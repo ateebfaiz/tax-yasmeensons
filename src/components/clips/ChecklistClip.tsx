@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { CheckSquare, Square, FileText, ArrowRight, Sparkles } from "lucide-react";
@@ -147,6 +148,21 @@ export default function ChecklistClip({
           <p className="text-ash dark:text-[#8C959F] leading-relaxed font-urdu text-[11px]" dir="rtl">
             اگر تمام کاغذات دستیاب نہیں ہیں تو فکر نہ کریں، ہمارے نمائندے آپ کے دستیاب ریکارڈ کے مطابق فائلنگ میں مدد کریں گے۔
           </p>
+        </div>
+
+        {/* Certificate Request Templates & App Guide */}
+        <div className="p-3 rounded-2xl bg-brass-subtle border border-brass/40 flex items-center justify-between gap-3 text-xs">
+          <div>
+            <strong className="text-ink dark:text-white block font-bold">Need WHT, PRC or SIM Certificates?</strong>
+            <span className="text-ash dark:text-[#8C959F] text-[11px]">Copy-paste messages &amp; instant app guide</span>
+          </div>
+          <Link
+            href="/requirements"
+            onClick={onClose}
+            className="px-3 py-1.5 rounded-full bg-ink hover:bg-theme-primary-hover text-paper-light font-bold text-[11px] whitespace-nowrap shadow-sm active:scale-95 transition-all"
+          >
+            View Templates →
+          </Link>
         </div>
 
         {/* Action Buttons */}

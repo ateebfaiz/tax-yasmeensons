@@ -14,6 +14,8 @@ import {
   AlertCircle,
   Clock,
 } from "lucide-react";
+import AnimatedStepper, { StepItem } from "@/components/smoothui/animated-stepper";
+import MagneticButton from "@/components/smoothui/magnetic-button";
 
 interface CategoryOption {
   code: string;
@@ -406,28 +408,39 @@ export function SeniorIntakeWizard({
     );
   }
 
+  const wizardSteps: StepItem[] = [
+    { label: "Category", description: isUrdu ? "صنف ٹیکس" : "Who you are" },
+    { label: "IRIS Status", description: isUrdu ? "آئرس اکاؤنٹ" : "FBR Portal" },
+    { label: "Package", description: isUrdu ? "پیکج فیس" : "Service Fee" },
+    { label: "Review", description: isUrdu ? "کوائف و تصدیق" : "Dispatch" },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      {/* Progress Header */}
-      <div className="space-y-2">
-        <div className="flex items-baseline justify-between font-mono text-xs text-ash">
+      {/* SmoothUI Animated Stepper Header */}
+      <div className="space-y-3 bg-paper-light/70 dark:bg-[#07121D]/70 p-4 rounded-2xl border border-rule shadow-sm">
+        <AnimatedStepper
+          steps={wizardSteps}
+          currentStep={currentPart - 1}
+          onStepChange={(stepIdx) => {
+            if (stepIdx < currentPart - 1) {
+              setCurrentPart(stepIdx + 1);
+            }
+          }}
+          allowClickNavigation={true}
+          variant="horizontal"
+          className="w-full"
+        />
+        <div className="flex items-center justify-between font-mono text-[11px] text-ash pt-1 border-t border-rule-light">
           <span className="font-bold text-ink">
-            PART 0{currentPart} / 04
+            STEP 0{currentPart} OF 04
           </span>
-          <span>
-            {currentPart === 1 && "WHO ARE YOU? · CATEGORY"}
-            {currentPart === 2 && "IRIS ACCOUNT STATUS"}
-            {currentPart === 3 && "SERVICE & FEE SELECTION"}
-            {currentPart === 4 && "TAXPAYER PARTICULARS"}
+          <span className="uppercase text-[10px] tracking-wider text-brass font-bold">
+            {currentPart === 1 && (isUrdu ? "ٹیکس گزار کی صنف کا انتخاب" : "CATEGORY SELECTION")}
+            {currentPart === 2 && (isUrdu ? "آئرس اکاؤنٹ اور این ٹی این کیفیت" : "IRIS ACCOUNT & NTN")}
+            {currentPart === 3 && (isUrdu ? "سروس اور پیکج کا انتخاب" : "SERVICE SELECTION")}
+            {currentPart === 4 && (isUrdu ? "شناختی کوائف اور تصدیق" : "VERIFICATION & DISPATCH")}
           </span>
-        </div>
-
-        {/* Thin Brass Progress Bar */}
-        <div className="w-full h-1 bg-rule rounded-full overflow-hidden">
-          <div
-            className="h-full bg-brass transition-all duration-300"
-            style={{ width: `${(currentPart / 4) * 100}%` }}
-          />
         </div>
       </div>
 
@@ -941,7 +954,7 @@ export function SeniorIntakeWizard({
       )}
 
       {/* Sticky Wizard Footer */}
-      <div className="sticky bottom-0 z-30 bg-folio/95 backdrop-blur-md border-t border-rule p-4 -mx-4 sm:mx-0 sm:rounded-2xl flex items-center justify-between gap-4">
+      <div className="sticky bottom-6 z-30 bg-paper-light/95 dark:bg-[#07121D]/95 backdrop-blur-xl border border-rule p-4 rounded-2xl flex items-center justify-between gap-4 shadow-lg mt-6">
         {currentPart > 1 ? (
           <button
             type="button"
@@ -968,7 +981,7 @@ export function SeniorIntakeWizard({
             <button
               type="button"
               onClick={validateAndNext}
-              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-7 py-2.5 rounded-full shadow transition-all active:scale-95"
+              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-6 py-2.5 rounded-full shadow transition-all active:scale-95"
             >
               <span>Continue →</span>
             </button>
@@ -977,7 +990,7 @@ export function SeniorIntakeWizard({
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-7 py-2.5 rounded-full shadow transition-all disabled:opacity-60 active:scale-95"
+              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-6 py-2.5 rounded-full shadow transition-all disabled:opacity-60 active:scale-95"
             >
               <span>{submitting ? "Recording Folio..." : "Generate Case File (YS-26-XXXXX)"}</span>
               <ArrowRight className="w-3.5 h-3.5" />

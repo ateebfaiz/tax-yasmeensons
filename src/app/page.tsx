@@ -21,10 +21,14 @@ import {
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { TaxDynamicIsland } from "@/components/ui/tax-dynamic-island";
+import GlowHover, { GlowHoverItem } from "@/components/smoothui/glow-hover-card";
+import MagneticButton from "@/components/smoothui/magnetic-button";
+import AnimatedTabs from "@/components/smoothui/animated-tabs";
 
 export default function HomePage() {
   const { isUrdu } = useLanguage();
   const appClip = useAppClip();
+  const [pricingCategory, setPricingCategory] = React.useState<string>("all");
 
   const personas = [
     {
@@ -64,6 +68,51 @@ export default function HomePage() {
       icon: GraduationCap,
     },
   ];
+
+  const glowPersonaItems: GlowHoverItem[] = personas.map((p) => {
+    const Icon = p.icon;
+    const theme =
+      p.code === "SAL"
+        ? { hue: 160, saturation: 70, lightness: 45 }
+        : p.code === "PEN"
+        ? { hue: 42, saturation: 80, lightness: 50 }
+        : p.code === "HIF"
+        ? { hue: 190, saturation: 70, lightness: 45 }
+        : { hue: 280, saturation: 65, lightness: 50 };
+
+    return {
+      id: p.code,
+      theme,
+      element: (
+        <Link
+          key={p.code}
+          href={p.href}
+          className="glass-card p-6 rounded-[24px] hover:border-brass transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md h-full"
+        >
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-bold text-brass px-2 py-0.5 rounded-full bg-brass-subtle border border-brass/20">
+                {p.code}
+              </span>
+              <Icon className="w-4 h-4 text-ash group-hover:text-ink transition-colors" />
+            </div>
+            <div>
+              <h3 className="font-bold text-sm text-ink group-hover:text-iris-teal transition-colors">
+                {p.titleEn}
+              </h3>
+              <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{p.titleUr}</div>
+            </div>
+            <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
+          </div>
+
+          <div className="font-mono text-[11px] font-bold text-ink flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-brass">
+            <span>Start as {p.code}</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </Link>
+      ),
+    };
+  });
 
   const fourSteps = [
     {
@@ -167,24 +216,38 @@ export default function HomePage() {
           Most clients choose: <strong className="text-brass font-bold">FA-2500 Complete Assistance (PKR 2,500)</strong>
         </div>
 
-        {/* CTAs */}
+        {/* CTAs with SmoothUI Magnetic Physics */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          <Link
-            href="/start"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-lg transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
+          <MagneticButton
+            strength={0.2}
+            radius={100}
+            asChild
+            className="w-full sm:w-auto p-0 bg-transparent hover:bg-transparent border-0 ring-0 focus-visible:ring-0 focus-visible:outline-none"
           >
-            <span>Start Filing (Part 01 / 04)</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+            <Link
+              href="/start"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-lg transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
+            >
+              <span>Start Filing (Part 01 / 04)</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </MagneticButton>
 
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake")}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper border border-brass/40 text-ink font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
+          <MagneticButton
+            strength={0.15}
+            radius={90}
+            asChild
+            className="w-full sm:w-auto p-0 bg-transparent hover:bg-transparent border-0 ring-0 focus-visible:ring-0 focus-visible:outline-none"
           >
-            <Sparkles className="w-4 h-4 text-brass" />
-            <span>Fast AppClip Intake</span>
-          </button>
+            <button
+              type="button"
+              onClick={() => appClip.open("tax-intake")}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper border border-brass/40 text-ink font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
+            >
+              <Sparkles className="w-4 h-4 text-brass" />
+              <span>Fast AppClip Intake</span>
+            </button>
+          </MagneticButton>
 
           <button
             type="button"
@@ -252,54 +315,44 @@ export default function HomePage() {
           <span className="font-mono text-xs text-ash">NON-BUSINESS ONLY</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {personas.map((p) => {
-            const Icon = p.icon;
-            return (
-              <Link
-                key={p.code}
-                href={p.href}
-                className="glass-card p-6 rounded-[24px] hover:border-brass transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-brass px-2 py-0.5 rounded-full bg-brass-subtle border border-brass/20">
-                      {p.code}
-                    </span>
-                    <Icon className="w-4 h-4 text-ash group-hover:text-ink transition-colors" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-sm text-ink group-hover:text-iris-teal transition-colors">
-                      {p.titleEn}
-                    </h3>
-                    <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{p.titleUr}</div>
-                  </div>
-                  <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
-                </div>
-
-                <div className="font-mono text-[11px] font-bold text-ink flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-brass">
-                  <span>Start as {p.code}</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        {/* SmoothUI GlowHover Interactive Cards */}
+        <GlowHover
+          items={glowPersonaItems}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          glowIntensity={0.16}
+          maskSize={380}
+        />
       </section>
 
       {/* 3. Pricing Folio Lines — Honest & Clear */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
-        <div className="border-b border-rule pb-2 flex items-baseline justify-between">
+        <div className="border-b border-rule pb-2 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION B</span>
             <h2 className="font-serif text-2xl font-bold text-ink">Fee Schedule & Packages</h2>
           </div>
-          <span className="font-mono text-xs text-ash">NO HIDDEN CHARGES</span>
+          <span className="font-mono text-xs text-ash">NO HIDDEN CHARGES · 100% TRANSPARENT</span>
+        </div>
+
+        {/* SmoothUI Animated Tabs */}
+        <div className="flex justify-center pt-2">
+          <AnimatedTabs
+            variant="pill"
+            activeTab={pricingCategory}
+            onChange={setPricingCategory}
+            tabs={[
+              { id: "all", label: "All Packages · تمام پیکجز" },
+              { id: "standard", label: "Individual Filers · انفرادی" },
+              { id: "complex", label: "Past Years / Special · خصوصی" },
+            ]}
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Guided Filing */}
-          <div className="glass-card p-6 sm:p-7 rounded-[28px] flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md transition-all">
+          <div className={`glass-card p-6 sm:p-7 rounded-[28px] flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md transition-all ${
+            pricingCategory === "complex" ? "opacity-40 scale-[0.98]" : "opacity-100"
+          }`}>
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: GF-1000</span>
@@ -346,7 +399,9 @@ export default function HomePage() {
           </div>
 
           {/* Complete Assistance — Recommended */}
-          <div className="glass-card-featured p-6 sm:p-7 rounded-[30px] flex flex-col justify-between space-y-6 relative shadow-lg">
+          <div className={`glass-card-featured p-6 sm:p-7 rounded-[30px] flex flex-col justify-between space-y-6 relative shadow-lg transition-all ${
+            pricingCategory === "complex" ? "opacity-40 scale-[0.98]" : "opacity-100 ring-2 ring-brass/40"
+          }`}>
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-brass text-ink font-mono text-[10px] font-bold uppercase tracking-wider shadow-sm">
               Most Selected · تجویز کردہ
             </div>
@@ -396,7 +451,9 @@ export default function HomePage() {
           </div>
 
           {/* Complex Review */}
-          <div className="glass-card p-6 sm:p-7 rounded-[28px] flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md transition-all">
+          <div className={`glass-card p-6 sm:p-7 rounded-[28px] flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md transition-all ${
+            pricingCategory === "standard" ? "opacity-40 scale-[0.98]" : pricingCategory === "complex" ? "opacity-100 ring-2 ring-brass" : "opacity-100"
+          }`}>
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: CX-4500</span>

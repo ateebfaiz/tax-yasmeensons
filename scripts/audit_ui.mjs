@@ -92,12 +92,15 @@ async function runAudit() {
         const badElements = [];
         const all = document.querySelectorAll("*");
         all.forEach((el) => {
-          if (el.scrollWidth > innerWidth + 1) {
+          const rect = el.getBoundingClientRect();
+          if (rect.right > innerWidth + 1 || (el.scrollWidth > innerWidth + 1 && el.children.length === 0)) {
             badElements.push({
               tag: el.tagName,
               className: el.className ? String(el.className).slice(0, 80) : "",
+              right: rect.right,
               scrollWidth: el.scrollWidth,
               clientWidth: el.clientWidth,
+              text: (el.innerText || "").slice(0, 40),
             });
           }
         });

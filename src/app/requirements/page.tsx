@@ -18,6 +18,7 @@ import {
   Users,
   ExternalLink,
 } from "lucide-react";
+import { TaxCertificateTemplates } from "@/components/tax/TaxCertificateTemplates";
 
 interface DocItem {
   code: string;
@@ -344,6 +345,9 @@ export default function RequirementsPage() {
           </div>
         </div>
       </div>
+
+      {/* Module 4: Certificate Message Templates, App Guides & Utility WHT */}
+      <TaxCertificateTemplates />
 
       {/* CTA Band */}
       <div className="bg-ink text-paper-light border-2 border-brass p-8 rounded-[30px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
