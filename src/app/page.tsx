@@ -2,166 +2,214 @@
 
 import React from "react";
 import Link from "next/link";
-import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
-import { BilingualIntakeForm } from "@/components/intake/BilingualIntakeForm";
+import { useLanguage } from "@/context/language-context";
 import {
-  ShieldCheck,
-  Lock,
   ArrowRight,
-  MessageCircle,
-  FileCheck,
+  ShieldCheck,
   CheckCircle2,
-  Users,
-  Briefcase,
-  GraduationCap,
-  HeartHandshake,
-  HelpCircle,
   ExternalLink,
-  Sparkles,
+  Briefcase,
+  HeartHandshake,
+  Users,
+  GraduationCap,
+  MessageCircle,
+  Lock,
+  FileText,
+  Clock,
+  HelpCircle,
 } from "lucide-react";
 
 export default function HomePage() {
-  const appClip = useAppClip();
+  const { isUrdu } = useLanguage();
 
   const personas = [
     {
-      id: "salaried",
+      code: "SAL",
       titleEn: "Salaried Employees",
       titleUr: "تنخواہ دار ملازمین",
-      descEn: "Salary certificates, tax withholding refunds, and tax return filing.",
-      descUr: "تنخواہ کی کٹوتی، ریفنڈ اور بروقت ٹیکس گوشوارے جمع کروانا",
+      descEn: "Monthly tax deduction reconciliation (s.149), salary slips, and ATL status.",
+      descUr: "تنخواہ سے کٹوتی، سیلری سلپس اور ودہولڈنگ ٹیکس ریفنڈ کا حساب",
       href: "/salaried",
       icon: Briefcase,
     },
     {
-      id: "pensioners",
-      titleEn: "Senior Citizens & Pensioners",
+      code: "PEN",
+      titleEn: "Senior & Pensioners",
       titleUr: "بزرگ شہری و پنشنرز",
-      descEn: "Pension exemptions, profit on debt tax exemptions, and wealth filings.",
-      descUr: "پنشن پر ٹیکس چھوٹ اور قومی بچت اسکیموں پر منافع کا حساب",
+      descEn: "Pension income tax exemption filing and National Savings/Behbood profits.",
+      descUr: "پنشن پر مکمل ٹیکس چھوٹ اور قومی بچت اسکیموں پر منافع کا اندراج",
       href: "/pensioners",
       icon: HeartHandshake,
     },
     {
-      id: "no-income",
-      titleEn: "Housewives & Non-Earning",
-      titleUr: "گھریلو خواتین و بغیر آمدنی",
-      descEn: "Active taxpayer status for bank accounts, asset registration, and family safety.",
-      descUr: "بینک اکاؤنٹ اور جائیداد کی آسانی کے لیے ایکٹو فائلر اسٹیٹس",
+      code: "HIF",
+      titleEn: "Housewife / Non-Earning",
+      titleUr: "گھریلو خواتین و نان ارننگ",
+      descEn: "Active taxpayer status to protect bank transactions and property transfers.",
+      descUr: "بینک ٹرانزیکشنز اور جائیداد کی منتقلی کے لیے ایکٹو فائلر رجسٹریشن",
       href: "/no-income",
       icon: Users,
     },
     {
-      id: "students",
+      code: "STU",
       titleEn: "Student Filers",
       titleUr: "طلباء و یوتھ فائلرز",
-      descEn: "Advance tax reductions on university fees and international payments.",
-      descUr: "یونیورسٹی فیس پر ایڈوانس ٹیکس کٹوتی سے بچاؤ",
+      descEn: "Eliminate advance withholding tax on university fees (s.236I) and open accounts.",
+      descUr: "یونیورسٹی فیس پر ایڈوانس ٹیکس کٹوتی سے بچاؤ اور اسٹوڈنٹ اکاؤنٹس",
       href: "/students",
       icon: GraduationCap,
     },
   ];
 
-  const workflowSteps = [
-    { num: "01", en: "Intake & Documents", ur: "دستاویزات کی وصولی", descEn: "Submit your basic info without sending passwords." },
-    { num: "02", en: "Tax Reconciliation", ur: "ٹیکس حساب کتاب", descEn: "Our team reconciles salary slips, WHT and wealth records." },
-    { num: "03", en: "Return Prepared", ur: "گوشوارہ کی تیاری", descEn: "Structured figures prepared and presented for your verification." },
-    { num: "04", en: "Your Pre-Approval", ur: "آپ کی حتمی منظوری", descEn: "You review exact numbers; nothing filed without your consent." },
-    { num: "05", en: "Direct IRIS Filing", ur: "آئرس پر فائلنگ", descEn: "You log in to official FBR IRIS; we guide you to final submission." },
-    { num: "06", en: "Filer Confirmed", ur: "ایکٹو فائلر تصدیق", descEn: "Return & Wealth Statement moved to Completed Tasks." },
+  const fourSteps = [
+    {
+      num: "01",
+      code: "DOCS",
+      titleEn: "Send Papers",
+      titleUr: "کاغذات بھیجیں",
+      descEn: "Share salary slip, WHT certificates, or bank statements on WhatsApp.",
+    },
+    {
+      num: "02",
+      code: "AUDIT",
+      titleEn: "We Reconcile",
+      titleUr: "ٹیکس حساب کتاب",
+      descEn: "Our team audits deductions and reconciles wealth statement balances.",
+    },
+    {
+      num: "03",
+      code: "REVIEW",
+      titleEn: "You Approve Figures",
+      titleUr: "حتمی منظوری",
+      descEn: "Mandatory pre-approval summary. Zero filing happens without your review.",
+    },
+    {
+      num: "04",
+      code: "IRIS",
+      titleEn: "You Submit on IRIS",
+      titleUr: "آئرس پر سبمشن",
+      descEn: "You log in to official iris.fbr.gov.pk; we guide you to final completed task.",
+    },
   ];
 
   const faqs = [
     {
-      qEn: "Do I have to provide my FBR/IRIS password?",
-      qUr: "کیا مجھے اپنا ایف بی آر پاس ورڈ دینا پڑے گا؟",
-      aEn: "Never. Our core security principle is customer-controlled authentication. We prepare and reconcile your return figures, and you log directly into FBR's official portal (iris.fbr.gov.pk) to submit with our guidance.",
-      aUr: "ہرگز نہیں! ہمارا بنیادی اصول یہی ہے کہ پاس ورڈ آپ کے پاس رہے۔ ہم آپ کا گوشوارہ تیار کریں گے اور آپ خود ایف بی آر کی آفیشل ویب سائٹ پر لاگ ان ہو کر جمع کروائیں گے۔",
+      qEn: "What is the filing deadline for Tax Year 2026?",
+      qUr: "مالی سال 2026 کا گوشوارہ جمع کروانے کی آخری تاریخ کیا ہے؟",
+      aEn: "For salaried and non-business individuals, the annual deadline is September 30, 2026. Early filing guarantees your name remains on the Active Taxpayer List (ATL) without paying late surcharge penalties.",
+      aUr: "تنخواہ دار اور انفرادی افراد کے لیے آخری تاریخ 30 ستمبر 2026 ہے۔ بروقت فائلنگ سے آپ کا نام ایکٹو ٹیکس پیئر لسٹ میں برقرار رہتا ہے۔",
     },
     {
-      qEn: "What if I forgot my IRIS password or PIN?",
-      qUr: "اگر میں پاس ورڈ یا پن بھول گیا ہوں تو کیا ہوگا؟",
-      aEn: "We guide you through the official FBR Forgot Password recovery flow, which sends official verification OTP codes directly to your registered SIM and email.",
-      aUr: "ہم آپ کو ایف بی آر کے آفیشل طریقہ کار کے تحت پاس ورڈ ری سیٹ کرنے کی مکمل رہنمائی دیں گے، جس کا کوڈ آپ کے ذاتی موبائل نمبر اور ای میل پر آئے گا۔",
+      qEn: "Do you ever ask for my official FBR/IRIS password?",
+      qUr: "کیا آپ مجھ سے میرا ایف بی آر پاس ورڈ مانگیں گے؟",
+      aEn: "Never. We enforce customer-controlled authentication. We prepare, calculate, and reconcile your numbers, and you sign into the official portal (iris.fbr.gov.pk) yourself while we assist you.",
+      aUr: "ہرگز نہیں! پاس ورڈ آپ کے پاس رہتا ہے۔ ہم مکمل گوشوارہ تیار کر کے آپ کو دیتے ہیں اور آپ خود آفیشل پورٹل پر لاگ ان ہو کر جمع کرتے ہیں۔",
     },
     {
-      qEn: "What is the fee for non-business filing?",
-      qUr: "ٹیکس فائلنگ کی فیس کیا ہے؟",
-      aEn: "Guided Filing is PKR 1,000 where we prepare the figures and checklist for you to submit. Full Filing Assistance is PKR 2,500 with complete screen assistance and reconciliation.",
-      aUr: "رہنمائی مع سیلف فائلنگ صرف 1,000 روپے ہے، جبکہ مکمل فائلنگ اسسٹنس 2,500 روپے ہے۔ کوئی پوشیدہ چارجز نہیں ہیں۔",
+      qEn: "Why should a housewife or non-earning person file a return?",
+      qUr: "گھریلو خواتین یا جن کی آمدنی نہیں ہے وہ فائلر کیوں بنیں؟",
+      aEn: "In Pakistan, non-filers pay up to 200% higher withholding tax on bank cash withdrawals, purchasing property, or registering vehicles. Filing a zero-tax return with household maintenance legally grants you Active Filer status.",
+      aUr: "نان فائلر ہونے کی صورت میں بینک ٹرانزیکشنز اور جائیداد کی خریداری پر دوگنا ٹیکس کٹتا ہے۔ گھریلو کفالت ظاہر کر کے آپ قانونی طور پر ایکٹو فائلر بن سکتے ہیں۔",
+    },
+    {
+      qEn: "Can I do the entire process over WhatsApp?",
+      qUr: "کیا پورا عمل واٹس ایپ پر مکمل ہو سکتا ہے؟",
+      aEn: "Yes. Once you start or choose WhatsApp handoff, our filing operator connects directly with you on 0312 0947187 with your Case ID, collects document photos, and sends you the step-by-step numbers.",
+      aUr: "جی ہاں! کیس نمبر بننے کے بعد ہمارا نمائندہ 03120947187 پر واٹس ایپ کے ذریعے تمام تفصیلات اور رہنمائی فراہم کرتا ہے۔",
+    },
+    {
+      qEn: "How long does it take for my ATL status to become Active?",
+      qUr: "ایکٹو ٹیکس پیئر لسٹ (ATL) میں نام کب تک فعال ہوتا ہے؟",
+      aEn: "FBR updates the ATL registry every Sunday night / Monday morning. Once your return is submitted and approved before the due date, your status reflects automatically.",
+      aUr: "ایف بی آر ہر اتوار کی رات سسٹم اپ ڈیٹ کرتا ہے اور پیر کی صبح تک نام ایکٹو ٹیکس پیئر لسٹ میں شامل ہو جاتا ہے۔",
+    },
+    {
+      qEn: "What pushes a case into the Complex (PKR 4,500+) tier?",
+      qUr: "پیچیدہ کیس (4,500+ روپے) میں کون سی صورتیں شامل ہیں؟",
+      aEn: "Cases involving multiple bank accounts with heavy turnover, unfiled prior tax years requiring wealth reconstruction, section 111 asset reconciliation, or property sale/purchase audits.",
+      aUr: "ایک سے زائد سالوں کے پرانے گوشوارے، پراپرٹی یا گاڑیوں کی خرید و فروخت، یا بیرونی ترسیلات کے مفصل آڈٹ والے کیسز۔",
     },
   ];
 
   return (
     <div className="space-y-16 md:space-y-24 py-8 md:py-16">
-      {/* Hero Section */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
-        {/* Trust Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-theme-primary/10 border border-theme-primary/25 text-theme-primary text-xs font-bold shadow-sm">
-          <ShieldCheck className="w-4 h-4" />
-          <span>Zero-Credential Architecture • Tax Year 2026</span>
+      {/* 1. Hero Section — Lead with the Job */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+        {/* IRIS Mapping Chip */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-paper-light border border-rule font-mono text-[11px] text-ash">
+          <span className="font-bold text-ink">FBR TY2026</span>
+          <span className="text-rule">|</span>
+          <span>Individual Non-Business Filing Desk</span>
         </div>
 
         {/* Hero Title */}
         <div className="space-y-3">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme-text leading-[1.15]">
-            Your FBR Password <br className="hidden sm:inline" />
-            <span className="text-gradient">Stays With You.</span>
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink tracking-tight leading-[1.15]">
+            File your Tax Year 2026 return <br className="hidden sm:inline" />
+            <span className="italic text-brass font-bold">— from PKR 1,000</span>
           </h1>
-          <p className="text-xl sm:text-2xl font-bold text-theme-primary font-urdu" dir="rtl">
-            ہم تیار کریں گے۔ ہم رہنمائی کریں گے۔ پاس ورڈ آپ کے پاس رہے گا۔
-          </p>
+
+          {isUrdu ? (
+            <p className="font-urdu text-xl sm:text-2xl font-bold text-ink" dir="rtl">
+              ہم تیار کریں گے۔ آپ آفیشل آئرس پر خود لاگ ان کر کے فائل کریں گے۔
+            </p>
+          ) : (
+            <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto leading-relaxed">
+              We prepare the figures and reconcile your wealth statement. You log into official FBR IRIS yourself. <strong className="text-ink">We never take your password.</strong>
+            </p>
+          )}
         </div>
 
-        {/* Subtitle */}
-        <p className="max-w-2xl mx-auto text-sm sm:text-base text-theme-text-secondary leading-relaxed">
-          Transparent, non-business income tax filing assistance for Pakistan. We organize your salary, deductions, and wealth statements without ever asking you to enter your FBR password on our servers.
-        </p>
+        {/* Pricing Story Highlight */}
+        <div className="inline-block bg-brass-subtle border border-brass/40 px-3.5 py-1.5 rounded-md font-mono text-xs text-ink">
+          Most clients choose: <strong className="text-brass">FA-2500 Complete Assistance (PKR 2,500)</strong>
+        </div>
 
-        {/* Hero Actions */}
+        {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake")}
-            className="w-full sm:w-auto btn-shimmer inline-flex items-center justify-center gap-2 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-theme-primary/25 text-sm transition-all"
+          <Link
+            href="/start"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-md text-sm shadow-md transition-all"
           >
-            <span>Start Tax Filing (Rs 1,000+)</span>
+            <span>Start Filing (Part 01 / 04)</span>
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </Link>
 
-          <button
-            type="button"
-            onClick={() => appClip.open("whatsapp-intake")}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-theme-surface hover:bg-theme-surface-raised border border-theme-border text-theme-text font-bold py-3.5 px-6 rounded-xl text-sm transition-all shadow-sm"
+          <Link
+            href="/requirements"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-folio hover:bg-paper border border-rule text-ink font-bold py-3.5 px-6 rounded-md text-sm transition-all"
           >
-            <MessageCircle className="w-4 h-4 text-[#25D366]" />
-            <span>WhatsApp (03120947187)</span>
-          </button>
+            <FileText className="w-4 h-4 text-ash" />
+            <span>See Documents Needed</span>
+          </Link>
         </div>
 
-        {/* FBR Direct Verification Badge */}
-        <div className="pt-4 flex items-center justify-center gap-2 text-xs text-theme-text-muted">
-          <Lock className="w-3.5 h-3.5 text-theme-primary" />
-          <span>Official Submission Gateway:</span>
+        {/* Stamp & Official Link */}
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs font-mono">
+          <span className="stamp-box px-2 py-0.5 rounded text-[10px]">
+            PASSWORD NEVER COLLECTED AT INTAKE
+          </span>
+          <span className="text-ash opacity-40 hidden sm:inline">·</span>
           <a
             href="https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-bold text-theme-primary hover:underline inline-flex items-center gap-0.5"
+            className="text-ash hover:text-ink underline flex items-center gap-0.5"
           >
-            <span>iris.fbr.gov.pk</span>
+            <span>Official portal: iris.fbr.gov.pk</span>
             <ExternalLink className="w-3 h-3" />
           </a>
         </div>
       </section>
 
-      {/* Target Personas Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-theme-text">Tailored for Individuals</h2>
-          <p className="text-xs sm:text-sm text-theme-text-secondary">
-            Exclusively built for non-business filers. Zero corporate jargon, zero complex commercial books.
-          </p>
+      {/* 2. Audience Profiles — Clean Folio Cards */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
+        <div className="border-b border-rule pb-2 flex items-baseline justify-between">
+          <div>
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION A</span>
+            <h2 className="font-serif text-2xl font-bold text-ink">Individual Tax Categories</h2>
+          </div>
+          <span className="font-mono text-xs text-ash">NON-BUSINESS ONLY</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -169,27 +217,29 @@ export default function HomePage() {
             const Icon = p.icon;
             return (
               <Link
-                key={p.id}
+                key={p.code}
                 href={p.href}
-                className="glass-card p-5 hover:border-theme-primary/50 transition-all group flex flex-col justify-between space-y-4"
+                className="glass-card p-5 hover:border-brass transition-all group flex flex-col justify-between space-y-4"
               >
-                <div className="space-y-3">
-                  <div className="w-10 h-10 rounded-xl bg-theme-primary/10 text-theme-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Icon className="w-5 h-5" />
+                <div className="space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-brass px-1.5 py-0.5 rounded bg-brass-subtle border border-brass/20">
+                      {p.code}
+                    </span>
+                    <Icon className="w-4 h-4 text-ash group-hover:text-ink transition-colors" />
                   </div>
-                  <div className="space-y-1">
-                    <h3 className="font-bold text-sm text-theme-text group-hover:text-theme-primary transition-colors">
+                  <div>
+                    <h3 className="font-bold text-sm text-ink group-hover:text-iris-teal transition-colors">
                       {p.titleEn}
                     </h3>
-                    <div className="text-xs font-semibold text-theme-primary font-urdu" dir="rtl">
-                      {p.titleUr}
-                    </div>
+                    <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{p.titleUr}</div>
                   </div>
-                  <p className="text-xs text-theme-text-secondary leading-relaxed">{p.descEn}</p>
+                  <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
                 </div>
-                <div className="text-xs font-bold text-theme-primary flex items-center gap-1 pt-2 border-t border-theme-border/40">
-                  <span>View Details</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+
+                <div className="font-mono text-[11px] font-bold text-ink flex items-center gap-1 pt-2 border-t border-rule-light group-hover:text-brass">
+                  <span>Start as {p.code}</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             );
@@ -197,206 +247,223 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Transparent Pricing Table */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
-        <div className="text-center space-y-2">
-          <div className="text-xs font-bold text-theme-primary uppercase tracking-wider">Transparent Fees</div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-theme-text">Simple, Honest Pricing</h2>
-          <p className="text-xs text-theme-text-secondary">
-            Final price confirmed upfront after document review. No surprises or arbitrary hikes.
-          </p>
+      {/* 3. Pricing Folio Lines — Honest & Clear */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
+        <div className="border-b border-rule pb-2 flex items-baseline justify-between">
+          <div>
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION B</span>
+            <h2 className="font-serif text-2xl font-bold text-ink">Fee Schedule & Packages</h2>
+          </div>
+          <span className="font-mono text-xs text-ash">NO HIDDEN CHARGES</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Tier 1 */}
-          <div className="glass-card p-6 flex flex-col justify-between space-y-6 relative border-theme-border">
+          {/* Guided Filing */}
+          <div className="glass-card p-6 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[11px] font-bold text-theme-primary uppercase tracking-wider">Self-Filer</span>
-                <h3 className="text-xl font-bold text-theme-text">Guided Filing</h3>
-                <div className="text-xs font-urdu text-theme-primary" dir="rtl">خود فائل کریں مع رہنمائی</div>
+              <div className="border-b border-rule pb-3">
+                <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: GF-1000</span>
+                <h3 className="font-serif text-xl font-bold text-ink">Guided Filing</h3>
+                <div className="font-urdu text-xs text-ash" dir="rtl">رہنمائی مع سیلف فائلنگ</div>
               </div>
-              <div className="text-3xl font-extrabold text-theme-text">
-                PKR 1,000 <span className="text-xs font-normal text-theme-text-muted">/ return</span>
+              <div className="font-serif text-3xl font-black text-ink">
+                PKR 1,000
               </div>
-              <ul className="space-y-2.5 text-xs text-theme-text-secondary">
+              <p className="text-xs text-ash leading-relaxed">
+                For taxpayers who want to submit themselves. We audit your salary/bills, calculate your figures, and provide a field-by-field checklist.
+              </p>
+              <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
                   <span>Document check & tax calculation</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Step-by-step IRIS filing figures</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>Field-by-field IRIS checklist</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Customer files independently</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Zero password sharing needed</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>Zero password shared</span>
                 </li>
               </ul>
             </div>
 
-            <button
-              type="button"
-              onClick={() => appClip.open("tax-intake", { defaultTier: "guided_1000" })}
-              className="w-full py-2.5 px-4 rounded-xl border border-theme-border bg-theme-surface hover:bg-theme-surface-raised font-bold text-xs text-theme-text transition-all"
+            <Link
+              href="/start?tier=guided_1000"
+              className="w-full py-2.5 text-center rounded border border-rule bg-paper-light hover:bg-paper font-bold text-xs text-ink transition-all font-mono"
             >
-              Choose Guided (Rs 1,000)
-            </button>
+              Select GF-1000
+            </Link>
           </div>
 
-          {/* Tier 2: Recommended */}
-          <div className="glass-card p-6 flex flex-col justify-between space-y-6 relative border-theme-primary ring-2 ring-theme-primary/30 shadow-xl">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-theme-primary text-white text-[10px] font-bold uppercase tracking-wider">
-              Most Popular / مقبول ترین
+          {/* Complete Assistance — Recommended */}
+          <div className="glass-card p-6 flex flex-col justify-between space-y-6 border-brass ring-1 ring-brass shadow-md relative">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded bg-brass text-ink font-mono text-[10px] font-bold uppercase tracking-wider">
+              Most Selected · تجویز کردہ
             </div>
             <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[11px] font-bold text-theme-primary uppercase tracking-wider">Assisted</span>
-                <h3 className="text-xl font-bold text-theme-text">Filing Assistance</h3>
-                <div className="text-xs font-urdu text-theme-primary" dir="rtl">مکمل فائلنگ اسسٹنس</div>
+              <div className="border-b border-rule pb-3">
+                <span className="font-mono text-[10px] font-bold text-brass tracking-widest">CODE: FA-2500</span>
+                <h3 className="font-serif text-xl font-bold text-ink">Complete Assistance</h3>
+                <div className="font-urdu text-xs text-ash" dir="rtl">مکمل فائلنگ اسسٹنس</div>
               </div>
-              <div className="text-3xl font-extrabold text-theme-text">
-                PKR 2,500 <span className="text-xs font-normal text-theme-text-muted">/ return</span>
+              <div className="font-serif text-3xl font-black text-ink">
+                PKR 2,500
               </div>
-              <ul className="space-y-2.5 text-xs text-theme-text-secondary">
+              <p className="text-xs text-ash leading-relaxed">
+                Full-service facilitation. We reconcile your return, wealth statement (s.116), and WHT credits, guide you screen-by-screen, and verify ATL.
+              </p>
+              <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Full return & wealth reconciliation</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>Full return + s.116 wealth balance</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Withholding tax refund optimization</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>WHT credit adjustment audit</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>IRIS screen-by-screen assistance</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Customer review & approval gate</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>Mandatory client pre-approval summary</span>
                 </li>
               </ul>
             </div>
 
-            <button
-              type="button"
-              onClick={() => appClip.open("tax-intake", { defaultTier: "assistance_2500" })}
-              className="btn-shimmer w-full py-3 px-4 rounded-xl bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-xs shadow-md transition-all"
+            <Link
+              href="/start?tier=assistance_2500"
+              className="w-full py-3 text-center rounded bg-ink hover:bg-theme-primary-hover font-bold text-xs text-paper-light shadow-sm transition-all font-mono"
             >
-              Choose Assistance (Rs 2,500)
-            </button>
+              Select FA-2500 (Recommended)
+            </Link>
           </div>
 
-          {/* Tier 3: Complex */}
-          <div className="glass-card p-6 flex flex-col justify-between space-y-6 relative border-theme-border">
+          {/* Complex Review */}
+          <div className="glass-card p-6 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
-              <div className="space-y-1">
-                <span className="text-[11px] font-bold text-theme-text-muted uppercase tracking-wider">Complex</span>
-                <h3 className="text-xl font-bold text-theme-text">Complex Review</h3>
-                <div className="text-xs font-urdu text-theme-primary" dir="rtl">پیچیدہ ریٹرن جائزہ</div>
+              <div className="border-b border-rule pb-3">
+                <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: CX-4500</span>
+                <h3 className="font-serif text-xl font-bold text-ink">Complex Review</h3>
+                <div className="font-urdu text-xs text-ash" dir="rtl">پیچیدہ ریٹرن جائزہ</div>
               </div>
-              <div className="text-3xl font-extrabold text-theme-text">
-                PKR 4,500+ <span className="text-xs font-normal text-theme-text-muted">/ case</span>
+              <div className="font-serif text-3xl font-black text-ink">
+                PKR 4,500+
               </div>
-              <ul className="space-y-2.5 text-xs text-theme-text-secondary">
+              <p className="text-xs text-ash leading-relaxed">
+                For multi-bank reconciliation, prior unfiled years, foreign remittances, or capital gains on property and stocks. Quoted after document review.
+              </p>
+              <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Multiple bank accounts & foreign assets</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>Prior unfiled years reconciliation</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Prior year unfiled reconciliation</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>s.111 asset transactions</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Capital gain / property transaction audit</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                  <span>Dedicated senior tax specialist</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <span>Final fee confirmed after review</span>
                 </li>
               </ul>
             </div>
 
-            <button
-              type="button"
-              onClick={() => appClip.open("tax-intake", { defaultTier: "complex_5000" })}
-              className="w-full py-2.5 px-4 rounded-xl border border-theme-border bg-theme-surface hover:bg-theme-surface-raised font-bold text-xs text-theme-text transition-all"
+            <Link
+              href="/start?tier=complex_5000"
+              className="w-full py-2.5 text-center rounded border border-rule bg-paper-light hover:bg-paper font-bold text-xs text-ink transition-all font-mono"
             >
-              Consult Complex Case
-            </button>
+              Consult CX-4500 Case
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 6-Step Workflow */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-theme-text">How It Works</h2>
-          <p className="text-xs sm:text-sm text-theme-text-secondary">
-            Structured filing workflow with mandatory customer pre-approval before anything is filed.
-          </p>
+      {/* 4. The 4-Step Process */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
+        <div className="border-b border-rule pb-2 flex items-baseline justify-between">
+          <div>
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION C</span>
+            <h2 className="font-serif text-2xl font-bold text-ink">Filing Workflow</h2>
+          </div>
+          <span className="font-mono text-xs text-ash">4 STEPS TO COMPLETED TASK</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {workflowSteps.map((step) => (
-            <div key={step.num} className="glass-card p-5 space-y-2.5 border-theme-border/60">
-              <div className="text-2xl font-black font-mono text-theme-primary/40">{step.num}</div>
-              <div className="space-y-0.5">
-                <h3 className="font-bold text-sm text-theme-text">{step.en}</h3>
-                <div className="text-xs font-semibold text-theme-primary font-urdu" dir="rtl">{step.ur}</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {fourSteps.map((s) => (
+            <div key={s.num} className="glass-card p-5 space-y-2 relative border-rule">
+              <div className="flex items-center justify-between font-mono text-xs">
+                <span className="font-bold text-brass">{s.num}</span>
+                <span className="text-[10px] text-ash px-1 bg-paper border border-rule rounded">{s.code}</span>
               </div>
-              <p className="text-xs text-theme-text-secondary leading-relaxed">{step.descEn}</p>
+              <div>
+                <h3 className="font-bold text-sm text-ink">{s.titleEn}</h3>
+                <div className="font-urdu text-xs text-ash" dir="rtl">{s.titleUr}</div>
+              </div>
+              <p className="text-xs text-ash leading-relaxed">{s.descEn}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* On-Page Intake Section (Desktop / Mobile Direct) */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6">
-        <div className="glass-card p-6 sm:p-8 space-y-6">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-theme-text">Start Your Filing Today</h2>
-            <p className="text-xs sm:text-sm text-theme-text-secondary">
-              Fill out your details below. You will receive an instant Case Reference and direct WhatsApp confirmation.
-            </p>
-            <p className="text-xs font-urdu text-theme-primary font-semibold" dir="rtl">
-              براہ کرم اپنی تفصیلات درج کریں اور فوری رہنمائی حاصل کریں۔
-            </p>
-          </div>
-
-          <BilingualIntakeForm defaultPersona="salaried" />
-        </div>
-      </section>
-
-      {/* FAQs */}
+      {/* 5. Comprehensive FAQs */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-theme-text">Frequently Asked Questions</h2>
-          <p className="text-xs text-theme-text-secondary font-urdu" dir="rtl">
-            اکثر پوچھے گئے سوالات و جوابات
-          </p>
+        <div className="border-b border-rule pb-2 flex items-baseline justify-between">
+          <div>
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION D</span>
+            <h2 className="font-serif text-2xl font-bold text-ink">Practice FAQs</h2>
+          </div>
+          <span className="font-mono text-xs text-ash font-urdu" dir="rtl">اکثر پوچھے گئے سوالات</span>
         </div>
 
         <div className="space-y-3">
           {faqs.map((faq, idx) => (
             <div key={idx} className="glass-card p-5 space-y-2">
-              <div className="space-y-0.5">
-                <h3 className="text-sm font-bold text-theme-text">{faq.qEn}</h3>
-                <div className="text-xs font-semibold text-theme-primary font-urdu" dir="rtl">{faq.qUr}</div>
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                <h3 className="font-bold text-sm text-ink">{faq.qEn}</h3>
+                <span className="font-urdu text-xs text-ash" dir="rtl">{faq.qUr}</span>
               </div>
-              <p className="text-xs text-theme-text-secondary leading-relaxed pt-1 border-t border-theme-border/40">
+              <p className="text-xs text-ash leading-relaxed pt-2 border-t border-rule-light">
                 {faq.aEn}
               </p>
-              <p className="text-[11px] font-urdu text-theme-text-muted leading-relaxed" dir="rtl">
+              <p className="font-urdu text-xs text-ash leading-relaxed" dir="rtl">
                 {faq.aUr}
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 6. Bottom Banner CTA */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="bg-ink text-paper-light border-2 border-brass p-6 sm:p-8 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="space-y-1 text-center sm:text-left">
+            <span className="font-mono text-xs text-brass tracking-wider">TY2026 INTAKE OPEN</span>
+            <h2 className="font-serif text-2xl font-bold text-paper-light">
+              Ready to file your return?
+            </h2>
+            <p className="text-xs text-ash-light max-w-md">
+              Complete Part 01 in 60 seconds. You receive an instant case ID (YS-26-XXXXX) and our tax specialist handles the rest.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <Link
+              href="/start"
+              className="inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3 px-6 rounded text-xs shadow-md transition-all font-mono"
+            >
+              <span>Open Intake Form</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+
+            <a
+              href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20my%20Tax%20Year%202026%20return."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-folio/10 hover:bg-folio/20 border border-brass/40 text-paper-light font-bold py-3 px-4 rounded text-xs transition-all font-mono"
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+              <span>0312 0947187</span>
+            </a>
+          </div>
         </div>
       </section>
     </div>

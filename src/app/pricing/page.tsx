@@ -2,169 +2,167 @@
 
 import React from "react";
 import Link from "next/link";
-import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
-import { CheckCircle2, ShieldCheck, ArrowRight, MessageCircle } from "lucide-react";
+import { CheckCircle2, ShieldCheck, ArrowRight, MessageCircle, AlertCircle } from "lucide-react";
 
 export default function PricingPage() {
-  const appClip = useAppClip();
-
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 space-y-12">
-      <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-primary/10 border border-theme-primary/20 text-theme-primary text-xs font-bold">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          <span>Transparent Pricing Policy • Tax Year 2026</span>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16 space-y-12 pb-28">
+      {/* Header */}
+      <div className="border-b-2 border-brass pb-4 space-y-2 text-center md:text-left">
+        <div className="flex items-center justify-center md:justify-between font-mono text-[11px] text-ash">
+          <span>SCHEDULE 03</span>
+          <span className="font-bold text-ink">TY2026 FEE SCHEDULE</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-theme-text">No Hidden Fees. Ever.</h1>
-        <p className="text-lg font-bold text-theme-primary font-urdu" dir="rtl">
-          شفاف فیس • کوئی پوشیدہ چارجز نہیں
-        </p>
-        <p className="max-w-xl mx-auto text-xs sm:text-sm text-theme-text-secondary">
-          We believe tax preparation should be straightforward. Review our tiered pricing below and select the model that fits your filing needs.
+        <h1 className="font-serif text-3xl sm:text-4xl font-black text-ink">
+          Transparent Fee Schedule
+        </h1>
+        <div className="font-urdu text-base font-bold text-ink" dir="rtl">
+          شفاف فیس و پیکیجز • کوئی پوشیدہ چارجز نہیں
+        </div>
+        <p className="text-xs text-ash leading-relaxed max-w-xl mx-auto md:mx-0">
+          Senior tax practice pricing for non-business individuals. The applicable fee is confirmed upfront before filing commences.
         </p>
       </div>
 
+      {/* 3 Packages */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Tier 1 */}
         <div className="glass-card p-6 flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <div>
-              <span className="text-[10px] font-bold text-theme-primary uppercase tracking-wider">Independent</span>
-              <h2 className="text-xl font-bold text-theme-text">Guided Filing</h2>
-              <div className="text-xs font-urdu text-theme-primary mt-0.5" dir="rtl">رہنمائی مع سیلف فائلنگ</div>
+            <div className="border-b border-rule pb-3">
+              <span className="font-mono text-[10px] font-bold text-ash tracking-widest uppercase">
+                PACKAGE: GF-1000
+              </span>
+              <h2 className="font-serif text-xl font-bold text-ink">Guided Filing</h2>
+              <div className="font-urdu text-xs text-ash" dir="rtl">رہنمائی مع سیلف فائلنگ</div>
             </div>
-            <div className="text-3xl font-extrabold text-theme-text">
+            <div className="font-serif text-3xl font-black text-ink">
               PKR 1,000
             </div>
-            <p className="text-xs text-theme-text-secondary leading-relaxed">
-              We audit your documents, calculate taxable income and withholding taxes, and provide a full checklist with exact numbers for each IRIS box.
+            <p className="text-xs text-ash leading-relaxed">
+              We audit your documents, calculate your taxable income and withholding deductions, and provide a field-by-field checklist. You sign into IRIS and submit independently.
             </p>
-            <ul className="space-y-2 text-xs text-theme-text-secondary pt-2 border-t border-theme-border/40">
+            <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
                 <span>Zero password sharing required</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>WHT certificate tax calculation</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                <span>Salary & WHT credit calculation</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>Step-by-step submission checklist</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                <span>Field-by-field IRIS guide</span>
               </li>
             </ul>
           </div>
 
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake", { defaultTier: "guided_1000" })}
-            className="w-full py-2.5 px-4 rounded-xl border border-theme-border bg-theme-surface hover:bg-theme-surface-raised font-bold text-xs text-theme-text transition-all"
+          <Link
+            href="/start?tier=guided_1000"
+            className="w-full py-2.5 text-center rounded border border-rule bg-paper-light hover:bg-paper font-mono font-bold text-xs text-ink transition-all"
           >
-            Choose Guided (Rs 1,000)
-          </button>
+            Select GF-1000 (PKR 1,000)
+          </Link>
         </div>
 
         {/* Tier 2: Recommended */}
-        <div className="glass-card p-6 flex flex-col justify-between space-y-6 border-theme-primary ring-2 ring-theme-primary/30 shadow-xl relative">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-theme-primary text-white text-[10px] font-bold uppercase tracking-wider">
-            Most Popular / مقبول ترین
+        <div className="glass-card p-6 flex flex-col justify-between space-y-6 border-brass ring-1 ring-brass shadow-md relative">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded bg-brass text-ink font-mono text-[10px] font-bold uppercase tracking-wider">
+            Most Selected · تجویز کردہ
           </div>
           <div className="space-y-4">
-            <div>
-              <span className="text-[10px] font-bold text-theme-primary uppercase tracking-wider">Assisted</span>
-              <h2 className="text-xl font-bold text-theme-text">Filing Assistance</h2>
-              <div className="text-xs font-urdu text-theme-primary mt-0.5" dir="rtl">مکمل فائلنگ اسسٹنس</div>
+            <div className="border-b border-rule pb-3">
+              <span className="font-mono text-[10px] font-bold text-brass tracking-widest uppercase">
+                PACKAGE: FA-2500
+              </span>
+              <h2 className="font-serif text-xl font-bold text-ink">Complete Assistance</h2>
+              <div className="font-urdu text-xs text-ash" dir="rtl">مکمل فائلنگ اسسٹنس</div>
             </div>
-            <div className="text-3xl font-extrabold text-theme-text">
+            <div className="font-serif text-3xl font-black text-ink">
               PKR 2,500
             </div>
-            <p className="text-xs text-theme-text-secondary leading-relaxed">
-              Complete hands-on facilitation through your official IRIS account. We reconcile your return, wealth statement, and deductions, followed by customer approval and submission.
+            <p className="text-xs text-ash leading-relaxed">
+              Full-service facilitation. We reconcile your return, wealth statement (s.116), and WHT deductions, guide you through official IRIS screens, and confirm ATL status.
             </p>
-            <ul className="space-y-2 text-xs text-theme-text-secondary pt-2 border-t border-theme-border/40">
+            <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>Full return & wealth statement</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                <span>Complete return & s.116 wealth balance</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>IRIS screen-by-screen assistance</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                <span>Screen-by-screen assistance on official IRIS</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>Customer pre-approval gate</span>
+                <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                <span>Mandatory client pre-approval summary</span>
               </li>
             </ul>
           </div>
 
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake", { defaultTier: "assistance_2500" })}
-            className="btn-shimmer w-full py-3 px-4 rounded-xl bg-theme-primary hover:bg-theme-primary-hover text-white font-bold text-xs shadow-md transition-all"
+          <Link
+            href="/start?tier=assistance_2500"
+            className="w-full py-3 text-center rounded bg-ink hover:bg-theme-primary-hover font-mono font-bold text-xs text-paper-light shadow-sm transition-all"
           >
-            Choose Assistance (Rs 2,500)
-          </button>
+            Select FA-2500 (PKR 2,500)
+          </Link>
         </div>
 
         {/* Tier 3: Complex */}
         <div className="glass-card p-6 flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <div>
-              <span className="text-[10px] font-bold text-theme-text-muted uppercase tracking-wider">Comprehensive</span>
-              <h2 className="text-xl font-bold text-theme-text">Complex Review</h2>
-              <div className="text-xs font-urdu text-theme-primary mt-0.5" dir="rtl">پیچیدہ کیس جائزہ</div>
+            <div className="border-b border-rule pb-3">
+              <span className="font-mono text-[10px] font-bold text-ash tracking-widest uppercase">
+                PACKAGE: CX-4500
+              </span>
+              <h2 className="font-serif text-xl font-bold text-ink">Complex Review</h2>
+              <div className="font-urdu text-xs text-ash" dir="rtl">پیچیدہ ریٹرن جائزہ</div>
             </div>
-            <div className="text-3xl font-extrabold text-theme-text">
+            <div className="font-serif text-3xl font-black text-ink">
               PKR 4,500+
             </div>
-            <p className="text-xs text-theme-text-secondary leading-relaxed">
-              For complex individual profiles involving capital gains on property or stocks, foreign remittances, multiple bank accounts, or prior unfiled tax years.
+            <p className="text-xs text-ash leading-relaxed">
+              For complex personal situations. <em>Final fee confirmed strictly after document review.</em>
             </p>
-            <ul className="space-y-2 text-xs text-theme-text-secondary pt-2 border-t border-theme-border/40">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>Multiple accounts & prior year gaps</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>Property & capital gains reconciliation</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-theme-success shrink-0" />
-                <span>Senior tax specialist assignment</span>
-              </li>
-            </ul>
+            <div className="space-y-1.5 p-3 rounded bg-paper-light border border-rule-light text-xs font-mono text-ash">
+              <div className="font-bold text-ink uppercase text-[10px]">What pushes into CX-4500:</div>
+              <div>• Unfiled prior tax years wealth reconstruction</div>
+              <div>• Section 111 asset transactions / property deeds</div>
+              <div>• Multiple high-turnover bank accounts</div>
+            </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake", { defaultTier: "complex_5000" })}
-            className="w-full py-2.5 px-4 rounded-xl border border-theme-border bg-theme-surface hover:bg-theme-surface-raised font-bold text-xs text-theme-text transition-all"
+          <Link
+            href="/start?tier=complex_5000"
+            className="w-full py-2.5 text-center rounded border border-rule bg-paper-light hover:bg-paper font-mono font-bold text-xs text-ink transition-all"
           >
-            Consult Complex Case
-          </button>
+            Consult CX-4500 Case
+          </Link>
         </div>
       </div>
 
-      {/* Confirmation Guarantee Banner */}
-      <div className="glass-card p-6 border-theme-primary/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+      {/* Upfront Confirmation Policy */}
+      <div className="glass-card p-6 border-brass flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="space-y-1 text-center sm:text-left">
-          <div className="font-bold text-sm text-theme-text flex items-center justify-center sm:justify-start gap-2">
-            <ShieldCheck className="w-4 h-4 text-theme-primary" />
-            <span>Final Fee Confirmed After Document Review</span>
+          <div className="font-serif font-bold text-base text-ink flex items-center justify-center sm:justify-start gap-2">
+            <ShieldCheck className="w-4 h-4 text-brass" />
+            <span>Upfront Fee Confirmation Policy</span>
           </div>
-          <p className="text-xs text-theme-text-secondary">
-            We confirm the final applicable fee before any filing work begins. Zero surprises.
+          <p className="text-xs text-ash max-w-lg">
+            Once you provide your documents, we confirm the exact fee in writing on WhatsApp before any work starts. No hidden surprises.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => appClip.open("whatsapp-intake")}
-          className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold py-2.5 px-5 rounded-xl text-xs shadow-sm hover:bg-[#1ebd59] transition-all shrink-0"
+
+        <a
+          href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20a%20pricing%20question%20for%20Tax%20Year%202026."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-[#128C7E] text-white font-mono font-bold py-2.5 px-5 rounded text-xs shadow-sm hover:bg-[#0e7064] transition-all shrink-0"
         >
           <MessageCircle className="w-4 h-4" />
-          <span>Ask on WhatsApp (03120947187)</span>
-        </button>
+          <span>Ask on WhatsApp (0312 0947187)</span>
+        </a>
       </div>
     </div>
   );

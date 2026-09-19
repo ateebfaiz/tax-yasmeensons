@@ -1,54 +1,53 @@
 /* ================================================================
-   Yasmeen Tax — Theming Tokens
-   Liquid Frosted Glass + Modern iOS Emerald Palette
+   Yasmeen & Sons Tax Practice — Official Tokens
+   Navy Document + Teal Service + Brass Seal + Warm Paper
    ================================================================ */
 
 :root {
   color-scheme: light;
+
+  /* Senior Tax Practice Palette */
+  --tax-ink:          #0B1C2C; /* Deep document ink */
+  --tax-iris-teal:    #0E5C57; /* Official IRIS teal */
+  --tax-brass:        #C4A046; /* Seal brass / gold accent */
+  --tax-brass-light:  #DFBA5E;
+  --tax-brass-subtle: #F6F1E3;
+  --tax-paper:        #F4EFE6; /* Warm document paper */
+  --tax-paper-light:  #FAF8F3;
+  --tax-folio:        #FFFFFF; /* White crisp cards */
+  --tax-rule:         #D7D0C4; /* Hairline printed form rule */
+  --tax-rule-light:   #EBE6DD;
+  --tax-stamp-red:    #8E1D2A; /* Official stamp red */
+  --tax-stamp-bg:     #FDF2F3;
+  --tax-ash:          #5C6670; /* Secondary codes, helper labels */
+  --tax-ash-light:    #8C959F;
+
+  /* Theme mappings */
+  --theme-background:      var(--tax-paper);
+  --theme-surface:         var(--tax-folio);
+  --theme-surface-raised:  var(--tax-paper-light);
+  --theme-text:            var(--tax-ink);
+  --theme-text-secondary:  var(--tax-ash);
+  --theme-text-muted:      var(--tax-ash-light);
+  --theme-border:          var(--tax-rule);
+  --theme-primary:         var(--tax-ink);
+  --theme-primary-hover:   #152B40;
+  --theme-accent:          var(--tax-brass);
+  --theme-success:         var(--tax-iris-teal);
+  --theme-danger:          var(--tax-stamp-red);
+
+  /* Liquid Frosted Glass (refined for tax ledger) */
+  --theme-glass-bg:        rgba(255, 255, 255, 0.88);
+  --theme-glass-border:    var(--tax-rule);
+  --theme-glass-blur:      16px;
 }
+
 :root.dark {
-  color-scheme: dark;
-}
-
-:root {
-  /* Surface hierarchy */
-  --theme-surface:         light-dark(#ffffff, #0d0d0f);
-  --theme-surface-raised:  light-dark(#f9f9f9, #16161a);
-  --theme-background:      light-dark(#f6f5f2, #0a0a0c);
-  --theme-muted:           light-dark(#ededeb, #1a1a1e);
-  --theme-overlay:         light-dark(rgba(0,0,0,0.04), rgba(255,255,255,0.04));
-
-  /* Text */
-  --theme-text:            light-dark(#111110, #f0f0ed);
-  --theme-text-secondary:  light-dark(#5e5d59, #9d9c95);
-  --theme-text-muted:      light-dark(#8b8a84, #6b6a65);
-  --theme-text-inverse:    light-dark(#ffffff, #0a0a0c);
-
-  /* Borders */
-  --theme-border:          light-dark(#e0ded7, #27262d);
-  --theme-border-light:    light-dark(#edece8, #1f1e23);
-  --theme-border-focus:    light-dark(#059669, #34d399);
-
-  /* Brand / Emerald */
-  --theme-primary:         light-dark(#059669, #34d399);
-  --theme-primary-hover:   light-dark(#047857, #6ee7b7);
-  --theme-primary-subtle:  light-dark(#ecfdf5, #064e3b);
-  --theme-accent:          light-dark(#b8860b, #fbbf24);
-
-  /* Status */
-  --theme-success:         light-dark(#059669, #34d399);
-  --theme-success-subtle:  light-dark(#ecfdf5, #064e3b);
-  --theme-danger:          light-dark(#dc2626, #f87171);
-  --theme-danger-subtle:   light-dark(#fef2f2, #7f1d1d18);
-  --theme-warning:         light-dark(#d97706, #fbbf24);
-  --theme-warning-subtle:  light-dark(#fffbeb, #78350f18);
-  --theme-info:            light-dark(#2563eb, #60a5fa);
-  --theme-info-subtle:     light-dark(#eff6ff, #1e3a5f18);
-
-  /* Liquid Frosted Glass */
-  --theme-glass-bg:        light-dark(rgba(255,255,255,0.78), rgba(13,13,15,0.82));
-  --theme-glass-border:    light-dark(rgba(0,0,0,0.08), rgba(255,255,255,0.12));
-  --theme-glass-shadow:    light-dark(rgba(0,0,0,0.05), rgba(0,0,0,0.30));
-  --theme-glass-blur:      20px;
-  --theme-glass-blur-heavy: 40px;
+  --tax-ink:          #07121D;
+  --theme-background: #0B1C2C;
+  --theme-surface:    #112538;
+  --theme-text:       #F4EFE6;
+  --theme-text-secondary: #9DA7B2;
+  --theme-border:     #223C54;
+  --theme-glass-bg:   rgba(17, 37, 56, 0.88);
 }

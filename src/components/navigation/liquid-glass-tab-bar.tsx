@@ -2,14 +2,12 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Layers, CheckSquare, Sparkles, MessageCircle } from "lucide-react";
+import { Home, Layers, CheckSquare, Sparkles, MessageCircle, HelpCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 
 export function LiquidGlassTabBar() {
   const pathname = usePathname();
   const router = useRouter();
-  const appClip = useAppClip();
 
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
@@ -35,7 +33,7 @@ export function LiquidGlassTabBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Don't show tab bar on fullscreen intake page if open
+  // Don't cover form actions on fullscreen intake wizard
   if (pathname === "/start") {
     return null;
   }
@@ -50,9 +48,9 @@ export function LiquidGlassTabBar() {
     >
       <nav
         className={cn(
-          "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] overflow-hidden px-3",
-          "bg-theme-surface/85 backdrop-blur-2xl backdrop-saturate-200 border border-theme-glass-border",
-          "shadow-[0_-4px_24px_rgba(0,0,0,0.10)]"
+          "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[24px] overflow-hidden px-3",
+          "bg-[#0B1C2C] text-[#F4EFE6] border border-[#C4A046]/40",
+          "shadow-[0_-4px_24px_rgba(11,28,44,0.30)]"
         )}
       >
         {/* Tab 1: Home */}
@@ -61,11 +59,11 @@ export function LiquidGlassTabBar() {
           onClick={() => router.push("/")}
           className={cn(
             "flex flex-col items-center justify-center flex-1 py-1 transition-all",
-            pathname === "/" ? "text-theme-primary font-bold" : "text-theme-text-muted hover:text-theme-text"
+            pathname === "/" ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
           )}
         >
-          <Home className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">Home</span>
+          <Home className="w-4 h-4" />
+          <span className="text-[10px] mt-0.5 font-mono">Home</span>
         </button>
 
         {/* Tab 2: Services */}
@@ -74,44 +72,47 @@ export function LiquidGlassTabBar() {
           onClick={() => router.push("/services")}
           className={cn(
             "flex flex-col items-center justify-center flex-1 py-1 transition-all",
-            pathname === "/services" ? "text-theme-primary font-bold" : "text-theme-text-muted hover:text-theme-text"
+            pathname === "/services" ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
           )}
         >
-          <Layers className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">Services</span>
+          <Layers className="w-4 h-4" />
+          <span className="text-[10px] mt-0.5 font-mono">Services</span>
         </button>
 
-        {/* Tab 3: Checklist Clip */}
+        {/* Tab 3: Checklist */}
         <button
           type="button"
-          onClick={() => appClip.open("tax-checklist")}
+          onClick={() => router.push("/requirements")}
           className={cn(
             "flex flex-col items-center justify-center flex-1 py-1 transition-all",
-            appClip.activeClip === "tax-checklist" ? "text-theme-primary font-bold" : "text-theme-text-muted hover:text-theme-text"
+            pathname === "/requirements" ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
           )}
         >
-          <CheckSquare className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">Checklist</span>
+          <CheckSquare className="w-4 h-4" />
+          <span className="text-[10px] mt-0.5 font-mono">Docs</span>
         </button>
 
-        {/* Tab 4: WhatsApp Clip */}
+        {/* Tab 4: IRIS Guide */}
         <button
           type="button"
-          onClick={() => appClip.open("whatsapp-intake")}
-          className="flex flex-col items-center justify-center flex-1 py-1 text-[#25D366] hover:opacity-80 transition-all"
+          onClick={() => router.push("/iris-guide")}
+          className={cn(
+            "flex flex-col items-center justify-center flex-1 py-1 transition-all",
+            pathname === "/iris-guide" ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
+          )}
         >
-          <MessageCircle className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-bold">WhatsApp</span>
+          <HelpCircle className="w-4 h-4" />
+          <span className="text-[10px] mt-0.5 font-mono">Guide</span>
         </button>
 
         {/* Tab 5: Start Primary Action */}
         <button
           type="button"
-          onClick={() => appClip.open("tax-intake")}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-theme-primary text-white shadow-md active:scale-95 transition-all ml-1 shrink-0"
+          onClick={() => router.push("/start")}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#C4A046] text-[#0B1C2C] shadow active:scale-95 transition-all ml-1 shrink-0 font-bold"
           aria-label="Start Filing"
         >
-          <Sparkles className="w-5 h-5" />
+          <Sparkles className="w-4 h-4" />
         </button>
       </nav>
     </div>

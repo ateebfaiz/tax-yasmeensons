@@ -6,10 +6,10 @@
 
 @layer base {
   * {
-    @apply border-theme-border;
+    @apply border-rule;
   }
   body {
-    @apply bg-theme-background text-theme-text antialiased;
+    @apply bg-paper text-ink antialiased font-sans;
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -19,28 +19,55 @@
 @layer utilities {
   .glass {
     background: var(--theme-glass-bg);
-    backdrop-filter: blur(var(--theme-glass-blur, 20px));
-    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 20px));
-    border: 1px solid var(--theme-glass-border);
-  }
-
-  .glass-elevated {
-    background: var(--theme-glass-bg);
-    backdrop-filter: blur(var(--theme-glass-blur-heavy, 40px));
-    -webkit-backdrop-filter: blur(var(--theme-glass-blur-heavy, 40px));
-    border: 1px solid var(--theme-glass-border);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(var(--theme-glass-blur, 16px));
+    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 16px));
+    border: 1px solid var(--tax-rule);
   }
 
   .glass-card {
-    @apply glass-elevated rounded-2xl;
+    background: var(--tax-folio);
+    border: 1px solid var(--tax-rule);
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(11, 28, 44, 0.04);
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-theme-primary to-theme-text;
+  .letterhead-band {
+    background: var(--tax-ink);
+    color: var(--tax-paper-light);
+    border-bottom: 2px solid var(--tax-brass);
+  }
+
+  .stamp-box {
+    border: 1.5px dashed var(--tax-stamp-red);
+    background: var(--tax-stamp-bg);
+    color: var(--tax-stamp-red);
+    font-family: var(--font-mono, monospace);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .fbr-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: monospace;
+    font-size: 11px;
+    background: var(--tax-brass-subtle);
+    color: var(--tax-ink);
+    border: 1px solid var(--tax-rule);
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .form-code {
+    font-family: monospace;
+    font-size: 10px;
+    color: var(--tax-ash);
+    letter-spacing: 0.05em;
   }
 
   .pb-safe {
-    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 12px);
+    padding-bottom: calc(env(safe-area-inset-bottom, 24px) + 80px);
   }
 }

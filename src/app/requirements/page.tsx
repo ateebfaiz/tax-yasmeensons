@@ -1,107 +1,168 @@
 "use client";
 
-import React from "react";
-import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
-import { CheckSquare, ShieldCheck, ArrowRight, FileText } from "lucide-react";
+import React, { useState } from "react";
+import Link from "next/link";
+import { CheckSquare, ArrowRight, FileText, CheckCircle2, ShieldCheck } from "lucide-react";
+
+interface DocItem {
+  code: string;
+  en: string;
+  ur: string;
+  type: "required" | "optional";
+}
+
+const CATEGORY_DOCS: Record<string, { title: string; ur: string; items: DocItem[] }> = {
+  SAL: {
+    title: "Salaried Employees (SAL)",
+    ur: "تنخواہ دار ملازمین",
+    items: [
+      { code: "s.149", en: "Annual Salary Certificate or 12 Months Salary Slips", ur: "سالانہ سیلری سرٹیفکیٹ یا 12 ماہ کی تنخواہ کی سلپس", type: "required" },
+      { code: "s.149 WHT", en: "Employer Tax Deduction Certificate", ur: "ادارے کی طرف سے جاری کردہ انکم ٹیکس کٹوتی سرٹیفکیٹ", type: "required" },
+      { code: "s.116 Banks", en: "Bank statements for all active accounts (July 2025 – June 2026)", ur: "تمام فعال اکاؤنٹس کی بینک اسٹیٹمنٹ مع منافع و ٹیکس", type: "required" },
+      { code: "s.235/236", en: "Electricity & Gas Bill Withholding Statements", ur: "بجلی اور گیس کے بلوں پر ودہولڈنگ ٹیکس سرٹیفکیٹس", type: "optional" },
+      { code: "s.236K", en: "Mobile SIM Annual Tax Deduction Certificate", ur: "موبائل سم پر سالانہ ٹیکس کٹوتی کا سرٹیفکیٹ", type: "optional" },
+      { code: "s.231/234", en: "Vehicle Token Tax / Motor Vehicle Purchase Receipts", ur: "گاڑی کا ٹوکن ٹیکس یا خرید و فروخت کا ریکارڈ", type: "optional" },
+      { code: "s.236C/K", en: "Property Sale or Purchase Deeds / FBR Challans", ur: "پراپرٹی کی خرید و فروخت یا ٹرانسفر کا ریکارڈ", type: "optional" },
+    ],
+  },
+  PEN: {
+    title: "Senior & Pensioners (PEN)",
+    ur: "پنشنرز اور بزرگ شہری",
+    items: [
+      { code: "Exempt", en: "Pension Book or Bank Pension Statement", ur: "پنشن بک یا سالانہ پنشن اکاؤنٹ اسٹیٹمنٹ", type: "required" },
+      { code: "CNIC", en: "Valid CNIC Copy (Senior Citizen)", ur: "شناختی کارڈ کی کاپی", type: "required" },
+      { code: "s.151 NSS", en: "National Savings / Behbood Certificates Profit Records", ur: "قومی بچت یا بہبود سرٹیفکیٹس کے منافع کا ریکارڈ", type: "optional" },
+      { code: "s.116 Banks", en: "Bank Statements with profit on debt details", ur: "بینک منافع اور کیش نکلوانے پر کٹوتی کے سرٹیفکیٹس", type: "optional" },
+      { code: "Assets", en: "Residential property documents and asset list", ur: "رہائشی مکان یا پلاٹ کے کاغذات", type: "optional" },
+    ],
+  },
+  HIF: {
+    title: "Housewife / Non-Earning (HIF)",
+    ur: "گھریلو خواتین و نان ارننگ",
+    items: [
+      { code: "CNIC", en: "Valid CNIC Copy (Front and Back)", ur: "قومی شناختی کارڈ کی کاپی", type: "required" },
+      { code: "SIM", en: "Active Mobile SIM in Applicant's Own Name", ur: "اپنے نام پر رجسٹرڈ فعال موبائل سم", type: "required" },
+      { code: "s.116 Bank", en: "Active Bank Account Statement (Nominal transactions)", ur: "بینک اکاؤنٹ اسٹیٹمنٹ (معمولی بیلنس)", type: "required" },
+      { code: "Source", en: "Confirmation of Spouse / Family maintenance funds", ur: "گھریلو کفالت یا شوہر کی معاونت کا بیان", type: "required" },
+      { code: "Assets", en: "Inherited property, gold, or gift deeds", ur: "وراثت یا تحفے میں ملے اثاثوں کی تفصیل", type: "optional" },
+    ],
+  },
+  STU: {
+    title: "Student Filers (STU)",
+    ur: "طلباء و یوتھ فائلرز",
+    items: [
+      { code: "CNIC/ID", en: "Valid CNIC and College/University ID Card", ur: "شناختی کارڈ اور اسٹوڈنٹ کارڈ", type: "required" },
+      { code: "SIM", en: "Active Mobile SIM in Student's Name", ur: "طالب علم کے نام پر رجسٹرڈ سم", type: "required" },
+      { code: "s.236I", en: "University Fee Receipts (showing advance tax)", ur: "یونیورسٹی فیس کی رسیدیں مع ایڈوانس ٹیکس", type: "required" },
+      { code: "s.116 Bank", en: "Student Bank Account Statement", ur: "اسٹوڈنٹ اکاؤنٹ کی بینک اسٹیٹمنٹ", type: "required" },
+    ],
+  },
+};
 
 export default function RequirementsPage() {
-  const appClip = useAppClip();
-
-  const sections = [
-    {
-      titleEn: "1. Salaried Individuals",
-      titleUr: "تنخواہ دار ملازمین کے ضروری کاغذات",
-      items: [
-        { en: "Annual Salary Certificate / 12 Months Salary Slips (July 2025 to June 2026)", ur: "سالانہ تنخواہ کا سرٹیفکیٹ یا 12 ماہ کی سیلری سلپس" },
-        { en: "Employer Tax Deduction Certificate (Section 149)", ur: "ادارے سے حاصل کردہ ودہولڈنگ ٹیکس سرٹیفکیٹ" },
-        { en: "Bank Statements of all active accounts (with profit on debt details)", ur: "تمام فعال بینک اکاؤنٹس کی سالانہ اسٹیٹمنٹ مع منافع" },
-        { en: "Utility Bills (Electricity/Gas/Mobile SIM) WHT certificates", ur: "بجلی، گیس کے بلز اور موبائل سم پر ٹیکس کٹوتی کا ریکارڈ" },
-        { en: "Property / Vehicle purchase, transfer or registration receipts", ur: "پراپرٹی یا گاڑی کی خرید و فروخت یا ٹرانسفر کے کاغذات" },
-      ],
-    },
-    {
-      titleEn: "2. Senior Citizens & Pensioners",
-      titleUr: "پنشنرز اور بزرگ شہریوں کے ضروری کاغذات",
-      items: [
-        { en: "Pension Book / Pension Account Statement for Tax Year 2026", ur: "پنشن بک یا پنشن اکاؤنٹ کی سالانہ اسٹیٹمنٹ" },
-        { en: "National Savings / Behbood Certificates profit deduction records", ur: "قومی بچت، بہبود یا پنشنرز سرٹیفکیٹس پر منافع کا ریکارڈ" },
-        { en: "Bank withholding certificates on cash withdrawals / profit", ur: "بینک منافع یا کیش نکلوانے پر کٹوتی کے سرٹیفکیٹس" },
-        { en: "Existing assets declaration (Residential house, cash, investments)", ur: "موجودہ اثاثہ جات کی تفصیل (رہائشی مکان، پلاٹ، کیش)" },
-      ],
-    },
-    {
-      titleEn: "3. Housewives & Zero-Income Individuals",
-      titleUr: "گھریلو خواتین اور بغیر آمدنی افراد کے کاغذات",
-      items: [
-        { en: "Valid CNIC Copy (Front & Back)", ur: "قومی شناختی کارڈ کی کاپی" },
-        { en: "Active Mobile SIM registered in applicant's own CNIC", ur: "اپنے نام پر رجسٹرڈ فعال موبائل سم" },
-        { en: "Bank Account Statement showing nominal transactions", ur: "بینک اکاؤنٹ کی سالانہ اسٹیٹمنٹ" },
-        { en: "Gifted / Inherited property or jewelry details (if applicable)", ur: "وراثت یا تحفے میں ملے اثاثوں کی تفصیل" },
-        { en: "Family maintenance / Spouse support source confirmation", ur: "گھریلو کفالت یا شوہر کی طرف سے ماہانہ اخراجات کا بیان" },
-      ],
-    },
-    {
-      titleEn: "4. Student Filers",
-      titleUr: "طلباء و یوتھ فائلرز کے ضروری کاغذات",
-      items: [
-        { en: "Valid CNIC & University/College ID Card Copy", ur: "شناختی کارڈ اور تعلیمی ادارے کا کارڈ" },
-        { en: "Mobile SIM in student's name", ur: "طالب علم کے نام پر رجسٹرڈ سم" },
-        { en: "University Fee Receipts (Advance tax under Sec 236I)", ur: "یونیورسٹی فیس کی رسیدیں مع ایڈوانس ٹیکس کٹوتی" },
-        { en: "Student Bank Account Statement", ur: "اسٹوڈنٹ اکاؤنٹ کی بینک اسٹیٹمنٹ" },
-      ],
-    },
-  ];
+  const [activeCat, setActiveCat] = useState<string>("SAL");
+  const current = CATEGORY_DOCS[activeCat] || CATEGORY_DOCS.SAL;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 space-y-12">
-      <div className="text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-theme-primary/10 border border-theme-primary/20 text-theme-primary text-xs font-bold">
-          <FileText className="w-3.5 h-3.5" />
-          <span>Documentation Checklist • Tax Year 2026</span>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 md:py-16 space-y-8 pb-28">
+      {/* Header */}
+      <div className="border-b-2 border-brass pb-4 space-y-2">
+        <div className="flex items-center justify-between font-mono text-[11px] text-ash">
+          <span>EVIDENCE SCHEDULE</span>
+          <span className="font-bold text-ink">TY2026 REQUIREMENTS</span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-theme-text">Document Requirements</h1>
-        <p className="text-lg font-bold text-theme-primary font-urdu" dir="rtl">
+        <h1 className="font-serif text-3xl sm:text-4xl font-black text-ink">
+          Documentation Checklist
+        </h1>
+        <div className="font-urdu text-base font-bold text-ink" dir="rtl">
           ٹیکس فائلنگ کے لیے ضروری کاغذات کی فہرست
-        </p>
-        <p className="max-w-xl mx-auto text-xs sm:text-sm text-theme-text-secondary">
-          Gathering your documents upfront allows fast reconciliation and maximum legitimate tax deductions.
+        </div>
+        <p className="text-xs text-ash leading-relaxed max-w-2xl">
+          Select your category chip below to see required vs optional documents. You can upload or simply photo-share them via WhatsApp.
         </p>
       </div>
 
-      <div className="space-y-6">
-        {sections.map((sec, idx) => (
-          <div key={idx} className="glass-card p-6 md:p-8 space-y-5">
-            <div className="border-b border-theme-border/50 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <h2 className="text-lg sm:text-xl font-bold text-theme-text">{sec.titleEn}</h2>
-              <div className="text-xs sm:text-sm font-semibold text-theme-primary font-urdu" dir="rtl">
-                {sec.titleUr}
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              {sec.items.map((item, i) => (
-                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-theme-surface/40 border border-theme-border/60">
-                  <CheckSquare className="w-4 h-4 text-theme-primary shrink-0 mt-0.5" />
-                  <div className="space-y-0.5 text-xs">
-                    <div className="font-semibold text-theme-text">{item.en}</div>
-                    <div className="text-theme-text-muted font-urdu" dir="rtl">{item.ur}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Filter Chips */}
+      <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+        {[
+          { code: "SAL", label: "Salaried Employees" },
+          { code: "PEN", label: "Senior & Pensioners" },
+          { code: "HIF", label: "Housewife / Non-Earning" },
+          { code: "STU", label: "Student Filers" },
+        ].map((c) => (
+          <button
+            key={c.code}
+            type="button"
+            onClick={() => setActiveCat(c.code)}
+            className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
+              activeCat === c.code
+                ? "bg-ink text-paper-light font-bold shadow-sm"
+                : "bg-folio border border-rule text-ash hover:text-ink"
+            }`}
+          >
+            <span className="text-brass font-bold">{c.code}</span>
+            <span>{c.label}</span>
+          </button>
         ))}
       </div>
 
-      <div className="text-center pt-4">
-        <button
-          type="button"
-          onClick={() => appClip.open("tax-intake")}
-          className="btn-shimmer inline-flex items-center gap-2 bg-theme-primary hover:bg-theme-primary-hover text-white font-bold py-3 px-8 rounded-xl text-sm shadow-md transition-all"
+      {/* Checklist Card */}
+      <div className="glass-card p-6 space-y-4 border-rule">
+        <div className="border-b border-rule-light pb-3 flex items-baseline justify-between">
+          <h2 className="font-serif text-lg font-bold text-ink">{current.title}</h2>
+          <span className="font-urdu text-xs text-ash" dir="rtl">{current.ur}</span>
+        </div>
+
+        <div className="space-y-2.5">
+          {current.items.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-3.5 rounded border border-rule bg-paper-light flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+            >
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-bold text-brass px-1.5 py-0.2 rounded bg-folio border border-rule">
+                    {item.code}
+                  </span>
+                  <span className="text-xs font-semibold text-ink">{item.en}</span>
+                </div>
+                <div className="font-urdu text-xs text-ash" dir="rtl">{item.ur}</div>
+              </div>
+
+              <div className="shrink-0">
+                {item.type === "required" ? (
+                  <span className="font-mono text-[10px] font-bold text-ink bg-brass/25 border border-brass px-2 py-0.5 rounded uppercase">
+                    Required
+                  </span>
+                ) : (
+                  <span className="font-mono text-[10px] text-ash bg-paper border border-rule px-2 py-0.5 rounded uppercase">
+                    If Applicable
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Direct link to start with preselected category */}
+      <div className="bg-ink text-paper-light border-2 border-brass p-6 rounded-md flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="space-y-1 text-center sm:text-left">
+          <span className="font-mono text-xs text-brass font-bold">READY WITH PAPERS?</span>
+          <div className="font-serif text-lg font-bold">
+            Begin filing with {activeCat} checklist
+          </div>
+          <p className="text-xs text-ash-light">
+            You can photo-share documents on WhatsApp during our step-by-step guidance.
+          </p>
+        </div>
+
+        <Link
+          href={`/start?cat=${activeCat}`}
+          className="inline-flex items-center gap-2 bg-brass hover:bg-brass-light text-ink font-mono font-bold text-xs py-3 px-6 rounded shadow transition-all shrink-0"
         >
-          <span>Have Documents Ready? Start Filing</span>
-          <ArrowRight className="w-4 h-4" />
-        </button>
+          <span>Start Filing with {activeCat} →</span>
+        </Link>
       </div>
     </div>
   );
