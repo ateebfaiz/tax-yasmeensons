@@ -197,11 +197,14 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
         {step === 1 && (
           <div className="space-y-4">
             {/* Persona Chips */}
-            <div className="space-y-1.5">
-              <label className="text-[11px] font-bold uppercase tracking-wider text-ash dark:text-[#8C959F]">
-                Taxpayer Category / زمرہ انتخاب کریں
+            <div className="space-y-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ash dark:text-[#8C959F]">
+                Taxpayer Category
               </label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                ٹیکس گزار کی صنف کا انتخاب کریں
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                 {PERSONAS.map((p) => {
                   const Icon = p.icon;
                   const isSelected = persona === p.id;
@@ -210,17 +213,17 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       key={p.id}
                       type="button"
                       onClick={() => setPersona(p.id)}
-                      className={`p-2.5 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex items-center gap-2 ${
+                      className={`p-3 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-1.5 ${
                         isSelected
                           ? "border-[#128C7E] bg-[#128C7E]/10 dark:border-[#C4A046] dark:bg-[#C4A046]/10 font-bold"
                           : "border-black/[0.08] dark:border-white/10 bg-white/50 dark:bg-white/[0.03] hover:bg-white/80"
                       }`}
                     >
-                      <Icon className={`w-4 h-4 shrink-0 ${isSelected ? "text-[#128C7E] dark:text-[#C4A046]" : "text-ash"}`} />
-                      <div className="min-w-0">
-                        <div className="text-xs truncate">{p.labelEn}</div>
-                        <div className="text-[10px] font-urdu opacity-75 truncate" dir="rtl">{p.labelUr}</div>
+                      <div className="flex items-center gap-2">
+                        <Icon className={`w-4 h-4 shrink-0 ${isSelected ? "text-[#128C7E] dark:text-[#C4A046]" : "text-ash"}`} />
+                        <span className="text-xs font-bold leading-tight">{p.labelEn}</span>
                       </div>
+                      <div className="text-xs font-urdu opacity-85 leading-tight" dir="rtl">{p.labelUr}</div>
                     </button>
                   );
                 })}
@@ -228,7 +231,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
             </div>
 
             {/* Name */}
-            <div className="bg-white/60 dark:bg-white/[0.03] backdrop-blur-md p-3.5 rounded-2xl border border-black/[0.06] dark:border-white/10 space-y-3">
+            <div className="bg-white/60 dark:bg-white/[0.03] backdrop-blur-md p-4 rounded-2xl border border-black/[0.06] dark:border-white/10 space-y-3.5">
               <div>
                 <BilingualLabel en="Full Name (as per CNIC)" ur="پورا نام (شناختی کارڈ کے مطابق)" htmlFor="fast-name" required />
                 <input
@@ -237,7 +240,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Muhammad Tariq"
-                  className="w-full mt-1 bg-white/80 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-xs font-semibold focus:border-[#128C7E] outline-none"
+                  className="w-full mt-1.5 bg-white/80 dark:bg-black/20 border border-black/10 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:border-[#128C7E] outline-none"
                 />
               </div>
 
@@ -328,14 +331,16 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
             </div>
 
             {/* Next Button */}
-            <button
-              type="button"
-              onClick={validateStep1}
-              className="w-full py-3 rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
-            >
-              <span>Continue to Income & Claims / اگلے مرحلے پر جائیں</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={validateStep1}
+                className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+              >
+                <span>Continue to Income &amp; Claims</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         )}
 

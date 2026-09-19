@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import {
   CheckSquare,
@@ -17,6 +19,7 @@ import {
   Briefcase,
   Users,
   ExternalLink,
+  Lock,
 } from "lucide-react";
 import { TaxCertificateTemplates } from "@/components/tax/TaxCertificateTemplates";
 
@@ -76,129 +79,114 @@ const CATEGORY_DOCS: Record<string, { title: string; ur: string; items: DocItem[
 };
 
 export default function RequirementsPage() {
+  const router = useRouter();
   const [activeCat, setActiveCat] = useState<string>("SAL");
   const appClip = useAppClip();
   const current = CATEGORY_DOCS[activeCat] || CATEGORY_DOCS.SAL;
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 md:py-16 space-y-10 pb-28">
-      {/* Header */}
-      <div className="border-b-2 border-brass pb-4 space-y-2">
-        <div className="flex items-center justify-between font-mono text-[11px] text-ash">
-          <span>EVIDENCE SCHEDULE</span>
-          <span className="font-bold text-ink">TY2026 REQUIREMENTS</span>
-        </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-black text-ink">
-          FBR Individual Registration Requirements
-        </h1>
-        <div className="font-urdu text-base font-bold text-ink" dir="rtl">
-          ایف بی آر انفرادی رجسٹریشن و نیشنل ٹیکس نمبر (NTN) کے ضروری تقاضے
-        </div>
-        <p className="text-xs text-ash leading-relaxed max-w-2xl">
-          To register as an individual with the Federal Board of Revenue (FBR) and obtain your National Tax Number (NTN), you can complete the online process through the FBR Iris Portal. We provide full guidance and can create and configure an email for you if you do not already have one.
-        </p>
-      </div>
-
+  // Shared inner content for checklist & modules
+  const renderModules = () => (
+    <div className="space-y-8">
       {/* Module 1: Required Information & Documents */}
-      <div className="glass-card p-6 sm:p-8 rounded-[28px] space-y-6 border-rule shadow-sm">
-        <div className="border-b border-rule pb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-full bg-brass/20 text-ink">
+      <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-6 border-rule shadow-sm">
+        <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
               SECTION 1
             </span>
-            <h2 className="font-serif text-lg font-bold text-ink">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
               Required Information &amp; Documents
             </h2>
           </div>
-          <span className="font-urdu text-xs text-ash" dir="rtl">ضروری معلومات و دستاویزات</span>
+          <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">ضروری معلومات و دستاویزات</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Item 1: Valid CNIC */}
-          <div className="p-4 rounded-2xl border border-rule bg-paper-light space-y-1.5">
-            <div className="flex items-center gap-2 font-bold text-xs text-ink">
-              <span className="w-5 h-5 rounded-full bg-[#128C7E]/10 text-[#128C7E] flex items-center justify-center text-[11px]">1</span>
+          <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
+            <div className="flex items-center gap-2 font-bold text-sm text-ink">
+              <span className="w-5 h-5 rounded-full bg-[#128C7E]/10 text-[#128C7E] flex items-center justify-center text-xs font-mono">1</span>
               <span>Valid CNIC (13 Digits)</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Your 13-digit Computerized National Identity Card number issued by NADRA (without hyphens for Iris verification).
             </p>
-            <div className="font-urdu text-[11px] text-ash" dir="rtl">
+            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
               نادرا سے جاری کردہ ۱۳ ہندسوں کا درست قومی شناختی کارڈ
             </div>
           </div>
 
           {/* Item 2: Active Mobile SIM */}
-          <div className="p-4 rounded-2xl border border-rule bg-paper-light space-y-1.5">
-            <div className="flex items-center gap-2 font-bold text-xs text-ink">
+          <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
+            <div className="flex items-center gap-2 font-bold text-sm text-ink">
               <Smartphone className="w-4 h-4 text-[#128C7E]" />
               <span>Active Mobile SIM</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Must be registered under your own CNIC to receive the verification code. If not in your name, <strong>must be on your blood relative or immediate family member</strong> (provide relative&apos;s name and CNIC).
             </p>
-            <div className="font-urdu text-[11px] text-ash" dir="rtl">
+            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
               اپنے نام پر یا قریبی خونی رشتہ دار کے نام پر رجسٹرڈ فعال سم
             </div>
           </div>
 
           {/* Item 3: Personal Email */}
-          <div className="p-4 rounded-2xl border border-rule bg-paper-light space-y-1.5">
-            <div className="flex items-center gap-2 font-bold text-xs text-ink">
+          <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
+            <div className="flex items-center gap-2 font-bold text-sm text-ink">
               <Mail className="w-4 h-4 text-[#128C7E]" />
               <span>Personal Email Address</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               An active email to receive official FBR notices and OTP verification. <em>We can help along with full guidance and create email if you don&apos;t already have one.</em>
             </p>
-            <div className="font-urdu text-[11px] text-ash" dir="rtl">
+            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
               ذاتی ای میل ایڈریس (اگر نہیں ہے تو ہم نیا بنا کر ترتیب دیں گے)
             </div>
           </div>
 
           {/* Item 4: Residential Address */}
-          <div className="p-4 rounded-2xl border border-rule bg-paper-light space-y-1.5">
-            <div className="flex items-center gap-2 font-bold text-xs text-ink">
+          <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
+            <div className="flex items-center gap-2 font-bold text-sm text-ink">
               <Home className="w-4 h-4 text-[#128C7E]" />
               <span>Current Residential Address</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Your current home address, city, and district required for FBR Form 181 jurisdiction mapping.
             </p>
-            <div className="font-urdu text-[11px] text-ash" dir="rtl">
+            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
               موجودہ رہائشی پتہ مع شہر و ضلع
             </div>
           </div>
         </div>
 
         {/* Income Source Particulars Box */}
-        <div className="p-4 rounded-2xl border border-brass/40 bg-brass-subtle space-y-2">
-          <div className="flex items-center gap-2 font-bold text-xs text-ink">
+        <div className="p-5 rounded-2xl border border-brass/40 bg-brass-subtle/80 space-y-3">
+          <div className="flex items-center gap-2 font-bold text-sm text-ink">
             <Briefcase className="w-4 h-4 text-brass" />
             <span>Income Source Particulars</span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-ash">
             <div>
-              <strong className="text-ink">Salaried:</strong> Employer name, NTN, and office address (optional).
+              <strong className="text-ink block mb-0.5">Salaried:</strong> Employer name, NTN, and office address (optional).
             </div>
             <div>
-              <strong className="text-ink">Business / Freelancer:</strong> Business name, principal activity, and electricity bill (&lt;3 months old).
+              <strong className="text-ink block mb-0.5">Business / Freelancer:</strong> Business name, principal activity, and utility bills.
             </div>
             <div>
-              <strong className="text-ink">Property / Support:</strong> Address of rental property or confirmation of family maintenance support.
+              <strong className="text-ink block mb-0.5">Property / Support:</strong> Rental property address or confirmation of family maintenance.
             </div>
           </div>
         </div>
       </div>
 
       {/* Module 2: Online Registration Process (Form 181) */}
-      <div className="glass-card p-6 sm:p-8 rounded-[28px] space-y-5 border-rule shadow-sm">
-        <div className="border-b border-rule pb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-full bg-brass/20 text-ink">
+      <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-6 border-rule shadow-sm">
+        <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
               SECTION 2
             </span>
-            <h2 className="font-serif text-lg font-bold text-ink">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
               Online Registration Process (Form 181)
             </h2>
           </div>
@@ -213,7 +201,7 @@ export default function RequirementsPage() {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
           {[
             { step: "01", title: "Access Portal", desc: "Open iris.fbr.gov.pk and verify the SSL secure lock." },
             { step: "02", title: "Unregistered Person", desc: "Select 'Registration for Unregistered Person' tab." },
@@ -222,55 +210,55 @@ export default function RequirementsPage() {
             { step: "05", title: "Complete Form 181", desc: "Submit individual registration without third-party fees." },
             { step: "06", title: "NTN & Password", desc: "Receive Iris login credentials and NTN via SMS from FBR." },
           ].map((s) => (
-            <div key={s.step} className="p-3.5 rounded-2xl border border-rule bg-paper-light space-y-1">
-              <span className="font-mono text-[10px] font-bold text-brass bg-folio border border-rule px-1.5 py-0.5 rounded-full">
+            <div key={s.step} className="p-4 rounded-2xl border border-rule bg-paper-light space-y-1.5">
+              <span className="font-mono text-[10px] font-bold text-brass bg-folio border border-rule px-2 py-0.5 rounded-full">
                 STEP {s.step}
               </span>
-              <div className="font-bold text-xs text-ink">{s.title}</div>
-              <p className="text-[11px] text-ash leading-snug">{s.desc}</p>
+              <div className="font-bold text-sm text-ink">{s.title}</div>
+              <p className="text-xs text-ash leading-snug">{s.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Module 3: Family Consolidation & WHT Audit */}
-      <div className="glass-card p-6 sm:p-8 rounded-[28px] space-y-4 border-rule shadow-sm bg-gradient-to-br from-paper-light to-folio">
-        <div className="border-b border-rule pb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-full bg-brass/20 text-ink">
+      <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-5 border-rule shadow-sm bg-gradient-to-br from-paper-light to-folio">
+        <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
               SECTION 3
             </span>
-            <h2 className="font-serif text-lg font-bold text-ink">
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
               Family Group Consolidation &amp; Source Withholding Audit
             </h2>
           </div>
-          <span className="font-urdu text-xs text-ash" dir="rtl">خاندانی اکاؤنٹس اور ٹیکس چھوٹ</span>
+          <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">خاندانی اکاؤنٹس اور ٹیکس چھوٹ</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="p-4 rounded-2xl border border-rule bg-paper-light space-y-1.5">
-            <div className="flex items-center gap-2 font-bold text-ink">
+          <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
+            <div className="flex items-center gap-2 font-bold text-sm text-ink">
               <Users className="w-4 h-4 text-[#128C7E]" />
               <span>Inter-Family Fund Transfers Reconciliation</span>
             </div>
-            <p className="text-ash leading-relaxed">
+            <p className="text-xs text-ash leading-relaxed">
               We reconcile inter-family bank transfers (between husband, wife, parents, or children) so that money transfers for household expenses are never mistakenly treated as commercial income or double-taxed.
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl border border-rule bg-paper-light space-y-1.5">
-            <div className="flex items-center gap-2 font-bold text-ink">
+          <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
+            <div className="flex items-center gap-2 font-bold text-sm text-ink">
               <ShieldCheck className="w-4 h-4 text-[#128C7E]" />
               <span>Comprehensive Withholding Tax (WHT) Audit</span>
             </div>
-            <p className="text-ash leading-relaxed">
+            <p className="text-xs text-ash leading-relaxed">
               We audit and claim all advance taxes deducted at source: ATM and bank cash withdrawals, fuel purchases, electricity and gas bills, mobile recharge and bundle package fees, and debit/credit card transactions.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Category Filter Chips & Documentation Schedule */}
+      {/* Module 4: Category Checklist Cards */}
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2 font-mono text-xs">
@@ -284,7 +272,7 @@ export default function RequirementsPage() {
                 key={c.code}
                 type="button"
                 onClick={() => setActiveCat(c.code)}
-                className={`px-3.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 text-xs ${
+                className={`px-4 py-2 rounded-full transition-all flex items-center gap-2 text-xs font-semibold ${
                   activeCat === c.code
                     ? "bg-ink text-paper-light font-bold shadow-sm"
                     : "bg-folio border border-rule text-ash hover:text-ink hover:border-ash"
@@ -299,43 +287,43 @@ export default function RequirementsPage() {
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist", { persona: activeCat.toLowerCase() })}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brass/15 border border-brass/40 text-ink font-mono font-bold text-xs hover:bg-brass/25 transition-all shadow-sm active:scale-95"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brass/15 border border-brass/40 text-ink font-mono font-bold text-xs hover:bg-brass/25 transition-all shadow-sm active:scale-95"
           >
             <Sparkles className="w-3.5 h-3.5 text-brass" />
-            <span>Interactive AppClip Checklist</span>
+            <span>Open Interactive AppClip Checklist</span>
           </button>
         </div>
 
         {/* Checklist Card */}
-        <div className="glass-card p-6 sm:p-8 rounded-[28px] space-y-5 border-rule shadow-sm">
+        <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-5 border-rule shadow-sm">
           <div className="border-b border-rule-light pb-3 flex items-baseline justify-between">
-            <h2 className="font-serif text-lg font-bold text-ink">{current.title}</h2>
-            <span className="font-urdu text-xs text-ash" dir="rtl">{current.ur}</span>
+            <h2 className="font-serif text-xl font-bold text-ink">{current.title}</h2>
+            <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">{current.ur}</span>
           </div>
 
           <div className="space-y-3">
             {current.items.map((item, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-2xl border border-rule bg-paper-light flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs"
+                className="p-4 sm:p-5 rounded-2xl border border-rule bg-paper-light flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs"
               >
-                <div className="space-y-0.5">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-brass px-2 py-0.5 rounded-full bg-folio border border-rule">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2.5">
+                    <span className="font-mono text-xs font-bold text-brass px-2.5 py-0.5 rounded-full bg-folio border border-rule">
                       {item.code}
                     </span>
-                    <span className="text-xs font-semibold text-ink">{item.en}</span>
+                    <span className="text-sm font-semibold text-ink">{item.en}</span>
                   </div>
-                  <div className="font-urdu text-xs text-ash" dir="rtl">{item.ur}</div>
+                  <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">{item.ur}</div>
                 </div>
 
                 <div className="shrink-0">
                   {item.type === "required" ? (
-                    <span className="font-mono text-[10px] font-bold text-ink bg-brass/25 border border-brass px-2.5 py-0.5 rounded-full uppercase">
+                    <span className="font-mono text-[10px] font-bold text-ink bg-brass/25 border border-brass px-3 py-1 rounded-full uppercase">
                       Required
                     </span>
                   ) : (
-                    <span className="font-mono text-[10px] text-ash bg-paper border border-rule px-2.5 py-0.5 rounded-full uppercase">
+                    <span className="font-mono text-[10px] text-ash bg-paper border border-rule px-3 py-1 rounded-full uppercase">
                       If Applicable
                     </span>
                   )}
@@ -346,42 +334,142 @@ export default function RequirementsPage() {
         </div>
       </div>
 
-      {/* Module 4: Certificate Message Templates, App Guides & Utility WHT */}
+      {/* Module 5: Certificate Message Templates & App Guide */}
       <TaxCertificateTemplates />
 
       {/* CTA Band */}
-      <div className="bg-ink text-paper-light border-2 border-brass p-8 rounded-[30px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-        <div className="space-y-1 text-center sm:text-left">
+      <div className="bg-ink text-paper-light border-2 border-brass p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="space-y-2 text-center sm:text-left">
           <span className="font-mono text-xs text-brass font-bold uppercase tracking-wider">READY WITH PAPERS?</span>
-          <div className="font-serif text-xl font-bold">
+          <div className="font-serif text-2xl font-bold">
             Begin filing with {activeCat} checklist
           </div>
-          <p className="text-xs text-ash-light leading-relaxed max-w-md">
+          <p className="text-xs sm:text-sm text-ash-light leading-relaxed max-w-md">
             You can photo-share documents on WhatsApp during our step-by-step guidance.
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-2.5 shrink-0">
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake", { defaultPersona: activeCat })}
-            className="inline-flex items-center justify-center gap-1.5 bg-brass hover:bg-brass-light text-ink font-mono font-bold text-xs py-3 px-6 rounded-full shadow transition-all active:scale-95"
+        <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+          <Link
+            href={`/start?cat=${activeCat}`}
+            className="inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-mono font-bold text-xs py-3.5 px-6 rounded-full shadow transition-all active:scale-95"
           >
-            <span>Fast AppClip ({activeCat})</span>
-            <Sparkles className="w-3.5 h-3.5" />
-          </button>
+            <span>Start Filing ({activeCat})</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
 
           <a
             href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20guidance%20on%20FBR%20Individual%20Registration."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs py-3 px-5 rounded-full transition-all active:scale-95"
+            className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs py-3.5 px-5 rounded-full transition-all active:scale-95"
           >
-            <WhatsAppIcon className="w-3.5 h-3.5" />
+            <WhatsAppIcon className="w-4 h-4" />
             <span>WhatsApp (03120947187)</span>
           </a>
         </div>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {/* ========================================================
+          1. MOBILE VIEWPORT (md:hidden): Frosted Liquid Glass AppClip
+          ======================================================== */}
+      <div className="block md:hidden">
+        <AppClipSheet
+          onClose={() => router.push("/")}
+          fullHeight
+          title="FBR Requirements & Checklist"
+          subtitle="TY2026 Evidence Schedule • Form 181 • Templates"
+        >
+          <div className="pb-16 pt-2">
+            {renderModules()}
+          </div>
+        </AppClipSheet>
+      </div>
+
+      {/* ========================================================
+          2. DESKTOP VIEWPORT (hidden md:block): Two-Column Layout
+          ======================================================== */}
+      <div className="hidden md:block max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16 pb-32">
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* LEFT COLUMN: Sticky Overview, Breathable Typography */}
+          <div className="col-span-5 lg:col-span-4 sticky top-24 space-y-6">
+            <div className="space-y-3">
+              <div>
+                <span className="inline-block font-mono text-[11px] text-brass font-bold tracking-widest uppercase bg-brass/10 border border-brass/30 px-3 py-1 rounded-full">
+                  EVIDENCE SCHEDULE · TY2026
+                </span>
+              </div>
+
+              <h1 className="font-serif text-3xl lg:text-4xl font-black text-ink leading-tight">
+                FBR Registration Requirements
+              </h1>
+
+              <div className="font-urdu text-base font-bold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                ایف بی آر انفرادی رجسٹریشن و نیشنل ٹیکس نمبر (NTN) کے ضروری تقاضے
+              </div>
+
+              <p className="text-sm text-ash leading-relaxed">
+                To register as an individual with the Federal Board of Revenue (FBR) and obtain your National Tax Number (NTN), you can complete the online process through the FBR Iris Portal.
+              </p>
+            </div>
+
+            {/* Zero-Credential Invariant Card */}
+            <div className="p-5 rounded-2xl bg-paper-light border border-rule space-y-2.5 shadow-xs">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+                <ShieldCheck className="w-4 h-4 shrink-0" />
+                <span>Zero-Credential Invariant</span>
+              </div>
+              <p className="text-xs text-ash leading-relaxed">
+                We never store, input, or ask for your FBR IRIS password. Registration codes and PIN are verified directly with FBR.
+              </p>
+              <div className="pt-2 border-t border-rule-light font-mono text-[11px] text-ash flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-brass" />
+                <span>Official Gateway:</span>
+                <a
+                  href="https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ink font-bold hover:text-brass underline inline-flex items-center gap-1"
+                >
+                  <span>iris.fbr.gov.pk</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
+            {/* WhatsApp Assistance */}
+            <div className="p-5 rounded-2xl bg-folio border border-rule space-y-3 shadow-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
+                  Document Desk Online
+                </span>
+              </div>
+              <p className="text-xs text-ash leading-relaxed">
+                Missing a bank certificate or need assistance requesting WHT from telecom? Chat with our desk.
+              </p>
+              <a
+                href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20questions%20about%20required%20tax%20documents."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span>WhatsApp Desk (0312 0947187)</span>
+              </a>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Modules and Checklist */}
+          <div className="col-span-7 lg:col-span-8">
+            {renderModules()}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

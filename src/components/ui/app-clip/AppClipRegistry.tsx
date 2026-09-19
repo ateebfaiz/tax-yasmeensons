@@ -8,4 +8,6 @@ export const AppClipRegistry: Record<string, React.ComponentType<any>> = {
   "whatsapp-intake": dynamic(() => import("@/components/clips/WhatsAppIntakeClip")),
   "tax-checklist": dynamic(() => import("@/components/clips/ChecklistClip")),
   "iris-guide": dynamic(() => import("@/components/clips/IrisGuideClip")),
+  "pricing": dynamic(() => import("@/components/clips/PricingClip")),
+  "services": dynamic(() => import("@/components/clips/ServicesClip")),
 };

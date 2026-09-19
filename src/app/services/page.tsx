@@ -2,10 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
-import { ShieldCheck, CheckCircle2, ArrowRight, FileCheck, Sparkles } from "lucide-react";
+import ServicesClip from "@/components/clips/ServicesClip";
+import { ShieldCheck, CheckCircle2, ArrowRight, Lock, ExternalLink, Sparkles } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 
 export default function ServicesPage() {
+  const router = useRouter();
   const appClip = useAppClip();
 
   const services = [
@@ -33,7 +37,7 @@ export default function ServicesPage() {
       descEn: "Our full-service facilitation through your FBR IRIS account. We organize all salary slips, bank tax deduction certificates, and asset declarations. We prepare the complete draft return and wealth statement (s.116), review final figures with you for mandatory pre-approval, and assist you through the IRIS submission.",
       descUr: "ہماری جامع فائلنگ سہولت جس میں ہم آپ کے تمام سیلری سلپس، بینک سرٹیفکیٹس اور اثاثوں کا جامع گوشوارہ تیار کرتے ہیں۔ حتمی جمع کروانے سے پہلے مکمل جائزہ آپ کو پیش کیا جاتا ہے اور آپ کی منظوری کے بعد فائلنگ مکمل کروائی جاتی ہے۔",
       points: [
-        "Full income tax return + section 116 wealth balance",
+        "Full income tax return + Section 116 wealth balance",
         "WHT credit optimization (mobile, utility, banking, motor vehicle)",
         "Screen-by-screen assistance with customer-authenticated session",
         "Mandatory pre-submission approval summary",
@@ -58,93 +62,158 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 md:py-16 space-y-12 pb-28">
-      {/* Header */}
-      <div className="border-b-2 border-brass pb-4 space-y-2 text-center md:text-left">
-        <div className="flex items-center justify-center md:justify-between font-mono text-[11px] text-ash">
-          <span>PRACTICE OVERVIEW</span>
-          <span className="font-bold text-ink">TY2026 SERVICES</span>
-        </div>
-        <h1 className="font-serif text-3xl sm:text-4xl font-black text-ink">
-          Tax Facilitation Services
-        </h1>
-        <div className="font-urdu text-base font-bold text-ink" dir="rtl">
-          ہماری سروسز • مکمل رازداری اور شفاف فیس کے ساتھ
-        </div>
-        <p className="text-xs text-ash leading-relaxed max-w-xl mx-auto md:mx-0">
-          Every tier strictly enforces our Zero-Credential Architecture: you never enter your FBR password on any third-party app.
-        </p>
+    <>
+      {/* ========================================================
+          1. MOBILE VIEWPORT (md:hidden): Frosted Liquid Glass AppClip
+          ======================================================== */}
+      <div className="block md:hidden">
+        <ServicesClip onClose={() => router.push("/")} />
       </div>
 
-      <div className="space-y-8">
-        {services.map((svc) => (
-          <div
-            key={svc.code}
-            className={`glass-card p-6 md:p-8 space-y-5 rounded-[28px] ${
-              svc.isRecommended ? "glass-card-featured border-brass shadow-lg" : "shadow-sm hover:shadow-md"
-            }`}
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-rule-light pb-4">
+      {/* ========================================================
+          2. DESKTOP VIEWPORT (hidden md:block): Two-Column Layout
+          ======================================================== */}
+      <div className="hidden md:block max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16 pb-32">
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* LEFT COLUMN: Sticky Overview & Trust */}
+          <div className="col-span-5 lg:col-span-4 sticky top-24 space-y-6">
+            <div className="space-y-3">
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-ink px-2 py-0.5 rounded-full bg-paper border border-rule">
-                    {svc.code}
-                  </span>
-                  <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
-                    {svc.titleEn}
-                  </h2>
-                </div>
-                <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{svc.titleUr}</div>
+                <span className="inline-block font-mono text-[11px] text-brass font-bold tracking-widest uppercase bg-brass/10 border border-brass/30 px-3 py-1 rounded-full">
+                  PRACTICE OVERVIEW · TY2026
+                </span>
               </div>
-              <div className="font-serif text-2xl font-black text-ink">
-                {svc.fee}
+
+              <h1 className="font-serif text-3xl lg:text-4xl font-black text-ink leading-tight">
+                Tax Facilitation Services
+              </h1>
+
+              <div className="font-urdu text-base font-bold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                ہماری سروسز • مکمل رازداری اور شفاف فیس کے ساتھ
+              </div>
+
+              <p className="text-sm text-ash leading-relaxed">
+                Non-business individual filers only. Every tier strictly enforces our Zero-Credential Architecture: you never enter your FBR password on any third-party app.
+              </p>
+            </div>
+
+            {/* Zero-Credential Invariant Card */}
+            <div className="p-5 rounded-2xl bg-paper-light border border-rule space-y-2.5 shadow-xs">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+                <ShieldCheck className="w-4 h-4 shrink-0" />
+                <span>Zero-Credential Invariant</span>
+              </div>
+              <p className="text-xs text-ash leading-relaxed">
+                We prepare all tax reconciliations beforehand. You sign in directly on official IRIS to inspect and submit.
+              </p>
+              <div className="pt-2 border-t border-rule-light font-mono text-[11px] text-ash flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-brass" />
+                <span>Official Gateway:</span>
+                <a
+                  href="https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ink font-bold hover:text-brass underline inline-flex items-center gap-1"
+                >
+                  <span>iris.fbr.gov.pk</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
             </div>
 
-            <div className="space-y-1 text-xs text-ash leading-relaxed">
-              <p>{svc.descEn}</p>
-              <p className="font-urdu text-ash" dir="rtl">{svc.descUr}</p>
+            {/* Concierge Desk */}
+            <div className="p-5 rounded-2xl bg-folio border border-rule space-y-3 shadow-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">
+                  Senior Counsel Desk
+                </span>
+              </div>
+              <p className="text-xs text-ash leading-relaxed">
+                Need guidance on which service level fits your tax profile? Talk with us directly.
+              </p>
+              <a
+                href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20questions%20about%20your%20tax%20services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span>WhatsApp Desk (0312 0947187)</span>
+              </a>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
-              {svc.points.map((pt, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs text-ink font-mono">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
-                  <span>{pt}</span>
+          {/* RIGHT COLUMN: Service Tiers */}
+          <div className="col-span-7 lg:col-span-8 space-y-8">
+            <div className="space-y-6">
+              {services.map((svc) => (
+                <div
+                  key={svc.code}
+                  className={`glass-card p-6 sm:p-8 space-y-5 rounded-3xl border-rule ${
+                    svc.isRecommended ? "glass-card-featured border-2 border-brass shadow-lg" : "shadow-sm hover:shadow-md"
+                  }`}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-rule-light pb-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-xs font-bold text-ink px-2.5 py-0.5 rounded-full bg-paper border border-rule">
+                          {svc.code}
+                        </span>
+                        {svc.isRecommended && (
+                          <span className="font-mono text-[10px] font-bold bg-brass text-ink px-2 py-0.5 rounded-full uppercase tracking-wider">
+                            Recommended
+                          </span>
+                        )}
+                      </div>
+                      <h2 className="font-serif text-2xl font-bold text-ink">
+                        {svc.titleEn}
+                      </h2>
+                      <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                        {svc.titleUr}
+                      </div>
+                    </div>
+                    <div className="font-serif text-3xl font-black text-ink">
+                      {svc.fee}
+                    </div>
+                  </div>
+
+                  <p className="text-sm text-ash leading-relaxed">
+                    {svc.descEn}
+                  </p>
+
+                  <div className="font-urdu text-xs text-ash/80 leading-relaxed" dir="rtl">
+                    {svc.descUr}
+                  </div>
+
+                  <ul className="space-y-2 text-xs text-ash font-mono border-t border-rule-light pt-3">
+                    {svc.points.map((pt, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-iris-teal shrink-0" />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="pt-2">
+                    <Link
+                      href={`/start?tier=${svc.tierId}`}
+                      className={`inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full font-mono font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 ${
+                        svc.isRecommended
+                          ? "bg-gradient-to-r from-[#128C7E] to-[#0A6054] text-white shadow-md"
+                          : "bg-paper hover:bg-paper-light border border-rule text-ink"
+                      }`}
+                    >
+                      <span>Proceed with {svc.code} ({svc.fee})</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
-
-            <div className="pt-3 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={() => appClip.open("tax-intake", { defaultTier: svc.tierId })}
-                className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold py-2.5 px-6 rounded-full text-xs shadow transition-all active:scale-95"
-              >
-                <span>Fast AppClip ({svc.code})</span>
-                <Sparkles className="w-3.5 h-3.5 text-brass" />
-              </button>
-
-              <Link
-                href={`/start?tier=${svc.tierId}`}
-                className="inline-flex items-center gap-1.5 border border-rule bg-paper-light hover:bg-paper text-ink font-mono font-bold py-2.5 px-5 rounded-full text-xs transition-all active:scale-95"
-              >
-                <span>Full Web Page Form →</span>
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => appClip.open("tax-checklist")}
-                className="inline-flex items-center gap-1.5 text-ash hover:text-ink font-mono text-xs px-3 py-2 transition-colors"
-              >
-                <FileCheck className="w-3.5 h-3.5 text-iris-teal" />
-                <span>View Checklist</span>
-              </button>
-            </div>
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
-

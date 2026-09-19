@@ -84,43 +84,43 @@ export default function AnimatedTabs({
 
   const baseContainerStyles = cn(
     "relative inline-flex",
-    variant === "underline" && "gap-1 border-oklch(0.922 0 0) border-b dark:border-oklch(1 0 0 / 10%)",
-    variant === "pill" && "gap-1 rounded-full bg-oklch(0.97 0 0) p-1 dark:bg-oklch(0.269 0 0)",
-    variant === "segment" && "gap-0 rounded-lg bg-oklch(0.97 0 0) p-1 dark:bg-oklch(0.269 0 0)"
+    variant === "underline" && "gap-1 border-b border-rule",
+    variant === "pill" && "gap-1.5 rounded-full bg-paper-light/80 dark:bg-[#07121D]/80 backdrop-blur-xl p-1.5 border border-rule",
+    variant === "segment" && "gap-0 rounded-xl bg-paper-light/80 dark:bg-[#07121D]/80 backdrop-blur-xl p-1 border border-rule"
   );
 
   const getTabStyles = (isActive: boolean) =>
     cn(
-      "relative z-10 flex cursor-pointer items-center justify-center gap-2 px-4 py-2 font-medium text-sm transition-colors",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-oklch(0.708 0 0) focus-visible:ring-offset-2 dark:focus-visible:ring-oklch(0.556 0 0)",
+      "relative z-10 flex cursor-pointer items-center justify-center gap-2 px-4 py-2 font-medium text-xs sm:text-sm transition-colors",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#128C7E] dark:focus-visible:ring-[#C4A046]",
       variant === "underline" && [
         "rounded-t-md",
         isActive
-          ? "text-oklch(0.145 0 0) dark:text-oklch(0.985 0 0)"
-          : "text-oklch(0.556 0 0) hover:text-oklch(0.145 0 0) dark:text-oklch(0.708 0 0) dark:hover:text-oklch(0.985 0 0)",
+          ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
+          : "text-ash hover:text-ink dark:text-[#8C959F] dark:hover:text-[#F4EFE6]",
       ],
       variant === "pill" && [
         "rounded-full",
         isActive
-          ? "text-oklch(0.145 0 0) dark:text-oklch(0.985 0 0)"
-          : "text-oklch(0.556 0 0) hover:text-oklch(0.145 0 0) dark:text-oklch(0.708 0 0) dark:hover:text-oklch(0.985 0 0)",
+          ? "text-ink dark:text-white font-bold"
+          : "text-ash hover:text-ink dark:text-[#8C959F] dark:hover:text-[#F4EFE6]",
       ],
       variant === "segment" && [
-        "flex-1 rounded-md",
+        "flex-1 rounded-lg",
         isActive
-          ? "text-oklch(0.145 0 0) dark:text-oklch(0.985 0 0)"
-          : "text-oklch(0.556 0 0) hover:text-oklch(0.145 0 0) dark:text-oklch(0.708 0 0) dark:hover:text-oklch(0.985 0 0)",
+          ? "text-ink dark:text-white font-bold"
+          : "text-ash hover:text-ink dark:text-[#8C959F] dark:hover:text-[#F4EFE6]",
       ]
     );
 
   const getIndicatorStyles = () =>
     cn(
       "absolute",
-      variant === "underline" && "right-0 -bottom-px left-0 h-0.5 bg-brand",
+      variant === "underline" && "right-0 -bottom-px left-0 h-0.5 bg-[#128C7E] dark:bg-[#C4A046]",
       variant === "pill" &&
-        "inset-0 rounded-full border border-oklch(0.922 0 0) bg-oklch(1 0 0) shadow-sm dark:border-oklch(1 0 0 / 10%) dark:bg-oklch(0.145 0 0)",
+        "inset-0 rounded-full border border-brass/40 bg-white dark:bg-[#0B1C2C] shadow-sm",
       variant === "segment" &&
-        "inset-0 rounded-md border border-oklch(0.922 0 0) bg-oklch(1 0 0) shadow-sm dark:border-oklch(1 0 0 / 10%) dark:bg-oklch(0.145 0 0)"
+        "inset-0 rounded-lg border border-brass/40 bg-white dark:bg-[#0B1C2C] shadow-sm"
     );
 
   return (

@@ -42,7 +42,7 @@ export function LiquidGlassTabBar() {
 
   const isChecklistActive = appClip.activeClip === "tax-checklist" || pathname === "/requirements";
   const isGuideActive = appClip.activeClip === "iris-guide" || pathname === "/iris-guide";
-  const isServicesActive = pathname === "/services";
+  const isServicesActive = appClip.activeClip === "services" || pathname === "/services";
   const isHomeActive = pathname === "/" && !appClip.isOpen;
 
   return (
@@ -86,10 +86,7 @@ export function LiquidGlassTabBar() {
         {/* Tab 2: Services */}
         <button
           type="button"
-          onClick={() => {
-            if (appClip.isOpen) appClip.close();
-            router.push("/services");
-          }}
+          onClick={() => appClip.open("services")}
           className={cn(
             "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
             "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",

@@ -216,43 +216,29 @@ export default function HomePage() {
           Most clients choose: <strong className="text-brass font-bold">FA-2500 Complete Assistance (PKR 2,500)</strong>
         </div>
 
-        {/* CTAs with SmoothUI Magnetic Physics */}
+        {/* CTAs with Consistent Brand Theme and Micro-Interactions */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          <MagneticButton
-            strength={0.2}
-            radius={100}
-            asChild
-            className="w-full sm:w-auto p-0 bg-transparent hover:bg-transparent border-0 ring-0 focus-visible:ring-0 focus-visible:outline-none"
+          <Link
+            href="/start"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-xl transition-all duration-200 active:scale-95"
           >
-            <Link
-              href="/start"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-lg transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
-            >
-              <span>Start Filing (Part 01 / 04)</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </MagneticButton>
+            <span>Start Filing (Part 01 / 04)</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
 
-          <MagneticButton
-            strength={0.15}
-            radius={90}
-            asChild
-            className="w-full sm:w-auto p-0 bg-transparent hover:bg-transparent border-0 ring-0 focus-visible:ring-0 focus-visible:outline-none"
+          <button
+            type="button"
+            onClick={() => appClip.open("tax-intake")}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0B1C2C] border border-brass/40 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
           >
-            <button
-              type="button"
-              onClick={() => appClip.open("tax-intake")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper border border-brass/40 text-ink font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
-            >
-              <Sparkles className="w-4 h-4 text-brass" />
-              <span>Fast AppClip Intake</span>
-            </button>
-          </MagneticButton>
+            <Sparkles className="w-4 h-4 text-brass" />
+            <span>Fast AppClip Intake</span>
+          </button>
 
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-folio hover:bg-paper border border-rule text-ink font-bold py-3.5 px-6 rounded-full text-sm transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule text-ink dark:text-[#F4EFE6] font-bold py-3.5 px-6 rounded-full text-sm transition-all duration-200 active:scale-95 shadow-sm"
           >
             <FileText className="w-4 h-4 text-ash" />
             <span>Docs Checklist</span>
@@ -267,21 +253,21 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="px-3 py-1 rounded-full bg-white/80 dark:bg-[#0B1C2C]/80 border border-rule hover:border-brass/50 text-ash hover:text-ink font-medium transition-all shadow-sm flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <span>📋 Documents Needed</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("whatsapp-intake")}
-            className="px-3 py-1 rounded-full bg-white/80 dark:bg-[#0B1C2C]/80 border border-rule hover:border-[#128C7E]/50 text-ash hover:text-ink font-medium transition-all shadow-sm flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-md border border-rule hover:border-[#128C7E] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
-            <span className="text-[#128C7E]">💬 WhatsApp File</span>
+            <span className="text-[#128C7E] dark:text-[#25D366]">💬 WhatsApp File</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("iris-guide")}
-            className="px-3 py-1 rounded-full bg-white/80 dark:bg-[#0B1C2C]/80 border border-rule hover:border-brass/50 text-ash hover:text-ink font-medium transition-all shadow-sm flex items-center gap-1.5"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <span>🛡️ IRIS Password Guide</span>
           </button>
@@ -385,7 +371,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "guided_1000" })}
-                className="w-full py-3 text-center rounded-full bg-paper-light hover:bg-paper border border-rule font-bold text-xs text-ink transition-all font-mono active:scale-95 shadow-sm"
+                className="w-full py-3.5 text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/60 font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
               >
                 Select GF-1000 (AppClip)
               </button>
@@ -437,9 +423,10 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "assistance_2500" })}
-                className="w-full py-3.5 text-center rounded-full bg-ink hover:bg-theme-primary-hover font-bold text-xs text-paper-light shadow-md hover:shadow-lg transition-all font-mono active:scale-95"
+                className="w-full py-3.5 text-center rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] font-bold text-xs text-white shadow-md hover:shadow-lg transition-all font-mono active:scale-95 flex items-center justify-center gap-2"
               >
-                Select FA-2500 (Fast AppClip)
+                <span>Select FA-2500 (Fast AppClip)</span>
+                <Sparkles className="w-3.5 h-3.5" />
               </button>
               <Link
                 href="/start?tier=assistance_2500"
@@ -486,9 +473,10 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => appClip.open("whatsapp-intake", { defaultTier: "complex_5000" })}
-                className="w-full py-3 text-center rounded-full border border-rule bg-paper-light hover:bg-paper font-bold text-xs text-ink transition-all font-mono active:scale-95 shadow-sm"
+                className="w-full py-3.5 text-center rounded-full border border-[#128C7E]/40 hover:border-[#128C7E] bg-[#128C7E]/5 dark:bg-white/[0.04] hover:bg-[#128C7E]/10 font-bold text-xs text-[#128C7E] dark:text-[#C4A046] transition-all font-mono active:scale-95 shadow-sm flex items-center justify-center gap-2"
               >
-                Consult CX-4500 (WhatsApp)
+                <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                <span>Consult CX-4500 (WhatsApp)</span>
               </button>
               <Link
                 href="/start?tier=complex_5000"

@@ -418,7 +418,7 @@ export function SeniorIntakeWizard({
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* SmoothUI Animated Stepper Header */}
-      <div className="space-y-3 bg-paper-light/70 dark:bg-[#07121D]/70 p-4 rounded-2xl border border-rule shadow-sm">
+      <div className="space-y-4 bg-paper-light/80 dark:bg-[#07121D]/80 p-5 sm:p-6 rounded-3xl border border-rule shadow-sm">
         <AnimatedStepper
           steps={wizardSteps}
           currentStep={currentPart - 1}
@@ -431,11 +431,11 @@ export function SeniorIntakeWizard({
           variant="horizontal"
           className="w-full"
         />
-        <div className="flex items-center justify-between font-mono text-[11px] text-ash pt-1 border-t border-rule-light">
-          <span className="font-bold text-ink">
+        <div className="flex items-center justify-between font-mono text-xs text-ash pt-2 border-t border-rule-light">
+          <span className="font-bold text-ink tracking-wider">
             STEP 0{currentPart} OF 04
           </span>
-          <span className="uppercase text-[10px] tracking-wider text-brass font-bold">
+          <span className="uppercase text-[11px] tracking-wider text-brass font-bold">
             {currentPart === 1 && (isUrdu ? "ٹیکس گزار کی صنف کا انتخاب" : "CATEGORY SELECTION")}
             {currentPart === 2 && (isUrdu ? "آئرس اکاؤنٹ اور این ٹی این کیفیت" : "IRIS ACCOUNT & NTN")}
             {currentPart === 3 && (isUrdu ? "سروس اور پیکج کا انتخاب" : "SERVICE SELECTION")}
@@ -445,9 +445,9 @@ export function SeniorIntakeWizard({
       </div>
 
       {error && (
-        <div className="p-3 bg-stamp-bg border border-stamp-red rounded text-stamp-red text-xs font-mono flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 shrink-0" />
-          <span>{error}</span>
+        <div className="p-4 bg-stamp-bg border border-stamp-red rounded-2xl text-stamp-red text-xs font-mono flex items-center gap-2.5">
+          <AlertCircle className="w-5 h-5 shrink-0" />
+          <span className="leading-relaxed">{error}</span>
         </div>
       )}
 
@@ -455,42 +455,57 @@ export function SeniorIntakeWizard({
           PART 01 — PERSON (Category cards with codes)
           ============================================================ */}
       {currentPart === 1 && (
-        <div className="glass-card p-6 space-y-5 border-rule">
-          <div className="border-b border-rule pb-3 space-y-1">
-            <div className="flex items-center justify-between">
+        <div className="glass-card p-6 sm:p-8 space-y-6 rounded-3xl border-rule">
+          <div className="border-b border-rule pb-4 space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="form-code">Res. status / source</span>
               <span className="fbr-chip">{currentCategory.irisMap}</span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-ink">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
               Part 01 — Select Your Income Profile
             </h2>
-            <p className="text-xs text-ash">
-              This selects your document checklist and tax slab schedule. It is not your final IRIS return type yet.
+            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              براہِ کرم اپنی آمدنی یا ٹیکس دہندہ کی صنف کا انتخاب کریں
+            </div>
+            <p className="text-xs sm:text-sm text-ash leading-relaxed">
+              This selects your tailored document checklist and tax schedule. It is not your final IRIS return type yet.
             </p>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-4">
             {CATEGORIES.map((cat) => {
               const isSelected = categoryCode === cat.code;
               return (
                 <div
                   key={cat.code}
                   onClick={() => setCategoryCode(cat.code)}
-                  className={`p-3.5 rounded border cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                  className={`p-5 sm:p-6 rounded-2xl border cursor-pointer transition-all flex items-start justify-between gap-4 ${
                     isSelected
-                      ? "border-brass bg-brass-subtle ring-1 ring-brass"
-                      : "border-rule bg-folio hover:border-ash"
+                      ? "border-brass bg-brass-subtle/80 ring-2 ring-brass shadow-sm"
+                      : "border-rule bg-folio hover:border-ash hover:shadow-xs"
                   }`}
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-ink px-1.5 py-0.5 rounded bg-paper border border-rule">
+                  <div className="space-y-2 min-w-0 flex-1">
+                    <div className="flex items-center gap-2.5">
+                      <span className="font-mono text-xs font-bold text-ink px-2.5 py-0.5 rounded-full bg-paper border border-rule">
                         {cat.code}
                       </span>
-                      <span className="font-bold text-xs text-ink">{cat.en}</span>
+                      <span className="font-bold text-base sm:text-lg text-ink">
+                        {cat.en}
+                      </span>
                     </div>
-                    <div className="font-urdu text-xs text-ash" dir="rtl">{cat.ur}</div>
-                    <p className="text-[11px] text-ash leading-tight">{cat.descEn}</p>
+
+                    <div className="font-urdu text-sm font-semibold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                      {cat.ur}
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-ash leading-relaxed">
+                      {cat.descEn}
+                    </p>
+
+                    <div className="font-urdu text-xs text-ash/80 leading-relaxed" dir="rtl">
+                      {cat.descUr}
+                    </div>
                   </div>
 
                   <input
@@ -498,7 +513,7 @@ export function SeniorIntakeWizard({
                     name="category"
                     checked={isSelected}
                     onChange={() => setCategoryCode(cat.code)}
-                    className="accent-ink h-4 w-4 mt-1"
+                    className="accent-ink h-5 w-5 mt-1 shrink-0 cursor-pointer"
                   />
                 </div>
               );
@@ -511,29 +526,34 @@ export function SeniorIntakeWizard({
           PART 02 — IRIS ACCOUNT STATUS
           ============================================================ */}
       {currentPart === 2 && (
-        <div className="glass-card p-6 space-y-5 border-rule">
-          <div className="border-b border-rule pb-3 space-y-1">
-            <div className="flex items-center justify-between">
+        <div className="glass-card p-6 sm:p-8 space-y-6 rounded-3xl border-rule">
+          <div className="border-b border-rule pb-4 space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="form-code">IRIS Authentication</span>
               <span className="fbr-chip">IRIS → e-Enrollment</span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-ink">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
               Part 02 — FBR IRIS Account Access
             </h2>
-            <p className="text-xs text-ash">
+            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              کیا آپ کے پاس سرکاری ایف بی آر پورٹل کا فعال لاگ ان موجود ہے؟
+            </div>
+            <p className="text-xs sm:text-sm text-ash leading-relaxed">
               Do you have login credentials for the official federal tax system?
             </p>
           </div>
 
-          {/* Stamp */}
-          <div className="stamp-box p-3 rounded text-center text-xs space-y-0.5">
-            <div>PASSWORD NOT REQUIRED AT INTAKE</div>
-            <div className="text-[10px] font-normal opacity-90">
-              You will sign into iris.fbr.gov.pk yourself. We never store credentials.
+          {/* Stamp / Security Invariant */}
+          <div className="stamp-box p-4 rounded-2xl text-center space-y-1">
+            <div className="font-mono text-xs font-bold uppercase tracking-wider text-stamp-red">
+              PASSWORD NOT REQUIRED AT INTAKE
+            </div>
+            <div className="text-xs text-ink/80 leading-relaxed">
+              You will sign into iris.fbr.gov.pk yourself during submission. We never ask for or store credentials.
             </div>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-4">
             {[
               {
                 id: "active",
@@ -562,23 +582,32 @@ export function SeniorIntakeWizard({
                 <div
                   key={opt.id}
                   onClick={() => setIrisStatus(opt.id)}
-                  className={`p-3.5 rounded border cursor-pointer transition-all flex items-start justify-between gap-3 ${
+                  className={`p-5 sm:p-6 rounded-2xl border cursor-pointer transition-all flex items-start justify-between gap-4 ${
                     isSelected
-                      ? "border-brass bg-brass-subtle ring-1 ring-brass"
-                      : "border-rule bg-folio hover:border-ash"
+                      ? "border-brass bg-brass-subtle/80 ring-2 ring-brass shadow-sm"
+                      : "border-rule bg-folio hover:border-ash hover:shadow-xs"
                   }`}
                 >
-                  <div className="space-y-1">
-                    <div className="font-bold text-xs text-ink">{opt.titleEn}</div>
-                    <div className="font-urdu text-xs text-ash" dir="rtl">{opt.titleUr}</div>
-                    <p className="text-[11px] text-ash">{opt.descEn}</p>
+                  <div className="space-y-2 min-w-0 flex-1">
+                    <div className="font-bold text-base sm:text-lg text-ink">
+                      {opt.titleEn}
+                    </div>
+                    <div className="font-urdu text-sm font-semibold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                      {opt.titleUr}
+                    </div>
+                    <p className="text-xs sm:text-sm text-ash leading-relaxed">
+                      {opt.descEn}
+                    </p>
+                    <div className="font-urdu text-xs text-ash/80 leading-relaxed" dir="rtl">
+                      {opt.descUr}
+                    </div>
                   </div>
                   <input
                     type="radio"
                     name="irisStatus"
                     checked={isSelected}
                     onChange={() => setIrisStatus(opt.id)}
-                    className="accent-ink h-4 w-4 mt-1"
+                    className="accent-ink h-5 w-5 mt-1 shrink-0 cursor-pointer"
                   />
                 </div>
               );
@@ -591,50 +620,69 @@ export function SeniorIntakeWizard({
           PART 03 — SERVICE + FEE
           ============================================================ */}
       {currentPart === 3 && (
-        <div className="glass-card p-6 space-y-5 border-rule">
-          <div className="border-b border-rule pb-3 space-y-1">
-            <div className="flex items-center justify-between">
+        <div className="glass-card p-6 sm:p-8 space-y-6 rounded-3xl border-rule">
+          <div className="border-b border-rule pb-4 space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="form-code">Fee schedule</span>
               <span className="fbr-chip">Schedule 03 — TY2026</span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-ink">
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
               Part 03 — Choose Service Package
             </h2>
-            <p className="text-xs text-ash">
-              All fees confirmed after initial review. No hidden retainers.
+            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              شفاف اور پیشگی فیس • کوئی پوشیدہ اخراجات نہیں
+            </div>
+            <p className="text-xs sm:text-sm text-ash leading-relaxed">
+              All fees are fixed and confirmed upfront after initial review. No hidden retainers.
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-4">
             {PACKAGES.map((pkg) => {
               const isSelected = packageCode === pkg.code;
               return (
                 <div
                   key={pkg.code}
                   onClick={() => setPackageCode(pkg.code)}
-                  className={`p-4 rounded border cursor-pointer transition-all flex items-start justify-between gap-3 relative ${
+                  className={`p-5 sm:p-6 rounded-2xl border cursor-pointer transition-all flex items-start justify-between gap-4 relative ${
                     isSelected
-                      ? "border-brass bg-brass-subtle ring-1 ring-brass"
-                      : "border-rule bg-folio hover:border-ash"
+                      ? "border-brass bg-brass-subtle/80 ring-2 ring-brass shadow-sm"
+                      : "border-rule bg-folio hover:border-ash hover:shadow-xs"
                   }`}
                 >
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-ink px-1.5 py-0.5 rounded bg-paper border border-rule">
+                  <div className="space-y-2.5 min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <span className="font-mono text-xs font-bold text-ink px-2.5 py-0.5 rounded-full bg-paper border border-rule">
                         {pkg.code}
                       </span>
-                      <span className="font-bold text-xs text-ink">{pkg.nameEn}</span>
-                      <span className="font-serif font-black text-xs text-ink ml-1">{pkg.fee}</span>
+                      <span className="font-serif font-black text-xl sm:text-2xl text-ink">
+                        {pkg.fee}
+                      </span>
                       {pkg.isRecommended && (
-                        <span className="font-mono text-[9px] font-bold bg-brass text-ink px-1.5 py-0.2 rounded uppercase">
+                        <span className="font-mono text-[10px] font-bold bg-brass text-ink px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                           Recommended
                         </span>
                       )}
                     </div>
-                    <div className="font-urdu text-xs text-ash" dir="rtl">{pkg.nameUr}</div>
-                    <p className="text-xs text-ash leading-relaxed">{pkg.descEn}</p>
+
+                    <div className="font-bold text-base sm:text-lg text-ink">
+                      {pkg.nameEn}
+                    </div>
+
+                    <div className="font-urdu text-sm font-semibold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                      {pkg.nameUr}
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-ash leading-relaxed">
+                      {pkg.descEn}
+                    </p>
+
+                    <div className="font-urdu text-xs text-ash/80 leading-relaxed" dir="rtl">
+                      {pkg.descUr}
+                    </div>
+
                     {pkg.code === "CX-4500" && (
-                      <p className="font-mono text-[10px] text-brass font-semibold">
+                      <p className="font-mono text-xs text-brass font-semibold pt-1">
                         * Final fee confirmed after document review.
                       </p>
                     )}
@@ -645,7 +693,7 @@ export function SeniorIntakeWizard({
                     name="package"
                     checked={isSelected}
                     onChange={() => setPackageCode(pkg.code)}
-                    className="accent-ink h-4 w-4 mt-1"
+                    className="accent-ink h-5 w-5 mt-1 shrink-0 cursor-pointer"
                   />
                 </div>
               );
@@ -658,48 +706,51 @@ export function SeniorIntakeWizard({
           PART 04 — FOLIO (Particulars, Docs, Consent)
           ============================================================ */}
       {currentPart === 4 && (
-        <form onSubmit={handleSubmit} className="glass-card p-6 space-y-5 border-rule">
-          <div className="border-b border-rule pb-3 space-y-1">
-            <div className="flex items-center justify-between">
+        <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 space-y-6 rounded-3xl border-rule">
+          <div className="border-b border-rule pb-4 space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="form-code">Part I — Particulars</span>
-              <span className="font-mono text-[11px] text-brass font-bold">
+              <span className="font-mono text-xs text-brass font-bold bg-brass/10 px-2.5 py-0.5 rounded-full border border-brass/20">
                 {categoryCode} · {packageCode}
               </span>
             </div>
-            <h2 className="font-serif text-xl font-bold text-ink">
-              Part 04 — Taxpayer Particulars & Folio
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
+              Part 04 — Taxpayer Particulars &amp; Folio
             </h2>
-            <p className="text-xs text-ash">
-              Enter your details. Case ID will be issued immediately upon submission.
+            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              بنیادی شناختی کوائف اور تصدیق برائے انفرادی کیس
+            </div>
+            <p className="text-xs sm:text-sm text-ash leading-relaxed">
+              Enter your contact and tax details. Your confidential Case Folio will be generated immediately.
             </p>
           </div>
 
-          <div className="space-y-3.5">
+          <div className="space-y-5">
             {/* Full Name */}
-            <div>
-              <div className="flex items-baseline justify-between mb-1">
-                <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  Full Name (as per CNIC) <span className="text-stamp-red">*</span>
-                </label>
-                <span className="form-code">Part I — Name</span>
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                Full Name (as per CNIC) <span className="text-stamp-red">*</span>
+              </label>
+              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                شناختی کارڈ کے مطابق پورا نام
               </div>
               <input
                 type="text"
                 required
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                placeholder="Muhammad Tariq"
-                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink focus:border-ink focus:ring-1 focus:ring-ink"
+                placeholder="e.g. Muhammad Tariq"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
               />
             </div>
 
             {/* WhatsApp & Active Mobile SIM */}
-            <div>
-              <div className="flex items-baseline justify-between mb-1">
-                <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  Active Mobile SIM / WhatsApp Contact <span className="text-stamp-red">*</span>
-                </label>
-                <span className="form-code">Contact phone</span>
+            <div className="space-y-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                Active Mobile SIM / WhatsApp Contact <span className="text-stamp-red">*</span>
+              </label>
+              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                فعال موبائل سم / واٹس ایپ نمبر (او ٹی پی و تصدیق کے لیے)
               </div>
               <input
                 type="tel"
@@ -707,52 +758,52 @@ export function SeniorIntakeWizard({
                 value={phone}
                 onChange={(e) => handlePhoneChange(e.target.value)}
                 placeholder="0312 0000000"
-                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink font-mono focus:border-ink focus:ring-1 focus:ring-ink"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink font-mono focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
               />
 
-              <div className="pt-2 flex flex-wrap gap-4 text-xs font-medium">
-                <label className="flex items-center gap-1.5 cursor-pointer">
+              <div className="pt-2 flex flex-col sm:flex-row gap-3 text-xs font-medium">
+                <label className="flex items-center gap-2 cursor-pointer p-2.5 rounded-xl border border-rule bg-paper-light hover:bg-paper transition-all">
                   <input
                     type="radio"
                     name="seniorSimOwner"
                     checked={simOwner === "own"}
                     onChange={() => setSimOwner("own")}
-                    className="accent-ink h-3.5 w-3.5"
+                    className="accent-[#128C7E] h-4 w-4"
                   />
                   <span>SIM in own name (اپنے نام پر سم)</span>
                 </label>
 
-                <label className="flex items-center gap-1.5 cursor-pointer">
+                <label className="flex items-center gap-2 cursor-pointer p-2.5 rounded-xl border border-rule bg-paper-light hover:bg-paper transition-all">
                   <input
                     type="radio"
                     name="seniorSimOwner"
                     checked={simOwner === "relative"}
                     onChange={() => setSimOwner("relative")}
-                    className="accent-ink h-3.5 w-3.5"
+                    className="accent-[#128C7E] h-4 w-4"
                   />
-                  <span>Blood Relative / Family SIM</span>
+                  <span>Blood Relative / Family SIM (خونی رشتہ دار)</span>
                 </label>
               </div>
 
               {simOwner === "relative" && (
-                <div className="mt-2 p-3 bg-paper-light border border-rule rounded space-y-2 text-xs">
-                  <div className="text-[11px] text-ash">
+                <div className="mt-3 p-4 bg-paper-light border border-rule rounded-2xl space-y-3 text-xs">
+                  <div className="text-xs text-ash leading-relaxed">
                     If SIM is not in your own name, provide relative details for verification codes:
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
                       type="text"
                       value={relativeName}
                       onChange={(e) => setRelativeName(e.target.value)}
                       placeholder="Relative Full Name (رشتہ دار کا نام)"
-                      className="w-full bg-folio border border-rule rounded px-2.5 py-1.5 text-xs text-ink"
+                      className="w-full bg-folio border border-rule rounded-xl px-3 py-2 text-xs text-ink"
                     />
                     <input
                       type="text"
                       value={relativeRelation}
                       onChange={(e) => setRelativeRelation(e.target.value)}
                       placeholder="Relationship (e.g. Father, Husband)"
-                      className="w-full bg-folio border border-rule rounded px-2.5 py-1.5 text-xs text-ink"
+                      className="w-full bg-folio border border-rule rounded-xl px-3 py-2 text-xs text-ink"
                     />
                   </div>
                   <input
@@ -760,36 +811,36 @@ export function SeniorIntakeWizard({
                     value={relativeCnic}
                     onChange={(e) => handleRelativeCnicChange(e.target.value)}
                     placeholder="Relative's 13-digit CNIC (رشتہ دار کا شناختی کارڈ)"
-                    className="w-full bg-folio border border-rule rounded px-2.5 py-1.5 text-xs text-ink font-mono"
+                    className="w-full bg-folio border border-rule rounded-xl px-3 py-2 text-xs text-ink font-mono"
                   />
                 </div>
               )}
             </div>
 
             {/* CNIC */}
-            <div>
-              <div className="flex items-baseline justify-between mb-1">
-                <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  CNIC (13 digits)
-                </label>
-                <span className="form-code">CNIC / NTN</span>
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                CNIC (13 digits)
+              </label>
+              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                قومی شناختی کارڈ نمبر (۱۳ ہندسے)
               </div>
               <input
                 type="text"
                 value={cnic}
                 onChange={(e) => handleCnicChange(e.target.value)}
                 placeholder="35202-0000000-0"
-                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink font-mono focus:border-ink focus:ring-1 focus:ring-ink"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink font-mono focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
               />
             </div>
 
             {/* Email Address & Assistance */}
-            <div>
-              <div className="flex items-baseline justify-between mb-1">
-                <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  Personal Email Address <span className="text-ash font-normal">(Optional)</span>
-                </label>
-                <span className="form-code">Electronic notice</span>
+            <div className="space-y-2">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                Personal Email Address <span className="text-ash font-normal">(Optional)</span>
+              </label>
+              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                ذاتی ای میل ایڈریس (نوٹسز اور تصدیق کے لیے)
               </div>
               <input
                 type="email"
@@ -797,19 +848,19 @@ export function SeniorIntakeWizard({
                 value={needEmailHelp ? "" : email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={needEmailHelp ? "We will help create and configure your email" : "client@domain.com"}
-                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink focus:border-ink focus:ring-1 focus:ring-ink disabled:opacity-60"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all disabled:opacity-60"
               />
 
-              <label className="flex items-start gap-2 pt-1.5 cursor-pointer text-xs text-ink">
+              <label className="flex items-start gap-3 p-3 rounded-xl border border-rule bg-paper-light cursor-pointer text-xs text-ink">
                 <input
                   type="checkbox"
                   checked={needEmailHelp}
                   onChange={(e) => setNeedEmailHelp(e.target.checked)}
-                  className="accent-ink h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
-                <span className="leading-snug">
+                <span className="leading-relaxed">
                   <strong>I don&apos;t have an email</strong> — we can help along with full guidance and create email if you don&apos;t already have one.
-                  <span className="block font-urdu text-[11px] text-ash mt-0.5" dir="rtl">
+                  <span className="block font-urdu text-xs text-[#128C7E] dark:text-[#C4A046] mt-1" dir="rtl">
                     میرا ای میل نہیں ہے، ہمارے لیے نیا ای میل بنائیں اور مکمل رہنمائی دیں۔
                   </span>
                 </span>
@@ -817,29 +868,29 @@ export function SeniorIntakeWizard({
             </div>
 
             {/* Current Residential Address */}
-            <div>
-              <div className="flex items-baseline justify-between mb-1">
-                <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  Current Residential Address <span className="text-ash font-normal">(FBR Form 181 requirement)</span>
-                </label>
-                <span className="form-code">Residence</span>
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                Current Residential Address <span className="text-ash font-normal">(FBR Form 181 requirement)</span>
+              </label>
+              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                موجودہ رہائشی پتہ مع شہر و ضلع
               </div>
               <input
                 type="text"
                 value={residentialAddress}
                 onChange={(e) => setResidentialAddress(e.target.value)}
                 placeholder="House / Street / Area / City"
-                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink focus:border-ink focus:ring-1 focus:ring-ink"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
               />
             </div>
 
             {/* Income Source Particulars */}
-            <div>
-              <div className="flex items-baseline justify-between mb-1">
-                <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  Income Source Details <span className="text-ash font-normal">(Optional)</span>
-                </label>
-                <span className="form-code">Source of funds</span>
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                Income Source Details <span className="text-ash font-normal">(Optional)</span>
+              </label>
+              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                آمدن یا روزگار کے ذرائع کی مختصر تفصیل
               </div>
               <input
                 type="text"
@@ -854,37 +905,43 @@ export function SeniorIntakeWizard({
                     ? "Husband / Family financial maintenance"
                     : "Rental property address or business activity"
                 }
-                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink focus:border-ink focus:ring-1 focus:ring-ink"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
               />
             </div>
 
             {/* Family Group Filing & WHT Deductions Audit */}
-            <div className="p-3 rounded bg-paper-light border border-rule space-y-3">
-              <label className="flex items-start gap-2.5 cursor-pointer text-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-paper-light border border-rule space-y-4">
+              <label className="flex items-start gap-3 cursor-pointer text-xs">
                 <input
                   type="checkbox"
                   checked={familyConsolidation}
                   onChange={(e) => setFamilyConsolidation(e.target.checked)}
-                  className="accent-ink h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
-                <div>
-                  <div className="font-bold text-ink">Family Group Filing &amp; Inter-Family Transfers Reconciliation</div>
-                  <div className="text-[11px] text-ash leading-snug">
+                <div className="space-y-1">
+                  <div className="font-bold text-ink text-sm">Family Group Filing &amp; Inter-Family Transfers Reconciliation</div>
+                  <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                    خاندانی بینک ٹرانسفرز کی تصدیق تاکہ دہرے ٹیکس سے بچاؤ ممکن ہو سکے
+                  </div>
+                  <div className="text-xs text-ash leading-relaxed">
                     Reconcile internal family bank transfers (Spouse, Parents, Children) so transfers are not mistaken for income or double-taxed.
                   </div>
                 </div>
               </label>
 
-              <label className="flex items-start gap-2.5 cursor-pointer text-xs border-t border-rule pt-2.5">
+              <label className="flex items-start gap-3 cursor-pointer text-xs border-t border-rule pt-3">
                 <input
                   type="checkbox"
                   checked={whtAudit}
                   onChange={(e) => setWhtAudit(e.target.checked)}
-                  className="accent-ink h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
-                <div>
-                  <div className="font-bold text-ink">Full Source Withholding Tax Audit (Recommended)</div>
-                  <div className="text-[11px] text-ash leading-snug">
+                <div className="space-y-1">
+                  <div className="font-bold text-[#128C7E] dark:text-[#C4A046] text-sm">Full Source Withholding Tax Audit (Recommended)</div>
+                  <div className="font-urdu text-xs text-ash" dir="rtl">
+                    تمام ودہولڈنگ ٹیکس کٹوتیوں کا کلیم (بجلی، گیس، موبائل، بینک و اے ٹی ایم)
+                  </div>
+                  <div className="text-xs text-ash leading-relaxed">
                     Claim and audit all deductions taken at source: ATM cash withdrawals, fuel, utility bills, mobile SIM load &amp; package fees, card fees.
                   </div>
                 </div>
@@ -892,60 +949,57 @@ export function SeniorIntakeWizard({
             </div>
 
             {/* Generated Document List from Part 01 */}
-            <div className="pt-2 border-t border-rule space-y-2">
+            <div className="pt-2 border-t border-rule space-y-3">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-bold text-ink">Required Documents for {categoryCode}:</span>
                 <span className="form-code">Evidence schedule</span>
               </div>
-              <div className="space-y-1.5 p-3 rounded bg-paper-light border border-rule-light text-xs font-mono">
+              <div className="space-y-2 p-4 rounded-2xl bg-paper-light border border-rule-light text-xs font-mono">
                 {currentCategory.docs.map((d, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <span className="text-brass font-bold">{d.code}</span>
-                    <span className="text-ink">{d.en}</span>
+                  <div key={i} className="flex items-start gap-2.5">
+                    <span className="text-brass font-bold shrink-0">{d.code}</span>
+                    <span className="text-ink leading-relaxed">{d.en}</span>
                   </div>
                 ))}
               </div>
 
-              <label className="flex items-center gap-2 cursor-pointer pt-1 text-xs text-ink font-medium">
+              <label className="flex items-center gap-2.5 cursor-pointer pt-1 text-xs text-ink font-medium">
                 <input
                   type="checkbox"
                   checked={sendViaWhatsApp}
                   onChange={(e) => setSendViaWhatsApp(e.target.checked)}
-                  className="accent-ink h-4 w-4 rounded"
+                  className="accent-[#128C7E] h-4 w-4 rounded"
                 />
                 <span>I will send document photos / PDFs directly on WhatsApp.</span>
               </label>
             </div>
 
             {/* Optional Notes */}
-            <div>
-              <div className="flex items-baseline justify-between mb-1">
-                <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  Additional Notes (Optional)
-                </label>
-                <span className="form-code">Remarks</span>
-              </div>
+            <div className="space-y-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ink">
+                Additional Notes (Optional)
+              </label>
               <textarea
                 rows={2}
                 value={credentialsNotes}
                 onChange={(e) => setCredentialsNotes(e.target.value)}
                 placeholder="Any special remarks or prior filing details..."
-                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs text-ink focus:border-ink focus:ring-1 focus:ring-ink"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-xs text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
               />
             </div>
 
             {/* Consent Checkbox */}
-            <div className="pt-2">
-              <label className="flex items-start gap-2.5 cursor-pointer p-3 rounded bg-paper-light border border-rule">
+            <div className="pt-1">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-2xl bg-paper-light border border-rule">
                 <input
                   type="checkbox"
                   required
                   checked={consented}
                   onChange={(e) => setConsented(e.target.checked)}
-                  className="accent-ink h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <span className="text-xs text-ink leading-relaxed">
-                  <strong>Authority to prepare:</strong> I authorize Yasmeen & Sons tax specialists to review provided records and prepare figures for Tax Year 2026. <em>No filing will be submitted without my review and direct IRIS sign-in.</em>
+                  <strong>Authority to prepare:</strong> I authorize Yasmeen &amp; Sons tax specialists to review provided records and prepare figures for Tax Year 2026. <em>No filing will be submitted without my review and direct IRIS sign-in.</em>
                 </span>
               </label>
             </div>
@@ -954,14 +1008,14 @@ export function SeniorIntakeWizard({
       )}
 
       {/* Sticky Wizard Footer */}
-      <div className="sticky bottom-6 z-30 bg-paper-light/95 dark:bg-[#07121D]/95 backdrop-blur-xl border border-rule p-4 rounded-2xl flex items-center justify-between gap-4 shadow-lg mt-6">
+      <div className="sticky bottom-6 z-30 bg-paper-light/95 dark:bg-[#07121D]/95 backdrop-blur-xl border border-rule p-4 sm:p-5 rounded-3xl flex items-center justify-between gap-4 shadow-xl mt-8">
         {currentPart > 1 ? (
           <button
             type="button"
             onClick={() => setCurrentPart((p) => p - 1)}
-            className="text-xs font-mono font-bold text-ash hover:text-ink flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-paper transition-all"
+            className="text-xs font-mono font-bold text-ash hover:text-ink flex items-center gap-1.5 px-4 py-2.5 rounded-full hover:bg-paper transition-all"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-4 h-4" />
             <span>Back</span>
           </button>
         ) : (
@@ -969,9 +1023,9 @@ export function SeniorIntakeWizard({
             href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20start%20my%20Tax%20Year%202026%20filing."
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono text-ash hover:text-ink flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-paper transition-all"
+            className="text-xs font-mono text-ash hover:text-ink flex items-center gap-2 px-4 py-2.5 rounded-full hover:bg-paper transition-all"
           >
-            <WhatsAppIcon className="w-3.5 h-3.5 text-[#128C7E]" />
+            <WhatsAppIcon className="w-4 h-4 text-[#128C7E]" />
             <span>WhatsApp Instead</span>
           </a>
         )}
@@ -981,7 +1035,7 @@ export function SeniorIntakeWizard({
             <button
               type="button"
               onClick={validateAndNext}
-              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-6 py-2.5 rounded-full shadow transition-all active:scale-95"
+              className="inline-flex items-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs sm:text-sm px-7 py-3 rounded-full shadow-md transition-all active:scale-95"
             >
               <span>Continue →</span>
             </button>
@@ -990,10 +1044,10 @@ export function SeniorIntakeWizard({
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-6 py-2.5 rounded-full shadow transition-all disabled:opacity-60 active:scale-95"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#128C7E] to-[#0A6054] text-white font-mono font-bold text-xs sm:text-sm px-7 py-3 rounded-full shadow-md transition-all disabled:opacity-60 active:scale-95"
             >
               <span>{submitting ? "Recording Folio..." : "Generate Case File (YS-26-XXXXX)"}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           )}
         </div>
