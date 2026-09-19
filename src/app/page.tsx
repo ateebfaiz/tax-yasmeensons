@@ -216,8 +216,9 @@ export default function HomePage() {
           Most clients choose: <strong className="text-brass font-bold">FA-2500 Complete Assistance (PKR 2,500)</strong>
         </div>
 
-        {/* CTAs with Consistent Brand Theme and Micro-Interactions */}
+        {/* CTAs with Dual Viewport Separation */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          {/* Primary CTA (both viewports) */}
           <Link
             href="/start"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-xl transition-all duration-200 active:scale-95"
@@ -226,51 +227,99 @@ export default function HomePage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
 
+          {/* Mobile Secondary CTA: Fast AppClip Intake */}
           <button
             type="button"
             onClick={() => appClip.open("tax-intake")}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0B1C2C] border border-brass/40 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-xl hover:bg-white/80 dark:hover:bg-[#0B1C2C] border border-brass/40 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
           >
             <Sparkles className="w-4 h-4 text-brass" />
             <span>Fast AppClip Intake</span>
           </button>
 
+          {/* Desktop Secondary CTA: Required Documents Checklist */}
+          <Link
+            href="/requirements"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-[#07121D]/70 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0B1C2C] border border-rule hover:border-brass/50 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+          >
+            <FileText className="w-4 h-4 text-[#128C7E] dark:text-[#C4A046]" />
+            <span>Required Documents</span>
+          </Link>
+
+          {/* Mobile Tertiary CTA: Docs Checklist AppClip */}
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule text-ink dark:text-[#F4EFE6] font-bold py-3.5 px-6 rounded-full text-sm transition-all duration-200 active:scale-95 shadow-sm"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule text-ink dark:text-[#F4EFE6] font-bold py-3.5 px-6 rounded-full text-sm transition-all duration-200 active:scale-95 shadow-sm"
           >
             <FileText className="w-4 h-4 text-ash" />
             <span>Docs Checklist</span>
           </button>
+
+          {/* Desktop Tertiary CTA: Fee Schedule & Pricing */}
+          <Link
+            href="/pricing"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/50 text-ink dark:text-[#F4EFE6] font-bold py-3.5 px-6 rounded-full text-sm transition-all duration-200 active:scale-95 shadow-sm"
+          >
+            <Sparkles className="w-4 h-4 text-brass" />
+            <span>Transparent Pricing</span>
+          </Link>
         </div>
 
-        {/* Frosted AppClip Quick Tray */}
-        <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs">
+        {/* Mobile Frosted Quick Tray (AppClips) */}
+        <div className="md:hidden pt-2 flex flex-wrap items-center justify-center gap-2 text-xs">
           <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold">
             Quick Clips:
           </span>
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <span>📋 Documents Needed</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("whatsapp-intake")}
-            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-md border border-rule hover:border-[#128C7E] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-[#128C7E] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <span className="text-[#128C7E] dark:text-[#25D366]">💬 WhatsApp File</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("iris-guide")}
-            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <span>🛡️ IRIS Password Guide</span>
           </button>
+        </div>
+
+        {/* Desktop Quick Portals (Direct Navigation Links) */}
+        <div className="hidden md:flex pt-2 flex-wrap items-center justify-center gap-2 text-xs">
+          <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold">
+            Portals:
+          </span>
+          <Link
+            href="/requirements"
+            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+          >
+            <span>📋 Document Checklist</span>
+          </Link>
+          <a
+            href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20my%20Tax%20Year%202026%20return."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-[#25D366] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+          >
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
+            <span className="text-[#128C7E] dark:text-[#25D366]">0312 0947187 (WhatsApp Desk)</span>
+          </a>
+          <Link
+            href="/iris-guide"
+            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+          >
+            <span>🛡️ IRIS Security Walkthrough</span>
+          </Link>
         </div>
 
         {/* Stamp & Official Link */}
@@ -368,18 +417,21 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-2 pt-2">
+              {/* Mobile: opens AppClip */}
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "guided_1000" })}
-                className="w-full py-3.5 text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/60 font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
+                className="md:hidden w-full py-3.5 text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/60 font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
               >
-                Select GF-1000 (AppClip)
+                Select GF-1000 (PKR 1,000)
               </button>
+
+              {/* Desktop: direct 2-column page wizard */}
               <Link
                 href="/start?tier=guided_1000"
-                className="block text-center text-[11px] font-mono text-ash hover:text-ink underline"
+                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/60 font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
               >
-                Or open full page wizard →
+                Select GF-1000 (PKR 1,000)
               </Link>
             </div>
           </div>
@@ -420,19 +472,23 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-2 pt-2">
+              {/* Mobile: opens AppClip */}
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "assistance_2500" })}
-                className="w-full py-3.5 text-center rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] font-bold text-xs text-white shadow-md hover:shadow-lg transition-all font-mono active:scale-95 flex items-center justify-center gap-2"
+                className="md:hidden w-full py-3.5 text-center rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] font-bold text-xs text-white shadow-md hover:shadow-lg transition-all font-mono active:scale-95 flex items-center justify-center gap-2"
               >
-                <span>Select FA-2500 (Fast AppClip)</span>
+                <span>Select FA-2500 (PKR 2,500)</span>
                 <Sparkles className="w-3.5 h-3.5" />
               </button>
+
+              {/* Desktop: direct 2-column page wizard */}
               <Link
                 href="/start?tier=assistance_2500"
-                className="block text-center text-[11px] font-mono text-ash hover:text-ink underline"
+                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] font-bold text-xs text-white shadow-md hover:shadow-lg transition-all font-mono active:scale-95 gap-2"
               >
-                Or open full page wizard →
+                <span>Select FA-2500 (PKR 2,500)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -470,14 +526,27 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-2 pt-2">
+              {/* Mobile: opens WhatsApp intake AppClip */}
               <button
                 type="button"
                 onClick={() => appClip.open("whatsapp-intake", { defaultTier: "complex_5000" })}
-                className="w-full py-3.5 text-center rounded-full border border-[#128C7E]/40 hover:border-[#128C7E] bg-[#128C7E]/5 dark:bg-white/[0.04] hover:bg-[#128C7E]/10 font-bold text-xs text-[#128C7E] dark:text-[#C4A046] transition-all font-mono active:scale-95 shadow-sm flex items-center justify-center gap-2"
+                className="md:hidden w-full py-3.5 text-center rounded-full border border-[#128C7E]/40 hover:border-[#128C7E] bg-[#128C7E]/5 dark:bg-white/[0.04] hover:bg-[#128C7E]/10 font-bold text-xs text-[#128C7E] dark:text-[#C4A046] transition-all font-mono active:scale-95 shadow-sm flex items-center justify-center gap-2"
               >
                 <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
                 <span>Consult CX-4500 (WhatsApp)</span>
               </button>
+
+              {/* Desktop: direct WhatsApp concierge link */}
+              <a
+                href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20a%20Complex%20Return%20(CX-4500)%20case%20for%20Tax%20Year%202026."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex w-full py-3.5 items-center justify-center rounded-full border border-[#128C7E]/40 hover:border-[#128C7E] bg-[#128C7E]/5 dark:bg-white/[0.04] hover:bg-[#128C7E]/10 font-bold text-xs text-[#128C7E] dark:text-[#C4A046] transition-all font-mono active:scale-95 shadow-sm gap-2"
+              >
+                <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
+                <span>Consult CX-4500 (WhatsApp)</span>
+              </a>
+
               <Link
                 href="/start?tier=complex_5000"
                 className="block text-center text-[11px] font-mono text-ash hover:text-ink underline"
@@ -558,14 +627,24 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            {/* Mobile AppClip button */}
             <button
               type="button"
               onClick={() => appClip.open("tax-intake")}
-              className="inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
+              className="md:hidden inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
             >
               <span>Fast AppClip Form</span>
               <Sparkles className="w-3.5 h-3.5" />
             </button>
+
+            {/* Desktop link to /start */}
+            <Link
+              href="/start"
+              className="hidden md:inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
+            >
+              <span>Start Filing Return</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
 
             <a
               href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20my%20Tax%20Year%202026%20return."

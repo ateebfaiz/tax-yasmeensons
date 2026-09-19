@@ -4,9 +4,12 @@ import React from "react";
 import Link from "next/link";
 import { StoreLogo } from "@/components/ui/store-logo";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import { ExternalLink, ShieldCheck } from "lucide-react";
 
 export function Footer() {
+  const appClip = useAppClip();
+
   return (
     <footer className="bg-ink text-paper-light border-t-2 border-brass pt-12 pb-32 md:pb-12 text-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
@@ -33,24 +36,112 @@ export function Footer() {
           <div className="font-mono font-bold text-brass uppercase tracking-wider text-[11px]">
             Audience Profiles
           </div>
-          <ul className="space-y-1.5 text-xs text-paper/80 font-mono">
-            <li><Link href="/salaried" className="hover:text-brass-light transition-colors">SAL · Salaried Employees</Link></li>
-            <li><Link href="/pensioners" className="hover:text-brass-light transition-colors">PEN · Senior & Pensioners</Link></li>
-            <li><Link href="/no-income" className="hover:text-brass-light transition-colors">HIF · Housewife / Non-Earning</Link></li>
-            <li><Link href="/students" className="hover:text-brass-light transition-colors">STU · Student Filers</Link></li>
+          <ul className="space-y-2 text-xs text-paper/80 font-mono">
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("persona-salaried")}
+                className="md:hidden text-left hover:text-brass-light transition-colors active:scale-95"
+              >
+                SAL · Salaried Employees
+              </button>
+              <Link href="/salaried" className="hidden md:inline hover:text-brass-light transition-colors">
+                SAL · Salaried Employees
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("persona-pensioner")}
+                className="md:hidden text-left hover:text-brass-light transition-colors active:scale-95"
+              >
+                PEN · Senior &amp; Pensioners
+              </button>
+              <Link href="/pensioners" className="hidden md:inline hover:text-brass-light transition-colors">
+                PEN · Senior &amp; Pensioners
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("persona-housewife")}
+                className="md:hidden text-left hover:text-brass-light transition-colors active:scale-95"
+              >
+                HIF · Housewife / Non-Earning
+              </button>
+              <Link href="/no-income" className="hidden md:inline hover:text-brass-light transition-colors">
+                HIF · Housewife / Non-Earning
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("persona-student")}
+                className="md:hidden text-left hover:text-brass-light transition-colors active:scale-95"
+              >
+                STU · Student Filers
+              </button>
+              <Link href="/students" className="hidden md:inline hover:text-brass-light transition-colors">
+                STU · Student Filers
+              </Link>
+            </li>
           </ul>
         </div>
 
         {/* Annexes & Navigation */}
         <div className="space-y-2.5">
           <div className="font-mono font-bold text-brass uppercase tracking-wider text-[11px]">
-            Folio Pages & Annexes
+            Folio Pages &amp; Annexes
           </div>
-          <ul className="space-y-1.5 text-xs text-paper/80">
-            <li><Link href="/start" className="hover:text-brass-light transition-colors">Start Case Filing (Form /start)</Link></li>
-            <li><Link href="/services" className="hover:text-brass-light transition-colors">Service Fee Schedule</Link></li>
-            <li><Link href="/requirements" className="hover:text-brass-light transition-colors">Documentation Checklist</Link></li>
-            <li><Link href="/iris-guide" className="hover:text-brass-light transition-colors text-brass-light font-bold">Annex A — Official IRIS Guide</Link></li>
+          <ul className="space-y-2 text-xs text-paper/80">
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("tax-intake")}
+                className="md:hidden text-left hover:text-brass-light transition-colors active:scale-95"
+              >
+                Start Case Filing (Form /start)
+              </button>
+              <Link href="/start" className="hidden md:inline hover:text-brass-light transition-colors">
+                Start Case Filing (Form /start)
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("services")}
+                className="md:hidden text-left hover:text-brass-light transition-colors active:scale-95"
+              >
+                Service Fee Schedule
+              </button>
+              <Link href="/services" className="hidden md:inline hover:text-brass-light transition-colors">
+                Service Fee Schedule
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("tax-checklist")}
+                className="md:hidden text-left hover:text-brass-light transition-colors active:scale-95"
+              >
+                Documentation Checklist
+              </button>
+              <Link href="/requirements" className="hidden md:inline hover:text-brass-light transition-colors">
+                Documentation Checklist
+              </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => appClip.open("iris-guide")}
+                className="md:hidden text-left hover:text-brass-light transition-colors text-brass-light font-bold active:scale-95"
+              >
+                Annex A — Official IRIS Guide
+              </button>
+              <Link href="/iris-guide" className="hidden md:inline hover:text-brass-light transition-colors text-brass-light font-bold">
+                Annex A — Official IRIS Guide
+              </Link>
+            </li>
           </ul>
         </div>
 

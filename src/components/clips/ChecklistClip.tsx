@@ -119,10 +119,10 @@ export default function ChecklistClip({
               <div
                 key={idx}
                 onClick={() => toggleCheck(idx)}
-                className={`p-3 rounded-2xl border cursor-pointer flex items-start gap-3 transition-all backdrop-blur-md ${
+                className={`p-3.5 rounded-2xl border cursor-pointer flex items-start gap-3 transition-all backdrop-blur-xl ${
                   isChecked
-                    ? "bg-[#128C7E]/10 border-[#128C7E]/40"
-                    : "bg-white/60 dark:bg-white/[0.03] border-black/[0.06] dark:border-white/10 hover:border-[#128C7E]/40"
+                    ? "bg-[#128C7E]/15 border-[#128C7E]/50 shadow-sm"
+                    : "bg-white/45 dark:bg-white/[0.04] border-white/70 dark:border-white/10 hover:border-[#128C7E]/40 shadow-sm"
                 }`}
               >
                 {isChecked ? (
@@ -143,7 +143,7 @@ export default function ChecklistClip({
           })}
         </div>
 
-        <div className="p-3.5 rounded-2xl bg-white/60 dark:bg-white/[0.04] backdrop-blur-md border border-black/[0.06] dark:border-white/10 text-xs space-y-1">
+        <div className="p-3.5 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 text-xs space-y-1 shadow-sm">
           <div className="font-bold text-ink dark:text-white">Don&apos;t have all documents right now?</div>
           <p className="text-ash dark:text-[#8C959F] leading-relaxed font-urdu text-[11px]" dir="rtl">
             اگر تمام کاغذات دستیاب نہیں ہیں تو فکر نہ کریں، ہمارے نمائندے آپ کے دستیاب ریکارڈ کے مطابق فائلنگ میں مدد کریں گے۔

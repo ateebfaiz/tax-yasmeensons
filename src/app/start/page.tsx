@@ -3,9 +3,26 @@
 import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { SeniorIntakeWizard } from "@/components/intake/SeniorIntakeWizard";
-import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { ShieldCheck, Lock, ExternalLink, Sparkles, CheckCircle2 } from "lucide-react";
+import TaxIntakeClip from "@/components/clips/TaxIntakeClip";
+
+function mapCategoryToPersona(cat: string): string {
+  const c = (cat || "").toLowerCase();
+  if (c.includes("sal")) return "salaried";
+  if (c.includes("pen")) return "pensioner";
+  if (c.includes("hw") || c.includes("house")) return "housewife";
+  if (c.includes("stu")) return "student";
+  if (c.includes("bus") || c.includes("free")) return "business";
+  return "salaried";
+}
+
+function mapTierParam(tier: string): string {
+  const t = (tier || "").toLowerCase();
+  if (t.includes("1000") || t.includes("guided")) return "guided_1000";
+  if (t.includes("5000") || t.includes("4500") || t.includes("complex")) return "complex_5000";
+  return "assistance_2500";
+}
 
 function StartWizardContent() {
   const searchParams = useSearchParams();
@@ -16,19 +33,16 @@ function StartWizardContent() {
   return (
     <>
       {/* ========================================================
-          1. MOBILE VIEWPORT (md:hidden): Frosted Liquid Glass AppClip
+          1. MOBILE VIEWPORT (md:hidden): Purpose-Built Mobile AppClip
           ======================================================== */}
       <div className="block md:hidden">
-        <AppClipSheet
+        <TaxIntakeClip
           onClose={() => router.push("/")}
-          fullHeight
-          title="Individual Tax Registration"
-          subtitle="FORM 2026-A • Senior Intake Desk • Zero Password"
-        >
-          <div className="pb-16 pt-1">
-            <SeniorIntakeWizard initialCategory={catParam} initialTier={tierParam} />
-          </div>
-        </AppClipSheet>
+          payload={{
+            defaultPersona: mapCategoryToPersona(catParam),
+            defaultTier: mapTierParam(tierParam),
+          }}
+        />
       </div>
 
       {/* ========================================================

@@ -284,14 +284,15 @@ export default function RequirementsPage() {
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-checklist", { persona: activeCat.toLowerCase() })}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brass/15 border border-brass/40 text-ink font-mono font-bold text-xs hover:bg-brass/25 transition-all shadow-sm active:scale-95"
+          <a
+            href="https://wa.me/923120947187?text=Hi%2C%20I%20need%20the%20tax%20document%20checklist%20for%20filing."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 text-[#128C7E] dark:text-[#25D366] font-mono font-bold text-xs hover:bg-[#25D366]/25 transition-all shadow-sm active:scale-95"
           >
-            <Sparkles className="w-3.5 h-3.5 text-brass" />
-            <span>Open Interactive AppClip Checklist</span>
-          </button>
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
+            <span>Request Checklist on WhatsApp</span>
+          </a>
         </div>
 
         {/* Checklist Card */}

@@ -3,14 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
-import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
+import PersonaClip from "@/components/clips/PersonaClip";
 import { Users, CheckCircle2, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 
 export default function NoIncomePage() {
   const router = useRouter();
-  const appClip = useAppClip();
 
   const content = (
     <div className="space-y-6">
@@ -94,14 +92,15 @@ export default function NoIncomePage() {
             <span>Start Non-Earning Filing</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake", { defaultPersona: "housewife" })}
+          <a
+            href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20as%20a%20Housewife%20or%20Non-Earning%20individual."
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-1.5 bg-folio/20 hover:bg-folio/30 border border-brass/40 text-paper-light font-mono font-bold text-xs py-3.5 px-5 rounded-full transition-all active:scale-95"
           >
-            <span>Fast AppClip</span>
-            <Sparkles className="w-3.5 h-3.5" />
-          </button>
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
+            <span>WhatsApp Desk</span>
+          </a>
         </div>
       </div>
     </div>
@@ -109,18 +108,9 @@ export default function NoIncomePage() {
 
   return (
     <>
-      {/* 1. MOBILE VIEWPORT (md:hidden): Frosted Liquid Glass AppClip */}
+      {/* 1. MOBILE VIEWPORT (md:hidden): Purpose-Built Mobile AppClip */}
       <div className="block md:hidden">
-        <AppClipSheet
-          onClose={() => router.push("/")}
-          fullHeight
-          title="Housewife & Non-Earning Status"
-          subtitle="TAX CATEGORY: HIF • Active Taxpayer List (ATL)"
-        >
-          <div className="pb-16 pt-2">
-            {content}
-          </div>
-        </AppClipSheet>
+        <PersonaClip persona="housewife" onClose={() => router.push("/")} />
       </div>
 
       {/* 2. DESKTOP VIEWPORT (hidden md:block): Two-Column Layout */}

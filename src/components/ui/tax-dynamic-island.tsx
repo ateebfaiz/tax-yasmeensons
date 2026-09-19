@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import {
   ShieldCheck,
@@ -24,6 +25,7 @@ export interface TaxDynamicIslandProps {
 }
 
 export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIslandProps) {
+  const router = useRouter();
   const [view, setView] = useState<IslandView>("idle");
   const [isHovered, setIsHovered] = useState(false);
   const appClip = useAppClip();
@@ -67,12 +69,18 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
             <div className="min-w-0 flex-1">
               <div className="font-bold text-xs text-white">60-Second Fast Intake</div>
               <div className="text-[11px] text-white/70 truncate">
-                No Passwords • Mobile AppClip
+                No Passwords • Senior Desk
               </div>
             </div>
             <button
               type="button"
-              onClick={() => appClip.open("tax-intake")}
+              onClick={() => {
+                if (typeof window !== "undefined" && window.innerWidth >= 768) {
+                  router.push("/start");
+                } else {
+                  appClip.open("tax-intake");
+                }
+              }}
               className="px-3 py-1 rounded-full bg-[#C4A046] hover:bg-[#DFBA5E] text-[#0B1C2C] font-bold text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-white shrink-0"
             >
               Open
@@ -94,7 +102,13 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
             </div>
             <button
               type="button"
-              onClick={() => appClip.open("iris-guide")}
+              onClick={() => {
+                if (typeof window !== "undefined" && window.innerWidth >= 768) {
+                  router.push("/iris-guide");
+                } else {
+                  appClip.open("iris-guide");
+                }
+              }}
               className="px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 text-white font-bold text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-white shrink-0"
             >
               Guide

@@ -23,7 +23,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
     >
       <div className="space-y-5 pb-24 text-ink dark:text-[#F4EFE6]">
         {/* Security / Policy Note */}
-        <div className="p-4 rounded-2xl bg-white/60 dark:bg-white/[0.03] backdrop-blur-md border border-black/[0.06] dark:border-white/10 space-y-1.5">
+        <div className="p-4 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 space-y-1.5 shadow-sm">
           <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>Senior Tax Practice · Non-Business Individuals Only</span>
@@ -34,7 +34,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Tier 1: Guided Filing */}
-        <div className="p-5 rounded-2xl bg-white/60 dark:bg-white/[0.03] backdrop-blur-md border border-black/[0.06] dark:border-white/10 space-y-3">
+        <div className="p-5 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 space-y-3 shadow-sm">
           <div className="space-y-1">
             <span className="font-mono text-[10px] font-bold text-ash tracking-widest uppercase">
               PACKAGE: GF-1000
@@ -54,7 +54,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             We audit your figures and give you a field-by-field checklist. You log into IRIS and submit independently.
           </p>
 
-          <ul className="space-y-1.5 text-xs text-ash dark:text-[#8C959F] font-mono border-t border-black/[0.06] dark:border-white/10 pt-2.5">
+          <ul className="space-y-1.5 text-xs text-ash dark:text-[#8C959F] font-mono border-t border-white/60 dark:border-white/10 pt-2.5">
             <li className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#128C7E] dark:text-[#C4A046] shrink-0" />
               <span>Zero password sharing required</span>
@@ -72,14 +72,14 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={() => handleSelectTier("guided_1000")}
-            className="w-full py-3 rounded-full border border-black/10 dark:border-white/15 hover:bg-black/5 dark:hover:bg-white/5 font-mono font-bold text-xs active:scale-95 transition-all"
+            className="w-full py-3 rounded-full border border-white/80 dark:border-white/15 bg-white/40 dark:bg-white/[0.03] backdrop-blur-md hover:bg-white/70 font-mono font-bold text-xs active:scale-95 transition-all shadow-sm"
           >
             Select GF-1000 (PKR 1,000)
           </button>
         </div>
 
         {/* Tier 2: Complete Assistance (Recommended) */}
-        <div className="p-5 rounded-2xl bg-white/80 dark:bg-white/[0.06] backdrop-blur-md border-2 border-[#128C7E] dark:border-[#C4A046] space-y-3 relative shadow-md">
+        <div className="p-5 rounded-2xl bg-white/50 dark:bg-white/[0.06] backdrop-blur-xl border-2 border-[#128C7E] dark:border-[#C4A046] space-y-3 relative shadow-md">
           <div className="inline-block px-3 py-0.5 rounded-full bg-[#128C7E] dark:bg-[#C4A046] text-white dark:text-black font-mono text-[10px] font-bold uppercase tracking-wider">
             Most Selected · تجویز کردہ
           </div>
@@ -103,7 +103,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             Full return &amp; wealth statement (s.116) preparation with screen assistance on official IRIS.
           </p>
 
-          <ul className="space-y-1.5 text-xs text-ash dark:text-[#8C959F] font-mono border-t border-black/[0.06] dark:border-white/10 pt-2.5">
+          <ul className="space-y-1.5 text-xs text-ash dark:text-[#8C959F] font-mono border-t border-white/60 dark:border-white/10 pt-2.5">
             <li className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#128C7E] dark:text-[#C4A046] shrink-0" />
               <span>Full return + Section 116 wealth balance</span>
@@ -133,7 +133,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Tier 3: Complex Case Review */}
-        <div className="p-5 rounded-2xl bg-white/60 dark:bg-white/[0.03] backdrop-blur-md border border-black/[0.06] dark:border-white/10 space-y-3">
+        <div className="p-5 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 space-y-3 shadow-sm">
           <div className="space-y-1">
             <span className="font-mono text-[10px] font-bold text-ash tracking-widest uppercase">
               PACKAGE: CX-4500
@@ -153,7 +153,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             Multi-bank accounts, unfiled prior years, foreign remittances, or property section 111 asset reconciliations.
           </p>
 
-          <ul className="space-y-1.5 text-xs text-ash dark:text-[#8C959F] font-mono border-t border-black/[0.06] dark:border-white/10 pt-2.5">
+          <ul className="space-y-1.5 text-xs text-ash dark:text-[#8C959F] font-mono border-t border-white/60 dark:border-white/10 pt-2.5">
             <li className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-[#128C7E] dark:text-[#C4A046] shrink-0" />
               <span>Capital gains &amp; property reconciliation</span>
@@ -171,7 +171,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={() => handleSelectTier("complex_5000")}
-            className="w-full py-3 rounded-full border border-black/10 dark:border-white/15 hover:bg-black/5 dark:hover:bg-white/5 font-mono font-bold text-xs active:scale-95 transition-all"
+            className="w-full py-3 rounded-full border border-white/80 dark:border-white/15 bg-white/40 dark:bg-white/[0.03] backdrop-blur-md hover:bg-white/70 font-mono font-bold text-xs active:scale-95 transition-all shadow-sm"
           >
             Select CX-4500 (Review)
           </button>

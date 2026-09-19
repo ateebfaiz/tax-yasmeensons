@@ -56,9 +56,9 @@ export function LiquidGlassTabBar() {
       <nav
         className={cn(
           "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] px-2.5",
-          "bg-white/75 dark:bg-[#07121D]/80 backdrop-blur-2xl backdrop-saturate-200",
-          "border border-white/60 dark:border-white/10",
-          "shadow-[0_12px_40px_rgba(11,28,44,0.12),inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.08)]"
+          "bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-3xl backdrop-saturate-150",
+          "border border-white/70 dark:border-white/20",
+          "shadow-[0_16px_40px_rgba(0,0,0,0.16),inset_0_1px_1px_rgba(255,255,255,0.85)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.12)]"
         )}
       >
         {/* Tab 1: Home */}

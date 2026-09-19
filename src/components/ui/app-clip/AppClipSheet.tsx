@@ -30,7 +30,7 @@ export function AppClipSheet({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/40 backdrop-blur-md z-40"
+        className="fixed inset-0 bg-black/25 dark:bg-black/45 backdrop-blur-[6px] z-40 transition-opacity"
         onClick={onClose}
       />
 
@@ -51,9 +51,10 @@ export function AppClipSheet({
         className={cn(
           "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-50",
           "flex flex-col pb-safe",
-          "bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-2xl backdrop-saturate-200",
-          "border-t border-white/60 dark:border-white/10 text-ink dark:text-paper-light",
-          "rounded-t-[32px] overflow-hidden shadow-[0_-16px_50px_rgba(11,28,44,0.16)]"
+          "bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-3xl backdrop-saturate-150",
+          "border-t border-x border-white/70 dark:border-white/20 text-ink dark:text-paper-light",
+          "rounded-t-[32px] overflow-hidden",
+          "shadow-[0_-20px_60px_rgba(0,0,0,0.18),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_-20px_60px_rgba(0,0,0,0.5),inset_0_1px_1px_0_rgba(255,255,255,0.15)]"
         )}
         style={{
           height: fullHeight ? "92dvh" : "auto",
@@ -63,10 +64,10 @@ export function AppClipSheet({
         {/* Frosted Grab Bar & Header */}
         <div
           onPointerDown={(e) => dragControls.start(e)}
-          className="w-full cursor-grab active:cursor-grabbing shrink-0 touch-none select-none relative z-20 pt-3 pb-3 border-b border-black/[0.06] dark:border-white/[0.08] bg-white/40 dark:bg-white/[0.03] backdrop-blur-md"
+          className="w-full cursor-grab active:cursor-grabbing shrink-0 touch-none select-none relative z-20 pt-3 pb-3 border-b border-black/[0.05] dark:border-white/[0.08] bg-white/30 dark:bg-white/[0.03] backdrop-blur-xl"
         >
           <div className="w-full flex justify-center pb-2.5">
-            <div className="w-12 h-1.5 rounded-full bg-black/20 dark:bg-white/20" />
+            <div className="w-12 h-1.5 rounded-full bg-black/20 dark:bg-white/20 shadow-[inset_0_1px_2px_rgba(0,0,0,0.15)]" />
           </div>
 
           <div className="px-5 flex justify-between items-center gap-3">
@@ -85,7 +86,7 @@ export function AppClipSheet({
                 onClick={onClose}
                 onPointerDown={(e) => e.stopPropagation()}
                 aria-label="Close sheet"
-                className="w-8 h-8 rounded-full border border-black/[0.08] dark:border-white/15 bg-white/60 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-[#128C7E] flex items-center justify-center active:scale-95 transition-colors text-ink dark:text-[#F4EFE6] backdrop-blur-md shadow-sm"
+                className="w-8 h-8 rounded-full border border-white/80 dark:border-white/20 bg-white/50 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-[#128C7E] flex items-center justify-center active:scale-95 transition-colors text-ink dark:text-[#F4EFE6] backdrop-blur-md shadow-sm"
               >
                 <X className="w-4 h-4" />
               </button>
