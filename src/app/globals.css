@@ -1,0 +1,46 @@
+@import './bilingual.css';
+@import '../themes/tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-theme-border;
+  }
+  body {
+    @apply bg-theme-background text-theme-text antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--theme-glass-bg);
+    backdrop-filter: blur(var(--theme-glass-blur, 20px));
+    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 20px));
+    border: 1px solid var(--theme-glass-border);
+  }
+
+  .glass-elevated {
+    background: var(--theme-glass-bg);
+    backdrop-filter: blur(var(--theme-glass-blur-heavy, 40px));
+    -webkit-backdrop-filter: blur(var(--theme-glass-blur-heavy, 40px));
+    border: 1px solid var(--theme-glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-card {
+    @apply glass-elevated rounded-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-theme-primary to-theme-text;
+  }
+
+  .pb-safe {
+    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 12px);
+  }
+}

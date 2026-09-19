@@ -1,0 +1,54 @@
+/* ================================================================
+   Yasmeen Tax — Theming Tokens
+   Liquid Frosted Glass + Modern iOS Emerald Palette
+   ================================================================ */
+
+:root {
+  color-scheme: light;
+}
+:root.dark {
+  color-scheme: dark;
+}
+
+:root {
+  /* Surface hierarchy */
+  --theme-surface:         light-dark(#ffffff, #0d0d0f);
+  --theme-surface-raised:  light-dark(#f9f9f9, #16161a);
+  --theme-background:      light-dark(#f6f5f2, #0a0a0c);
+  --theme-muted:           light-dark(#ededeb, #1a1a1e);
+  --theme-overlay:         light-dark(rgba(0,0,0,0.04), rgba(255,255,255,0.04));
+
+  /* Text */
+  --theme-text:            light-dark(#111110, #f0f0ed);
+  --theme-text-secondary:  light-dark(#5e5d59, #9d9c95);
+  --theme-text-muted:      light-dark(#8b8a84, #6b6a65);
+  --theme-text-inverse:    light-dark(#ffffff, #0a0a0c);
+
+  /* Borders */
+  --theme-border:          light-dark(#e0ded7, #27262d);
+  --theme-border-light:    light-dark(#edece8, #1f1e23);
+  --theme-border-focus:    light-dark(#059669, #34d399);
+
+  /* Brand / Emerald */
+  --theme-primary:         light-dark(#059669, #34d399);
+  --theme-primary-hover:   light-dark(#047857, #6ee7b7);
+  --theme-primary-subtle:  light-dark(#ecfdf5, #064e3b);
+  --theme-accent:          light-dark(#b8860b, #fbbf24);
+
+  /* Status */
+  --theme-success:         light-dark(#059669, #34d399);
+  --theme-success-subtle:  light-dark(#ecfdf5, #064e3b);
+  --theme-danger:          light-dark(#dc2626, #f87171);
+  --theme-danger-subtle:   light-dark(#fef2f2, #7f1d1d18);
+  --theme-warning:         light-dark(#d97706, #fbbf24);
+  --theme-warning-subtle:  light-dark(#fffbeb, #78350f18);
+  --theme-info:            light-dark(#2563eb, #60a5fa);
+  --theme-info-subtle:     light-dark(#eff6ff, #1e3a5f18);
+
+  /* Liquid Frosted Glass */
+  --theme-glass-bg:        light-dark(rgba(255,255,255,0.78), rgba(13,13,15,0.82));
+  --theme-glass-border:    light-dark(rgba(0,0,0,0.08), rgba(255,255,255,0.12));
+  --theme-glass-shadow:    light-dark(rgba(0,0,0,0.05), rgba(0,0,0,0.30));
+  --theme-glass-blur:      20px;
+  --theme-glass-blur-heavy: 40px;
+}
