@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { taxFilings } from "@/lib/db/schema";
 import { generateReference } from "@/lib/utils";
+import { createTodoistTask } from "@/lib/todoist";
 
 export async function POST(req: Request) {
   try {
@@ -29,6 +30,30 @@ export async function POST(req: Request) {
 
     const reference = generateReference();
 
+    // Trigger Doist/Todoist P1 Notification
+    let todoistTaskId: string | null = null;
+    try {
+      const taskTitle = `📋 TAX CASE: ${reference} — ${fullName.trim()} (${persona.toUpperCase()})`;
+      const taskDescription = 
+        `**Customer:** ${fullName.trim()}\n` +
+        `**Phone:** ${phone.trim()}\n` +
+        (cnic ? `**CNIC:** ${cnic.trim()}\n` : "") +
+        (email ? `**Email:** ${email.trim()}\n` : "") +
+        `**Category:** ${persona}\n` +
+        `**IRIS Status:** ${irisStatus}\n` +
+        `**Tier:** ${serviceTier}\n` +
+        `**Contact Pref:** ${contactPreference}\n` +
+        (documentsSummary ? `**Documents:** ${documentsSummary.trim()}\n` : "") +
+        (credentialsNotes ? `**Notes/Credentials:** ${credentialsNotes.trim()}\n` : "");
+
+      const todoistRes = await createTodoistTask(taskTitle, taskDescription);
+      if (todoistRes && todoistRes.id) {
+        todoistTaskId = String(todoistRes.id);
+      }
+    } catch (tErr) {
+      console.error("[Todoist] Task creation error:", tErr);
+    }
+
     // Persist to Neon DB if available
     if (db) {
       try {
@@ -44,6 +69,7 @@ export async function POST(req: Request) {
           contactPreference,
           credentialsNotes: credentialsNotes?.trim() || null,
           documentsSummary: documentsSummary?.trim() || null,
+          todoistTaskId,
           source,
           status: "pending",
         });
@@ -57,6 +83,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       reference,
+      todoistTaskId,
       message: "Filing intake case created successfully.",
     });
   } catch (err: any) {
