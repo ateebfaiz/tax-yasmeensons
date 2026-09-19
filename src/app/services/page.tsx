@@ -2,9 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { ShieldCheck, CheckCircle2, ArrowRight, FileCheck, HelpCircle } from "lucide-react";
+import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { ShieldCheck, CheckCircle2, ArrowRight, FileCheck, Sparkles } from "lucide-react";
 
 export default function ServicesPage() {
+  const appClip = useAppClip();
+
   const services = [
     {
       code: "GF-1000",
@@ -73,18 +76,18 @@ export default function ServicesPage() {
         </p>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
         {services.map((svc) => (
           <div
             key={svc.code}
-            className={`glass-card p-6 md:p-8 space-y-5 border-rule ${
-              svc.isRecommended ? "border-brass ring-1 ring-brass shadow-md" : ""
+            className={`glass-card p-6 md:p-8 space-y-5 rounded-[28px] ${
+              svc.isRecommended ? "glass-card-featured border-brass shadow-lg" : "shadow-sm hover:shadow-md"
             }`}
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-rule-light pb-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-ink px-1.5 py-0.5 rounded bg-paper border border-rule">
+                  <span className="font-mono text-xs font-bold text-ink px-2 py-0.5 rounded-full bg-paper border border-rule">
                     {svc.code}
                   </span>
                   <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
@@ -112,21 +115,31 @@ export default function ServicesPage() {
               ))}
             </div>
 
-            <div className="pt-2 flex flex-wrap gap-3">
-              <Link
-                href={`/start?tier=${svc.tierId}`}
-                className="inline-flex items-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold py-2.5 px-6 rounded text-xs shadow transition-all"
+            <div className="pt-3 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => appClip.open("tax-intake", { defaultTier: svc.tierId })}
+                className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold py-2.5 px-6 rounded-full text-xs shadow transition-all active:scale-95"
               >
-                <span>Select {svc.code} →</span>
-              </Link>
+                <span>Fast AppClip ({svc.code})</span>
+                <Sparkles className="w-3.5 h-3.5 text-brass" />
+              </button>
 
               <Link
-                href="/requirements"
-                className="inline-flex items-center gap-2 border border-rule bg-paper-light hover:bg-paper text-ink font-mono font-bold py-2.5 px-4 rounded text-xs transition-all"
+                href={`/start?tier=${svc.tierId}`}
+                className="inline-flex items-center gap-1.5 border border-rule bg-paper-light hover:bg-paper text-ink font-mono font-bold py-2.5 px-5 rounded-full text-xs transition-all active:scale-95"
               >
-                <FileCheck className="w-3.5 h-3.5 text-ash" />
-                <span>View Checklist</span>
+                <span>Full Web Page Form →</span>
               </Link>
+
+              <button
+                type="button"
+                onClick={() => appClip.open("tax-checklist")}
+                className="inline-flex items-center gap-1.5 text-ash hover:text-ink font-mono text-xs px-3 py-2 transition-colors"
+              >
+                <FileCheck className="w-3.5 h-3.5 text-iris-teal" />
+                <span>View Checklist</span>
+              </button>
             </div>
           </div>
         ))}
@@ -134,3 +147,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+

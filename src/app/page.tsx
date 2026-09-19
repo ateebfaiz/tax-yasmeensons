@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useLanguage } from "@/context/language-context";
+import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import {
   ArrowRight,
   ShieldCheck,
@@ -17,10 +18,12 @@ import {
   FileText,
   Clock,
   HelpCircle,
+  Sparkles,
 } from "lucide-react";
 
 export default function HomePage() {
   const { isUrdu } = useLanguage();
+  const appClip = useAppClip();
 
   const personas = [
     {
@@ -134,23 +137,23 @@ export default function HomePage() {
   return (
     <div className="space-y-16 md:space-y-24 py-8 md:py-16">
       {/* 1. Hero Section — Lead with the Job */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-7">
         {/* IRIS Mapping Chip */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-paper-light border border-rule font-mono text-[11px] text-ash">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-paper-light border border-rule font-mono text-[11px] text-ash shadow-sm">
           <span className="font-bold text-ink">FBR TY2026</span>
           <span className="text-rule">|</span>
           <span>Individual Non-Business Filing Desk</span>
         </div>
 
         {/* Hero Title */}
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink tracking-tight leading-[1.15]">
             File your Tax Year 2026 return <br className="hidden sm:inline" />
             <span className="italic text-brass font-bold">— from PKR 1,000</span>
           </h1>
 
           {isUrdu ? (
-            <p className="font-urdu text-xl sm:text-2xl font-bold text-ink" dir="rtl">
+            <p className="font-urdu text-xl sm:text-2xl font-bold text-ink leading-relaxed" dir="rtl">
               ہم تیار کریں گے۔ آپ آفیشل آئرس پر خود لاگ ان کر کے فائل کریں گے۔
             </p>
           ) : (
@@ -161,32 +164,70 @@ export default function HomePage() {
         </div>
 
         {/* Pricing Story Highlight */}
-        <div className="inline-block bg-brass-subtle border border-brass/40 px-3.5 py-1.5 rounded-md font-mono text-xs text-ink">
-          Most clients choose: <strong className="text-brass">FA-2500 Complete Assistance (PKR 2,500)</strong>
+        <div className="inline-block bg-brass-subtle border border-brass/40 px-4 py-2 rounded-full font-mono text-xs text-ink shadow-sm">
+          Most clients choose: <strong className="text-brass font-bold">FA-2500 Complete Assistance (PKR 2,500)</strong>
         </div>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <Link
             href="/start"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-md text-sm shadow-md transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-lg transition-all active:scale-95"
           >
             <span>Start Filing (Part 01 / 04)</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
 
-          <Link
-            href="/requirements"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-folio hover:bg-paper border border-rule text-ink font-bold py-3.5 px-6 rounded-md text-sm transition-all"
+          <button
+            type="button"
+            onClick={() => appClip.open("tax-intake")}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper border border-brass/40 text-ink font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-all active:scale-95"
+          >
+            <Sparkles className="w-4 h-4 text-brass" />
+            <span>Fast AppClip Intake</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => appClip.open("tax-checklist")}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-folio hover:bg-paper border border-rule text-ink font-bold py-3.5 px-6 rounded-full text-sm transition-all"
           >
             <FileText className="w-4 h-4 text-ash" />
-            <span>See Documents Needed</span>
-          </Link>
+            <span>Docs Checklist</span>
+          </button>
+        </div>
+
+        {/* Frosted AppClip Quick Tray */}
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs">
+          <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold">
+            Quick Clips:
+          </span>
+          <button
+            type="button"
+            onClick={() => appClip.open("tax-checklist")}
+            className="px-3 py-1 rounded-full bg-white/80 dark:bg-[#0B1C2C]/80 border border-rule hover:border-brass/50 text-ash hover:text-ink font-medium transition-all shadow-sm flex items-center gap-1.5"
+          >
+            <span>📋 Documents Needed</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => appClip.open("whatsapp-intake")}
+            className="px-3 py-1 rounded-full bg-white/80 dark:bg-[#0B1C2C]/80 border border-rule hover:border-[#128C7E]/50 text-ash hover:text-ink font-medium transition-all shadow-sm flex items-center gap-1.5"
+          >
+            <span className="text-[#128C7E]">💬 WhatsApp File</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => appClip.open("iris-guide")}
+            className="px-3 py-1 rounded-full bg-white/80 dark:bg-[#0B1C2C]/80 border border-rule hover:border-brass/50 text-ash hover:text-ink font-medium transition-all shadow-sm flex items-center gap-1.5"
+          >
+            <span>🛡️ IRIS Password Guide</span>
+          </button>
         </div>
 
         {/* Stamp & Official Link */}
         <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs font-mono">
-          <span className="stamp-box px-2 py-0.5 rounded text-[10px]">
+          <span className="stamp-box px-3 py-1 rounded-full text-[10px]">
             PASSWORD NEVER COLLECTED AT INTAKE
           </span>
           <span className="text-ash opacity-40 hidden sm:inline">·</span>
@@ -212,18 +253,18 @@ export default function HomePage() {
           <span className="font-mono text-xs text-ash">NON-BUSINESS ONLY</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {personas.map((p) => {
             const Icon = p.icon;
             return (
               <Link
                 key={p.code}
                 href={p.href}
-                className="glass-card p-5 hover:border-brass transition-all group flex flex-col justify-between space-y-4"
+                className="glass-card p-6 rounded-[24px] hover:border-brass transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md"
               >
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-brass px-1.5 py-0.5 rounded bg-brass-subtle border border-brass/20">
+                    <span className="font-mono text-xs font-bold text-brass px-2 py-0.5 rounded-full bg-brass-subtle border border-brass/20">
                       {p.code}
                     </span>
                     <Icon className="w-4 h-4 text-ash group-hover:text-ink transition-colors" />
@@ -237,7 +278,7 @@ export default function HomePage() {
                   <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
                 </div>
 
-                <div className="font-mono text-[11px] font-bold text-ink flex items-center gap-1 pt-2 border-t border-rule-light group-hover:text-brass">
+                <div className="font-mono text-[11px] font-bold text-ink flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-brass">
                   <span>Start as {p.code}</span>
                   <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -259,7 +300,7 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Guided Filing */}
-          <div className="glass-card p-6 flex flex-col justify-between space-y-6">
+          <div className="glass-card p-6 sm:p-7 rounded-[28px] flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md transition-all">
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: GF-1000</span>
@@ -288,17 +329,26 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <Link
-              href="/start?tier=guided_1000"
-              className="w-full py-2.5 text-center rounded border border-rule bg-paper-light hover:bg-paper font-bold text-xs text-ink transition-all font-mono"
-            >
-              Select GF-1000
-            </Link>
+            <div className="space-y-2 pt-2">
+              <button
+                type="button"
+                onClick={() => appClip.open("tax-intake", { defaultTier: "guided_1000" })}
+                className="w-full py-3 text-center rounded-full bg-paper-light hover:bg-paper border border-rule font-bold text-xs text-ink transition-all font-mono active:scale-95 shadow-sm"
+              >
+                Select GF-1000 (AppClip)
+              </button>
+              <Link
+                href="/start?tier=guided_1000"
+                className="block text-center text-[11px] font-mono text-ash hover:text-ink underline"
+              >
+                Or open full page wizard →
+              </Link>
+            </div>
           </div>
 
           {/* Complete Assistance — Recommended */}
-          <div className="glass-card p-6 flex flex-col justify-between space-y-6 border-brass ring-1 ring-brass shadow-md relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded bg-brass text-ink font-mono text-[10px] font-bold uppercase tracking-wider">
+          <div className="glass-card-featured p-6 sm:p-7 rounded-[30px] flex flex-col justify-between space-y-6 relative shadow-lg">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-brass text-ink font-mono text-[10px] font-bold uppercase tracking-wider shadow-sm">
               Most Selected · تجویز کردہ
             </div>
             <div className="space-y-4">
@@ -329,16 +379,25 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <Link
-              href="/start?tier=assistance_2500"
-              className="w-full py-3 text-center rounded bg-ink hover:bg-theme-primary-hover font-bold text-xs text-paper-light shadow-sm transition-all font-mono"
-            >
-              Select FA-2500 (Recommended)
-            </Link>
+            <div className="space-y-2 pt-2">
+              <button
+                type="button"
+                onClick={() => appClip.open("tax-intake", { defaultTier: "assistance_2500" })}
+                className="w-full py-3.5 text-center rounded-full bg-ink hover:bg-theme-primary-hover font-bold text-xs text-paper-light shadow-md hover:shadow-lg transition-all font-mono active:scale-95"
+              >
+                Select FA-2500 (Fast AppClip)
+              </button>
+              <Link
+                href="/start?tier=assistance_2500"
+                className="block text-center text-[11px] font-mono text-ash hover:text-ink underline"
+              >
+                Or open full page wizard →
+              </Link>
+            </div>
           </div>
 
           {/* Complex Review */}
-          <div className="glass-card p-6 flex flex-col justify-between space-y-6">
+          <div className="glass-card p-6 sm:p-7 rounded-[28px] flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md transition-all">
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: CX-4500</span>
@@ -367,12 +426,21 @@ export default function HomePage() {
               </ul>
             </div>
 
-            <Link
-              href="/start?tier=complex_5000"
-              className="w-full py-2.5 text-center rounded border border-rule bg-paper-light hover:bg-paper font-bold text-xs text-ink transition-all font-mono"
-            >
-              Consult CX-4500 Case
-            </Link>
+            <div className="space-y-2 pt-2">
+              <button
+                type="button"
+                onClick={() => appClip.open("whatsapp-intake", { defaultTier: "complex_5000" })}
+                className="w-full py-3 text-center rounded-full border border-rule bg-paper-light hover:bg-paper font-bold text-xs text-ink transition-all font-mono active:scale-95 shadow-sm"
+              >
+                Consult CX-4500 (WhatsApp)
+              </button>
+              <Link
+                href="/start?tier=complex_5000"
+                className="block text-center text-[11px] font-mono text-ash hover:text-ink underline"
+              >
+                Or open full page wizard →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -387,16 +455,16 @@ export default function HomePage() {
           <span className="font-mono text-xs text-ash">4 STEPS TO COMPLETED TASK</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {fourSteps.map((s) => (
-            <div key={s.num} className="glass-card p-5 space-y-2 relative border-rule">
+            <div key={s.num} className="glass-card p-6 rounded-[24px] space-y-2.5 relative border-rule/70 shadow-sm">
               <div className="flex items-center justify-between font-mono text-xs">
                 <span className="font-bold text-brass">{s.num}</span>
-                <span className="text-[10px] text-ash px-1 bg-paper border border-rule rounded">{s.code}</span>
+                <span className="text-[10px] text-ash px-2 py-0.5 bg-paper-light border border-rule rounded-full">{s.code}</span>
               </div>
               <div>
                 <h3 className="font-bold text-sm text-ink">{s.titleEn}</h3>
-                <div className="font-urdu text-xs text-ash" dir="rtl">{s.titleUr}</div>
+                <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{s.titleUr}</div>
               </div>
               <p className="text-xs text-ash leading-relaxed">{s.descEn}</p>
             </div>
@@ -414,9 +482,9 @@ export default function HomePage() {
           <span className="font-mono text-xs text-ash font-urdu" dir="rtl">اکثر پوچھے گئے سوالات</span>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-3.5">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="glass-card p-5 space-y-2">
+            <div key={idx} className="glass-card p-6 rounded-[22px] space-y-2.5 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
                 <h3 className="font-bold text-sm text-ink">{faq.qEn}</h3>
                 <span className="font-urdu text-xs text-ash" dir="rtl">{faq.qUr}</span>
@@ -434,31 +502,32 @@ export default function HomePage() {
 
       {/* 6. Bottom Banner CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="bg-ink text-paper-light border-2 border-brass p-6 sm:p-8 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-1 text-center sm:text-left">
-            <span className="font-mono text-xs text-brass tracking-wider">TY2026 INTAKE OPEN</span>
-            <h2 className="font-serif text-2xl font-bold text-paper-light">
+        <div className="bg-ink text-paper-light border-2 border-brass p-8 sm:p-10 rounded-[32px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+          <div className="space-y-1.5 text-center sm:text-left">
+            <span className="font-mono text-xs text-brass tracking-wider uppercase font-bold">TY2026 INTAKE OPEN</span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-paper-light">
               Ready to file your return?
             </h2>
-            <p className="text-xs text-ash-light max-w-md">
+            <p className="text-xs text-ash-light max-w-md leading-relaxed">
               Complete Part 01 in 60 seconds. You receive an instant case ID (YS-26-XXXXX) and our tax specialist handles the rest.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-            <Link
-              href="/start"
-              className="inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3 px-6 rounded text-xs shadow-md transition-all font-mono"
+            <button
+              type="button"
+              onClick={() => appClip.open("tax-intake")}
+              className="inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
             >
-              <span>Open Intake Form</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+              <span>Fast AppClip Form</span>
+              <Sparkles className="w-3.5 h-3.5" />
+            </button>
 
             <a
               href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20my%20Tax%20Year%202026%20return."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-folio/10 hover:bg-folio/20 border border-brass/40 text-paper-light font-bold py-3 px-4 rounded text-xs transition-all font-mono"
+              className="inline-flex items-center justify-center gap-2 bg-folio/10 hover:bg-folio/20 border border-brass/40 text-paper-light font-bold py-3.5 px-5 rounded-full text-xs transition-all font-mono active:scale-95"
             >
               <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
               <span>0312 0947187</span>
@@ -469,3 +538,4 @@ export default function HomePage() {
     </div>
   );
 }
+

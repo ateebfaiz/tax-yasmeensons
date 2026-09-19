@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { TaxSeal } from "@/components/ui/tax-seal";
+import { StoreLogo } from "@/components/ui/store-logo";
 import { ExternalLink, MessageCircle, ShieldCheck } from "lucide-react";
 
 export function Footer() {
@@ -11,14 +11,11 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
         {/* Practice Identity */}
         <div className="space-y-3">
-          <div className="flex items-center gap-3">
-            <TaxSeal size={32} />
-            <div className="flex flex-col">
-              <span className="font-serif font-bold text-sm tracking-wide text-paper-light">
-                Yasmeen & Sons
-              </span>
-              <span className="font-mono text-[9px] text-brass-light tracking-widest uppercase">
-                Tax Facilitation Practice
+          <div className="flex items-center gap-2.5">
+            <StoreLogo variant="white" size={26} className="h-6 w-auto" />
+            <div className="flex items-center pl-2 border-l border-rule/30">
+              <span className="font-mono text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-brass text-ink uppercase tracking-widest">
+                TAX
               </span>
             </div>
           </div>

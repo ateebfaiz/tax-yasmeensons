@@ -756,12 +756,12 @@ export function SeniorIntakeWizard({
       )}
 
       {/* Sticky Wizard Footer */}
-      <div className="sticky bottom-0 z-30 bg-folio/95 backdrop-blur-md border-t border-rule p-4 -mx-4 sm:mx-0 sm:rounded-md flex items-center justify-between gap-4">
+      <div className="sticky bottom-0 z-30 bg-folio/95 backdrop-blur-md border-t border-rule p-4 -mx-4 sm:mx-0 sm:rounded-2xl flex items-center justify-between gap-4">
         {currentPart > 1 ? (
           <button
             type="button"
             onClick={() => setCurrentPart((p) => p - 1)}
-            className="text-xs font-mono font-bold text-ash hover:text-ink flex items-center gap-1"
+            className="text-xs font-mono font-bold text-ash hover:text-ink flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-paper transition-all"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back</span>
@@ -771,7 +771,7 @@ export function SeniorIntakeWizard({
             href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20start%20my%20Tax%20Year%202026%20filing."
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono text-ash hover:text-ink flex items-center gap-1"
+            className="text-xs font-mono text-ash hover:text-ink flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-paper transition-all"
           >
             <MessageCircle className="w-3.5 h-3.5 text-[#128C7E]" />
             <span>WhatsApp Instead</span>
@@ -783,7 +783,7 @@ export function SeniorIntakeWizard({
             <button
               type="button"
               onClick={validateAndNext}
-              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-6 py-2.5 rounded shadow transition-all"
+              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-7 py-2.5 rounded-full shadow transition-all active:scale-95"
             >
               <span>Continue →</span>
             </button>
@@ -792,7 +792,7 @@ export function SeniorIntakeWizard({
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-6 py-2.5 rounded shadow transition-all disabled:opacity-60"
+              className="inline-flex items-center gap-1.5 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs px-7 py-2.5 rounded-full shadow transition-all disabled:opacity-60 active:scale-95"
             >
               <span>{submitting ? "Recording Folio..." : "Generate Case File (YS-26-XXXXX)"}</span>
               <ArrowRight className="w-3.5 h-3.5" />

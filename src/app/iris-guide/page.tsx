@@ -2,9 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
-import { ExternalLink, KeyRound, UserCheck, ShieldCheck, CheckCircle2, ArrowRight, Laptop, Lock, HelpCircle } from "lucide-react";
+import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { ExternalLink, KeyRound, UserCheck, ShieldCheck, CheckCircle2, ArrowRight, Laptop, Lock, HelpCircle, Sparkles } from "lucide-react";
 
 export default function IrisGuidePage() {
+  const appClip = useAppClip();
+
   const steps = [
     {
       step: "01",
@@ -100,8 +103,8 @@ export default function IrisGuidePage() {
       </div>
 
       {/* Security Stamp Box */}
-      <div className="stamp-box p-4 rounded text-xs space-y-1">
-        <div className="font-bold flex items-center gap-1.5">
+      <div className="stamp-box p-5 rounded-2xl text-xs space-y-1.5 shadow-sm">
+        <div className="font-bold flex items-center gap-1.5 text-stamp-red">
           <ShieldCheck className="w-4 h-4 text-stamp-red" />
           <span>ZERO-CREDENTIAL INVARIANT</span>
         </div>
@@ -113,10 +116,10 @@ export default function IrisGuidePage() {
       {/* Steps List */}
       <div className="space-y-6">
         {steps.map((s) => (
-          <div key={s.step} className="glass-card p-6 space-y-4 border-rule">
+          <div key={s.step} className="glass-card p-6 sm:p-7 space-y-4 rounded-[28px] border-rule/80 shadow-sm hover:shadow-md transition-all">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-rule-light pb-3">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-sm font-bold text-brass px-2 py-0.5 rounded bg-brass-subtle border border-brass/30">
+                <span className="font-mono text-sm font-bold text-brass px-2.5 py-0.5 rounded-full bg-brass-subtle border border-brass/30">
                   {s.step}
                 </span>
                 <div>
@@ -124,7 +127,7 @@ export default function IrisGuidePage() {
                   <div className="font-urdu text-xs text-ash" dir="rtl">{s.titleUr}</div>
                 </div>
               </div>
-              <span className="font-mono text-[10px] text-ash px-2 py-0.5 bg-paper rounded border border-rule">
+              <span className="font-mono text-[10px] text-ash px-2.5 py-0.5 bg-paper rounded-full border border-rule">
                 {s.code}
               </span>
             </div>
@@ -134,11 +137,11 @@ export default function IrisGuidePage() {
               <p className="font-urdu text-ash text-[11px]" dir="rtl">{s.descUr}</p>
             </div>
 
-            <div className="bg-paper-light p-3.5 rounded border border-rule-light space-y-1.5">
+            <div className="bg-paper-light p-4 rounded-2xl border border-rule-light space-y-2">
               <span className="font-mono text-[10px] font-bold text-ink uppercase tracking-wider block">
                 Official Procedure:
               </span>
-              <ul className="space-y-1 text-xs text-ash font-mono">
+              <ul className="space-y-1.5 text-xs text-ash font-mono">
                 {s.details.map((d, i) => (
                   <li key={i} className="flex items-start gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0 mt-0.5" />
@@ -166,19 +169,29 @@ export default function IrisGuidePage() {
       </div>
 
       {/* Action Footer */}
-      <div className="bg-paper-light border border-rule p-6 rounded text-center space-y-3">
-        <h3 className="font-serif text-xl font-bold text-ink">Ready for Assistance?</h3>
-        <p className="text-xs text-ash max-w-md mx-auto">
+      <div className="glass-card border border-rule/80 p-8 rounded-[30px] text-center space-y-4 shadow-sm">
+        <h3 className="font-serif text-2xl font-bold text-ink">Ready for Assistance?</h3>
+        <p className="text-xs text-ash max-w-md mx-auto leading-relaxed">
           Start your intake in 60 seconds. Our desk prepares your return checklist and guides you through these exact steps.
         </p>
-        <Link
-          href="/start"
-          className="inline-flex items-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs py-3 px-6 rounded shadow transition-all"
-        >
-          <span>Begin Tax Return Intake (Part 01 / 04)</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <button
+            type="button"
+            onClick={() => appClip.open("tax-intake")}
+            className="inline-flex items-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-mono font-bold text-xs py-3.5 px-7 rounded-full shadow-md transition-all active:scale-95"
+          >
+            <span>Fast AppClip Intake</span>
+            <Sparkles className="w-3.5 h-3.5 text-brass" />
+          </button>
+          <Link
+            href="/start"
+            className="inline-flex items-center gap-2 bg-paper-light hover:bg-paper border border-rule text-ink font-mono font-bold text-xs py-3.5 px-6 rounded-full shadow-xs transition-all active:scale-95"
+          >
+            <span>Full Form Page →</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
+

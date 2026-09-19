@@ -19,16 +19,41 @@
 @layer utilities {
   .glass {
     background: var(--theme-glass-bg);
-    backdrop-filter: blur(var(--theme-glass-blur, 16px));
-    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 16px));
+    backdrop-filter: blur(var(--theme-glass-blur, 20px));
+    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 20px));
     border: 1px solid var(--tax-rule);
   }
 
   .glass-card {
-    background: var(--tax-folio);
-    border: 1px solid var(--tax-rule);
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 8px rgba(11, 28, 44, 0.04);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(215, 208, 196, 0.75);
+    border-radius: 1.5rem; /* rounded-2xl (24px) */
+    box-shadow: 0 4px 24px rgba(11, 28, 44, 0.04);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(196, 160, 70, 0.5);
+    box-shadow: 0 10px 32px rgba(11, 28, 44, 0.08);
+  }
+
+  .glass-card-featured {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1.5px solid rgba(196, 160, 70, 0.7);
+    border-radius: 1.75rem; /* 28px */
+    box-shadow: 0 8px 36px rgba(196, 160, 70, 0.15);
+  }
+
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(215, 208, 196, 0.65);
+    border-radius: 9999px;
   }
 
   .letterhead-band {
@@ -45,6 +70,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
+    border-radius: 9999px;
   }
 
   .fbr-chip {
@@ -56,8 +82,8 @@
     background: var(--tax-brass-subtle);
     color: var(--tax-ink);
     border: 1px solid var(--tax-rule);
-    padding: 0.15rem 0.5rem;
-    border-radius: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
   }
 
   .form-code {
@@ -71,3 +97,4 @@
     padding-bottom: calc(env(safe-area-inset-bottom, 24px) + 80px);
   }
 }
+

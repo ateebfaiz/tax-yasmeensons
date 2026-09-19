@@ -2,14 +2,14 @@
 
 import React from "react";
 import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
-import { BilingualIntakeForm } from "@/components/intake/BilingualIntakeForm";
+import { SeniorIntakeWizard } from "@/components/intake/SeniorIntakeWizard";
 
 export default function TaxIntakeClip({
   onClose,
   payload,
 }: {
   onClose: () => void;
-  payload?: { defaultPersona?: string };
+  payload?: { defaultPersona?: string; defaultTier?: string };
 }) {
   return (
     <AppClipSheet
@@ -18,10 +18,10 @@ export default function TaxIntakeClip({
       title="Start Tax Filing Intake"
       subtitle="ٹیکس فائلنگ کا آغاز • Non-Business Individual"
     >
-      <div className="p-4 md:p-6 pb-20">
-        <BilingualIntakeForm
-          defaultPersona={payload?.defaultPersona || "salaried"}
-          onSuccess={() => {}}
+      <div className="p-1 sm:p-3 pb-24">
+        <SeniorIntakeWizard
+          initialCategory={payload?.defaultPersona || "SAL"}
+          initialTier={payload?.defaultTier || "assistance_2500"}
         />
       </div>
     </AppClipSheet>

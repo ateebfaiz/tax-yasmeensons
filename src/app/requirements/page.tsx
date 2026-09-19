@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { CheckSquare, ArrowRight, FileText, CheckCircle2, ShieldCheck } from "lucide-react";
+import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { CheckSquare, ArrowRight, FileText, CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 
 interface DocItem {
   code: string;
@@ -61,6 +62,7 @@ const CATEGORY_DOCS: Record<string, { title: string; ur: string; items: DocItem[
 
 export default function RequirementsPage() {
   const [activeCat, setActiveCat] = useState<string>("SAL");
+  const appClip = useAppClip();
   const current = CATEGORY_DOCS[activeCat] || CATEGORY_DOCS.SAL;
 
   return (
@@ -82,46 +84,57 @@ export default function RequirementsPage() {
         </p>
       </div>
 
-      {/* Filter Chips */}
-      <div className="flex flex-wrap gap-2 pt-1 font-mono text-xs">
-        {[
-          { code: "SAL", label: "Salaried Employees" },
-          { code: "PEN", label: "Senior & Pensioners" },
-          { code: "HIF", label: "Housewife / Non-Earning" },
-          { code: "STU", label: "Student Filers" },
-        ].map((c) => (
-          <button
-            key={c.code}
-            type="button"
-            onClick={() => setActiveCat(c.code)}
-            className={`px-3 py-1.5 rounded transition-all flex items-center gap-1.5 ${
-              activeCat === c.code
-                ? "bg-ink text-paper-light font-bold shadow-sm"
-                : "bg-folio border border-rule text-ash hover:text-ink"
-            }`}
-          >
-            <span className="text-brass font-bold">{c.code}</span>
-            <span>{c.label}</span>
-          </button>
-        ))}
+      {/* Filter Chips & AppClip launch */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-2 font-mono text-xs">
+          {[
+            { code: "SAL", label: "Salaried Employees" },
+            { code: "PEN", label: "Senior & Pensioners" },
+            { code: "HIF", label: "Housewife / Non-Earning" },
+            { code: "STU", label: "Student Filers" },
+          ].map((c) => (
+            <button
+              key={c.code}
+              type="button"
+              onClick={() => setActiveCat(c.code)}
+              className={`px-3.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 text-xs ${
+                activeCat === c.code
+                  ? "bg-ink text-paper-light font-bold shadow-sm"
+                  : "bg-folio border border-rule text-ash hover:text-ink hover:border-ash"
+              }`}
+            >
+              <span className="text-brass font-bold">{c.code}</span>
+              <span>{c.label}</span>
+            </button>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={() => appClip.open("tax-checklist", { persona: activeCat.toLowerCase() })}
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-brass/15 border border-brass/40 text-ink font-mono font-bold text-xs hover:bg-brass/25 transition-all shadow-sm active:scale-95"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-brass" />
+          <span>Interactive AppClip Checklist</span>
+        </button>
       </div>
 
       {/* Checklist Card */}
-      <div className="glass-card p-6 space-y-4 border-rule">
+      <div className="glass-card p-6 sm:p-8 rounded-[28px] space-y-5 border-rule/80 shadow-sm">
         <div className="border-b border-rule-light pb-3 flex items-baseline justify-between">
           <h2 className="font-serif text-lg font-bold text-ink">{current.title}</h2>
           <span className="font-urdu text-xs text-ash" dir="rtl">{current.ur}</span>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {current.items.map((item, idx) => (
             <div
               key={idx}
-              className="p-3.5 rounded border border-rule bg-paper-light flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+              className="p-4 rounded-2xl border border-rule bg-paper-light flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs"
             >
               <div className="space-y-0.5">
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold text-brass px-1.5 py-0.2 rounded bg-folio border border-rule">
+                  <span className="font-mono text-xs font-bold text-brass px-2 py-0.5 rounded-full bg-folio border border-rule">
                     {item.code}
                   </span>
                   <span className="text-xs font-semibold text-ink">{item.en}</span>
@@ -131,11 +144,11 @@ export default function RequirementsPage() {
 
               <div className="shrink-0">
                 {item.type === "required" ? (
-                  <span className="font-mono text-[10px] font-bold text-ink bg-brass/25 border border-brass px-2 py-0.5 rounded uppercase">
+                  <span className="font-mono text-[10px] font-bold text-ink bg-brass/25 border border-brass px-2.5 py-0.5 rounded-full uppercase">
                     Required
                   </span>
                 ) : (
-                  <span className="font-mono text-[10px] text-ash bg-paper border border-rule px-2 py-0.5 rounded uppercase">
+                  <span className="font-mono text-[10px] text-ash bg-paper border border-rule px-2.5 py-0.5 rounded-full uppercase">
                     If Applicable
                   </span>
                 )}
@@ -146,24 +159,35 @@ export default function RequirementsPage() {
       </div>
 
       {/* Direct link to start with preselected category */}
-      <div className="bg-ink text-paper-light border-2 border-brass p-6 rounded-md flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-ink text-paper-light border-2 border-brass p-8 rounded-[30px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="space-y-1 text-center sm:text-left">
-          <span className="font-mono text-xs text-brass font-bold">READY WITH PAPERS?</span>
-          <div className="font-serif text-lg font-bold">
+          <span className="font-mono text-xs text-brass font-bold uppercase tracking-wider">READY WITH PAPERS?</span>
+          <div className="font-serif text-xl font-bold">
             Begin filing with {activeCat} checklist
           </div>
-          <p className="text-xs text-ash-light">
+          <p className="text-xs text-ash-light leading-relaxed max-w-md">
             You can photo-share documents on WhatsApp during our step-by-step guidance.
           </p>
         </div>
 
-        <Link
-          href={`/start?cat=${activeCat}`}
-          className="inline-flex items-center gap-2 bg-brass hover:bg-brass-light text-ink font-mono font-bold text-xs py-3 px-6 rounded shadow transition-all shrink-0"
-        >
-          <span>Start Filing with {activeCat} →</span>
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-2.5 shrink-0">
+          <button
+            type="button"
+            onClick={() => appClip.open("tax-intake", { defaultPersona: activeCat })}
+            className="inline-flex items-center justify-center gap-1.5 bg-brass hover:bg-brass-light text-ink font-mono font-bold text-xs py-3 px-6 rounded-full shadow transition-all active:scale-95"
+          >
+            <span>Fast AppClip ({activeCat})</span>
+            <Sparkles className="w-3.5 h-3.5" />
+          </button>
+          <Link
+            href={`/start?cat=${activeCat}`}
+            className="inline-flex items-center justify-center gap-1.5 bg-folio/10 hover:bg-folio/20 border border-brass/40 text-paper-light font-mono font-bold text-xs py-3 px-5 rounded-full transition-all active:scale-95"
+          >
+            <span>Full Form →</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
+
