@@ -20,6 +20,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { TaxDynamicIsland } from "@/components/ui/tax-dynamic-island";
 
 export default function HomePage() {
   const { isUrdu } = useLanguage();
@@ -138,11 +139,9 @@ export default function HomePage() {
     <div className="space-y-16 md:space-y-24 py-8 md:py-16">
       {/* 1. Hero Section — Lead with the Job */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-7">
-        {/* IRIS Mapping Chip */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-paper-light border border-rule font-mono text-[11px] text-ash shadow-sm">
-          <span className="font-bold text-ink">FBR TY2026</span>
-          <span className="text-rule">|</span>
-          <span>Individual Non-Business Filing Desk</span>
+        {/* Dynamic Island: Active Live Desk & AppClip Controller */}
+        <div className="flex justify-center pb-2">
+          <TaxDynamicIsland />
         </div>
 
         {/* Hero Title */}
@@ -172,7 +171,7 @@ export default function HomePage() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <Link
             href="/start"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-lg transition-all active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-ink hover:bg-theme-primary-hover text-paper-light font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-lg transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
           >
             <span>Start Filing (Part 01 / 04)</span>
             <ArrowRight className="w-4 h-4" />
@@ -181,7 +180,7 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("tax-intake")}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper border border-brass/40 text-ink font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-all active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper border border-brass/40 text-ink font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
           >
             <Sparkles className="w-4 h-4 text-brass" />
             <span>Fast AppClip Intake</span>
@@ -190,7 +189,7 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-folio hover:bg-paper border border-rule text-ink font-bold py-3.5 px-6 rounded-full text-sm transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-folio hover:bg-paper border border-rule text-ink font-bold py-3.5 px-6 rounded-full text-sm transition-colors focus-visible:ring-2 focus-visible:ring-brass active:scale-95"
           >
             <FileText className="w-4 h-4 text-ash" />
             <span>Docs Checklist</span>

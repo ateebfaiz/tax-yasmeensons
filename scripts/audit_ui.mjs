@@ -149,7 +149,7 @@ async function runAudit() {
   if (buttonClicked) {
     await new Promise((r) => setTimeout(r, 800)); // wait for framer-motion slide up
     const clipSheetOverflow = await clipPage.evaluate(() => {
-      const sheet = document.querySelector('[key="app-clip-sheet"]') || document.querySelector('.z-\\[9999\\]');
+      const sheet = document.querySelector('[role="dialog"]') || document.querySelector('.z-50');
       return {
         sheetPresent: !!sheet,
         scrollWidth: document.documentElement.scrollWidth,

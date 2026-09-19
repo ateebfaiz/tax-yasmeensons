@@ -30,7 +30,7 @@ export function AppClipSheet({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/40 backdrop-blur-md z-[9998]"
+        className="fixed inset-0 bg-black/40 backdrop-blur-md z-40"
         onClick={onClose}
       />
 
@@ -49,7 +49,7 @@ export function AppClipSheet({
           if (info.offset.y > 70 || info.velocity.y > 300) onClose();
         }}
         className={cn(
-          "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-[9999]",
+          "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-50",
           "flex flex-col pb-safe",
           "bg-white/80 dark:bg-[#07121D]/80 backdrop-blur-2xl backdrop-saturate-200",
           "border-t border-white/60 dark:border-white/10 text-ink dark:text-paper-light",
@@ -85,7 +85,7 @@ export function AppClipSheet({
                 onClick={onClose}
                 onPointerDown={(e) => e.stopPropagation()}
                 aria-label="Close sheet"
-                className="w-8 h-8 rounded-full border border-black/[0.08] dark:border-white/15 bg-white/60 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 flex items-center justify-center active:scale-95 transition-all text-ink dark:text-[#F4EFE6] backdrop-blur-md shadow-sm"
+                className="w-8 h-8 rounded-full border border-black/[0.08] dark:border-white/15 bg-white/60 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-[#128C7E] flex items-center justify-center active:scale-95 transition-colors text-ink dark:text-[#F4EFE6] backdrop-blur-md shadow-sm"
               >
                 <X className="w-4 h-4" />
               </button>
