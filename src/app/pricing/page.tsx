@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
-import { CheckCircle2, ShieldCheck, ArrowRight, MessageCircle, AlertCircle, Sparkles } from "lucide-react";
+import { CheckCircle2, ShieldCheck, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 
 export default function PricingPage() {
   const appClip = useAppClip();
@@ -190,7 +191,7 @@ export default function PricingPage() {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 bg-[#128C7E] text-white font-mono font-bold py-3 px-6 rounded-full text-xs shadow-sm hover:bg-[#0e7064] transition-all shrink-0 active:scale-95"
         >
-          <MessageCircle className="w-4 h-4" />
+          <WhatsAppIcon className="w-4 h-4" />
           <span>Ask on WhatsApp (0312 0947187)</span>
         </a>
       </div>

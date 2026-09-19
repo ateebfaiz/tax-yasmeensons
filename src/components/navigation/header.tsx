@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { StoreLogo } from "@/components/ui/store-logo";
 import { LanguageToggle } from "@/components/navigation/language-toggle";
 import { useLanguage } from "@/context/language-context";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { ArrowRight } from "lucide-react";
 
 export function Header() {
   const pathname = usePathname();
@@ -65,7 +66,7 @@ export function Header() {
             rel="noopener noreferrer"
             className="hidden lg:inline-flex items-center gap-1.5 text-xs font-bold text-ink px-3.5 py-1.5 rounded-full border border-rule/80 hover:bg-paper hover:border-brass/50 transition-all"
           >
-            <MessageCircle className="w-3.5 h-3.5 text-[#128C7E]" />
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
             <span>0312 0947187</span>
           </a>
 

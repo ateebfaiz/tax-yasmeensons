@@ -3,13 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { formatWhatsAppUrl } from "@/lib/utils";
 import { useLanguage } from "@/context/language-context";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import {
   ShieldCheck,
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
   ExternalLink,
-  MessageCircle,
   FileCheck,
   AlertCircle,
   Clock,
@@ -158,7 +158,16 @@ export function SeniorIntakeWizard({
   const [fullName, setFullName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [cnic, setCnic] = useState<string>("");
+  const [simOwner, setSimOwner] = useState<"own" | "relative">("own");
+  const [relativeName, setRelativeName] = useState<string>("");
+  const [relativeCnic, setRelativeCnic] = useState<string>("");
+  const [relativeRelation, setRelativeRelation] = useState<string>("Father / والد");
   const [email, setEmail] = useState<string>("");
+  const [needEmailHelp, setNeedEmailHelp] = useState<boolean>(false);
+  const [residentialAddress, setResidentialAddress] = useState<string>("");
+  const [incomeDetails, setIncomeDetails] = useState<string>("");
+  const [familyConsolidation, setFamilyConsolidation] = useState<boolean>(false);
+  const [whtAudit, setWhtAudit] = useState<boolean>(true);
   const [sendViaWhatsApp, setSendViaWhatsApp] = useState<boolean>(true);
   const [credentialsNotes, setCredentialsNotes] = useState<string>("");
   const [consented, setConsented] = useState<boolean>(false);
@@ -198,6 +207,17 @@ export function SeniorIntakeWizard({
       formatted = `${digits.slice(0, 5)}-${digits.slice(5, 12)}-${digits.slice(12)}`;
     }
     setCnic(formatted);
+  };
+
+  const handleRelativeCnicChange = (val: string) => {
+    const digits = val.replace(/\D/g, "").slice(0, 13);
+    let formatted = digits;
+    if (digits.length > 5 && digits.length <= 12) {
+      formatted = `${digits.slice(0, 5)}-${digits.slice(5)}`;
+    } else if (digits.length > 12) {
+      formatted = `${digits.slice(0, 5)}-${digits.slice(5, 12)}-${digits.slice(12)}`;
+    }
+    setRelativeCnic(formatted);
   };
 
   const handlePhoneChange = (val: string) => {
@@ -245,6 +265,10 @@ export function SeniorIntakeWizard({
       setError("Please enter a valid 11-digit WhatsApp/Mobile number.");
       return;
     }
+    if (simOwner === "relative" && (!relativeName.trim() || !relativeCnic.trim())) {
+      setError("Please enter relative's name and CNIC / قریبی رشتہ دار کا نام اور شناختی کارڈ درج کریں۔");
+      return;
+    }
     if (!consented) {
       setError("Please check the authorization box to proceed.");
       return;
@@ -252,19 +276,29 @@ export function SeniorIntakeWizard({
 
     setSubmitting(true);
     try {
+      const notesSummary = [
+        simOwner === "relative" ? `SIM on Relative: ${relativeName} (${relativeRelation}), CNIC: ${relativeCnic}` : "SIM: Registered in own CNIC",
+        needEmailHelp ? "Customer requests email creation assistance" : email ? `Email: ${email}` : "No email",
+        residentialAddress ? `Address: ${residentialAddress}` : "",
+        incomeDetails ? `Income details: ${incomeDetails}` : "",
+        familyConsolidation ? "Family group filing / inter-family transfers reconciliation requested" : "",
+        whtAudit ? "Full withholding tax deduction claim audit enabled (banks, bills, SIM, fuel)" : "",
+        credentialsNotes ? `Notes: ${credentialsNotes}` : "",
+      ].filter(Boolean).join(" | ");
+
       const res = await fetch("/api/intake", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName,
-          phone,
-          cnic,
-          email,
+          fullName: fullName.trim(),
+          phone: phone.trim(),
+          cnic: cnic.trim(),
+          email: needEmailHelp ? "needs_email_help@fbr.local" : email.trim(),
           persona: categoryCode.toLowerCase(),
           irisStatus,
           serviceTier: currentPkg.id,
           contactPreference: "whatsapp",
-          credentialsNotes,
+          credentialsNotes: notesSummary,
           documentsSummary: sendViaWhatsApp ? "Will send documents on WhatsApp" : "Direct filing",
           source: "senior_wizard",
         }),
@@ -285,8 +319,13 @@ export function SeniorIntakeWizard({
           `*Name:* ${fullName}\n` +
           `*Phone:* ${phone}\n` +
           (cnic ? `*CNIC:* ${cnic}\n` : "") +
-          (email ? `*Email:* ${email}\n` : "") +
+          (simOwner === "relative" ? `*SIM on:* ${relativeName} (${relativeRelation}, CNIC: ${relativeCnic})\n` : `*SIM:* Own CNIC\n`) +
+          (needEmailHelp ? `*Email:* Help requested to create email\n` : email ? `*Email:* ${email}\n` : "") +
+          (residentialAddress ? `*Address:* ${residentialAddress}\n` : "") +
           `*Category:* ${currentCategory.en} (${currentCategory.code})\n` +
+          (incomeDetails ? `*Income Source:* ${incomeDetails}\n` : "") +
+          (familyConsolidation ? `*Family Consolidation:* Reconcile family transfers\n` : "") +
+          (whtAudit ? `*WHT Audit:* Claim all ATM, fuel, utility, SIM source taxes\n` : "") +
           `*Service:* ${currentPkg.nameEn} (${currentPkg.fee})\n` +
           `*IRIS Status:* ${irisStatus}\n` +
           (credentialsNotes ? `*Notes:* ${credentialsNotes}\n` : "") +
@@ -349,7 +388,7 @@ export function SeniorIntakeWizard({
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[#128C7E] hover:bg-[#0e7064] text-white font-bold py-3.5 px-6 rounded shadow transition-all"
           >
-            <MessageCircle className="w-4 h-4" />
+            <WhatsAppIcon className="w-4 h-4" />
             <span>Open WhatsApp Chat (0312 0947187)</span>
           </a>
 
@@ -641,11 +680,11 @@ export function SeniorIntakeWizard({
               />
             </div>
 
-            {/* WhatsApp */}
+            {/* WhatsApp & Active Mobile SIM */}
             <div>
               <div className="flex items-baseline justify-between mb-1">
                 <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  WhatsApp Contact <span className="text-stamp-red">*</span>
+                  Active Mobile SIM / WhatsApp Contact <span className="text-stamp-red">*</span>
                 </label>
                 <span className="form-code">Contact phone</span>
               </div>
@@ -657,6 +696,61 @@ export function SeniorIntakeWizard({
                 placeholder="0312 0000000"
                 className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink font-mono focus:border-ink focus:ring-1 focus:ring-ink"
               />
+
+              <div className="pt-2 flex flex-wrap gap-4 text-xs font-medium">
+                <label className="flex items-center gap-1.5 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="seniorSimOwner"
+                    checked={simOwner === "own"}
+                    onChange={() => setSimOwner("own")}
+                    className="accent-ink h-3.5 w-3.5"
+                  />
+                  <span>SIM in own name (اپنے نام پر سم)</span>
+                </label>
+
+                <label className="flex items-center gap-1.5 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="seniorSimOwner"
+                    checked={simOwner === "relative"}
+                    onChange={() => setSimOwner("relative")}
+                    className="accent-ink h-3.5 w-3.5"
+                  />
+                  <span>Blood Relative / Family SIM</span>
+                </label>
+              </div>
+
+              {simOwner === "relative" && (
+                <div className="mt-2 p-3 bg-paper-light border border-rule rounded space-y-2 text-xs">
+                  <div className="text-[11px] text-ash">
+                    If SIM is not in your own name, provide relative details for verification codes:
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input
+                      type="text"
+                      value={relativeName}
+                      onChange={(e) => setRelativeName(e.target.value)}
+                      placeholder="Relative Full Name (رشتہ دار کا نام)"
+                      className="w-full bg-folio border border-rule rounded px-2.5 py-1.5 text-xs text-ink"
+                    />
+                    <input
+                      type="text"
+                      value={relativeRelation}
+                      onChange={(e) => setRelativeRelation(e.target.value)}
+                      placeholder="Relationship (e.g. Father, Husband)"
+                      className="w-full bg-folio border border-rule rounded px-2.5 py-1.5 text-xs text-ink"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    value={relativeCnic}
+                    onChange={(e) => handleRelativeCnicChange(e.target.value)}
+                    placeholder="Relative's 13-digit CNIC (رشتہ دار کا شناختی کارڈ)"
+                    className="w-full bg-folio border border-rule rounded px-2.5 py-1.5 text-xs text-ink font-mono"
+                  />
+                </div>
+              )}
             </div>
 
             {/* CNIC */}
@@ -676,21 +770,112 @@ export function SeniorIntakeWizard({
               />
             </div>
 
-            {/* Email (Optional) */}
+            {/* Email Address & Assistance */}
             <div>
               <div className="flex items-baseline justify-between mb-1">
                 <label className="text-xs font-bold text-ink uppercase tracking-wide">
-                  Email Address <span className="text-ash font-normal">(Optional)</span>
+                  Personal Email Address <span className="text-ash font-normal">(Optional)</span>
                 </label>
                 <span className="form-code">Electronic notice</span>
               </div>
               <input
                 type="email"
-                value={email}
+                disabled={needEmailHelp}
+                value={needEmailHelp ? "" : email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="client@domain.com"
+                placeholder={needEmailHelp ? "We will help create and configure your email" : "client@domain.com"}
+                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink focus:border-ink focus:ring-1 focus:ring-ink disabled:opacity-60"
+              />
+
+              <label className="flex items-start gap-2 pt-1.5 cursor-pointer text-xs text-ink">
+                <input
+                  type="checkbox"
+                  checked={needEmailHelp}
+                  onChange={(e) => setNeedEmailHelp(e.target.checked)}
+                  className="accent-ink h-4 w-4 mt-0.5 shrink-0 rounded"
+                />
+                <span className="leading-snug">
+                  <strong>I don&apos;t have an email</strong> — we can help along with full guidance and create email if you don&apos;t already have one.
+                  <span className="block font-urdu text-[11px] text-ash mt-0.5" dir="rtl">
+                    میرا ای میل نہیں ہے، ہمارے لیے نیا ای میل بنائیں اور مکمل رہنمائی دیں۔
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            {/* Current Residential Address */}
+            <div>
+              <div className="flex items-baseline justify-between mb-1">
+                <label className="text-xs font-bold text-ink uppercase tracking-wide">
+                  Current Residential Address <span className="text-ash font-normal">(FBR Form 181 requirement)</span>
+                </label>
+                <span className="form-code">Residence</span>
+              </div>
+              <input
+                type="text"
+                value={residentialAddress}
+                onChange={(e) => setResidentialAddress(e.target.value)}
+                placeholder="House / Street / Area / City"
                 className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink focus:border-ink focus:ring-1 focus:ring-ink"
               />
+            </div>
+
+            {/* Income Source Particulars */}
+            <div>
+              <div className="flex items-baseline justify-between mb-1">
+                <label className="text-xs font-bold text-ink uppercase tracking-wide">
+                  Income Source Details <span className="text-ash font-normal">(Optional)</span>
+                </label>
+                <span className="form-code">Source of funds</span>
+              </div>
+              <input
+                type="text"
+                value={incomeDetails}
+                onChange={(e) => setIncomeDetails(e.target.value)}
+                placeholder={
+                  categoryCode === "SAL"
+                    ? "Employer Name, Office Address & NTN (if known)"
+                    : categoryCode === "PEN"
+                    ? "Pension Book No. / National Savings profit branch"
+                    : categoryCode === "HIF"
+                    ? "Husband / Family financial maintenance"
+                    : "Rental property address or business activity"
+                }
+                className="w-full bg-folio border border-rule rounded px-3 py-2 text-xs font-semibold text-ink focus:border-ink focus:ring-1 focus:ring-ink"
+              />
+            </div>
+
+            {/* Family Group Filing & WHT Deductions Audit */}
+            <div className="p-3 rounded bg-paper-light border border-rule space-y-3">
+              <label className="flex items-start gap-2.5 cursor-pointer text-xs">
+                <input
+                  type="checkbox"
+                  checked={familyConsolidation}
+                  onChange={(e) => setFamilyConsolidation(e.target.checked)}
+                  className="accent-ink h-4 w-4 mt-0.5 shrink-0 rounded"
+                />
+                <div>
+                  <div className="font-bold text-ink">Family Group Filing &amp; Inter-Family Transfers Reconciliation</div>
+                  <div className="text-[11px] text-ash leading-snug">
+                    Reconcile internal family bank transfers (Spouse, Parents, Children) so transfers are not mistaken for income or double-taxed.
+                  </div>
+                </div>
+              </label>
+
+              <label className="flex items-start gap-2.5 cursor-pointer text-xs border-t border-rule pt-2.5">
+                <input
+                  type="checkbox"
+                  checked={whtAudit}
+                  onChange={(e) => setWhtAudit(e.target.checked)}
+                  className="accent-ink h-4 w-4 mt-0.5 shrink-0 rounded"
+                />
+                <div>
+                  <div className="font-bold text-ink">Full Source Withholding Tax Audit (Recommended)</div>
+                  <div className="text-[11px] text-ash leading-snug">
+                    Claim and audit all deductions taken at source: ATM cash withdrawals, fuel, utility bills, mobile SIM load &amp; package fees, card fees.
+                  </div>
+                </div>
+              </label>
             </div>
 
             {/* Generated Document List from Part 01 */}
@@ -773,7 +958,7 @@ export function SeniorIntakeWizard({
             rel="noopener noreferrer"
             className="text-xs font-mono text-ash hover:text-ink flex items-center gap-1.5 px-3 py-2 rounded-full hover:bg-paper transition-all"
           >
-            <MessageCircle className="w-3.5 h-3.5 text-[#128C7E]" />
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#128C7E]" />
             <span>WhatsApp Instead</span>
           </a>
         )}

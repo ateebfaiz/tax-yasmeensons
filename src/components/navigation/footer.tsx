@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { StoreLogo } from "@/components/ui/store-logo";
-import { ExternalLink, MessageCircle, ShieldCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { ExternalLink, ShieldCheck } from "lucide-react";
 
 export function Footer() {
   return (
@@ -77,7 +78,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-[#25D366] font-bold"
               >
-                <MessageCircle className="w-3.5 h-3.5" />
+                <WhatsAppIcon className="w-3.5 h-3.5" />
                 <span>WhatsApp: 0312 0947187</span>
               </a>
             </li>

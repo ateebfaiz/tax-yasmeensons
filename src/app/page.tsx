@@ -13,13 +13,13 @@ import {
   HeartHandshake,
   Users,
   GraduationCap,
-  MessageCircle,
   Lock,
   FileText,
   Clock,
   HelpCircle,
   Sparkles,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 
 export default function HomePage() {
   const { isUrdu } = useLanguage();
@@ -529,7 +529,7 @@ export default function HomePage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-folio/10 hover:bg-folio/20 border border-brass/40 text-paper-light font-bold py-3.5 px-5 rounded-full text-xs transition-all font-mono active:scale-95"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+              <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
               <span>0312 0947187</span>
             </a>
           </div>

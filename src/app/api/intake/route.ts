@@ -19,6 +19,15 @@ export async function POST(req: Request) {
       credentialsNotes = "",
       documentsSummary = "",
       source = "web_intake",
+      residentialAddress,
+      simOwner,
+      relativeName,
+      relativeCnic,
+      relativeRelation,
+      needEmailHelp,
+      incomeDetails,
+      familyConsolidation,
+      whtAudit,
     } = body;
 
     if (!fullName || !phone) {
@@ -38,13 +47,18 @@ export async function POST(req: Request) {
         `**Customer:** ${fullName.trim()}\n` +
         `**Phone:** ${phone.trim()}\n` +
         (cnic ? `**CNIC:** ${cnic.trim()}\n` : "") +
-        (email ? `**Email:** ${email.trim()}\n` : "") +
+        (simOwner === "relative" ? `**SIM Ownership:** Relative (${relativeName || ""} - ${relativeRelation || ""}, CNIC: ${relativeCnic || ""})\n` : "") +
+        (needEmailHelp ? `**Email:** Needs Email Creation Guidance\n` : email ? `**Email:** ${email.trim()}\n` : "") +
+        (residentialAddress ? `**Residential Address:** ${residentialAddress.trim()}\n` : "") +
         `**Category:** ${persona}\n` +
+        (incomeDetails ? `**Income Source:** ${incomeDetails.trim()}\n` : "") +
+        (familyConsolidation ? `**Family Consolidation:** Yes (Reconcile inter-family transfers)\n` : "") +
+        (whtAudit ? `**WHT Deductions Audit:** Yes (Claim ATM, fuel, bills, SIM)\n` : "") +
         `**IRIS Status:** ${irisStatus}\n` +
         `**Tier:** ${serviceTier}\n` +
         `**Contact Pref:** ${contactPreference}\n` +
         (documentsSummary ? `**Documents:** ${documentsSummary.trim()}\n` : "") +
-        (credentialsNotes ? `**Notes/Credentials:** ${credentialsNotes.trim()}\n` : "");
+        (credentialsNotes ? `**Notes/Particulars:** ${credentialsNotes.trim()}\n` : "");
 
       const todoistRes = await createTodoistTask(taskTitle, taskDescription);
       if (todoistRes && todoistRes.id) {

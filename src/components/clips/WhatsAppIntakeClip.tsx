@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
 import { BilingualLabel } from "@/components/ui/bilingual-label";
 import { formatWhatsAppUrl } from "@/lib/utils";
-import { MessageCircle, ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export default function WhatsAppIntakeClip({
   onClose,
@@ -168,9 +169,9 @@ export default function WhatsAppIntakeClip({
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 text-sm shadow-md transition-all"
+              className="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold py-3.5 px-6 rounded-full flex items-center justify-center gap-2 text-sm shadow-md transition-all active:scale-95"
             >
-              <MessageCircle className="w-4 h-4" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>Connect on WhatsApp (03120947187)</span>
             </button>
           </form>

@@ -55,9 +55,10 @@ export function LiquidGlassTabBar() {
     >
       <nav
         className={cn(
-          "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] overflow-hidden px-3",
-          "bg-[#0B1C2C]/92 backdrop-blur-2xl backdrop-saturate-200 text-[#F4EFE6] border border-[#C4A046]/45",
-          "shadow-[0_8px_32px_rgba(11,28,44,0.35)]"
+          "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] px-2.5",
+          "bg-white/75 dark:bg-[#07121D]/80 backdrop-blur-2xl backdrop-saturate-200",
+          "border border-white/60 dark:border-white/10",
+          "shadow-[0_12px_40px_rgba(11,28,44,0.12),inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.08)]"
         )}
       >
         {/* Tab 1: Home */}
@@ -68,12 +69,18 @@ export function LiquidGlassTabBar() {
             router.push("/");
           }}
           className={cn(
-            "flex flex-col items-center justify-center flex-1 py-1 transition-all active:scale-95",
-            isHomeActive ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isHomeActive
+              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
+              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
           )}
         >
-          <Home className="w-4 h-4" />
-          <span className="text-[10px] mt-0.5 font-mono">Home</span>
+          {isHomeActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+          )}
+          <Home className="w-5 h-5" />
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Home</span>
         </button>
 
         {/* Tab 2: Services */}
@@ -84,48 +91,66 @@ export function LiquidGlassTabBar() {
             router.push("/services");
           }}
           className={cn(
-            "flex flex-col items-center justify-center flex-1 py-1 transition-all active:scale-95",
-            isServicesActive ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isServicesActive
+              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
+              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
           )}
         >
-          <Layers className="w-4 h-4" />
-          <span className="text-[10px] mt-0.5 font-mono">Services</span>
+          {isServicesActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+          )}
+          <Layers className="w-5 h-5" />
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Services</span>
         </button>
 
-        {/* Tab 3: Checklist (AppClip Sheet) */}
+        {/* Tab 3: Checklist (Docs) */}
         <button
           type="button"
           onClick={() => appClip.open("tax-checklist")}
           className={cn(
-            "flex flex-col items-center justify-center flex-1 py-1 transition-all active:scale-95",
-            isChecklistActive ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isChecklistActive
+              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
+              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
           )}
         >
-          <CheckSquare className="w-4 h-4" />
-          <span className="text-[10px] mt-0.5 font-mono">Docs</span>
+          {isChecklistActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+          )}
+          <CheckSquare className="w-5 h-5" />
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Docs</span>
         </button>
 
-        {/* Tab 4: IRIS Guide (AppClip Sheet) */}
+        {/* Tab 4: IRIS Guide */}
         <button
           type="button"
           onClick={() => appClip.open("iris-guide")}
           className={cn(
-            "flex flex-col items-center justify-center flex-1 py-1 transition-all active:scale-95",
-            isGuideActive ? "text-[#C4A046] font-bold" : "text-[#8C959F] hover:text-[#F4EFE6]"
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isGuideActive
+              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
+              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
           )}
         >
-          <HelpCircle className="w-4 h-4" />
-          <span className="text-[10px] mt-0.5 font-mono">Guide</span>
+          {isGuideActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+          )}
+          <HelpCircle className="w-5 h-5" />
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Guide</span>
         </button>
 
-        {/* Tab 5: Start Primary AppClip FAB */}
+        {/* Tab 5: Start Fast AppClip Intake FAB */}
         <button
           type="button"
           onClick={() => appClip.open("tax-intake")}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-[#C4A046] hover:bg-[#DFBA5E] text-[#0B1C2C] shadow-lg active:scale-90 transition-all ml-1 shrink-0 font-bold"
-          aria-label="Start Filing AppClip"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white shadow-md shadow-[#128C7E]/25 active:scale-90 transition-all ml-1 shrink-0"
+          aria-label="Start Fast Intake AppClip"
         >
-          <Sparkles className="w-4 h-4" />
+          <Sparkles className="w-4 h-4 text-white" />
         </button>
       </nav>
     </div>

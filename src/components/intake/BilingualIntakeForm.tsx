@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { BilingualLabel } from "@/components/ui/bilingual-label";
 import { formatWhatsAppUrl } from "@/lib/utils";
-import { ShieldCheck, MessageCircle, Phone, ArrowRight, CheckCircle2, Lock, FileText, AlertCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { ShieldCheck, Phone, ArrowRight, CheckCircle2, Lock, FileText, AlertCircle } from "lucide-react";
 
 const PERSONAS = [
   { id: "salaried", en: "Salaried Individual", ur: "تنخواہ دار ملازم", descEn: "Salary slips, tax certificates", descUr: "تنخواہ کی سلپ اور ود ہولڈنگ سرٹیفکیٹ" },
@@ -57,7 +58,7 @@ const CONTACT_PREFERENCES = [
     ur: "واٹس ایپ پر فوری رابطہ",
     descEn: "Generates case reference and opens direct WhatsApp chat with our tax specialist.",
     descUr: "کیس ریفرنس بن کر براہِ راست واٹس ایپ پر ٹیکس ماہر سے بات چیت شروع ہوگی۔",
-    icon: MessageCircle,
+    icon: WhatsAppIcon,
   },
   {
     id: "phone_call",
@@ -192,7 +193,7 @@ export function BilingualIntakeForm({
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-md hover:bg-[#1ebd59] transition-all"
           >
-            <MessageCircle className="w-4 h-4" /> Connect on WhatsApp (03120947187)
+            <WhatsAppIcon className="w-4 h-4" /> Connect on WhatsApp (03120947187)
           </a>
         </div>
       </div>

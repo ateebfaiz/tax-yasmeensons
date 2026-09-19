@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { ExternalLink, KeyRound, UserCheck, ShieldCheck, CheckCircle2, ArrowRight, Laptop, Lock, HelpCircle, Sparkles } from "lucide-react";
 
 export default function IrisGuidePage() {
@@ -42,18 +43,22 @@ export default function IrisGuidePage() {
     },
     {
       step: "03",
-      code: "ENROLL-NTN",
-      titleEn: "e-Enrollment for Registered Persons",
-      titleUr: "این ٹی این ہولڈرز کے لیے آن لائن رجسٹریشن",
-      descEn: "If you already have an NTN on manual records but never logged into IRIS online.",
-      descUr: "اگر این ٹی این پہلے سے موجود ہے مگر کبھی آن لائن اکاؤنٹ نہیں بنایا۔",
+      code: "REG-181",
+      titleEn: "Online Registration (Form 181) & NTN Issuance",
+      titleUr: "آن لائن رجسٹریشن (فارم 181) اور این ٹی این کا حصول",
+      descEn: "To register as an individual with FBR and obtain your NTN via Iris Portal (Form 181).",
+      descUr: "ایف بی آر آئرس پورٹل پر انفرادی رجسٹریشن اور این ٹی این حاصل کرنے کا باقاعدہ طریقہ۔",
       details: [
-        "Click 'Registration for Unregistered Person' on the IRIS homepage",
-        "Provide your CNIC, mobile number registered in your own name, and email",
-        "NADRA bio-verifies your data and issues your login credentials via SMS",
+        "Click 'Registration for Unregistered Person' on iris.fbr.gov.pk",
+        "Valid CNIC: 13 digits (NADRA verified)",
+        "Active Mobile SIM: Registered under own CNIC, or blood relative / immediate family member (with relative's name & CNIC)",
+        "Personal Email: Used for electronic notice and OTP (we can guide and create one for you)",
+        "Current Residential Address: Form 181 property and residence mapping",
+        "Income Source Details: Salaried employer NTN, business activity, or household support declaration",
+        "Dual Verification: Submit 6-digit SMS OTP and Email OTP to complete registration",
       ],
       link: "https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml",
-      linkText: "FBR e-Enrollment",
+      linkText: "FBR Online Registration (Form 181)",
     },
     {
       step: "04",
@@ -183,12 +188,15 @@ export default function IrisGuidePage() {
             <span>Fast AppClip Intake</span>
             <Sparkles className="w-3.5 h-3.5 text-brass" />
           </button>
-          <Link
-            href="/start"
-            className="inline-flex items-center gap-2 bg-paper-light hover:bg-paper border border-rule text-ink font-mono font-bold text-xs py-3.5 px-6 rounded-full shadow-xs transition-all active:scale-95"
+          <a
+            href="https://wa.me/923120947187?text=Hi%2C%20I%20need%20guidance%20with%20FBR%20IRIS%20Portal."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs py-3.5 px-6 rounded-full shadow-md transition-all active:scale-95"
           >
-            <span>Full Form Page →</span>
-          </Link>
+            <WhatsAppIcon className="w-3.5 h-3.5" />
+            <span>Chat on WhatsApp (03120947187)</span>
+          </a>
         </div>
       </div>
     </div>
