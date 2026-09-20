@@ -125,6 +125,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
             name: f.name,
             category: f.category,
             url: f.url as string,
+            key: f.key,
             size: f.size,
             type: f.type,
           })),

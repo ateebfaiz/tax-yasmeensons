@@ -14,7 +14,14 @@ export type IntakeInput = {
   documentsSummary?: string;
   source?: string;
   fbrPayload?: unknown;
-  documents?: { name: string; category: string; url: string; size?: number; type?: string }[];
+  documents?: {
+    name: string;
+    category: string;
+    url: string;
+    key?: string;
+    size?: number;
+    type?: string;
+  }[];
   residentialAddress?: string;
   simOwner?: string;
   relativeName?: string;

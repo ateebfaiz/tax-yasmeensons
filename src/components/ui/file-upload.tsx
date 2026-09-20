@@ -33,6 +33,7 @@ export interface UploadedTaxDocument {
   category: DocumentCategory;
   previewUrl?: string;
   url?: string;
+  key?: string;
   uploadedAt: Date;
   status: "complete" | "uploading" | "error";
   progress?: number;
@@ -152,7 +153,13 @@ export function SmoothFileUpload({
         setFiles((prev) => {
           const updated = prev.map((f) =>
             f.id === id
-              ? { ...f, url: data.url as string, status: "complete" as const, progress: 100 }
+              ? {
+                  ...f,
+                  url: data.url as string,
+                  key: data.key as string,
+                  status: "complete" as const,
+                  progress: 100,
+                }
               : f
           );
           onFilesChange?.(updated);
