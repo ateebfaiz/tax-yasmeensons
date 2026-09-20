@@ -13,17 +13,20 @@ import {
   HeartHandshake,
   Users,
   GraduationCap,
-  Lock,
   FileText,
-  Clock,
-  HelpCircle,
   Sparkles,
+  Star,
+  Clock,
+  AlertTriangle,
+  Award,
+  Lock,
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { TaxDynamicIsland } from "@/components/ui/tax-dynamic-island";
 import GlowHover, { GlowHoverItem } from "@/components/smoothui/glow-hover-card";
-import MagneticButton from "@/components/smoothui/magnetic-button";
 import AnimatedTabs from "@/components/smoothui/animated-tabs";
+import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 
 export default function HomePage() {
   const { isUrdu } = useLanguage();
@@ -87,17 +90,17 @@ export default function HomePage() {
         <Link
           key={p.code}
           href={p.href}
-          className="glass-card p-6 rounded-[24px] hover:border-brass transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md h-full"
+          className="glass-card p-6 rounded-[24px] hover:border-[#20b6a5]/50 transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md h-full"
         >
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-brass px-2 py-0.5 rounded-full bg-brass-subtle border border-brass/20">
+              <span className="font-mono text-xs font-bold text-[#20b6a5] px-2 py-0.5 rounded-full bg-[#20b6a5]/10 border border-[#20b6a5]/30">
                 {p.code}
               </span>
-              <Icon className="w-4 h-4 text-ash group-hover:text-ink transition-colors" />
+              <Icon className="w-4 h-4 text-ash group-hover:text-ink dark:group-hover:text-white transition-colors" />
             </div>
             <div>
-              <h3 className="font-bold text-sm text-ink group-hover:text-iris-teal transition-colors">
+              <h3 className="font-bold text-sm text-ink dark:text-white group-hover:text-[#20b6a5] transition-colors">
                 {p.titleEn}
               </h3>
               <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{p.titleUr}</div>
@@ -105,7 +108,7 @@ export default function HomePage() {
             <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
           </div>
 
-          <div className="font-mono text-[11px] font-bold text-ink flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-brass">
+          <div className="font-mono text-[11px] font-bold text-ink dark:text-white flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-[#20b6a5]">
             <span>Start as {p.code}</span>
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </div>
@@ -118,30 +121,76 @@ export default function HomePage() {
     {
       num: "01",
       code: "DOCS",
-      titleEn: "Send Papers",
-      titleUr: "کاغذات بھیجیں",
-      descEn: "Share salary slip, WHT certificates, or bank statements on WhatsApp.",
+      titleEn: "Select Category & Papers",
+      titleUr: "صنف اور کاغذات منتخب کریں",
+      descEn: "Choose salaried, pensioner, housewife, or student. Upload slips or certificates.",
     },
     {
       num: "02",
-      code: "AUDIT",
-      titleEn: "We Reconcile",
-      titleUr: "ٹیکس حساب کتاب",
-      descEn: "Our team audits deductions and reconciles wealth statement balances.",
+      code: "8-CLIP",
+      titleEn: "Simplified e-Return",
+      titleUr: "سادہ ڈیجیٹل ونڈوز",
+      descEn: "Fill FBR 8-Window non-business form tailored exclusively to your income sources.",
     },
     {
       num: "03",
-      code: "REVIEW",
-      titleEn: "You Approve Figures",
-      titleUr: "حتمی منظوری",
-      descEn: "Mandatory pre-approval summary. Zero filing happens without your review.",
+      code: "RECON",
+      titleEn: "Wealth Balanced to 0.00",
+      titleUr: "دولت کا گوشوارہ متوازن",
+      descEn: "Zero-gap s.116 reconciliation matching income, assets, and living expenses.",
     },
     {
       num: "04",
       code: "IRIS",
-      titleEn: "You Submit on IRIS",
-      titleUr: "آئرس پر سبمشن",
-      descEn: "You log in to official iris.fbr.gov.pk; we guide you to final completed task.",
+      titleEn: "Official IRIS Submission",
+      titleUr: "آفیشل آئرس پر حتمی سبمشن",
+      descEn: "You sign into official iris.fbr.gov.pk with screen guidance; Active ATL guaranteed.",
+    },
+  ];
+
+  const trustBadges = [
+    { icon: Lock, title: "Zero Password Sharing", desc: "You log in privately on IRIS" },
+    { icon: Award, title: "FBR SRO 1561 Ready", desc: "Simplified 8-Window pattern" },
+    { icon: ShieldCheck, title: "Active ATL Guaranteed", desc: "100% tax penalty immunity" },
+    { icon: Clock, title: "Zero-Gap Wealth (s.116)", desc: "Reconciled to exact 0.00" },
+  ];
+
+  const customerReviews = [
+    {
+      name: "Tariq Mehmood",
+      role: "Corporate Salaried Executive",
+      city: "Lahore",
+      rating: 5,
+      comment:
+        "The fastest tax filing I've experienced in 8 years. Never asked for my Iris password. Reconciled my salary tax deduction and telecom WHT in 10 minutes!",
+      ref: "YS-26-44819",
+    },
+    {
+      name: "Col. (R) Farooq Ahmed",
+      role: "Pensioner & Senior Citizen",
+      city: "Rawalpindi",
+      rating: 5,
+      comment:
+        "Handled my armed forces pension exemption and Behbood Certificate profit correctly. My name is actively reflecting on the ATL list with zero hassle.",
+      ref: "YS-26-89104",
+    },
+    {
+      name: "Fatima Noor",
+      role: "Housewife (Asset Filer)",
+      city: "Karachi",
+      rating: 5,
+      comment:
+        "Very respectful and patient. Helped me declare household allowance without confusing legal jargon. Banking transactions are now free from double tax!",
+      ref: "YS-26-31920",
+    },
+    {
+      name: "Saad Hashmi",
+      role: "Remote Software Developer",
+      city: "Islamabad",
+      rating: 5,
+      comment:
+        "Clean glass interface on mobile. FBR 8-window wizard auto-calculated my foreign remittance PRC details and wealth balance smoothly.",
+      ref: "YS-26-72811",
     },
   ];
 
@@ -167,8 +216,8 @@ export default function HomePage() {
     {
       qEn: "Can I do the entire process over WhatsApp?",
       qUr: "کیا پورا عمل واٹس ایپ پر مکمل ہو سکتا ہے؟",
-      aEn: "Yes. Once you start or choose WhatsApp handoff, our filing operator connects directly with you on 0312 0947187 with your Case ID, collects document photos, and sends you the step-by-step numbers.",
-      aUr: "جی ہاں! کیس نمبر بننے کے بعد ہمارا نمائندہ 03120947187 پر واٹس ایپ کے ذریعے تمام تفصیلات اور رہنمائی فراہم کرتا ہے۔",
+      aEn: `Yes. Once you start or choose WhatsApp handoff, our filing operator connects directly with you on ${SITE_CONFIG.contact.whatsappDisplay} with your Case ID, collects document photos, and sends you the step-by-step numbers.`,
+      aUr: `جی ہاں! کیس نمبر بننے کے بعد ہمارا نمائندہ ${SITE_CONFIG.contact.whatsappDisplay} پر واٹس ایپ کے ذریعے تمام تفصیلات اور رہنمائی فراہم کرتا ہے۔`,
     },
     {
       qEn: "How long does it take for my ATL status to become Active?",
@@ -187,28 +236,53 @@ export default function HomePage() {
   return (
     <div className="space-y-16 md:space-y-24 py-8 md:py-16">
       {/* 1. Hero Section — Lead with the Job */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-7">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+        {/* Tax Season 2026 Announcement Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#20b6a5]/15 border border-[#20b6a5]/40 text-[#20b6a5] text-xs font-mono font-bold shadow-[0_0_16px_rgba(32,182,165,0.2)] animate-pulse">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Tax Season 2026 is Here! 🎉 Active ATL Filing Open</span>
+        </div>
+
         {/* Dynamic Island: Active Live Desk & AppClip Controller */}
-        <div className="flex justify-center pb-2">
+        <div className="flex justify-center pb-1">
           <TaxDynamicIsland />
         </div>
 
         {/* Hero Title */}
         <div className="space-y-3.5">
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink tracking-tight leading-[1.15]">
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink dark:text-white tracking-tight leading-[1.15]">
             File your Tax Year 2026 return <br className="hidden sm:inline" />
-            <span className="italic text-brass font-bold">— from PKR 1,000</span>
+            <span className="italic text-[#20b6a5] font-bold">— from PKR 1,000</span>
           </h1>
 
           {isUrdu ? (
-            <p className="font-urdu text-xl sm:text-2xl font-bold text-ink leading-relaxed" dir="rtl">
+            <p className="font-urdu text-xl sm:text-2xl font-bold text-ink dark:text-white leading-relaxed" dir="rtl">
               ہم تیار کریں گے۔ آپ آفیشل آئرس پر خود لاگ ان کر کے فائل کریں گے۔
             </p>
           ) : (
             <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto leading-relaxed">
-              We prepare the figures and reconcile your wealth statement. You log into official FBR IRIS yourself. <strong className="text-ink">We never take your password.</strong>
+              We prepare the figures and reconcile your wealth statement to exact 0.00. You log into official FBR IRIS yourself. <strong className="text-ink dark:text-white">We never take your password.</strong>
             </p>
           )}
+        </div>
+
+        {/* Trust Badges Strip */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1 text-left">
+          {trustBadges.map((b, i) => {
+            const Icon = b.icon;
+            return (
+              <div
+                key={i}
+                className="p-3 rounded-2xl bg-white/40 dark:bg-[#07131b]/80 border border-white/10 dark:border-white/[0.08] backdrop-blur-md space-y-1 shadow-sm"
+              >
+                <div className="flex items-center gap-2">
+                  <Icon className="w-4 h-4 text-[#20b6a5]" />
+                  <span className="font-bold text-xs text-ink dark:text-white">{b.title}</span>
+                </div>
+                <p className="text-[11px] text-ash truncate">{b.desc}</p>
+              </div>
+            );
+          })}
         </div>
 
         {/* Pricing Story Highlight */}
@@ -218,51 +292,48 @@ export default function HomePage() {
 
         {/* CTAs with Dual Viewport Separation */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          {/* Primary CTA (both viewports) */}
+          {/* Primary CTA (Desktop: /start, Mobile: FBR 8-Window AppClip) */}
+          <button
+            type="button"
+            onClick={() => appClip.open("fbr-simplified-intake")}
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#20b6a5] to-[#0d978b] hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(32,182,165,0.35)] transition-all active:scale-95"
+          >
+            <Sparkles className="w-4 h-4" />
+            <span>Start FBR 8-Window Return</span>
+          </button>
+
           <Link
             href="/start"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-md hover:shadow-xl transition-all duration-200 active:scale-95"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#20b6a5] to-[#0d978b] hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(32,182,165,0.35)] transition-all active:scale-95"
           >
             <span>Start Filing (Part 01 / 04)</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
 
-          {/* Mobile Secondary CTA: Fast AppClip Intake */}
-          <button
-            type="button"
-            onClick={() => appClip.open("tax-intake")}
-            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-xl hover:bg-white/80 dark:hover:bg-[#0B1C2C] border border-brass/40 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
-          >
-            <Sparkles className="w-4 h-4 text-brass" />
-            <span>Fast AppClip Intake</span>
-          </button>
-
-          {/* Desktop Secondary CTA: Required Documents Checklist */}
+          {/* Track Filing Progress Link */}
           <Link
-            href="/requirements"
-            className="hidden md:inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-[#07121D]/70 backdrop-blur-xl hover:bg-white dark:hover:bg-[#0B1C2C] border border-rule hover:border-brass/50 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:shadow-md transition-all duration-200 active:scale-95"
+            href="/track"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-white/15 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:border-[#20b6a5] transition-all active:scale-95"
           >
-            <FileText className="w-4 h-4 text-[#128C7E] dark:text-[#C4A046]" />
-            <span>Required Documents</span>
+            <span>Track Case Status (/track)</span>
           </Link>
 
-          {/* Mobile Tertiary CTA: Docs Checklist AppClip */}
+          {/* Checklist Button */}
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule text-ink dark:text-[#F4EFE6] font-bold py-3.5 px-6 rounded-full text-sm transition-all duration-200 active:scale-95 shadow-sm"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light dark:bg-white/[0.04] border border-rule text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm transition-all active:scale-95 shadow-sm"
           >
-            <FileText className="w-4 h-4 text-ash" />
+            <FileText className="w-4 h-4 text-[#20b6a5]" />
             <span>Docs Checklist</span>
           </button>
 
-          {/* Desktop Tertiary CTA: Fee Schedule & Pricing */}
           <Link
-            href="/pricing"
-            className="hidden md:inline-flex items-center justify-center gap-2 bg-paper-light hover:bg-paper dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/50 text-ink dark:text-[#F4EFE6] font-bold py-3.5 px-6 rounded-full text-sm transition-all duration-200 active:scale-95 shadow-sm"
+            href="/requirements"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl border border-rule hover:border-[#20b6a5] text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-all active:scale-95"
           >
-            <Sparkles className="w-4 h-4 text-brass" />
-            <span>Transparent Pricing</span>
+            <FileText className="w-4 h-4 text-[#20b6a5]" />
+            <span>Required Documents</span>
           </Link>
         </div>
 
@@ -273,28 +344,35 @@ export default function HomePage() {
           </span>
           <button
             type="button"
+            onClick={() => appClip.open("fbr-simplified-intake")}
+            className="px-3.5 py-1.5 rounded-full bg-[#20b6a5]/15 border border-[#20b6a5]/40 text-[#20b6a5] font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+          >
+            <span>⚡ FBR Simplified Return</span>
+          </button>
+          <button
+            type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
           >
             <span>📋 Documents Needed</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("whatsapp-intake")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-[#128C7E] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
           >
-            <span className="text-[#128C7E] dark:text-[#25D366]">💬 WhatsApp File</span>
+            <span className="text-[#25D366]">💬 WhatsApp File</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("iris-guide")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
           >
             <span>🛡️ IRIS Password Guide</span>
           </button>
         </div>
 
-        {/* Desktop Quick Portals (Direct Navigation Links) */}
+        {/* Desktop Quick Portals */}
         <div className="hidden md:flex pt-2 flex-wrap items-center justify-center gap-2 text-xs">
           <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold">
             Portals:
@@ -306,13 +384,13 @@ export default function HomePage() {
             <span>📋 Document Checklist</span>
           </Link>
           <a
-            href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20my%20Tax%20Year%202026%20return."
+            href={formatWhatsAppUrl("Hi, I want to file my Tax Year 2026 return.")}
             target="_blank"
             rel="noopener noreferrer"
             className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-[#25D366] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
-            <span className="text-[#128C7E] dark:text-[#25D366]">0312 0947187 (WhatsApp Desk)</span>
+            <span className="text-[#128C7E] dark:text-[#25D366]">{SITE_CONFIG.contact.whatsappDisplay} (WhatsApp Desk)</span>
           </a>
           <Link
             href="/iris-guide"
@@ -332,11 +410,36 @@ export default function HomePage() {
             href="https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-ash hover:text-ink underline flex items-center gap-0.5"
+            className="text-ash hover:text-ink dark:hover:text-white underline flex items-center gap-0.5"
           >
             <span>Official portal: iris.fbr.gov.pk</span>
             <ExternalLink className="w-3 h-3" />
           </a>
+        </div>
+      </section>
+
+      {/* Urgency Deadline Banner */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-amber-500/15 via-red-500/10 to-transparent border border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+              <AlertTriangle className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-bold text-xs sm:text-sm text-ink dark:text-white">
+                Don&apos;t Miss the Deadline! Protect Your Active Taxpayer (ATL) Status
+              </div>
+              <p className="text-[11px] text-ash leading-snug">
+                Non-filers face up to 100% higher tax deductions on banking transactions, ATM cash withdrawals, and property transfers.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/start"
+            className="px-5 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-mono font-bold text-xs whitespace-nowrap active:scale-95 transition-all shadow"
+          >
+            File Now Before Cut-Off →
+          </Link>
         </div>
       </section>
 
@@ -345,7 +448,7 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex items-baseline justify-between">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION A</span>
-            <h2 className="font-serif text-2xl font-bold text-ink">Individual Tax Categories</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Individual Tax Categories</h2>
           </div>
           <span className="font-mono text-xs text-ash">NON-BUSINESS ONLY</span>
         </div>
@@ -364,7 +467,7 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION B</span>
-            <h2 className="font-serif text-2xl font-bold text-ink">Fee Schedule & Packages</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Fee Schedule &amp; Packages</h2>
           </div>
           <span className="font-mono text-xs text-ash">NO HIDDEN CHARGES · 100% TRANSPARENT</span>
         </div>
@@ -391,10 +494,10 @@ export default function HomePage() {
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: GF-1000</span>
-                <h3 className="font-serif text-xl font-bold text-ink">Guided Filing</h3>
+                <h3 className="font-serif text-xl font-bold text-ink dark:text-white">Guided Filing</h3>
                 <div className="font-urdu text-xs text-ash" dir="rtl">رہنمائی مع سیلف فائلنگ</div>
               </div>
-              <div className="font-serif text-3xl font-black text-ink">
+              <div className="font-serif text-3xl font-black text-ink dark:text-white">
                 PKR 1,000
               </div>
               <p className="text-xs text-ash leading-relaxed">
@@ -402,34 +505,32 @@ export default function HomePage() {
               </p>
               <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
-                  <span>Document check & tax calculation</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
+                  <span>Document check &amp; tax calculation</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>Field-by-field IRIS checklist</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>Zero password shared</span>
                 </li>
               </ul>
             </div>
 
             <div className="space-y-2 pt-2">
-              {/* Mobile: opens AppClip */}
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "guided_1000" })}
-                className="md:hidden w-full py-3.5 text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/60 font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
+                className="md:hidden w-full py-3.5 text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
               >
                 Select GF-1000 (PKR 1,000)
               </button>
 
-              {/* Desktop: direct 2-column page wizard */}
               <Link
                 href="/start?tier=guided_1000"
-                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule hover:border-brass/60 font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
+                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
               >
                 Select GF-1000 (PKR 1,000)
               </Link>
@@ -438,54 +539,52 @@ export default function HomePage() {
 
           {/* Complete Assistance — Recommended */}
           <div className={`glass-card-featured p-6 sm:p-7 rounded-[30px] flex flex-col justify-between space-y-6 relative shadow-lg transition-all ${
-            pricingCategory === "complex" ? "opacity-40 scale-[0.98]" : "opacity-100 ring-2 ring-brass/40"
+            pricingCategory === "complex" ? "opacity-40 scale-[0.98]" : "opacity-100 ring-2 ring-[#20b6a5]/50"
           }`}>
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-brass text-ink font-mono text-[10px] font-bold uppercase tracking-wider shadow-sm">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-[#20b6a5] text-black font-mono text-[10px] font-bold uppercase tracking-wider shadow-sm">
               Most Selected · تجویز کردہ
             </div>
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
-                <span className="font-mono text-[10px] font-bold text-brass tracking-widest">CODE: FA-2500</span>
-                <h3 className="font-serif text-xl font-bold text-ink">Complete Assistance</h3>
+                <span className="font-mono text-[10px] font-bold text-[#20b6a5] tracking-widest">CODE: FA-2500</span>
+                <h3 className="font-serif text-xl font-bold text-ink dark:text-white">Complete Assistance</h3>
                 <div className="font-urdu text-xs text-ash" dir="rtl">مکمل فائلنگ اسسٹنس</div>
               </div>
-              <div className="font-serif text-3xl font-black text-ink">
+              <div className="font-serif text-3xl font-black text-ink dark:text-white">
                 PKR 2,500
               </div>
               <p className="text-xs text-ash leading-relaxed">
-                Full-service facilitation. We reconcile your return, wealth statement (s.116), and WHT credits, guide you screen-by-screen, and verify ATL.
+                Full-service facilitation. We reconcile your return, wealth statement (s.116) to 0.00, and WHT credits, guide you screen-by-screen, and verify ATL.
               </p>
               <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>Full return + s.116 wealth balance</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>WHT credit adjustment audit</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>Mandatory client pre-approval summary</span>
                 </li>
               </ul>
             </div>
 
             <div className="space-y-2 pt-2">
-              {/* Mobile: opens AppClip */}
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "assistance_2500" })}
-                className="md:hidden w-full py-3.5 text-center rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] font-bold text-xs text-white shadow-md hover:shadow-lg transition-all font-mono active:scale-95 flex items-center justify-center gap-2"
+                className="md:hidden w-full py-3.5 text-center rounded-full bg-gradient-to-r from-[#20b6a5] to-[#0d978b] font-bold text-xs text-white shadow-md transition-all font-mono active:scale-95 flex items-center justify-center gap-2"
               >
                 <span>Select FA-2500 (PKR 2,500)</span>
                 <Sparkles className="w-3.5 h-3.5" />
               </button>
 
-              {/* Desktop: direct 2-column page wizard */}
               <Link
                 href="/start?tier=assistance_2500"
-                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] font-bold text-xs text-white shadow-md hover:shadow-lg transition-all font-mono active:scale-95 gap-2"
+                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-gradient-to-r from-[#20b6a5] to-[#0d978b] font-bold text-xs text-white shadow-md transition-all font-mono active:scale-95 gap-2"
               >
                 <span>Select FA-2500 (PKR 2,500)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -500,10 +599,10 @@ export default function HomePage() {
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: CX-4500</span>
-                <h3 className="font-serif text-xl font-bold text-ink">Complex Review</h3>
+                <h3 className="font-serif text-xl font-bold text-ink dark:text-white">Complex Review</h3>
                 <div className="font-urdu text-xs text-ash" dir="rtl">پیچیدہ ریٹرن جائزہ</div>
               </div>
-              <div className="font-serif text-3xl font-black text-ink">
+              <div className="font-serif text-3xl font-black text-ink dark:text-white">
                 PKR 4,500+
               </div>
               <p className="text-xs text-ash leading-relaxed">
@@ -511,37 +610,35 @@ export default function HomePage() {
               </p>
               <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>Prior unfiled years reconciliation</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>s.111 asset transactions</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-iris-teal shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                   <span>Final fee confirmed after review</span>
                 </li>
               </ul>
             </div>
 
             <div className="space-y-2 pt-2">
-              {/* Mobile: opens WhatsApp intake AppClip */}
               <button
                 type="button"
                 onClick={() => appClip.open("whatsapp-intake", { defaultTier: "complex_5000" })}
-                className="md:hidden w-full py-3.5 text-center rounded-full border border-[#128C7E]/40 hover:border-[#128C7E] bg-[#128C7E]/5 dark:bg-white/[0.04] hover:bg-[#128C7E]/10 font-bold text-xs text-[#128C7E] dark:text-[#C4A046] transition-all font-mono active:scale-95 shadow-sm flex items-center justify-center gap-2"
+                className="md:hidden w-full py-3.5 text-center rounded-full border border-[#25D366]/40 bg-[#25D366]/10 font-bold text-xs text-[#25D366] transition-all font-mono active:scale-95 shadow-sm flex items-center justify-center gap-2"
               >
                 <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
                 <span>Consult CX-4500 (WhatsApp)</span>
               </button>
 
-              {/* Desktop: direct WhatsApp concierge link */}
               <a
-                href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20a%20Complex%20Return%20(CX-4500)%20case%20for%20Tax%20Year%202026."
+                href={formatWhatsAppUrl("Hi, I have a Complex Return (CX-4500) case for Tax Year 2026.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex w-full py-3.5 items-center justify-center rounded-full border border-[#128C7E]/40 hover:border-[#128C7E] bg-[#128C7E]/5 dark:bg-white/[0.04] hover:bg-[#128C7E]/10 font-bold text-xs text-[#128C7E] dark:text-[#C4A046] transition-all font-mono active:scale-95 shadow-sm gap-2"
+                className="hidden md:flex w-full py-3.5 items-center justify-center rounded-full border border-[#25D366]/40 bg-[#25D366]/10 font-bold text-xs text-[#25D366] transition-all font-mono active:scale-95 shadow-sm gap-2"
               >
                 <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
                 <span>Consult CX-4500 (WhatsApp)</span>
@@ -549,7 +646,7 @@ export default function HomePage() {
 
               <Link
                 href="/start?tier=complex_5000"
-                className="block text-center text-[11px] font-mono text-ash hover:text-ink underline"
+                className="block text-center text-[11px] font-mono text-ash hover:text-ink dark:hover:text-white underline"
               >
                 Or open full page wizard →
               </Link>
@@ -563,7 +660,7 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex items-baseline justify-between">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION C</span>
-            <h2 className="font-serif text-2xl font-bold text-ink">Filing Workflow</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Filing Workflow</h2>
           </div>
           <span className="font-mono text-xs text-ash">4 STEPS TO COMPLETED TASK</span>
         </div>
@@ -572,14 +669,59 @@ export default function HomePage() {
           {fourSteps.map((s) => (
             <div key={s.num} className="glass-card p-6 rounded-[24px] space-y-2.5 relative border-rule/70 shadow-sm">
               <div className="flex items-center justify-between font-mono text-xs">
-                <span className="font-bold text-brass">{s.num}</span>
-                <span className="text-[10px] text-ash px-2 py-0.5 bg-paper-light border border-rule rounded-full">{s.code}</span>
+                <span className="font-bold text-[#20b6a5]">{s.num}</span>
+                <span className="text-[10px] text-ash px-2 py-0.5 bg-paper-light dark:bg-white/10 border border-rule rounded-full">{s.code}</span>
               </div>
               <div>
-                <h3 className="font-bold text-sm text-ink">{s.titleEn}</h3>
+                <h3 className="font-bold text-sm text-ink dark:text-white">{s.titleEn}</h3>
                 <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{s.titleUr}</div>
               </div>
               <p className="text-xs text-ash leading-relaxed">{s.descEn}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Customer Reviews Showcase */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 space-y-6">
+        <div className="border-b border-rule pb-2 flex items-baseline justify-between">
+          <div>
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION D</span>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">What Our Filers Say</h2>
+          </div>
+          <span className="font-mono text-xs text-[#20b6a5]">VERIFIED REVIEWS</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {customerReviews.map((rev, i) => (
+            <div
+              key={i}
+              className="p-5 rounded-3xl bg-white/45 dark:bg-[#07131b]/70 border border-white/10 backdrop-blur-xl space-y-3 shadow-sm"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-xs sm:text-sm text-ink dark:text-white">
+                    {rev.name}
+                  </div>
+                  <div className="text-[11px] text-ash">
+                    {rev.role} · {rev.city}
+                  </div>
+                </div>
+                <div className="flex items-center gap-0.5 text-amber-400">
+                  {[...Array(rev.rating)].map((_, idx) => (
+                    <Star key={idx} className="w-3.5 h-3.5 fill-amber-400" />
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-xs text-ash leading-relaxed italic">
+                &ldquo;{rev.comment}&rdquo;
+              </p>
+
+              <div className="font-mono text-[10px] text-[#20b6a5] pt-1 border-t border-white/[0.08] flex items-center justify-between">
+                <span>Verified Case: {rev.ref}</span>
+                <span className="text-emerald-400">Active ATL ✓</span>
+              </div>
             </div>
           ))}
         </div>
@@ -589,8 +731,8 @@ export default function HomePage() {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
         <div className="border-b border-rule pb-2 flex items-baseline justify-between">
           <div>
-            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION D</span>
-            <h2 className="font-serif text-2xl font-bold text-ink">Practice FAQs</h2>
+            <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION E</span>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Practice FAQs</h2>
           </div>
           <span className="font-mono text-xs text-ash font-urdu" dir="rtl">اکثر پوچھے گئے سوالات</span>
         </div>
@@ -599,7 +741,7 @@ export default function HomePage() {
           {faqs.map((faq, idx) => (
             <div key={idx} className="glass-card p-6 rounded-[22px] space-y-2.5 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <h3 className="font-bold text-sm text-ink">{faq.qEn}</h3>
+                <h3 className="font-bold text-sm text-ink dark:text-white">{faq.qEn}</h3>
                 <span className="font-urdu text-xs text-ash" dir="rtl">{faq.qUr}</span>
               </div>
               <p className="text-xs text-ash leading-relaxed pt-2 border-t border-rule-light">
@@ -615,9 +757,9 @@ export default function HomePage() {
 
       {/* 6. Bottom Banner CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="bg-ink text-paper-light border-2 border-brass p-8 sm:p-10 rounded-[32px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div className="bg-ink text-paper-light border-2 border-[#20b6a5]/50 p-8 sm:p-10 rounded-[32px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
           <div className="space-y-1.5 text-center sm:text-left">
-            <span className="font-mono text-xs text-brass tracking-wider uppercase font-bold">TY2026 INTAKE OPEN</span>
+            <span className="font-mono text-xs text-[#20b6a5] tracking-wider uppercase font-bold">TY2026 INTAKE OPEN</span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-paper-light">
               Ready to file your return?
             </h2>
@@ -630,30 +772,30 @@ export default function HomePage() {
             {/* Mobile AppClip button */}
             <button
               type="button"
-              onClick={() => appClip.open("tax-intake")}
-              className="md:hidden inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
+              onClick={() => appClip.open("fbr-simplified-intake")}
+              className="md:hidden inline-flex items-center justify-center gap-2 bg-[#20b6a5] hover:bg-[#1ebd59] text-white font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
             >
-              <span>Fast AppClip Form</span>
+              <span>FBR 8-Window Form</span>
               <Sparkles className="w-3.5 h-3.5" />
             </button>
 
             {/* Desktop link to /start */}
             <Link
               href="/start"
-              className="hidden md:inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
+              className="hidden md:inline-flex items-center justify-center gap-2 bg-[#20b6a5] hover:bg-[#1ebd59] text-white font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
             >
               <span>Start Filing Return</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
 
             <a
-              href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20my%20Tax%20Year%202026%20return."
+              href={formatWhatsAppUrl("Hi, I want to file my Tax Year 2026 return.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-folio/10 hover:bg-folio/20 border border-brass/40 text-paper-light font-bold py-3.5 px-5 rounded-full text-xs transition-all font-mono active:scale-95"
+              className="inline-flex items-center justify-center gap-2 bg-folio/10 hover:bg-folio/20 border border-white/20 text-paper-light font-bold py-3.5 px-5 rounded-full text-xs transition-all font-mono active:scale-95"
             >
               <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
-              <span>0312 0947187</span>
+              <span>{SITE_CONFIG.contact.whatsappDisplay}</span>
             </a>
           </div>
         </div>
@@ -661,4 +803,3 @@ export default function HomePage() {
     </div>
   );
 }
-

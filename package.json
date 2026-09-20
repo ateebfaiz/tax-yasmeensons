@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "gates": "bash scripts/run-quality-gates.sh",
+    "check-gates": "bash scripts/run-quality-gates.sh",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
@@ -14,7 +16,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.39.3",
-    "framer-motion": "^12.4.7",
     "lucide-react": "^0.475.0",
     "motion": "^13.4.0",
     "next": "^15.2.0",

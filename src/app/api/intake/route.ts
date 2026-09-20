@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { taxFilings } from "@/lib/db/schema";
-import { generateReference } from "@/lib/utils";
-import { createTodoistTask } from "@/lib/todoist";
+import { FASTAPI_BACKEND_URL, SITE_CONFIG } from "@/lib/config";
+import { formatWhatsAppUrl } from "@/lib/utils";
 
 export async function POST(req: Request) {
   try {
@@ -17,6 +15,7 @@ export async function POST(req: Request) {
       serviceTier = "assistance_2500",
       contactPreference = "whatsapp",
       credentialsNotes = "",
+      clientNotes = "",
       documentsSummary = "",
       source = "web_intake",
       residentialAddress,
@@ -28,6 +27,7 @@ export async function POST(req: Request) {
       incomeDetails,
       familyConsolidation,
       whtAudit,
+      fbrPayload,
     } = body;
 
     if (!fullName || !phone) {
@@ -37,73 +37,82 @@ export async function POST(req: Request) {
       );
     }
 
-    const reference = generateReference();
+    // Compose diagnostic notes
+    const consolidatedNotes = [
+      clientNotes || credentialsNotes,
+      simOwner === "relative"
+        ? `SIM on Relative: ${relativeName || ""} (${relativeRelation || ""}, CNIC: ${relativeCnic || ""})`
+        : null,
+      needEmailHelp ? "Customer requests email creation assistance" : null,
+      residentialAddress ? `Address: ${residentialAddress}` : null,
+      incomeDetails ? `Income Source: ${incomeDetails}` : null,
+      familyConsolidation ? "Family group filing requested" : null,
+      whtAudit ? "Full source withholding tax claim audit requested" : null,
+    ]
+      .filter(Boolean)
+      .join(" | ");
 
-    // Trigger Doist/Todoist P1 Notification
-    let todoistTaskId: string | null = null;
+    const backendPayload = {
+      fullName: fullName.trim(),
+      phone: phone.trim(),
+      cnic: cnic ? cnic.replace(/\D/g, "") : null,
+      email: needEmailHelp ? "needs_email_help@fbr.local" : email?.trim() || null,
+      persona,
+      irisStatus,
+      serviceTier,
+      contactPreference,
+      notes: consolidatedNotes || null,
+      documentsSummary: documentsSummary?.trim() || null,
+      source,
+      fbrPayload: fbrPayload || null,
+    };
+
+    // Forward to FastAPI Cloud Backend Authority
     try {
-      const taskTitle = `📋 TAX CASE: ${reference} — ${fullName.trim()} (${persona.toUpperCase()})`;
-      const taskDescription = 
-        `**Customer:** ${fullName.trim()}\n` +
-        `**Phone:** ${phone.trim()}\n` +
-        (cnic ? `**CNIC:** ${cnic.trim()}\n` : "") +
-        (simOwner === "relative" ? `**SIM Ownership:** Relative (${relativeName || ""} - ${relativeRelation || ""}, CNIC: ${relativeCnic || ""})\n` : "") +
-        (needEmailHelp ? `**Email:** Needs Email Creation Guidance\n` : email ? `**Email:** ${email.trim()}\n` : "") +
-        (residentialAddress ? `**Residential Address:** ${residentialAddress.trim()}\n` : "") +
-        `**Category:** ${persona}\n` +
-        (incomeDetails ? `**Income Source:** ${incomeDetails.trim()}\n` : "") +
-        (familyConsolidation ? `**Family Consolidation:** Yes (Reconcile inter-family transfers)\n` : "") +
-        (whtAudit ? `**WHT Deductions Audit:** Yes (Claim ATM, fuel, bills, SIM)\n` : "") +
-        `**IRIS Status:** ${irisStatus}\n` +
-        `**Tier:** ${serviceTier}\n` +
-        `**Contact Pref:** ${contactPreference}\n` +
-        (documentsSummary ? `**Documents:** ${documentsSummary.trim()}\n` : "") +
-        (credentialsNotes ? `**Notes/Particulars:** ${credentialsNotes.trim()}\n` : "");
+      const backendRes = await fetch(`${FASTAPI_BACKEND_URL}/api/tax/intake`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(backendPayload),
+        cache: "no-store",
+      });
 
-      const todoistRes = await createTodoistTask(taskTitle, taskDescription);
-      if (todoistRes && todoistRes.id) {
-        todoistTaskId = String(todoistRes.id);
-      }
-    } catch (tErr) {
-      console.error("[Todoist] Task creation error:", tErr);
-    }
-
-    // Persist to Neon DB if available
-    if (db) {
-      try {
-        await db.insert(taxFilings).values({
-          reference,
-          fullName: fullName.trim(),
-          phone: phone.trim(),
-          email: email?.trim() || null,
-          cnic: cnic?.trim() || null,
-          persona,
-          irisStatus,
-          serviceTier,
-          contactPreference,
-          credentialsNotes: credentialsNotes?.trim() || null,
-          documentsSummary: documentsSummary?.trim() || null,
-          todoistTaskId,
-          source,
-          status: "pending",
+      if (backendRes.ok) {
+        const data = await backendRes.json();
+        return NextResponse.json({
+          success: true,
+          reference: data.reference,
+          todoistTaskId: data.todoistTaskId,
+          status: data.status || "pending",
+          message: data.message || "Filing intake recorded successfully.",
         });
-      } catch (dbErr) {
-        console.error("Database insert error (non-fatal for customer):", dbErr);
       }
-    } else {
-      console.warn("Neon DB client not initialized (DATABASE_URL may be missing).");
+
+      const errData = await backendRes.json().catch(() => null);
+      console.error("[FastAPI Cloud] Non-200 response:", backendRes.status, errData);
+    } catch (backendErr) {
+      console.error("[FastAPI Cloud] Connection error:", backendErr);
     }
 
-    return NextResponse.json({
-      success: true,
-      reference,
-      todoistTaskId,
-      message: "Filing intake case created successfully.",
-    });
+    // Fail-fast with clear WhatsApp fallback rather than silent fake success
+    const fallbackWhatsAppUrl = formatWhatsAppUrl(
+      `Hi, I attempted to submit my Tax Year ${SITE_CONFIG.taxYear} return for ${fullName.trim()} (${phone.trim()}), but experienced a network issue. Please log my case.`
+    );
+
+    return NextResponse.json(
+      {
+        error:
+          "Unable to persist filing case to cloud database. Please connect with our direct tax desk on WhatsApp.",
+        fallbackWhatsAppUrl,
+      },
+      { status: 503 }
+    );
   } catch (err: any) {
     console.error("Intake processing error:", err);
     return NextResponse.json(
-      { error: "Internal server error. Please retry or contact WhatsApp directly." },
+      {
+        error:
+          "Internal server error processing intake. Please contact our desk directly on WhatsApp.",
+      },
       { status: 500 }
     );
   }

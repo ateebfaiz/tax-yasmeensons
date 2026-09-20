@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import PersonaClip from "@/components/clips/PersonaClip";
 import { Users, CheckCircle2, ShieldCheck, ArrowRight, Sparkles } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 
 export default function NoIncomePage() {
   const router = useRouter();
@@ -93,7 +95,7 @@ export default function NoIncomePage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
           <a
-            href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20file%20as%20a%20Housewife%20or%20Non-Earning%20individual."
+            href={formatWhatsAppUrl("Hi, I want to file as a Housewife or Non-Earning individual.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-1.5 bg-folio/20 hover:bg-folio/30 border border-brass/40 text-paper-light font-mono font-bold text-xs py-3.5 px-5 rounded-full transition-all active:scale-95"
@@ -158,13 +160,13 @@ export default function NoIncomePage() {
                 </span>
               </div>
               <a
-                href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20register%20as%20a%20non-earning%20filer."
+                href={formatWhatsAppUrl("Hi, I want to register as a non-earning filer.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
               >
                 <WhatsAppIcon className="w-4 h-4" />
-                <span>WhatsApp Desk (0312 0947187)</span>
+                <span>WhatsApp Desk ({SITE_CONFIG.contact.whatsappDisplay})</span>
               </a>
             </div>
           </div>

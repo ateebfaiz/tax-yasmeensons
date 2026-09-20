@@ -3,9 +3,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
+import { GlassCard } from "@/components/ui/glass/GlassCard";
+import { GlassButton } from "@/components/ui/glass/GlassButton";
+import { GlassSegmentedControl } from "@/components/ui/glass/GlassSegmentedControl";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
-import { CheckSquare, Square, FileText, ArrowRight, Sparkles } from "lucide-react";
+import { CheckSquare, Square, Sparkles } from "lucide-react";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 
 const CHECKLISTS: Record<string, { titleEn: string; titleUr: string; items: { en: string; ur: string }[] }> = {
   salaried: {
@@ -74,39 +79,32 @@ export default function ChecklistClip({
     setCheckedItems((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const tabs = [
+    { id: "salaried", label: "Salaried", labelUrdu: "تنخواہ دار" },
+    { id: "pensioner", label: "Pensioner", labelUrdu: "پنشنر" },
+    { id: "no_income", label: "No Income", labelUrdu: "بغیر آمدنی" },
+    { id: "student", label: "Student", labelUrdu: "طالب علم" },
+  ];
+
   return (
     <AppClipSheet
       onClose={onClose}
-      fullHeight
       title="Filing Document Checklist"
       subtitle="دستاویزات کی مکمل چیک لسٹ • Tax Year 2026"
     >
-      <div className="space-y-4 pb-24 text-ink dark:text-[#F4EFE6]">
+      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
         {/* Category Tabs */}
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-          {[
-            { id: "salaried", en: "Salaried", ur: "تنخواہ دار" },
-            { id: "pensioner", en: "Pensioner", ur: "پنشنر" },
-            { id: "no_income", en: "No Income", ur: "بغیر آمدنی" },
-            { id: "student", en: "Student", ur: "طالب علم" },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all border active:scale-95 ${
-                activeTab === tab.id
-                  ? "bg-[#128C7E] text-white border-[#128C7E] shadow-sm"
-                  : "bg-white/60 dark:bg-white/[0.04] border-black/[0.08] dark:border-white/10 text-ash dark:text-[#8C959F] hover:text-ink"
-              }`}
-            >
-              {tab.en} / <span className="font-urdu">{tab.ur}</span>
-            </button>
-          ))}
-        </div>
+        <GlassSegmentedControl
+          tabs={tabs}
+          activeTab={activeTab}
+          onChange={(id) => setActiveTab(id)}
+        />
 
-        <div className="space-y-0.5">
-          <h3 className="text-xs font-bold text-ink dark:text-white uppercase tracking-wider">{current.titleEn}</h3>
-          <p className="text-xs font-bold text-[#128C7E] font-urdu" dir="rtl">
+        <div className="space-y-0.5 pt-1">
+          <h3 className="text-xs font-bold text-[#f5f7f8] uppercase tracking-wider">
+            {current.titleEn}
+          </h3>
+          <p className="text-xs font-bold text-[#20b6a5] font-urdu" dir="rtl">
             {current.titleUr}
           </p>
         </div>
@@ -116,77 +114,81 @@ export default function ChecklistClip({
           {current.items.map((item, idx) => {
             const isChecked = !!checkedItems[`${activeTab}-${idx}`];
             return (
-              <div
+              <GlassCard
                 key={idx}
+                variant={isChecked ? "active" : "default"}
+                interactive
                 onClick={() => toggleCheck(idx)}
-                className={`p-3.5 rounded-2xl border cursor-pointer flex items-start gap-3 transition-all backdrop-blur-xl ${
-                  isChecked
-                    ? "bg-[#128C7E]/15 border-[#128C7E]/50 shadow-sm"
-                    : "bg-white/45 dark:bg-white/[0.04] border-white/70 dark:border-white/10 hover:border-[#128C7E]/40 shadow-sm"
-                }`}
+                className="p-3.5 flex items-start gap-3"
               >
                 {isChecked ? (
-                  <CheckSquare className="w-4 h-4 text-[#128C7E] shrink-0 mt-0.5" />
+                  <CheckSquare className="w-4 h-4 text-[#20b6a5] shrink-0 mt-0.5" />
                 ) : (
-                  <Square className="w-4 h-4 text-ash dark:text-[#8C959F] shrink-0 mt-0.5" />
+                  <Square className="w-4 h-4 text-[#aeb9bf] shrink-0 mt-0.5" />
                 )}
                 <div className="space-y-0.5 min-w-0 flex-1">
-                  <div className={`text-xs font-medium ${isChecked ? "line-through opacity-60" : ""}`}>
+                  <div
+                    className={`text-xs font-medium transition-all ${
+                      isChecked ? "line-through opacity-60 text-[#aeb9bf]" : "text-[#f5f7f8]"
+                    }`}
+                  >
                     {item.en}
                   </div>
-                  <div className="text-[11px] font-urdu opacity-75" dir="rtl">
+                  <div className="text-[11px] font-urdu opacity-75 text-[#20b6a5]" dir="rtl">
                     {item.ur}
                   </div>
                 </div>
-              </div>
+              </GlassCard>
             );
           })}
         </div>
 
-        <div className="p-3.5 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 text-xs space-y-1 shadow-sm">
-          <div className="font-bold text-ink dark:text-white">Don&apos;t have all documents right now?</div>
-          <p className="text-ash dark:text-[#8C959F] leading-relaxed font-urdu text-[11px]" dir="rtl">
+        {/* Info Note */}
+        <GlassCard variant="subtle" className="p-3 text-xs space-y-1">
+          <div className="font-bold text-[#f5f7f8]">Don&apos;t have all documents right now?</div>
+          <p className="text-[#aeb9bf] leading-relaxed font-urdu text-[11px]" dir="rtl">
             اگر تمام کاغذات دستیاب نہیں ہیں تو فکر نہ کریں، ہمارے نمائندے آپ کے دستیاب ریکارڈ کے مطابق فائلنگ میں مدد کریں گے۔
           </p>
-        </div>
+        </GlassCard>
 
         {/* Certificate Request Templates & App Guide */}
-        <div className="p-3 rounded-2xl bg-brass-subtle border border-brass/40 flex items-center justify-between gap-3 text-xs">
+        <GlassCard variant="glow" className="p-3 flex items-center justify-between gap-3 text-xs">
           <div>
-            <strong className="text-ink dark:text-white block font-bold">Need WHT, PRC or SIM Certificates?</strong>
-            <span className="text-ash dark:text-[#8C959F] text-[11px]">Copy-paste messages &amp; instant app guide</span>
+            <strong className="text-[#f5f7f8] block font-bold">Need WHT, PRC or SIM Certificates?</strong>
+            <span className="text-[#aeb9bf] text-[11px]">Copy-paste messages &amp; instant app guide</span>
           </div>
           <Link
             href="/requirements"
             onClick={onClose}
-            className="px-3 py-1.5 rounded-full bg-ink hover:bg-theme-primary-hover text-paper-light font-bold text-[11px] whitespace-nowrap shadow-sm active:scale-95 transition-all"
+            className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/20 text-[#f5f7f8] font-bold text-[11px] whitespace-nowrap shadow-sm active:scale-95 transition-all"
           >
             View Templates →
           </Link>
-        </div>
+        </GlassCard>
 
         {/* Action Buttons */}
-        <div className="pt-2 flex flex-col sm:flex-row gap-2">
-          <button
+        <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
+          <GlassButton
             type="button"
+            variant="primary"
             onClick={() => {
               onClose();
               appClip.open("tax-intake", { defaultPersona: activeTab });
             }}
-            className="flex-1 py-3 rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+            icon={<Sparkles className="w-4 h-4" />}
+            className="flex-1"
           >
-            <span>Proceed to Fast Intake</span>
-            <Sparkles className="w-4 h-4" />
-          </button>
+            Proceed to Fast Intake
+          </GlassButton>
 
           <a
-            href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20questions%20about%20required%20tax%20documents."
+            href={formatWhatsAppUrl("Hi, I have questions about required tax documents.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="py-3 px-5 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+            className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-[rgba(27,37,43,0.72)] hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
-            <span>WhatsApp (03120947187)</span>
+            <span>WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>
           </a>
         </div>
       </div>

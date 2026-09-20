@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 import { useLanguage } from "@/context/language-context";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import {
@@ -15,7 +16,6 @@ import {
   Clock,
 } from "lucide-react";
 import AnimatedStepper, { StepItem } from "@/components/smoothui/animated-stepper";
-import MagneticButton from "@/components/smoothui/magnetic-button";
 
 interface CategoryOption {
   code: string;
@@ -333,12 +333,12 @@ export function SeniorIntakeWizard({
           (credentialsNotes ? `*Notes:* ${credentialsNotes}\n` : "") +
           `\nI have registered this filing case on tax.yasmeensons.com and am ready to proceed.`;
 
-        window.open(formatWhatsAppUrl(waMsg, "03120947187"), "_blank");
+        window.open(formatWhatsAppUrl(waMsg), "_blank");
       } else {
         setError(data.error || "Failed to create case record. Please retry.");
       }
     } catch {
-      setError("Network connection issue. You can contact WhatsApp directly at 0312 0947187.");
+      setError(`Network connection issue. You can contact WhatsApp directly at ${SITE_CONFIG.contact.whatsappDisplay}.`);
     } finally {
       setSubmitting(false);
     }
@@ -376,7 +376,7 @@ export function SeniorIntakeWizard({
 
         <div className="space-y-2 text-xs text-ash leading-relaxed max-w-md mx-auto">
           <p>
-            Your case file is officially generated and logged in our tax desk. WhatsApp chat has been initiated with our consultant on <strong>0312 0947187</strong>.
+            Your case file is officially generated and logged in our tax desk. WhatsApp chat has been initiated with our consultant on <strong>{SITE_CONFIG.contact.whatsappDisplay}</strong>.
           </p>
           <p className="font-urdu text-ink font-semibold" dir="rtl">
             آپ کا کیس نمبر محفوظ ہو چکا ہے۔ براہ کرم واٹس ایپ پر رابطہ جاری رکھیں۔
@@ -385,13 +385,13 @@ export function SeniorIntakeWizard({
 
         <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center font-mono text-xs">
           <a
-            href={formatWhatsAppUrl(`Hi, following up on ${waPrefill}`, "03120947187")}
+            href={formatWhatsAppUrl(`Hi, following up on ${waPrefill}`)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[#128C7E] hover:bg-[#0e7064] text-white font-bold py-3.5 px-6 rounded shadow transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
-            <span>Open WhatsApp Chat (0312 0947187)</span>
+            <span>Open WhatsApp Chat ({SITE_CONFIG.contact.whatsappDisplay})</span>
           </a>
 
           <a
@@ -1020,7 +1020,7 @@ export function SeniorIntakeWizard({
           </button>
         ) : (
           <a
-            href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20to%20start%20my%20Tax%20Year%202026%20filing."
+            href={formatWhatsAppUrl("Hi, I want to start my Tax Year 2026 filing.")}
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs font-mono text-ash hover:text-ink flex items-center gap-2 px-4 py-2.5 rounded-full hover:bg-paper transition-all"

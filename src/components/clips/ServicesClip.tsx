@@ -2,9 +2,13 @@
 
 import React from "react";
 import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
+import { GlassCard } from "@/components/ui/glass/GlassCard";
+import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import { CheckCircle2, ShieldCheck, Sparkles } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 
 export default function ServicesClip({ onClose }: { onClose: () => void }) {
   const appClip = useAppClip();
@@ -60,96 +64,89 @@ export default function ServicesClip({ onClose }: { onClose: () => void }) {
   return (
     <AppClipSheet
       onClose={onClose}
-      fullHeight
       title="Tax Facilitation Services"
       subtitle="ہماری سروسز • Individual Filers Only • TY2026"
     >
-      <div className="space-y-5 pb-24 text-ink dark:text-[#F4EFE6]">
+      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
         {/* Zero-Credential Invariant Banner */}
-        <div className="p-4 rounded-2xl bg-white/60 dark:bg-white/[0.03] backdrop-blur-md border border-black/[0.06] dark:border-white/10 space-y-1.5">
-          <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+        <GlassCard variant="subtle" className="p-3.5 space-y-1">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#20b6a5]">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>Zero-Credential Architecture</span>
           </div>
-          <p className="text-xs text-ash dark:text-[#8C959F] leading-relaxed">
+          <p className="text-xs text-[#aeb9bf] leading-relaxed">
             We never ask for or store your IRIS password. All filings are submitted under your own private authentication.
           </p>
-        </div>
+        </GlassCard>
 
         {/* Services List */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {services.map((svc) => (
-            <div
+            <GlassCard
               key={svc.code}
-              className={`p-5 rounded-2xl backdrop-blur-md space-y-3 ${
-                svc.isRecommended
-                  ? "bg-white/80 dark:bg-white/[0.06] border-2 border-[#128C7E] dark:border-[#C4A046] shadow-md"
-                  : "bg-white/60 dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/10"
-              }`}
+              variant={svc.isRecommended ? "glow" : "default"}
+              className="p-4 space-y-2.5"
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10">
+                    <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-[#aeb9bf]">
                       {svc.code}
                     </span>
                     {svc.isRecommended && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#128C7E] dark:text-[#C4A046]">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#20b6a5]">
                         Recommended
                       </span>
                     )}
                   </div>
-                  <h3 className="font-serif text-base font-bold text-ink dark:text-white">
+                  <h3 className="font-serif text-base font-bold text-white">
                     {svc.titleEn}
                   </h3>
-                  <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                  <div className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
                     {svc.titleUr}
                   </div>
                 </div>
-                <div className="font-serif text-xl font-black text-ink dark:text-white shrink-0">
+                <div className="font-serif text-xl font-black text-white shrink-0">
                   {svc.fee}
                 </div>
               </div>
 
-              <p className="text-xs text-ash dark:text-[#8C959F] leading-relaxed">
+              <p className="text-xs text-[#aeb9bf] leading-relaxed">
                 {svc.descEn}
               </p>
 
-              <ul className="space-y-1.5 text-xs text-ash dark:text-[#8C959F] font-mono border-t border-black/[0.06] dark:border-white/10 pt-2.5">
+              <ul className="space-y-1.5 text-xs text-[#aeb9bf] font-mono border-t border-white/[0.08] pt-2">
                 {svc.points.map((pt, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#128C7E] dark:text-[#C4A046] shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
                     <span>{pt}</span>
                   </li>
                 ))}
               </ul>
 
-              <button
+              <GlassButton
                 type="button"
+                variant={svc.isRecommended ? "primary" : "secondary"}
                 onClick={() => handleStart(svc.tierId)}
-                className={`w-full py-3 rounded-full font-mono font-bold text-xs active:scale-95 transition-all flex items-center justify-center gap-2 ${
-                  svc.isRecommended
-                    ? "bg-gradient-to-r from-[#128C7E] to-[#0A6054] text-white shadow-md"
-                    : "border border-black/10 dark:border-white/15 hover:bg-black/5 dark:hover:bg-white/5"
-                }`}
+                icon={<Sparkles className="w-3.5 h-3.5" />}
+                className="w-full"
               >
-                <span>Select {svc.code}</span>
-                <Sparkles className="w-3.5 h-3.5" />
-              </button>
-            </div>
+                Select {svc.code}
+              </GlassButton>
+            </GlassCard>
           ))}
         </div>
 
         {/* WhatsApp Contact */}
-        <div className="pt-2">
+        <div className="pt-1">
           <a
-            href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20questions%20about%20your%20tax%20services."
+            href={formatWhatsAppUrl("Hi, I have questions about your tax services.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-[rgba(27,37,43,0.72)] hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
-            <span>Consult on WhatsApp (0312 0947187)</span>
+            <span>Consult on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>
           </a>
         </div>
       </div>

@@ -1,12 +1,16 @@
 # CLAUDE.md — Quick Reference for Claude & AI Coding Assistants
 **Workspace**: `/home/ateeb/projects/tax-yasmeensons`  
-**Platform**: `tax.yasmeensons.com` (Pakistani Inland Revenue Individual Tax Facilitation)
+**Platform**: `tax.yasmeensons.com` (Pakistani Inland Revenue Individual Tax Facilitation)  
+**Backend Authority**: FastAPI Cloud (`https://ys-fastapi-backend.fastapicloud.dev`)
 
 ---
 
 ## ⚡ Essential Commands
 ```bash
-# Build & Typecheck
+# Run All Local On-Device Quality Gates
+npm run check-gates
+
+# Build & Typecheck (Must compile cleanly)
 npm run build
 
 # Start Dev Server
@@ -14,23 +18,20 @@ npm run dev
 
 # Run Automated Puppeteer UI Audit (Mobile & Desktop Viewports)
 node scripts/audit_ui.mjs
+
+# Strict No-Hardcoding Gate
+grep -rn "03120947187" src/ | grep -v "config.ts"
 ```
 
 ---
 
-## 🛡️ Strict Policies & Invariants
+## 🛡️ Strict Quality Gates & Invariants
 
-1. **Zero-Credential Security**: NEVER ask for, store, or accept FBR Iris passwords or PINs.
-2. **Strict Viewport Partitioning**:
-   - **Desktop (>= 768px)**: 2-column layout. NO buttons opening mobile bottom-sheet AppClips.
-   - **Mobile (< 768px)**: Subpages & intakes open inside ultra-frosted liquid glass AppClips. NEVER embed desktop `SeniorIntakeWizard` into an AppClip.
-3. **Bilingual Requirement**: All user-facing text must include English and Urdu Nastaleeq (`font-urdu`, `dir="rtl"`).
-4. **WhatsApp Dispatch**: Operator number is `03120947187`. Pre-fill with case folio.
-
----
-
-## 📚 Key Reference Documentation
-- Full Architectural Spec: [`docs/ARCHITECTURE_AND_POLICIES.md`](file:///home/ateeb/projects/tax-yasmeensons/docs/ARCHITECTURE_AND_POLICIES.md)
-- FBR Iris Registration Guide: [`docs/FBR_INDIVIDUAL_REGISTRATION_GUIDE.md`](file:///home/ateeb/projects/tax-yasmeensons/docs/FBR_INDIVIDUAL_REGISTRATION_GUIDE.md)
-- PRC & WHT Copy-Paste Templates: [`docs/MESSAGE_TEMPLATES_PRC_WHT.md`](file:///home/ateeb/projects/tax-yasmeensons/docs/MESSAGE_TEMPLATES_PRC_WHT.md)
-- Agent Rules & Subagent Protocol: [`AGENTS.md`](file:///home/ateeb/projects/tax-yasmeensons/AGENTS.md)
+1. **Zero-Credential Security**: NEVER ask for, store, or accept FBR Iris passwords or PINs. Column name is `client_notes`, never `credentials_notes`.
+2. **Strict No-Hardcoding**: Never hardcode WhatsApp phone numbers or API URLs. Always import from `SITE_CONFIG` ([`src/lib/config.ts`](file:///home/ateeb/projects/tax-yasmeensons/src/lib/config.ts)) and use `formatWhatsAppUrl`.
+3. **Fail-Fast API Contract**: `/api/intake` must NEVER silently swallow DB errors and pretend success. If backend fails, return 502/503 with WhatsApp fallback.
+4. **FastAPI Cloud Database Authority**: All DB persistence and Todoist P1 dispatching must route to FastAPI Cloud backend (`https://ys-fastapi-backend.fastapicloud.dev/api/tax`).
+5. **Safari History Dark Glass Standard**: Translucent dark charcoal (`rgba(27, 37, 43, 0.72)` / `rgba(22, 30, 36, 0.88)`), canvas `#07131b`, fine 1px border (`rgba(255, 255, 255, 0.12)`), teal accent (`#20b6a5`). NO bright white cards on AppClips.
+6. **Zero Empty Space Gate**: All AppClips and `AppClipSheet` must size naturally (`height: auto; max-height: 90dvh`) without artificial blank voids below the content or CTAs. Use `100dvh` and clamped `env(safe-area-inset-bottom)`.
+7. **FBR 8-Window Simplified Non-Business Spec (SRO 1561(I)/2025)**: Modular clips 0–7 with bilingual labels, Urdu hints, FBR code persistence (`5003`, `2031`, `s.149`, `s.116`), and real-time wealth recon to 0.00. Business income exits flow.
+8. **Additive Evolution Rule**: Never remove existing sections or features. Enhancements to hero, menu, reviews, workflow, and tracking must be strictly additive.

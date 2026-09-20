@@ -16,6 +16,7 @@ import {
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 
 export type IslandView = "idle" | "support" | "intake" | "iris";
 
@@ -46,11 +47,11 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
                 <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
               </div>
               <div className="text-[11px] text-white/70 font-mono truncate">
-                0312 0947187 • Direct Specialist
+                {SITE_CONFIG.contact.whatsappDisplay} • Direct Specialist
               </div>
             </div>
             <a
-              href={formatWhatsAppUrl("Hi, I want assistance with Tax Year 2026 filing.", "03120947187")}
+              href={formatWhatsAppUrl("Hi, I want assistance with Tax Year 2026 filing.")}
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-1 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-white shrink-0"

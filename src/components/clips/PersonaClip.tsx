@@ -3,8 +3,11 @@
 import React from "react";
 import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { GlassCard } from "@/components/ui/glass/GlassCard";
+import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 import {
   Briefcase,
   HeartHandshake,
@@ -13,7 +16,6 @@ import {
   CheckCircle2,
   ShieldCheck,
   ArrowRight,
-  Sparkles,
 } from "lucide-react";
 
 export type PersonaType = "salaried" | "pensioner" | "housewife" | "student";
@@ -185,114 +187,114 @@ export default function PersonaClip({ persona, onClose }: PersonaClipProps) {
   return (
     <AppClipSheet
       onClose={onClose}
-      fullHeight
       title={current.titleEn}
       subtitle={current.subtitleEn}
     >
-      <div className="space-y-4 pb-24 text-ink dark:text-[#F4EFE6]">
+      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
         {/* Profile Card */}
-        <div className="p-4 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 space-y-2 shadow-sm">
+        <GlassCard variant="default" className="p-4 space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-[#128C7E]/15 dark:bg-[#C4A046]/15 flex items-center justify-center text-[#128C7E] dark:text-[#C4A046]">
+              <div className="w-8 h-8 rounded-full bg-[#20b6a5]/15 flex items-center justify-center text-[#20b6a5]">
                 <Icon className="w-4 h-4" />
               </div>
-              <span className="font-mono text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+              <span className="font-mono text-xs font-bold text-[#20b6a5]">
                 CODE: {current.code}
               </span>
             </div>
-            <span className="font-mono text-[10px] text-ash bg-white/60 dark:bg-white/10 px-2.5 py-0.5 rounded-full border border-white/60 dark:border-white/10">
+            <span className="font-mono text-[10px] text-[#aeb9bf] bg-white/[0.06] px-2.5 py-0.5 rounded-full border border-white/[0.08]">
               TY2026 AUDIENCE
             </span>
           </div>
 
-          <div className="font-urdu text-sm font-bold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+          <div className="font-urdu text-sm font-bold text-[#20b6a5]" dir="rtl">
             {current.titleUr}
           </div>
-          <p className="text-xs text-ash dark:text-[#8C959F] leading-relaxed">
+          <p className="text-xs text-[#aeb9bf] leading-relaxed">
             {current.leadEn}
           </p>
-          <div className="font-urdu text-xs text-ash dark:text-[#8C959F] leading-relaxed" dir="rtl">
+          <div className="font-urdu text-xs text-[#aeb9bf] leading-relaxed" dir="rtl">
             {current.leadUr}
           </div>
-        </div>
+        </GlassCard>
 
         {/* 3 Core Pillars */}
         <div className="space-y-2">
-          <div className="font-mono text-xs font-bold uppercase tracking-wider text-ash dark:text-[#8C959F]">
+          <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#aeb9bf]">
             Key Provisions &amp; Tax Rights
           </div>
           <div className="space-y-2">
             {current.pillars.map((p, idx) => (
-              <div
+              <GlassCard
                 key={idx}
-                className="p-3.5 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 space-y-1 shadow-sm"
+                variant="subtle"
+                className="p-3.5 space-y-1"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-ink dark:text-white">{p.title}</span>
-                  <span className="font-mono text-[9px] font-bold text-brass px-2 py-0.5 rounded-full bg-brass/10 border border-brass/30">
+                  <span className="font-bold text-xs text-[#f5f7f8]">{p.title}</span>
+                  <span className="font-mono text-[9px] font-bold text-[#20b6a5] px-2 py-0.5 rounded-full bg-[#20b6a5]/10 border border-[#20b6a5]/30">
                     {p.badge}
                   </span>
                 </div>
-                <p className="text-[11px] text-ash dark:text-[#8C959F] leading-relaxed">
+                <p className="text-[11px] text-[#aeb9bf] leading-relaxed">
                   {p.desc}
                 </p>
-              </div>
+              </GlassCard>
             ))}
           </div>
         </div>
 
         {/* Required Documents Checklist */}
-        <div className="p-4 rounded-2xl bg-white/45 dark:bg-white/[0.04] backdrop-blur-xl border border-white/70 dark:border-white/10 space-y-2.5 shadow-sm">
-          <div className="flex items-center justify-between border-b border-white/60 dark:border-white/10 pb-2">
-            <span className="font-serif text-sm font-bold text-ink dark:text-white">
+        <GlassCard variant="default" className="p-4 space-y-2.5">
+          <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
+            <span className="font-serif text-sm font-bold text-[#f5f7f8]">
               Required Documents Checklist
             </span>
-            <span className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
               لازمی دستاویزات
             </span>
           </div>
 
-          <ul className="space-y-2 text-xs text-ash dark:text-[#8C959F] font-mono">
+          <ul className="space-y-2 text-xs text-[#aeb9bf] font-mono">
             {current.docs.map((doc, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#128C7E] dark:text-[#C4A046] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0 mt-0.5" />
                 <span className="leading-snug">{doc}</span>
               </li>
             ))}
           </ul>
-        </div>
+        </GlassCard>
 
         {/* Security Stamp */}
-        <div className="p-3 rounded-2xl bg-white/40 dark:bg-white/[0.03] backdrop-blur-md border border-white/60 dark:border-white/10 flex items-center gap-2 text-xs">
-          <ShieldCheck className="w-4 h-4 text-[#128C7E] shrink-0" />
-          <span className="text-[11px] text-ash dark:text-[#8C959F]">
+        <GlassCard variant="subtle" className="p-3 flex items-center gap-2 text-xs">
+          <ShieldCheck className="w-4 h-4 text-[#20b6a5] shrink-0" />
+          <span className="text-[11px] text-[#aeb9bf]">
             Zero password sharing: We prepare numbers and guide you on official IRIS.
           </span>
-        </div>
+        </GlassCard>
 
         {/* Action Buttons */}
-        <div className="pt-2 flex flex-col gap-2">
-          <button
+        <div className="pt-2 flex flex-col gap-2.5">
+          <GlassButton
             type="button"
+            variant="primary"
             onClick={handleStartFiling}
-            className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-all"
+            icon={<ArrowRight className="w-4 h-4" />}
+            className="w-full"
           >
-            <span>Start Filing as {current.code} ({current.titleEn})</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+            Start Filing as {current.code} ({current.titleEn})
+          </GlassButton>
 
           <a
             href={formatWhatsAppUrl(
-              `Hi, I need assistance with Tax Year 2026 filing for ${current.titleEn} (${current.code}).`,
-              "03120947187"
+              `Hi, I need assistance with Tax Year 2026 filing for ${current.titleEn} (${current.code}).`
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3 rounded-full border border-white/80 dark:border-white/15 bg-white/45 dark:bg-white/[0.04] backdrop-blur-md text-[#128C7E] dark:text-white font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm"
+            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-[rgba(27,37,43,0.72)] hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
-            <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
-            <span>Consult on WhatsApp (0312 0947187)</span>
+            <WhatsAppIcon className="w-4 h-4" />
+            <span>Consult on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>
           </a>
         </div>
       </div>

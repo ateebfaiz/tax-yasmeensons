@@ -7,6 +7,8 @@ import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import ServicesClip from "@/components/clips/ServicesClip";
 import { ShieldCheck, CheckCircle2, ArrowRight, Lock, ExternalLink, Sparkles } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 
 export default function ServicesPage() {
   const router = useRouter();
@@ -133,13 +135,13 @@ export default function ServicesPage() {
                 Need guidance on which service level fits your tax profile? Talk with us directly.
               </p>
               <a
-                href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20questions%20about%20your%20tax%20services."
+                href={formatWhatsAppUrl("Hi, I have questions about your tax services.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
               >
                 <WhatsAppIcon className="w-4 h-4" />
-                <span>WhatsApp Desk (0312 0947187)</span>
+                <span>WhatsApp Desk ({SITE_CONFIG.contact.whatsappDisplay})</span>
               </a>
             </div>
           </div>

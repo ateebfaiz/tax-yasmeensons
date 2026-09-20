@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import { AppClipSheet } from "@/components/ui/app-clip/AppClipSheet";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 import {
   CheckSquare,
   ArrowRight,
@@ -285,7 +287,7 @@ export default function RequirementsPage() {
           </div>
 
           <a
-            href="https://wa.me/923120947187?text=Hi%2C%20I%20need%20the%20tax%20document%20checklist%20for%20filing."
+            href={formatWhatsAppUrl("Hi, I need the tax document checklist for filing.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 text-[#128C7E] dark:text-[#25D366] font-mono font-bold text-xs hover:bg-[#25D366]/25 transition-all shadow-sm active:scale-95"
@@ -360,13 +362,13 @@ export default function RequirementsPage() {
           </Link>
 
           <a
-            href="https://wa.me/923120947187?text=Hi%2C%20I%20want%20guidance%20on%20FBR%20Individual%20Registration."
+            href={formatWhatsAppUrl("Hi, I want guidance on FBR Individual Registration.")}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs py-3.5 px-5 rounded-full transition-all active:scale-95"
           >
             <WhatsAppIcon className="w-4 h-4" />
-            <span>WhatsApp (03120947187)</span>
+            <span>WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>
           </a>
         </div>
       </div>
@@ -381,11 +383,10 @@ export default function RequirementsPage() {
       <div className="block md:hidden">
         <AppClipSheet
           onClose={() => router.push("/")}
-          fullHeight
           title="FBR Requirements & Checklist"
           subtitle="TY2026 Evidence Schedule • Form 181 • Templates"
         >
-          <div className="pb-16 pt-2">
+          <div className="pb-4 pt-2">
             {renderModules()}
           </div>
         </AppClipSheet>
@@ -454,13 +455,13 @@ export default function RequirementsPage() {
                 Missing a bank certificate or need assistance requesting WHT from telecom? Chat with our desk.
               </p>
               <a
-                href="https://wa.me/923120947187?text=Hi%2C%20I%20have%20questions%20about%20required%20tax%20documents."
+                href={formatWhatsAppUrl("Hi, I have questions about required tax documents.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
               >
                 <WhatsAppIcon className="w-4 h-4" />
-                <span>WhatsApp Desk (0312 0947187)</span>
+                <span>WhatsApp Desk ({SITE_CONFIG.contact.whatsappDisplay})</span>
               </a>
             </div>
           </div>

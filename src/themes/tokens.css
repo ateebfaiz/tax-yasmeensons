@@ -1,53 +1,70 @@
 /* ================================================================
    Yasmeen & Sons Tax Practice — Official Tokens
-   Navy Document + Teal Service + Brass Seal + Warm Paper
+   Safari History Dark Glass System + Teal Glow + High-Contrast Ink
    ================================================================ */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  /* Senior Tax Practice Palette */
-  --tax-ink:          #0B1C2C; /* Deep document ink */
-  --tax-iris-teal:    #0E5C57; /* Official IRIS teal */
-  --tax-brass:        #C4A046; /* Seal brass / gold accent */
-  --tax-brass-light:  #DFBA5E;
-  --tax-brass-subtle: #F6F1E3;
-  --tax-paper:        #F4EFE6; /* Warm document paper */
-  --tax-paper-light:  #FAF8F3;
-  --tax-folio:        #FFFFFF; /* White crisp cards */
-  --tax-rule:         #D7D0C4; /* Hairline printed form rule */
-  --tax-rule-light:   #EBE6DD;
-  --tax-stamp-red:    #8E1D2A; /* Official stamp red */
-  --tax-stamp-bg:     #FDF2F3;
-  --tax-ash:          #5C6670; /* Secondary codes, helper labels */
-  --tax-ash-light:    #8C959F;
+  /* Safari History Dark Glass Foundation */
+  --page-bg: #07131b;
+  --glass-bg: rgba(27, 37, 43, 0.72);
+  --glass-bg-strong: rgba(22, 30, 36, 0.88);
+  --glass-card-bg: rgba(30, 42, 49, 0.65);
+  --glass-card-hover: rgba(36, 52, 60, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-subtle: rgba(255, 255, 255, 0.07);
+  --glass-highlight: rgba(255, 255, 255, 0.06);
+  --glass-glow: rgba(32, 182, 165, 0.15);
+
+  /* High Contrast Typography */
+  --text-primary: #f5f7f8;
+  --text-secondary: #aeb9bf;
+  --text-muted: #72828b;
+
+  /* Teal / Emerald Accents */
+  --accent: #20b6a5;
+  --accent-strong: #0d978b;
+  --accent-surface: rgba(32, 182, 165, 0.14);
+  --accent-glow: 0 0 24px rgba(32, 182, 165, 0.28);
+
+  /* Geometry */
+  --radius-panel: 28px;
+  --radius-card: 20px;
+  --radius-pill: 9999px;
+
+  /* Legacy & Theme Compatibility Mappings */
+  --tax-ink: #f5f7f8;
+  --tax-iris-teal: #20b6a5;
+  --tax-brass: #C4A046;
+  --tax-brass-light: #DFBA5E;
+  --tax-brass-subtle: rgba(196, 160, 70, 0.12);
+  --tax-paper: #07131b;
+  --tax-paper-light: #0d1e2b;
+  --tax-folio: #112538;
+  --tax-rule: rgba(255, 255, 255, 0.12);
+  --tax-rule-light: rgba(255, 255, 255, 0.07);
+  --tax-stamp-red: #E5484D;
+  --tax-stamp-bg: rgba(229, 72, 77, 0.1);
+  --tax-ash: #aeb9bf;
+  --tax-ash-light: #72828b;
 
   /* Theme mappings */
-  --theme-background:      var(--tax-paper);
-  --theme-surface:         var(--tax-folio);
-  --theme-surface-raised:  var(--tax-paper-light);
-  --theme-text:            var(--tax-ink);
-  --theme-text-secondary:  var(--tax-ash);
-  --theme-text-muted:      var(--tax-ash-light);
-  --theme-border:          var(--tax-rule);
-  --theme-primary:         var(--tax-ink);
-  --theme-primary-hover:   #152B40;
-  --theme-accent:          var(--tax-brass);
-  --theme-success:         var(--tax-iris-teal);
-  --theme-danger:          var(--tax-stamp-red);
+  --theme-background: var(--page-bg);
+  --theme-surface: var(--glass-bg-strong);
+  --theme-surface-raised: var(--glass-card-bg);
+  --theme-text: var(--text-primary);
+  --theme-text-secondary: var(--text-secondary);
+  --theme-text-muted: var(--text-muted);
+  --theme-border: var(--glass-border);
+  --theme-primary: var(--accent);
+  --theme-primary-hover: var(--accent-strong);
+  --theme-accent: var(--accent);
+  --theme-success: var(--accent);
+  --theme-danger: var(--tax-stamp-red);
 
-  /* Liquid Frosted Glass (refined for tax ledger) */
-  --theme-glass-bg:        rgba(255, 255, 255, 0.88);
-  --theme-glass-border:    var(--tax-rule);
-  --theme-glass-blur:      16px;
-}
-
-:root.dark {
-  --tax-ink:          #07121D;
-  --theme-background: #0B1C2C;
-  --theme-surface:    #112538;
-  --theme-text:       #F4EFE6;
-  --theme-text-secondary: #9DA7B2;
-  --theme-border:     #223C54;
-  --theme-glass-bg:   rgba(17, 37, 56, 0.88);
+  /* Liquid Frosted Glass (Safari History Grade) */
+  --theme-glass-bg: var(--glass-bg);
+  --theme-glass-border: var(--glass-border);
+  --theme-glass-blur: 20px;
 }

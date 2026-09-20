@@ -4,6 +4,8 @@ import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { SeniorIntakeWizard } from "@/components/intake/SeniorIntakeWizard";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
+import { formatWhatsAppUrl } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/config";
 import { ShieldCheck, Lock, ExternalLink, Sparkles, CheckCircle2 } from "lucide-react";
 import TaxIntakeClip from "@/components/clips/TaxIntakeClip";
 
@@ -108,13 +110,13 @@ function StartWizardContent() {
                 Need immediate help with documents or unfiled prior years? Message our senior desk directly.
               </p>
               <a
-                href="https://wa.me/923120947187?text=Hi%2C%20I%20need%20assistance%20with%20Tax%20Intake%20Wizard."
+                href={formatWhatsAppUrl("Hi, I need assistance with Tax Intake Wizard.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 rounded-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
               >
                 <WhatsAppIcon className="w-4 h-4" />
-                <span>WhatsApp Desk (0312 0947187)</span>
+                <span>WhatsApp Desk ({SITE_CONFIG.contact.whatsappDisplay})</span>
               </a>
             </div>
 
