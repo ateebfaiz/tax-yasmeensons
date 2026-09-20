@@ -75,7 +75,7 @@ export default function WhatsAppIntakeClip({
       <div className="space-y-3.5 pb-3 text-ink dark:text-white">
         {refId ? (
           <div className="text-center py-5 space-y-3.5">
-            <div className="w-14 h-14 bg-apple-blue/15 text-apple-blue rounded-full flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(0,122,255,0.3)]">
+            <div className="w-14 h-14 bg-apple-blue/15 text-apple-blue rounded-full flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold text-ink dark:text-white">WhatsApp Chat Opened</h3>

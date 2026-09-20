@@ -409,7 +409,7 @@ export default function FbrSimplifiedClipWizard({
                 onClick={() => idx <= activeStepIndex && setActiveStepIndex(idx)}
                 className={`flex-shrink-0 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium transition-all flex items-center gap-1.5 ${
                   isCurrent
-                    ? "bg-apple-blue text-white font-bold shadow-[0_0_12px_rgba(0,122,255,0.35)]"
+                    ? "bg-apple-blue text-white font-bold"
                     : isCompleted
                     ? "bg-white/[0.08] text-apple-blue hover:bg-white/[0.12]"
                     : "bg-white/[0.03] text-ash dark:text-white/60/50 pointer-events-none"
@@ -537,7 +537,7 @@ export default function FbrSimplifiedClipWizard({
                       }
                       className={`p-3 rounded-2xl border text-left transition-all flex items-center justify-between gap-2 ${
                         isChecked
-                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_12px_rgba(0,122,255,0.25)] text-ink dark:text-white font-bold"
+                          ? "border-apple-blue bg-apple-blue/15 text-ink dark:text-white font-bold"
                           : "border-rule/60 dark:border-white/[0.10] bg-paper-light/50 dark:bg-[#1c1c1e]/60 text-ash dark:text-white/60 hover:border-apple-blue/40"
                       }`}
                     >
@@ -1370,7 +1370,7 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             {submissionSuccess ? (
               <div className="text-center py-5 space-y-3.5">
-                <div className="w-16 h-16 rounded-full bg-apple-blue/20 text-apple-blue flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(0,122,255,0.3)]">
+                <div className="w-16 h-16 rounded-full bg-apple-blue/20 text-apple-blue flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
                 <div>

@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { TaxDynamicIsland } from "@/components/ui/tax-dynamic-island";
-import GlowHover, { GlowHoverItem } from "@/components/smoothui/glow-hover-card";
 import AnimatedTabs from "@/components/smoothui/animated-tabs";
 import { formatWhatsAppUrl } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/config";
@@ -72,50 +71,7 @@ export default function HomePage() {
     },
   ];
 
-  const glowPersonaItems: GlowHoverItem[] = personas.map((p) => {
-    const Icon = p.icon;
-    const theme =
-      p.code === "SAL"
-        ? { hue: 160, saturation: 70, lightness: 45 }
-        : p.code === "PEN"
-        ? { hue: 42, saturation: 80, lightness: 50 }
-        : p.code === "HIF"
-        ? { hue: 190, saturation: 70, lightness: 45 }
-        : { hue: 280, saturation: 65, lightness: 50 };
 
-    return {
-      id: p.code,
-      theme,
-      element: (
-        <Link
-          key={p.code}
-          href={p.href}
-          className="glass-card p-6 rounded-[24px] hover:border-apple-blue/50 transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md h-full"
-        >
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-apple-blue px-2 py-0.5 rounded-full bg-apple-blue/10 border border-apple-blue/30">
-                {p.code}
-              </span>
-              <Icon className="w-4 h-4 text-ash group-hover:text-ink dark:group-hover:text-white transition-colors" />
-            </div>
-            <div>
-              <h3 className="font-bold text-sm text-ink dark:text-white group-hover:text-apple-blue transition-colors">
-                {p.titleEn}
-              </h3>
-              <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{p.titleUr}</div>
-            </div>
-            <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
-          </div>
-
-          <div className="font-mono text-[11px] font-bold text-ink dark:text-white flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-apple-blue">
-            <span>Start as {p.code}</span>
-            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-          </div>
-        </Link>
-      ),
-    };
-  });
 
   const fourSteps = [
     {
@@ -237,10 +193,13 @@ export default function HomePage() {
     <div className="space-y-16 md:space-y-24 py-8 md:py-16">
       {/* 1. Hero Section — Lead with the Job */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7">
-        {/* Tax Season 2026 Announcement Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-apple-blue/10 dark:bg-apple-blue/15 border border-apple-blue/30 text-apple-blue text-xs font-mono font-bold shadow-[0_0_16px_rgba(0,122,255,0.15)] animate-pulse whitespace-nowrap">
-          <Sparkles className="w-3.5 h-3.5 text-apple-blue shrink-0" />
-          <span>Tax Season 2026 is Here! 🎉 Active ATL Filing Open</span>
+        {/* Tax Season 2026 — mobile uses a short no-wrap line; desktop the full line */}
+        <div className="w-full max-w-full flex justify-center px-2">
+          <div className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-black/10 dark:border-white/15 bg-white dark:bg-black px-3 py-1.5 text-[11px] sm:text-xs font-medium text-black dark:text-white">
+            <Sparkles className="w-3.5 h-3.5 text-apple-blue shrink-0" />
+            <span className="sm:hidden whitespace-nowrap truncate">Tax Season 2026 · ATL Open</span>
+            <span className="hidden sm:inline whitespace-nowrap">Tax Season 2026 is Here! Active ATL Filing Open</span>
+          </div>
         </div>
 
         {/* Dynamic Island: Active Live Desk & AppClip Controller */}
@@ -453,13 +412,38 @@ export default function HomePage() {
           <span className="font-mono text-xs text-ash">NON-BUSINESS ONLY</span>
         </div>
 
-        {/* SmoothUI GlowHover Interactive Cards */}
-        <GlowHover
-          items={glowPersonaItems}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
-          glowIntensity={0.16}
-          maskSize={380}
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {personas.map((p) => {
+            const Icon = p.icon;
+            return (
+              <Link
+                key={p.code}
+                href={p.href}
+                className="glass-card p-6 rounded-[24px] hover:border-apple-blue/50 transition-colors group flex flex-col justify-between space-y-4 h-full"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-xs font-bold text-apple-blue px-2 py-0.5 rounded-full bg-apple-blue/10 border border-apple-blue/30">
+                      {p.code}
+                    </span>
+                    <Icon className="w-4 h-4 text-ash group-hover:text-ink dark:group-hover:text-white transition-colors" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-sm text-ink dark:text-white group-hover:text-apple-blue transition-colors">
+                      {p.titleEn}
+                    </h3>
+                    <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{p.titleUr}</div>
+                  </div>
+                  <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
+                </div>
+                <div className="font-mono text-[11px] font-bold text-ink dark:text-white flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-apple-blue">
+                  <span>Start as {p.code}</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </section>
 
       {/* 3. Pricing Folio Lines — Honest & Clear */}

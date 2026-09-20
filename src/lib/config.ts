@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
   fbrOfficialUrl: "https://fbr.gov.pk",
 };
 
-/** Authority FastAPI Cloud microservice endpoint */
+/** Filing desk backend (cases, documents, tracking) */
 export const FASTAPI_BACKEND_URL =
   process.env.FASTAPI_BACKEND_URL || "https://ys-fastapi-backend.fastapicloud.dev";
 

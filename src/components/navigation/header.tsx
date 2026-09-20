@@ -10,11 +10,13 @@ import { useLanguage } from "@/context/language-context";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { formatWhatsAppUrl } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/config";
+import { useTheme } from "@/context/theme-context";
 import { ArrowRight } from "lucide-react";
 
 export function Header() {
   const pathname = usePathname();
   const { isUrdu } = useLanguage();
+  const { resolvedTheme } = useTheme();
 
   const navLinks = [
     { href: "/start", en: "Income Tax Return", ur: "انکم ٹیکس ریٹرن" },
@@ -43,7 +45,11 @@ export function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
         {/* Brand Lockup: Official Storefront Logo + Tax Practice Pill */}
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-          <StoreLogo size={26} className="h-6 sm:h-7 w-auto transition-transform group-hover:scale-[1.02]" />
+          <StoreLogo
+            size={26}
+            variant={resolvedTheme === "dark" ? "white" : "black"}
+            className="h-6 sm:h-7 w-auto transition-transform group-hover:scale-[1.02]"
+          />
           <div className="flex items-center gap-1.5 pl-2 sm:pl-2.5 border-l border-rule/80">
             <span className="font-mono text-[9px] font-bold px-2 py-0.5 rounded-full bg-apple-blue/15 text-apple-blue border border-apple-blue/30 uppercase tracking-widest">
               TAX

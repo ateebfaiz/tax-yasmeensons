@@ -32,7 +32,7 @@ export interface UploadedTaxDocument {
   type: string;
   category: DocumentCategory;
   previewUrl?: string;
-  base64?: string;
+  url?: string;
   uploadedAt: Date;
   status: "complete" | "uploading" | "error";
   progress?: number;
@@ -110,7 +110,7 @@ export function SmoothFileUpload({
   };
 
   const processFile = useCallback(
-    (file: File, category: DocumentCategory) => {
+    async (file: File, category: DocumentCategory) => {
       const maxBytes = maxFileSizeMb * 1024 * 1024;
       if (file.size > maxBytes) {
         setErrorMessage(`File "${file.name}" exceeds maximum allowed size of ${maxFileSizeMb}MB.`);
@@ -120,34 +120,50 @@ export function SmoothFileUpload({
       setErrorMessage(null);
       const isImg = file.type.startsWith("image/");
       const id = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+      const previewUrl = isImg ? URL.createObjectURL(file) : undefined;
 
-      const newDoc: UploadedTaxDocument = {
+      const pending: UploadedTaxDocument = {
         id,
         name: file.name,
         size: file.size,
         type: file.type || "application/octet-stream",
         category,
+        previewUrl,
         uploadedAt: new Date(),
-        status: "complete",
-        progress: 100,
+        status: "uploading",
+        progress: 20,
       };
 
-      if (isImg) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const result = e.target?.result as string;
-          newDoc.previewUrl = result;
-          newDoc.base64 = result;
-          setFiles((prev) => {
-            const updated = [...prev, newDoc];
-            onFilesChange?.(updated);
-            return updated;
-          });
-        };
-        reader.readAsDataURL(file);
-      } else {
+      setFiles((prev) => {
+        const updated = [...prev, pending];
+        onFilesChange?.(updated);
+        return updated;
+      });
+
+      try {
+        const form = new FormData();
+        form.append("file", file);
+        form.append("category", category);
+        const res = await fetch("/api/documents", { method: "POST", body: form });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.url) {
+          throw new Error(data.error || "Upload failed");
+        }
         setFiles((prev) => {
-          const updated = [...prev, newDoc];
+          const updated = prev.map((f) =>
+            f.id === id
+              ? { ...f, url: data.url as string, status: "complete" as const, progress: 100 }
+              : f
+          );
+          onFilesChange?.(updated);
+          return updated;
+        });
+      } catch {
+        setErrorMessage(`Could not save “${file.name}”. Please retry or send it on WhatsApp.`);
+        setFiles((prev) => {
+          const updated = prev.map((f) =>
+            f.id === id ? { ...f, status: "error" as const } : f
+          );
           onFilesChange?.(updated);
           return updated;
         });

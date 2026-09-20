@@ -124,9 +124,9 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
             className="flex items-center gap-2.5 px-3.5 py-1.5 text-white cursor-pointer select-none"
             onClick={() => setView("intake")}
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-            <span className="font-mono text-[11px] font-bold tracking-tight text-white/90">
-              {activeCaseRef ? `CASE: ${activeCaseRef}` : "TY2026 INDIVIDUAL PRACTICE"}
+            <span className="w-2 h-2 rounded-full bg-apple-green shrink-0" />
+            <span className="font-mono text-[11px] font-bold tracking-tight text-white/90 whitespace-nowrap">
+              {activeCaseRef ? `CASE: ${activeCaseRef}` : "TAX SEASON 2026 · ATL OPEN"}
             </span>
 
             <AnimatePresence>

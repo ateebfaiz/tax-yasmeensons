@@ -18,15 +18,24 @@ import {
   ExternalLink,
 } from "lucide-react";
 
+interface CaseDocument {
+  name: string;
+  category: string;
+  url: string;
+}
+
 interface CaseResult {
   reference: string;
-  full_name: string;
-  cnic?: string;
+  fullName: string;
   persona: string;
   status: string;
-  service_tier?: string;
-  created_at?: string;
-  documents_summary?: string;
+  serviceTier?: string;
+  createdAt?: string;
+  stage?: number;
+  stageLabel?: string;
+  stageLabelUrdu?: string;
+  notesSummary?: string;
+  documents?: CaseDocument[];
 }
 
 export default function TrackCasePage() {
@@ -75,7 +84,11 @@ export default function TrackCasePage() {
     return 0;
   };
 
-  const currentStage = caseData ? getStageIndex(caseData.status) : 0;
+  const currentStage = caseData
+    ? typeof caseData.stage === "number"
+      ? Math.max(0, Math.min(3, caseData.stage - 1))
+      : getStageIndex(caseData.status)
+    : 0;
 
   const STAGES = [
     {
@@ -152,8 +165,8 @@ export default function TrackCasePage() {
           </div>
 
           {error && (
-            <div className="p-3 bg-red-500/15 border border-red-500/30 rounded-2xl text-red-300 text-xs flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+            <div className="p-3 bg-apple-red/10 border border-apple-red/30 rounded-2xl text-apple-red text-xs flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
@@ -165,14 +178,14 @@ export default function TrackCasePage() {
             icon={<Search className="w-4 h-4" />}
             className="w-full"
           >
-            {loading ? "Verifying Status with Database..." : "Check Case Status"}
+            {loading ? "Looking up your case…" : "Check Case Status"}
           </GlassButton>
         </form>
 
         <div className="pt-2 flex items-center justify-between text-[11px] text-ash border-t border-white/[0.08]">
           <span className="flex items-center gap-1">
             <ShieldCheck className="w-3.5 h-3.5 text-apple-blue" />
-            <span>FastAPI Cloud Microservice Authority</span>
+            <span>Live from our filing desk</span>
           </span>
           <a
             href={formatWhatsAppUrl("Hi, I lost my Tax Filing Case Reference Number.")}
@@ -195,11 +208,11 @@ export default function TrackCasePage() {
                   CASE FOLIO: {caseData.reference}
                 </span>
                 <h2 className="font-serif text-xl font-bold text-ink dark:text-white mt-0.5">
-                  {caseData.full_name}
+                  {caseData.fullName}
                 </h2>
                 <div className="text-xs text-ash mt-0.5">
                   Category: <span className="text-ink dark:text-white font-mono uppercase">{caseData.persona}</span>
-                  {caseData.cnic && ` · CNIC: ${caseData.cnic}`}
+                  {caseData.stageLabel ? ` · ${caseData.stageLabel}` : ""}
                 </div>
               </div>
 
@@ -207,9 +220,9 @@ export default function TrackCasePage() {
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-mono font-bold bg-apple-blue/20 text-apple-blue border border-apple-blue/40 uppercase">
                   {caseData.status || "In Progress"}
                 </span>
-                {caseData.created_at && (
+                {caseData.createdAt && (
                   <div className="text-[10px] text-ash font-mono mt-1">
-                    Queued: {new Date(caseData.created_at).toLocaleDateString()}
+                    Queued: {new Date(caseData.createdAt + "Z").toLocaleDateString()}
                   </div>
                 )}
               </div>
@@ -230,10 +243,10 @@ export default function TrackCasePage() {
                       key={stg.num}
                       className={`p-3 rounded-2xl border transition-all ${
                         isCurrent
-                          ? "bg-apple-blue/15 border-apple-blue shadow-[0_0_12px_rgba(0,122,255,0.25)] text-apple-blue font-bold"
+                          ? "bg-apple-blue/15 border-apple-blue text-apple-blue font-bold"
                           : isDone
-                          ? "bg-white/[0.04] border-white/20 text-[#aeb9bf]"
-                          : "bg-white/[0.02] border-white/[0.06] text-[#aeb9bf]/40"
+                          ? "bg-black/[0.04] dark:bg-white/[0.04] border-black/10 dark:border-white/20 text-ash"
+                          : "bg-transparent border-black/10 dark:border-white/[0.08] text-ash/50"
                       }`}
                     >
                       <div className="flex items-center justify-between text-xs font-mono mb-1">
@@ -254,14 +267,36 @@ export default function TrackCasePage() {
               </div>
             </div>
 
+            {caseData.documents && caseData.documents.length > 0 && (
+              <div className="space-y-1.5">
+                <span className="font-mono text-[11px] text-ash uppercase tracking-wider">
+                  Saved documents
+                </span>
+                <ul className="space-y-1">
+                  {caseData.documents.map((doc) => (
+                    <li key={doc.url} className="text-xs">
+                      <a
+                        href={doc.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-apple-blue hover:underline"
+                      >
+                        {doc.category.toUpperCase()} · {doc.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {/* Next Action Box */}
-            <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/[0.08] text-xs flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="p-3.5 rounded-2xl bg-black/[0.04] dark:bg-white/[0.04] border border-black/10 dark:border-white/[0.08] text-xs flex flex-col sm:flex-row items-center justify-between gap-3">
               <div className="text-ash text-center sm:text-left">
-                Need to submit supporting bank certificates or expedite filing?
+                Need to send a bank certificate or speed up filing?
               </div>
               <a
                 href={formatWhatsAppUrl(
-                  `Hi, following up on Tax Filing Case ${caseData.reference} (${caseData.full_name}).`
+                  `Hi, following up on Tax Filing Case ${caseData.reference} (${caseData.fullName}).`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"

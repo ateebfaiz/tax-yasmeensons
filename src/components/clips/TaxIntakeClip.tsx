@@ -119,6 +119,15 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
         clientNotes: notesSummary,
         documentsSummary: documentsSummary || `Mobile AppClip Intake: ${persona.toUpperCase()} (${irisStatusLabel})`,
         source: "fast_app_clip",
+        documents: uploadedFiles
+          .filter((f) => f.url && f.status === "complete")
+          .map((f) => ({
+            name: f.name,
+            category: f.category,
+            url: f.url as string,
+            size: f.size,
+            type: f.type,
+          })),
       });
 
       if (!result.ok) {
@@ -210,7 +219,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setPersona(p.id)}
                       className={`p-3 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-1.5 ${
                         isSelected
-                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_16px_rgba(0,122,255,0.2)] font-bold text-ink dark:text-white"
+                          ? "border-apple-blue bg-apple-blue/15 font-bold text-ink dark:text-white"
                           : "border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] text-ink/80 dark:text-white/80"
                       }`}
                     >
@@ -249,7 +258,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setIrisStatus(s.id as any)}
                       className={`p-2.5 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-0.5 ${
                         isSelected
-                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_16px_rgba(0,122,255,0.2)] font-bold text-ink dark:text-white"
+                          ? "border-apple-blue bg-apple-blue/15 font-bold text-ink dark:text-white"
                           : "border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] text-ink/80 dark:text-white/80"
                       }`}
                     >
@@ -399,7 +408,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setTier(t.id)}
                       className={`p-2.5 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-1 relative ${
                         isSelected
-                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_16px_rgba(0,122,255,0.2)] font-bold text-ink dark:text-white"
+                          ? "border-apple-blue bg-apple-blue/15 font-bold text-ink dark:text-white"
                           : "border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] text-ink/80 dark:text-white/80"
                       }`}
                     >
@@ -592,7 +601,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
         {/* STEP 3: SUCCESS & FOLIO */}
         {step === 3 && (
           <div className="text-center py-4 space-y-3.5">
-            <div className="w-14 h-14 rounded-full bg-apple-blue/15 text-apple-blue flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(0,122,255,0.3)]">
+            <div className="w-14 h-14 rounded-full bg-apple-blue/15 text-apple-blue flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 

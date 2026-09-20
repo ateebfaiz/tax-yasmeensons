@@ -20,11 +20,11 @@ export function GlassCard({
     default:
       "border text-ink shadow-[0_4px_24px_rgba(0,0,0,0.04)]",
     active:
-      "bg-apple-blue/10 border-apple-blue/50 text-ink dark:text-white shadow-[0_0_24px_rgba(0,122,255,0.20)]",
+      "bg-apple-blue/10 border-apple-blue/50 text-ink dark:text-white",
     subtle:
       "bg-black/[0.03] dark:bg-white/[0.05] border-black/[0.05] dark:border-white/[0.08] text-ash dark:text-system-secondary-label",
     glow:
-      "bg-white/75 dark:bg-[#2c2c2e]/75 border-apple-blue/40 shadow-[0_0_32px_rgba(0,122,255,0.20)]",
+      "bg-white/75 dark:bg-[#2c2c2e]/75 border-apple-blue/40",
   };
 
   return (

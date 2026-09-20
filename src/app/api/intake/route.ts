@@ -27,6 +27,7 @@ export async function POST(req: Request) {
       familyConsolidation,
       whtAudit,
       fbrPayload,
+      documents,
     } = body;
 
     if (!fullName || !phone) {
@@ -64,9 +65,10 @@ export async function POST(req: Request) {
       documentsSummary: documentsSummary?.trim() || null,
       source,
       fbrPayload: fbrPayload || null,
+      documents: Array.isArray(documents) ? documents : null,
     };
 
-    // Forward to FastAPI Cloud Backend Authority
+    // Save the case with the filing desk
     try {
       const backendRes = await fetch(`${FASTAPI_BACKEND_URL}/api/tax/intake`, {
         method: "POST",
@@ -88,9 +90,9 @@ export async function POST(req: Request) {
       }
 
       const errData = await backendRes.json().catch(() => null);
-      console.error("[FastAPI Cloud] Non-200 response:", backendRes.status, errData);
+      console.error("[intake] desk returned", backendRes.status, errData);
     } catch (backendErr) {
-      console.error("[FastAPI Cloud] Connection error:", backendErr);
+      console.error("[intake] desk unreachable:", backendErr);
     }
 
     // Fail-fast with clear WhatsApp fallback rather than silent fake success
