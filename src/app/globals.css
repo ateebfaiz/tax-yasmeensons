@@ -8,11 +8,17 @@
   * {
     @apply border-rule;
   }
+  html {
+    overflow-x: clip;
+    max-width: 100vw;
+  }
   body {
     @apply bg-paper text-ink antialiased font-sans;
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+    max-width: 100vw;
   }
   .theme {
     --color-brand: var(--brand, oklch(0.72 0.2 352.53));

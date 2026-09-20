@@ -7,6 +7,7 @@ import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { BilingualLabel } from "@/components/ui/bilingual-label";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { formatWhatsAppUrl, formatCnicInput, formatPhoneInput } from "@/lib/utils";
+import { postIntake } from "@/lib/intake";
 import { SITE_CONFIG } from "@/lib/config";
 import {
   ShieldCheck,
@@ -107,25 +108,26 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
         whtAudit ? "Full withholding tax deduction claim audit enabled (banks, bills, SIM, fuel)" : "",
       ].filter(Boolean).join(" | ");
 
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          phone: phone.trim(),
-          cnic: cnic.trim(),
-          email: needEmailHelp ? "needs_email_help@fbr.local" : email.trim(),
-          persona,
-          serviceTier: tier,
-          contactPreference: submitViaWhatsApp ? "whatsapp" : "web",
-          credentialsNotes: notesSummary,
-          documentsSummary: documentsSummary || `Mobile AppClip Intake: ${persona.toUpperCase()} (${irisStatusLabel})`,
-          source: "fast_app_clip",
-        }),
+      const result = await postIntake({
+        fullName: fullName.trim(),
+        phone: phone.trim(),
+        cnic: cnic.trim(),
+        email: needEmailHelp ? "needs_email_help@fbr.local" : email.trim(),
+        persona,
+        serviceTier: tier,
+        contactPreference: submitViaWhatsApp ? "whatsapp" : "web",
+        clientNotes: notesSummary,
+        documentsSummary: documentsSummary || `Mobile AppClip Intake: ${persona.toUpperCase()} (${irisStatusLabel})`,
+        source: "fast_app_clip",
       });
 
-      const data = await res.json();
-      const generatedRef = data.reference || "TAX-2026-CLIP";
+      if (!result.ok) {
+        setError(result.error);
+        if (submitViaWhatsApp) window.open(result.fallbackWhatsAppUrl, "_blank");
+        return;
+      }
+
+      const generatedRef = result.reference;
       setRefId(generatedRef);
 
       if (submitViaWhatsApp) {
@@ -166,7 +168,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
     <AppClipSheet
       onClose={onClose}
       title="Fast Tax Filing Intake"
-      subtitle="فوری ٹیکس فائلنگ • 60 Seconds • No Password Required"
+      subtitle="60 seconds · No password required"
     >
       <div className="space-y-3.5 pb-3 text-ink dark:text-white">
         {/* Step Indicator */}
@@ -208,8 +210,8 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setPersona(p.id)}
                       className={`p-3 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-1.5 ${
                         isSelected
-                          ? "border-apple-blue/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-ink dark:text-white"
-                          : "border-rule/50 dark:border-white/[0.08] bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-ash dark:text-white/60"
+                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_16px_rgba(0,122,255,0.2)] font-bold text-ink dark:text-white"
+                          : "border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] text-ink/80 dark:text-white/80"
                       }`}
                     >
                       <div className="flex items-center gap-2">
@@ -247,8 +249,8 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setIrisStatus(s.id as any)}
                       className={`p-2.5 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-0.5 ${
                         isSelected
-                          ? "border-apple-blue/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-ink dark:text-white"
-                          : "border-rule/50 dark:border-white/[0.08] bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-ash dark:text-white/60"
+                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_16px_rgba(0,122,255,0.2)] font-bold text-ink dark:text-white"
+                          : "border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] text-ink/80 dark:text-white/80"
                       }`}
                     >
                       <span className="text-xs font-bold leading-tight">{s.labelEn}</span>
@@ -397,8 +399,8 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setTier(t.id)}
                       className={`p-2.5 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-1 relative ${
                         isSelected
-                          ? "border-apple-blue/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-ink dark:text-white"
-                          : "border-rule/50 dark:border-white/[0.08] bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-ash dark:text-white/60"
+                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_16px_rgba(0,122,255,0.2)] font-bold text-ink dark:text-white"
+                          : "border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] text-ink/80 dark:text-white/80"
                       }`}
                     >
                       {t.rec && (
@@ -565,7 +567,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   e.preventDefault();
                   handleSubmit(true);
                 }}
-                className={`flex-1 h-12 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:opacity-95 text-white font-bold text-xs shadow-md active:scale-95 transition-all ${
+                className={`flex-1 h-12 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:opacity-95 text-white font-bold text-xs shadow-md active:scale-95 transition-all whitespace-nowrap px-3 sm:px-4 ${
                   submitting ? "opacity-50 pointer-events-none" : ""
                 }`}
               >
@@ -590,7 +592,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
         {/* STEP 3: SUCCESS & FOLIO */}
         {step === 3 && (
           <div className="text-center py-4 space-y-3.5">
-            <div className="w-14 h-14 rounded-full bg-apple-blue/15 text-apple-blue flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
+            <div className="w-14 h-14 rounded-full bg-apple-blue/15 text-apple-blue flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(0,122,255,0.3)]">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
@@ -599,7 +601,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                 CASE FOLIO ISSUED
               </div>
               <div className="font-mono text-2xl sm:text-3xl font-black text-ink dark:text-white tracking-tight">
-                {refId || "TAX-2026-RECORD"}
+                {refId}
               </div>
               <div className="text-xs text-ash dark:text-white/60">
                 TY2026 • {persona.toUpperCase()} • NON-BUSINESS INDIVIDUAL

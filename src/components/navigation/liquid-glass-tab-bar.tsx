@@ -56,11 +56,11 @@ export function LiquidGlassTabBar() {
       <nav
         className={cn(
           "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] px-2.5",
-          "bg-white/72 dark:bg-[#1c1c1e]/75",
-          "border border-black/[0.08] dark:border-white/[0.12]",
-          "shadow-[0_16px_40px_rgba(0,0,0,0.10)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
+          "border shadow-[0_16px_40px_rgba(0,0,0,0.10)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
         )}
         style={{
+          backgroundColor: "var(--glass-bg-strong)",
+          borderColor: "var(--glass-border)",
           WebkitBackdropFilter: "blur(28px) saturate(190%)",
           backdropFilter: "blur(28px) saturate(190%)",
         }}
@@ -84,7 +84,7 @@ export function LiquidGlassTabBar() {
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
           <Home className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Home</span>
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Home</span>
         </button>
 
         {/* Tab 2: Services */}
@@ -103,7 +103,7 @@ export function LiquidGlassTabBar() {
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
           <Layers className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Services</span>
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Services</span>
         </button>
 
         {/* Tab 3: Checklist (Docs) */}
@@ -122,7 +122,7 @@ export function LiquidGlassTabBar() {
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
           <CheckSquare className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Docs</span>
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Docs</span>
         </button>
 
         {/* Tab 4: IRIS Guide */}
@@ -141,7 +141,7 @@ export function LiquidGlassTabBar() {
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
           <HelpCircle className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Guide</span>
+          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Guide</span>
         </button>
 
         {/* Tab 5: Start Fast AppClip Intake FAB */}

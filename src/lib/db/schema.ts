@@ -11,7 +11,7 @@ export const taxFilings = pgTable("tax_filings", {
   irisStatus: varchar("iris_status", { length: 50 }).notNull(), // active | forgot_password | unregistered
   serviceTier: varchar("service_tier", { length: 50 }).notNull(), // guided_1000 | assistance_2500 | complex_5000
   contactPreference: varchar("contact_preference", { length: 50 }).notNull(), // whatsapp | phone_call | email
-  credentialsNotes: text("credentials_notes"), // Preserves any user-entered notes/credentials without dumping
+  clientNotes: text("client_notes"),
   documentsSummary: text("documents_summary"),
   todoistTaskId: varchar("todoist_task_id", { length: 255 }),
   source: varchar("source", { length: 50 }).default("web_intake"),

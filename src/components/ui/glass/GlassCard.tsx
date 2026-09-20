@@ -13,11 +13,12 @@ export function GlassCard({
   className = "",
   variant = "default",
   interactive = false,
+  style,
   ...props
 }: GlassCardProps) {
   const variantStyles = {
     default:
-      "bg-white/65 dark:bg-[#1c1c1e]/65 border-black/[0.08] dark:border-white/[0.12] text-ink dark:text-white shadow-[0_4px_24px_rgba(0,0,0,0.04)]",
+      "border text-ink shadow-[0_4px_24px_rgba(0,0,0,0.04)]",
     active:
       "bg-apple-blue/10 border-apple-blue/50 text-ink dark:text-white shadow-[0_0_24px_rgba(0,122,255,0.20)]",
     subtle:
@@ -36,9 +37,12 @@ export function GlassCard({
         className
       )}
       style={{
+        backgroundColor: variant === "default" ? "var(--glass-card-bg)" : undefined,
+        borderColor: variant === "default" ? "var(--glass-border)" : undefined,
+        color: "var(--text-primary)",
         WebkitBackdropFilter: "blur(24px) saturate(180%)",
         backdropFilter: "blur(24px) saturate(180%)",
-        ...props.style,
+        ...style,
       }}
       {...props}
     >

@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { AppClipProvider } from "@/components/ui/app-clip/AppClipProvider";
 import { LanguageProvider } from "@/context/language-context";
 import { ThemeProvider } from "@/context/theme-context";
-import { LetterheadBand } from "@/components/navigation/letterhead-band";
 import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/navigation/footer";
 import { LiquidGlassTabBar } from "@/components/navigation/liquid-glass-tab-bar";
@@ -28,7 +27,10 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   viewportFit: "cover",
-  themeColor: "#293241",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2f2f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
 };
 
 export default function RootLayout({
@@ -44,7 +46,7 @@ export default function RootLayout({
             __html: `
               try {
                 const t = localStorage.getItem('tax_theme');
-                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                if (t === 'dark') {
                   document.documentElement.classList.add('dark');
                 } else {
                   document.documentElement.classList.remove('dark');
@@ -60,13 +62,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-paper text-ink font-sans selection:bg-apple-blue/20 selection:text-apple-blue transition-colors duration-200">
+      <body className="min-h-screen flex flex-col bg-paper text-ink font-sans selection:bg-apple-blue/20 selection:text-apple-blue transition-colors duration-200 overflow-x-clip">
         <ThemeProvider>
           <LanguageProvider>
             <AppClipProvider>
-              <LetterheadBand />
               <Header />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 w-full overflow-x-clip">{children}</main>
               <Footer />
               <LiquidGlassTabBar />
             </AppClipProvider>

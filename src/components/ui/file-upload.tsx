@@ -252,6 +252,7 @@ export function SmoothFileUpload({
             ? "border-apple-blue bg-apple-blue/10 scale-[1.01]"
             : "border-black/[0.12] dark:border-white/[0.16] hover:border-apple-blue/60 hover:bg-white/80 dark:hover:bg-[#1c1c1e]/80"
         )}
+        data-smooth-upload="true"
         style={{
           WebkitBackdropFilter: "blur(24px) saturate(180%)",
           backdropFilter: "blur(24px) saturate(180%)",
@@ -406,7 +407,7 @@ export function SmoothFileUpload({
             </div>
           </div>
 
-          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-apple-blue text-white font-mono text-xs font-bold shrink-0 group-hover:translate-x-0.5 transition-transform shadow-sm">
+          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-apple-blue text-white font-mono text-xs font-bold shrink-0 whitespace-nowrap group-hover:translate-x-0.5 transition-transform shadow-sm">
             <span>Manual Form</span>
             <ArrowRight className="w-3 h-3" />
           </span>

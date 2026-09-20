@@ -236,10 +236,10 @@ export default function HomePage() {
   return (
     <div className="space-y-16 md:space-y-24 py-8 md:py-16">
       {/* 1. Hero Section — Lead with the Job */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7">
         {/* Tax Season 2026 Announcement Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-apple-blue/10 dark:bg-apple-blue/15 border border-apple-blue/30 text-apple-blue text-xs font-mono font-bold shadow-[0_0_16px_rgba(0,122,255,0.15)] animate-pulse">
-          <Sparkles className="w-3.5 h-3.5 text-apple-blue" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-apple-blue/10 dark:bg-apple-blue/15 border border-apple-blue/30 text-apple-blue text-xs font-mono font-bold shadow-[0_0_16px_rgba(0,122,255,0.15)] animate-pulse whitespace-nowrap">
+          <Sparkles className="w-3.5 h-3.5 text-apple-blue shrink-0" />
           <span>Tax Season 2026 is Here! 🎉 Active ATL Filing Open</span>
         </div>
 
@@ -249,10 +249,10 @@ export default function HomePage() {
         </div>
 
         {/* Hero Title */}
-        <div className="space-y-3.5">
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink dark:text-white tracking-tight leading-[1.15]">
-            File your Tax Year 2026 return <br className="hidden sm:inline" />
-            <span className="italic text-apple-blue font-bold">— from PKR 1,000</span>
+        <div className="space-y-4 max-w-4xl mx-auto">
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink dark:text-white tracking-tight leading-[1.2]">
+            <span>File your Tax Year 2026 return </span>
+            <span className="italic text-apple-blue font-bold whitespace-nowrap">— from PKR 1,000</span>
           </h1>
 
           {isUrdu ? (
@@ -260,7 +260,7 @@ export default function HomePage() {
               ہم تیار کریں گے۔ آپ آفیشل آئرس پر خود لاگ ان کر کے فائل کریں گے۔
             </p>
           ) : (
-            <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-ash max-w-3xl mx-auto leading-relaxed">
               We prepare the figures and reconcile your wealth statement to exact 0.00. You log into official FBR IRIS yourself. <strong className="text-ink dark:text-white">We never take your password.</strong>
             </p>
           )}
@@ -287,7 +287,7 @@ export default function HomePage() {
 
         {/* Pricing Story Highlight */}
         <div className="inline-block bg-brass-subtle border border-brass/40 px-4 py-2 rounded-full font-mono text-xs text-ink shadow-sm">
-          Most clients choose: <strong className="text-brass font-bold">FA-2500 Complete Assistance (PKR 2,500)</strong>
+          Most clients choose: <strong className="text-apple-blue font-bold">FA-2500 Complete Assistance (PKR 2,500)</strong>
         </div>
 
         {/* CTAs with Dual Viewport Separation */}
@@ -296,24 +296,24 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("fbr-simplified-intake")}
-            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-palette-coral to-apple-blue hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(238,108,77,0.30)] transition-all active:scale-95"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(0,122,255,0.30)] transition-all active:scale-95 whitespace-nowrap"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 shrink-0" />
             <span>Start FBR 8-Window Return</span>
           </button>
 
           <Link
             href="/start"
-            className="hidden md:inline-flex items-center justify-center gap-2 bg-gradient-to-r from-palette-coral to-apple-blue hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(238,108,77,0.30)] transition-all active:scale-95"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(0,122,255,0.30)] transition-all active:scale-95 whitespace-nowrap"
           >
             <span>Start Filing (Part 01 / 04)</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 shrink-0" />
           </Link>
 
           {/* Track Filing Progress Link */}
           <Link
             href="/track"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-white/15 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:border-apple-blue transition-all active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-white/[0.06] backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.12] text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:border-apple-blue transition-all active:scale-95 whitespace-nowrap"
           >
             <span>Track Case Status (/track)</span>
           </Link>
@@ -322,51 +322,51 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light dark:bg-white/[0.04] border border-rule text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm transition-all active:scale-95 shadow-sm"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-white/[0.06] backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.12] text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm transition-all active:scale-95 shadow-sm whitespace-nowrap"
           >
-            <FileText className="w-4 h-4 text-apple-blue" />
+            <FileText className="w-4 h-4 text-apple-blue shrink-0" />
             <span>Docs Checklist</span>
           </button>
 
           <Link
             href="/requirements"
-            className="hidden md:inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl border border-rule hover:border-apple-blue text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-all active:scale-95"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-white/[0.06] backdrop-blur-xl border border-black/[0.08] dark:border-white/[0.12] hover:border-apple-blue text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-all active:scale-95 whitespace-nowrap"
           >
-            <FileText className="w-4 h-4 text-apple-blue" />
+            <FileText className="w-4 h-4 text-apple-blue shrink-0" />
             <span>Required Documents</span>
           </Link>
         </div>
 
         {/* Mobile Frosted Quick Tray (AppClips) */}
         <div className="md:hidden pt-2 flex flex-wrap items-center justify-center gap-2 text-xs">
-          <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold">
+          <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold whitespace-nowrap">
             Quick Clips:
           </span>
           <button
             type="button"
             onClick={() => appClip.open("fbr-simplified-intake")}
-            className="px-3.5 py-1.5 rounded-full bg-apple-blue/15 border border-apple-blue/40 text-apple-blue font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-apple-blue/15 border border-apple-blue/40 text-apple-blue font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95 whitespace-nowrap"
           >
             <span>⚡ FBR Simplified Return</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95 whitespace-nowrap"
           >
             <span>📋 Documents Needed</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("whatsapp-intake")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95 whitespace-nowrap"
           >
             <span className="text-[#25D366]">💬 WhatsApp File</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("iris-guide")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95 whitespace-nowrap"
           >
             <span>🛡️ IRIS Password Guide</span>
           </button>
@@ -374,12 +374,12 @@ export default function HomePage() {
 
         {/* Desktop Quick Portals */}
         <div className="hidden md:flex pt-2 flex-wrap items-center justify-center gap-2 text-xs">
-          <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold">
+          <span className="text-[11px] font-mono text-ash uppercase tracking-wider font-semibold whitespace-nowrap">
             Portals:
           </span>
           <Link
             href="/requirements"
-            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] hover:border-apple-blue text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95 whitespace-nowrap"
           >
             <span>📋 Document Checklist</span>
           </Link>
@@ -387,14 +387,14 @@ export default function HomePage() {
             href={formatWhatsAppUrl("Hi, I want to file my Tax Year 2026 return.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-[#25D366] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 backdrop-blur-md border border-[#25D366]/40 hover:border-[#25D366] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95 whitespace-nowrap"
           >
-            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
-            <span className="text-[#128C7E] dark:text-[#25D366]">{SITE_CONFIG.contact.whatsappDisplay} (WhatsApp Desk)</span>
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+            <span className="text-[#25D366]">{SITE_CONFIG.contact.whatsappDisplay} (WhatsApp Desk)</span>
           </a>
           <Link
             href="/iris-guide"
-            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 backdrop-blur-md border border-black/[0.08] dark:border-white/[0.12] hover:border-apple-blue text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95 whitespace-nowrap"
           >
             <span>🛡️ IRIS Security Walkthrough</span>
           </Link>
@@ -473,15 +473,15 @@ export default function HomePage() {
         </div>
 
         {/* SmoothUI Animated Tabs */}
-        <div className="flex justify-center pt-2">
+        <div className="flex justify-center pt-2 overflow-x-auto pb-1 no-scrollbar">
           <AnimatedTabs
             variant="pill"
             activeTab={pricingCategory}
             onChange={setPricingCategory}
             tabs={[
-              { id: "all", label: "All Packages · تمام پیکجز" },
-              { id: "standard", label: "Individual Filers · انفرادی" },
-              { id: "complex", label: "Past Years / Special · خصوصی" },
+              { id: "all", label: "All Packages" },
+              { id: "standard", label: "Individual Filers" },
+              { id: "complex", label: "Past Years / Special" },
             ]}
           />
         </div>

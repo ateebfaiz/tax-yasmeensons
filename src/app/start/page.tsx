@@ -65,7 +65,7 @@ function StartWizardContent() {
                 Individual Tax Filing Registration
               </h1>
 
-              <div className="font-urdu text-base font-bold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-base font-bold text-apple-blue" dir="rtl">
                 انفرادی ٹیکس ریٹرن فائلنگ • تصدیق شدہ کوائف
               </div>
 
@@ -76,7 +76,7 @@ function StartWizardContent() {
 
             {/* Zero-Credential Guarantee Card */}
             <div className="p-5 rounded-2xl bg-paper-light border border-rule space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+              <div className="flex items-center gap-2 text-xs font-bold text-apple-blue">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Zero-Credential Invariant</span>
               </div>

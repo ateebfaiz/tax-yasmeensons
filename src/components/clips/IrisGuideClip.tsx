@@ -42,7 +42,7 @@ export default function IrisGuideClip({
 
           {/* Scenario 1: Form 181 Registration */}
           <GlassCard variant="default" className="p-3.5 space-y-1.5">
-            <div className="flex items-center gap-2 text-xs font-bold text-white">
+            <div className="flex items-center gap-2 text-xs font-bold text-ink dark:text-white">
               <UserCheck className="w-4 h-4 text-apple-blue" />
               <span>1. New Individual Registration (Form 181)</span>
             </div>
@@ -56,7 +56,7 @@ export default function IrisGuideClip({
 
           {/* Scenario 2: Forgot Password */}
           <GlassCard variant="default" className="p-3.5 space-y-1.5">
-            <div className="flex items-center gap-2 text-xs font-bold text-white">
+            <div className="flex items-center gap-2 text-xs font-bold text-ink dark:text-white">
               <KeyRound className="w-4 h-4 text-apple-blue" />
               <span>2. Forgot IRIS Password or PIN</span>
             </div>
@@ -70,7 +70,7 @@ export default function IrisGuideClip({
 
           {/* Scenario 3: Lost SIM / Inaccessible */}
           <GlassCard variant="default" className="p-3.5 space-y-1.5">
-            <div className="flex items-center gap-2 text-xs font-bold text-white">
+            <div className="flex items-center gap-2 text-xs font-bold text-ink dark:text-white">
               <AlertTriangle className="w-4 h-4 text-amber-400" />
               <span>3. Mobile SIM / Email Lost or Changed</span>
             </div>
@@ -86,7 +86,7 @@ export default function IrisGuideClip({
             href="https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 h-12 inline-flex items-center justify-center gap-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-[rgba(36,52,60,0.85)] border border-white/[0.16] text-white font-mono font-bold text-xs backdrop-blur-xl shadow-md active:scale-95 transition-all"
+            className="flex-1 h-12 inline-flex items-center justify-center gap-1.5 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-black/[0.06] dark:hover:bg-white/[0.12] border border-black/[0.12] dark:border-white/[0.16] text-ink dark:text-white font-mono font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <span>Open iris.fbr.gov.pk</span>
             <ExternalLink className="w-3.5 h-3.5" />

@@ -194,11 +194,11 @@ export default function TrackCasePage() {
                 <span className="font-mono text-[11px] text-apple-blue font-bold uppercase tracking-wider">
                   CASE FOLIO: {caseData.reference}
                 </span>
-                <h2 className="font-serif text-xl font-bold text-white mt-0.5">
+                <h2 className="font-serif text-xl font-bold text-ink dark:text-white mt-0.5">
                   {caseData.full_name}
                 </h2>
                 <div className="text-xs text-ash mt-0.5">
-                  Category: <span className="text-white font-mono uppercase">{caseData.persona}</span>
+                  Category: <span className="text-ink dark:text-white font-mono uppercase">{caseData.persona}</span>
                   {caseData.cnic && ` · CNIC: ${caseData.cnic}`}
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default function TrackCasePage() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-xs flex items-center gap-1.5 shadow active:scale-95 transition-all shrink-0"
+                className="px-4 py-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-xs flex items-center gap-1.5 shadow active:scale-95 transition-all shrink-0 whitespace-nowrap"
               >
                 <WhatsAppIcon className="w-3.5 h-3.5" />
                 <span>Chat on WhatsApp</span>

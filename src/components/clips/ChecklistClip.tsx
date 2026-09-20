@@ -214,7 +214,7 @@ export default function ChecklistClip({
             href={formatWhatsAppUrl("Hi, I have questions about required tax documents.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
+            className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-[#25D366]/10 border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all whitespace-nowrap"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>

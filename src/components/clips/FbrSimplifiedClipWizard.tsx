@@ -6,6 +6,7 @@ import { GlassCard } from "@/components/ui/glass/GlassCard";
 import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { formatWhatsAppUrl, formatCnicInput, formatPhoneInput } from "@/lib/utils";
+import { postIntake } from "@/lib/intake";
 import { SITE_CONFIG } from "@/lib/config";
 import {
   ShieldCheck,
@@ -341,25 +342,27 @@ export default function FbrSimplifiedClipWizard({
     };
 
     try {
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          phone: phone.trim(),
-          cnic: cnic.trim(),
-          email: email.trim(),
-          persona: flags.salary ? "salaried" : flags.property ? "landlord" : "individual",
-          serviceTier: payload?.defaultTier || "assistance_2500",
-          contactPreference: viaWhatsApp ? "whatsapp" : "web",
-          credentialsNotes: `FBR SRO 1561(I)/2025 Simplified Return Payload: ${JSON.stringify(fbrPayload)}`,
-          documentsSummary: `FBR 8-Window Wizard: TY2026. Taxable Inc: PKR ${totalTaxableIncome.toLocaleString()}, WHT: PKR ${totalTaxPaid.toLocaleString()}, Wealth Balance Gap: PKR ${unreconciledGap}`,
-          source: "fbr_simplified_clip_wizard",
-        }),
+      const result = await postIntake({
+        fullName: fullName.trim(),
+        phone: phone.trim(),
+        cnic: cnic.trim(),
+        email: email.trim(),
+        persona: flags.salary ? "salaried" : flags.property ? "landlord" : "individual",
+        serviceTier: payload?.defaultTier || "assistance_2500",
+        contactPreference: viaWhatsApp ? "whatsapp" : "web",
+        clientNotes: `FBR SRO 1561(I)/2025 Simplified Return. Taxable: PKR ${totalTaxableIncome.toLocaleString()}, WHT: PKR ${totalTaxPaid.toLocaleString()}, Wealth gap: PKR ${unreconciledGap}`,
+        documentsSummary: `FBR 8-Window Wizard: TY2026. Taxable Inc: PKR ${totalTaxableIncome.toLocaleString()}, WHT: PKR ${totalTaxPaid.toLocaleString()}, Wealth Balance Gap: PKR ${unreconciledGap}`,
+        source: "fbr_simplified_clip_wizard",
+        fbrPayload,
       });
 
-      const data = await res.json();
-      const generatedRef = data.reference || "YS-26-FBR";
+      if (!result.ok) {
+        setError(result.error);
+        if (viaWhatsApp) window.open(result.fallbackWhatsAppUrl, "_blank");
+        return;
+      }
+
+      const generatedRef = result.reference;
       setCaseReference(generatedRef);
       setSubmissionSuccess(true);
 
@@ -406,7 +409,7 @@ export default function FbrSimplifiedClipWizard({
                 onClick={() => idx <= activeStepIndex && setActiveStepIndex(idx)}
                 className={`flex-shrink-0 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium transition-all flex items-center gap-1.5 ${
                   isCurrent
-                    ? "bg-apple-blue text-white font-bold shadow-[0_0_12px_rgba(238,108,77,0.35)]"
+                    ? "bg-apple-blue text-white font-bold shadow-[0_0_12px_rgba(0,122,255,0.35)]"
                     : isCompleted
                     ? "bg-white/[0.08] text-apple-blue hover:bg-white/[0.12]"
                     : "bg-white/[0.03] text-ash dark:text-white/60/50 pointer-events-none"
@@ -534,8 +537,8 @@ export default function FbrSimplifiedClipWizard({
                       }
                       className={`p-3 rounded-2xl border text-left transition-all flex items-center justify-between gap-2 ${
                         isChecked
-                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_12px_rgba(238,108,77,0.25)] text-ink dark:text-white font-bold"
-                          : "border-rule/60 dark:border-white/[0.10] bg-paper-light/50 dark:bg-[#1c1c1e]/60 text-ash dark:text-white/60 hover:border-palette-sky/40"
+                          ? "border-apple-blue bg-apple-blue/15 shadow-[0_0_12px_rgba(0,122,255,0.25)] text-ink dark:text-white font-bold"
+                          : "border-rule/60 dark:border-white/[0.10] bg-paper-light/50 dark:bg-[#1c1c1e]/60 text-ash dark:text-white/60 hover:border-apple-blue/40"
                       }`}
                     >
                       <div className="min-w-0">
@@ -1367,7 +1370,7 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             {submissionSuccess ? (
               <div className="text-center py-5 space-y-3.5">
-                <div className="w-16 h-16 rounded-full bg-apple-blue/20 text-apple-blue flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
+                <div className="w-16 h-16 rounded-full bg-apple-blue/20 text-apple-blue flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(0,122,255,0.3)]">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
                 <div>
@@ -1468,7 +1471,7 @@ export default function FbrSimplifiedClipWizard({
                       e.preventDefault();
                       handleFinalSubmit(true);
                     }}
-                    className={`w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:opacity-95 text-white font-bold text-xs shadow-md active:scale-95 transition-all ${
+                    className={`w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] hover:opacity-95 text-white font-bold text-xs shadow-md active:scale-95 transition-all whitespace-nowrap px-4 ${
                       submitting ? "opacity-50 pointer-events-none" : ""
                     }`}
                   >

@@ -90,7 +90,7 @@ export default function ServicesPage() {
                 Tax Facilitation Services
               </h1>
 
-              <div className="font-urdu text-base font-bold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-base font-bold text-apple-blue" dir="rtl">
                 ہماری سروسز • مکمل رازداری اور شفاف فیس کے ساتھ
               </div>
 
@@ -101,7 +101,7 @@ export default function ServicesPage() {
 
             {/* Zero-Credential Invariant Card */}
             <div className="p-5 rounded-2xl bg-paper-light border border-rule space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+              <div className="flex items-center gap-2 text-xs font-bold text-apple-blue">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Zero-Credential Invariant</span>
               </div>
@@ -171,7 +171,7 @@ export default function ServicesPage() {
                       <h2 className="font-serif text-2xl font-bold text-ink">
                         {svc.titleEn}
                       </h2>
-                      <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                      <div className="font-urdu text-sm text-apple-blue" dir="rtl">
                         {svc.titleUr}
                       </div>
                     </div>
@@ -202,7 +202,7 @@ export default function ServicesPage() {
                       href={`/start?tier=${svc.tierId}`}
                       className={`inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full font-mono font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 ${
                         svc.isRecommended
-                          ? "bg-gradient-to-r from-[#128C7E] to-[#0A6054] text-white shadow-md"
+                          ? "bg-gradient-to-r from-apple-blue to-apple-blue/80 text-white shadow-md"
                           : "bg-paper hover:bg-paper-light border border-rule text-ink"
                       }`}
                     >

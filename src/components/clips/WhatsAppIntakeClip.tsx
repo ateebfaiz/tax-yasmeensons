@@ -6,6 +6,7 @@ import { GlassCard } from "@/components/ui/glass/GlassCard";
 import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { BilingualLabel } from "@/components/ui/bilingual-label";
 import { formatWhatsAppUrl, formatPhoneInput } from "@/lib/utils";
+import { postIntake } from "@/lib/intake";
 import { SITE_CONFIG } from "@/lib/config";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { ShieldCheck, CheckCircle2 } from "lucide-react";
@@ -31,21 +32,20 @@ export default function WhatsAppIntakeClip({
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName,
-          phone,
-          persona,
-          serviceTier: tier,
-          contactPreference: "whatsapp",
-          credentialsNotes: notes,
-          source: "whatsapp_quick_clip",
-        }),
+      const result = await postIntake({
+        fullName,
+        phone,
+        persona,
+        serviceTier: tier,
+        contactPreference: "whatsapp",
+        clientNotes: notes,
+        source: "whatsapp_quick_clip",
       });
-      const data = await res.json();
-      const generatedRef = data.reference || "TAX-2026-DIRECT";
+      if (!result.ok) {
+        window.open(result.fallbackWhatsAppUrl, "_blank");
+        return;
+      }
+      const generatedRef = result.reference;
       setRefId(generatedRef);
 
       const msg = `*Quick WhatsApp Tax Filing Inquiry*\n\n` +
@@ -59,7 +59,6 @@ export default function WhatsAppIntakeClip({
 
       window.open(formatWhatsAppUrl(msg), "_blank");
     } catch {
-      // Fallback direct open
       const msg = `Hi, I would like to start Tax Year 2026 individual filing. Name: ${fullName}, Category: ${persona}`;
       window.open(formatWhatsAppUrl(msg), "_blank");
     } finally {
@@ -76,7 +75,7 @@ export default function WhatsAppIntakeClip({
       <div className="space-y-3.5 pb-3 text-ink dark:text-white">
         {refId ? (
           <div className="text-center py-5 space-y-3.5">
-            <div className="w-14 h-14 bg-apple-blue/15 text-apple-blue rounded-full flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
+            <div className="w-14 h-14 bg-apple-blue/15 text-apple-blue rounded-full flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(0,122,255,0.3)]">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold text-ink dark:text-white">WhatsApp Chat Opened</h3>

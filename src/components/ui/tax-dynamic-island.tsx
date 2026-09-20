@@ -64,7 +64,7 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
       case "intake":
         return (
           <div className="flex items-center gap-3 px-4 py-2 text-white">
-            <div className="w-8 h-8 rounded-full bg-[#C4A046]/20 flex items-center justify-center text-[#C4A046] shrink-0">
+            <div className="w-8 h-8 rounded-full bg-apple-blue/20 flex items-center justify-center text-apple-blue shrink-0">
               <Zap className="w-4 h-4" />
             </div>
             <div className="min-w-0 flex-1">
@@ -82,7 +82,7 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
                   appClip.open("tax-intake");
                 }
               }}
-              className="px-3 py-1 rounded-full bg-[#C4A046] hover:bg-[#DFBA5E] text-[#0B1C2C] font-bold text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-white shrink-0"
+              className="px-3 py-1 rounded-full bg-apple-blue hover:bg-apple-blue/90 text-white font-bold text-[11px] transition-colors focus-visible:ring-2 focus-visible:ring-white shrink-0"
             >
               Open
             </button>
@@ -138,7 +138,7 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
                   transition={{ duration: 0.15 }}
                   className="flex items-center gap-1.5 overflow-hidden pl-1 border-l border-white/20 text-[10px] text-white/80 font-mono"
                 >
-                  <span className="text-[#C4A046] font-semibold">Zero-Password</span>
+                  <span className="text-apple-blue font-semibold">Zero-Password</span>
                   <ChevronRight className="w-3 h-3 text-white/50" />
                 </motion.div>
               )}
@@ -155,7 +155,8 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
         layout
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="w-fit min-w-[140px] max-w-sm overflow-hidden rounded-full bg-[#07121D] border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+        className="w-fit min-w-[220px] min-h-[36px] max-w-sm overflow-hidden rounded-full bg-[#1c1c1e] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.35)] flex items-center justify-center"
+        style={{ color: "#ffffff" }}
         transition={
           shouldReduceMotion
             ? { duration: 0 }
@@ -168,9 +169,8 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
       >
         <motion.div
           key={view}
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={false}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.15 }}
         >
           {content}

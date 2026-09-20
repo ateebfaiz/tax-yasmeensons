@@ -51,15 +51,17 @@ export function AppClipSheet({
         }}
         className={cn(
           "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-50",
-          "flex flex-col",
-          "bg-white/75 dark:bg-[#1c1c1e]/78 text-ink dark:text-white",
-          "border-t border-x border-black/[0.10] dark:border-white/[0.14]",
+          "flex flex-col text-ink",
+          "border-t border-x",
           "rounded-t-[28px] sm:rounded-t-[32px] overflow-hidden",
           "shadow-[0_-20px_60px_rgba(0,0,0,0.15)] dark:shadow-[0_-25px_70px_rgba(0,0,0,0.7)]"
         )}
         style={{
           maxHeight: "90dvh",
           paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 16px)",
+          backgroundColor: "var(--glass-bg-strong)",
+          borderColor: "var(--glass-border)",
+          color: "var(--text-primary)",
           WebkitBackdropFilter: "blur(32px) saturate(190%)",
           backdropFilter: "blur(32px) saturate(190%)",
         }}
@@ -77,12 +79,12 @@ export function AppClipSheet({
           </div>
 
           <div className="px-5 flex justify-between items-center gap-3">
-            <div className="min-w-0">
-              <div className="font-serif text-lg font-bold text-ink dark:text-palette-frost tracking-tight truncate">
+            <div className="min-w-0 flex-1">
+              <div className="font-serif text-lg font-bold tracking-tight leading-tight" style={{ color: "var(--text-primary)" }}>
                 {title}
               </div>
               {subtitle && (
-                <div className="text-xs text-ash dark:text-palette-sky truncate mt-0.5">{subtitle}</div>
+                <div className="text-xs leading-tight mt-0.5 truncate" style={{ color: "var(--text-secondary)" }}>{subtitle}</div>
               )}
             </div>
             <div className="flex items-center gap-2 shrink-0">
@@ -92,7 +94,7 @@ export function AppClipSheet({
                 onClick={onClose}
                 onPointerDown={(e) => e.stopPropagation()}
                 aria-label="Close sheet"
-                className="w-9 h-9 rounded-full border border-rule/80 dark:border-white/15 bg-black/5 hover:bg-black/10 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] focus-visible:ring-2 focus-visible:ring-palette-coral flex items-center justify-center active:scale-95 transition-all text-ink dark:text-palette-frost shadow-sm"
+                className="w-9 h-9 rounded-full border border-black/[0.08] dark:border-white/15 bg-black/5 hover:bg-black/10 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] focus-visible:ring-2 focus-visible:ring-apple-blue flex items-center justify-center active:scale-95 transition-all text-ink dark:text-white shadow-sm shrink-0"
               >
                 <X className="w-4 h-4" />
               </button>

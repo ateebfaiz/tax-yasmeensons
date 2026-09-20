@@ -10,7 +10,7 @@ echo "================================================="
 
 # G1 - Zero-Credentials Gate
 echo "--> [G1] Checking for prohibited credential fields (IRIS password/PIN)..."
-if grep -rEi "(iris_password|irisPassword|iris_pin|irisPin|user_password|fbr_password)" src/ 2>/dev/null; then
+if grep -rEi "(iris_password|irisPassword|iris_pin|irisPin|user_password|fbr_password|credentials_notes|credentialsNotes)" src/ 2>/dev/null; then
   echo "ERROR: [G1 FAILED] Credential collection pattern found in src/! Never request IRIS passwords/PINs."
   exit 1
 fi

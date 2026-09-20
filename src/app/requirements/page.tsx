@@ -102,20 +102,20 @@ export default function RequirementsPage() {
               Required Information &amp; Documents
             </h2>
           </div>
-          <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">ضروری معلومات و دستاویزات</span>
+          <span className="font-urdu text-sm text-apple-blue" dir="rtl">ضروری معلومات و دستاویزات</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Item 1: Valid CNIC */}
           <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
             <div className="flex items-center gap-2 font-bold text-sm text-ink">
-              <span className="w-5 h-5 rounded-full bg-[#128C7E]/10 text-[#128C7E] flex items-center justify-center text-xs font-mono">1</span>
+              <span className="w-5 h-5 rounded-full bg-apple-blue/10 text-apple-blue flex items-center justify-center text-xs font-mono">1</span>
               <span>Valid CNIC (13 Digits)</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Your 13-digit Computerized National Identity Card number issued by NADRA (without hyphens for Iris verification).
             </p>
-            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-xs text-apple-blue" dir="rtl">
               نادرا سے جاری کردہ ۱۳ ہندسوں کا درست قومی شناختی کارڈ
             </div>
           </div>
@@ -123,13 +123,13 @@ export default function RequirementsPage() {
           {/* Item 2: Active Mobile SIM */}
           <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
             <div className="flex items-center gap-2 font-bold text-sm text-ink">
-              <Smartphone className="w-4 h-4 text-[#128C7E]" />
+              <Smartphone className="w-4 h-4 text-apple-blue" />
               <span>Active Mobile SIM</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Must be registered under your own CNIC to receive the verification code. If not in your name, <strong>must be on your blood relative or immediate family member</strong> (provide relative&apos;s name and CNIC).
             </p>
-            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-xs text-apple-blue" dir="rtl">
               اپنے نام پر یا قریبی خونی رشتہ دار کے نام پر رجسٹرڈ فعال سم
             </div>
           </div>
@@ -137,13 +137,13 @@ export default function RequirementsPage() {
           {/* Item 3: Personal Email */}
           <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
             <div className="flex items-center gap-2 font-bold text-sm text-ink">
-              <Mail className="w-4 h-4 text-[#128C7E]" />
+              <Mail className="w-4 h-4 text-apple-blue" />
               <span>Personal Email Address</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               An active email to receive official FBR notices and OTP verification. <em>We can help along with full guidance and create email if you don&apos;t already have one.</em>
             </p>
-            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-xs text-apple-blue" dir="rtl">
               ذاتی ای میل ایڈریس (اگر نہیں ہے تو ہم نیا بنا کر ترتیب دیں گے)
             </div>
           </div>
@@ -151,13 +151,13 @@ export default function RequirementsPage() {
           {/* Item 4: Residential Address */}
           <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
             <div className="flex items-center gap-2 font-bold text-sm text-ink">
-              <Home className="w-4 h-4 text-[#128C7E]" />
+              <Home className="w-4 h-4 text-apple-blue" />
               <span>Current Residential Address</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
               Your current home address, city, and district required for FBR Form 181 jurisdiction mapping.
             </p>
-            <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-xs text-apple-blue" dir="rtl">
               موجودہ رہائشی پتہ مع شہر و ضلع
             </div>
           </div>
@@ -198,7 +198,7 @@ export default function RequirementsPage() {
             href="https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono font-bold text-[#128C7E] hover:underline inline-flex items-center gap-1"
+            className="text-xs font-mono font-bold text-apple-blue hover:underline inline-flex items-center gap-1"
           >
             <span>iris.fbr.gov.pk</span>
             <ExternalLink className="w-3 h-3" />
@@ -236,13 +236,13 @@ export default function RequirementsPage() {
               Family Group Consolidation &amp; Source Withholding Audit
             </h2>
           </div>
-          <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">خاندانی اکاؤنٹس اور ٹیکس چھوٹ</span>
+          <span className="font-urdu text-sm text-apple-blue" dir="rtl">خاندانی اکاؤنٹس اور ٹیکس چھوٹ</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
             <div className="flex items-center gap-2 font-bold text-sm text-ink">
-              <Users className="w-4 h-4 text-[#128C7E]" />
+              <Users className="w-4 h-4 text-apple-blue" />
               <span>Inter-Family Fund Transfers Reconciliation</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
@@ -252,7 +252,7 @@ export default function RequirementsPage() {
 
           <div className="p-5 rounded-2xl border border-rule bg-paper-light space-y-2">
             <div className="flex items-center gap-2 font-bold text-sm text-ink">
-              <ShieldCheck className="w-4 h-4 text-[#128C7E]" />
+              <ShieldCheck className="w-4 h-4 text-apple-blue" />
               <span>Comprehensive Withholding Tax (WHT) Audit</span>
             </div>
             <p className="text-xs text-ash leading-relaxed">
@@ -273,7 +273,7 @@ export default function RequirementsPage() {
               Upload Documents &amp; Manual Filing Options
             </h2>
           </div>
-          <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+          <span className="font-urdu text-sm text-apple-blue" dir="rtl">
             دستاویزات اپلوڈ کریں یا مینوئل فارم پُر کریں
           </span>
         </div>
@@ -317,13 +317,13 @@ export default function RequirementsPage() {
                 key={c.code}
                 type="button"
                 onClick={() => setActiveCat(c.code)}
-                className={`px-4 py-2 rounded-full transition-all flex items-center gap-2 text-xs font-semibold ${
+                className={`px-4 py-2 rounded-full transition-all flex items-center gap-2 text-xs font-semibold whitespace-nowrap ${
                   activeCat === c.code
                     ? "bg-ink text-paper-light font-bold shadow-sm"
                     : "bg-folio border border-rule text-ash hover:text-ink hover:border-ash"
                 }`}
               >
-                <span className="text-brass font-bold">{c.code}</span>
+                <span className="text-apple-blue font-bold">{c.code}</span>
                 <span>{c.label}</span>
               </button>
             ))}
@@ -333,9 +333,9 @@ export default function RequirementsPage() {
             href={formatWhatsAppUrl("Hi, I need the tax document checklist for filing.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 text-[#128C7E] dark:text-[#25D366] font-mono font-bold text-xs hover:bg-[#25D366]/25 transition-all shadow-sm active:scale-95"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#25D366]/15 border border-[#25D366]/40 text-[#25D366] font-mono font-bold text-xs hover:bg-[#25D366]/25 transition-all shadow-sm active:scale-95 whitespace-nowrap"
           >
-            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
+            <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
             <span>Request Checklist on WhatsApp</span>
           </a>
         </div>
@@ -344,7 +344,7 @@ export default function RequirementsPage() {
         <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-5 border-rule shadow-sm">
           <div className="border-b border-rule-light pb-3 flex items-baseline justify-between">
             <h2 className="font-serif text-xl font-bold text-ink">{current.title}</h2>
-            <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">{current.ur}</span>
+            <span className="font-urdu text-sm text-apple-blue" dir="rtl">{current.ur}</span>
           </div>
 
           <div className="space-y-3">
@@ -360,7 +360,7 @@ export default function RequirementsPage() {
                     </span>
                     <span className="text-sm font-semibold text-ink">{item.en}</span>
                   </div>
-                  <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">{item.ur}</div>
+                  <div className="font-urdu text-xs text-apple-blue" dir="rtl">{item.ur}</div>
                 </div>
 
                 <div className="shrink-0">
@@ -384,13 +384,13 @@ export default function RequirementsPage() {
       <TaxCertificateTemplates />
 
       {/* CTA Band */}
-      <div className="bg-ink text-paper-light border-2 border-brass p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+      <div className="bg-ink dark:bg-[#1c1c1e] text-paper-light border border-black/[0.08] dark:border-white/[0.12] p-8 sm:p-10 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="space-y-2 text-center sm:text-left">
-          <span className="font-mono text-xs text-brass font-bold uppercase tracking-wider">READY WITH PAPERS?</span>
-          <div className="font-serif text-2xl font-bold">
+          <span className="font-mono text-xs text-apple-blue font-bold uppercase tracking-wider">READY WITH PAPERS?</span>
+          <div className="font-serif text-2xl sm:text-3xl font-bold text-white">
             Begin filing with {activeCat} checklist
           </div>
-          <p className="text-xs sm:text-sm text-ash-light leading-relaxed max-w-md">
+          <p className="text-xs sm:text-sm text-ash-light leading-relaxed max-w-md font-sans">
             You can photo-share documents on WhatsApp during our step-by-step guidance.
           </p>
         </div>
@@ -398,19 +398,19 @@ export default function RequirementsPage() {
         <div className="flex flex-col sm:flex-row gap-3 shrink-0">
           <Link
             href={`/start?cat=${activeCat}`}
-            className="inline-flex items-center justify-center gap-2 bg-brass hover:bg-brass-light text-ink font-mono font-bold text-xs py-3.5 px-6 rounded-full shadow transition-all active:scale-95"
+            className="inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-mono font-bold text-xs py-3.5 px-6 rounded-full shadow transition-all active:scale-95 whitespace-nowrap"
           >
             <span>Start Filing ({activeCat})</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 shrink-0" />
           </Link>
 
           <a
             href={formatWhatsAppUrl("Hi, I want guidance on FBR Individual Registration.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs py-3.5 px-5 rounded-full transition-all active:scale-95"
+            className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebd59] text-white font-mono font-bold text-xs py-3.5 px-5 rounded-full transition-all active:scale-95 whitespace-nowrap"
           >
-            <WhatsAppIcon className="w-4 h-4" />
+            <WhatsAppIcon className="w-4 h-4 shrink-0" />
             <span>WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>
           </a>
         </div>
@@ -453,7 +453,7 @@ export default function RequirementsPage() {
                 FBR Registration Requirements
               </h1>
 
-              <div className="font-urdu text-base font-bold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-base font-bold text-apple-blue" dir="rtl">
                 ایف بی آر انفرادی رجسٹریشن و نیشنل ٹیکس نمبر (NTN) کے ضروری تقاضے
               </div>
 
@@ -464,7 +464,7 @@ export default function RequirementsPage() {
 
             {/* Zero-Credential Invariant Card */}
             <div className="p-5 rounded-2xl bg-paper-light border border-rule space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+              <div className="flex items-center gap-2 text-xs font-bold text-apple-blue">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Zero-Credential Invariant</span>
               </div>

@@ -197,16 +197,18 @@ export function TaxCertificateTemplates() {
         </div>
 
         {/* Tab Switcher */}
-        <AnimatedTabs
-          variant="pill"
-          activeTab={mainTab}
-          onChange={setMainTab}
-          tabs={[
-            { id: "templates", label: "Copy-Paste Templates · نمونے" },
-            { id: "apps", label: "Instant App Guides · ایپس" },
-            { id: "utility_rules", label: "Utility WHT Calc · حساب بل" },
-          ]}
-        />
+        <div className="overflow-x-auto no-scrollbar">
+          <AnimatedTabs
+            variant="pill"
+            activeTab={mainTab}
+            onChange={setMainTab}
+            tabs={[
+              { id: "templates", label: "Copy-Paste Templates" },
+              { id: "apps", label: "Instant App Guides" },
+              { id: "utility_rules", label: "Utility WHT Calc" },
+            ]}
+          />
+        </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────
@@ -243,7 +245,7 @@ export function TaxCertificateTemplates() {
                       onClick={() => copyToClipboard(tmpl.id, tmpl.bodyEn)}
                       className={`inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full font-mono text-xs font-bold transition-all shrink-0 active:scale-95 shadow-sm ${
                         isCopied
-                          ? "bg-[#128C7E] text-white"
+                          ? "bg-apple-blue text-white"
                           : "bg-ink hover:bg-theme-primary-hover text-paper-light"
                       }`}
                     >
@@ -254,7 +256,7 @@ export function TaxCertificateTemplates() {
 
                   {/* Code snippet block */}
                   <div className="relative">
-                    <pre className="bg-paper-light dark:bg-[#07121D] p-4 rounded-xl text-xs font-mono text-ink/90 overflow-x-auto whitespace-pre-wrap border border-rule leading-relaxed">
+                    <pre className="bg-paper-light dark:bg-paper-light p-4 rounded-xl text-xs font-mono text-ink/90 overflow-x-auto whitespace-pre-wrap border border-rule leading-relaxed">
                       {tmpl.bodyEn}
                     </pre>
                   </div>
@@ -286,7 +288,7 @@ export function TaxCertificateTemplates() {
           <div className="space-y-3">
             <div className="flex items-center justify-between border-b border-rule pb-2">
               <div className="flex items-center gap-2 font-bold text-sm text-ink">
-                <Smartphone className="w-4 h-4 text-[#128C7E]" />
+                <Smartphone className="w-4 h-4 text-apple-blue" />
                 <span>Mobile SIM Operators (Jazz, Zong, Ufone, Telenor)</span>
               </div>
               <span className="font-urdu text-xs text-ash" dir="rtl">موبائل سم ایپس سے ٹیکس سرٹیفکیٹ</span>

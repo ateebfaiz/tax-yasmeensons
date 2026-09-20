@@ -85,18 +85,18 @@ export default function AnimatedTabs({
   const baseContainerStyles = cn(
     "relative inline-flex",
     variant === "underline" && "gap-1 border-b border-rule",
-    variant === "pill" && "gap-1.5 rounded-full bg-paper-light/80 dark:bg-[#07121D]/80 backdrop-blur-xl p-1.5 border border-rule",
-    variant === "segment" && "gap-0 rounded-xl bg-paper-light/80 dark:bg-[#07121D]/80 backdrop-blur-xl p-1 border border-rule"
+    variant === "pill" && "gap-1.5 rounded-full bg-paper-light/80 dark:bg-paper-light/80 backdrop-blur-xl p-1.5 border border-rule",
+    variant === "segment" && "gap-0 rounded-xl bg-paper-light/80 dark:bg-paper-light/80 backdrop-blur-xl p-1 border border-rule"
   );
 
   const getTabStyles = (isActive: boolean) =>
     cn(
-      "relative z-10 flex cursor-pointer items-center justify-center gap-2 px-4 py-2 font-medium text-xs sm:text-sm transition-colors",
-      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#128C7E] dark:focus-visible:ring-[#C4A046]",
+      "relative z-10 flex cursor-pointer items-center justify-center gap-2 px-4 py-2 font-medium text-xs sm:text-sm transition-colors whitespace-nowrap",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-apple-blue",
       variant === "underline" && [
         "rounded-t-md",
         isActive
-          ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
+          ? "text-apple-blue font-bold"
           : "text-ash hover:text-ink dark:text-[#8C959F] dark:hover:text-[#F4EFE6]",
       ],
       variant === "pill" && [
@@ -116,11 +116,11 @@ export default function AnimatedTabs({
   const getIndicatorStyles = () =>
     cn(
       "absolute",
-      variant === "underline" && "right-0 -bottom-px left-0 h-0.5 bg-[#128C7E] dark:bg-[#C4A046]",
+      variant === "underline" && "right-0 -bottom-px left-0 h-0.5 bg-apple-blue dark:bg-apple-blue",
       variant === "pill" &&
-        "inset-0 rounded-full border border-brass/40 bg-white dark:bg-[#0B1C2C] shadow-sm",
+        "inset-0 rounded-full border border-brass/40 bg-white dark:bg-folio shadow-sm",
       variant === "segment" &&
-        "inset-0 rounded-lg border border-brass/40 bg-white dark:bg-[#0B1C2C] shadow-sm"
+        "inset-0 rounded-lg border border-brass/40 bg-white dark:bg-folio shadow-sm"
     );
 
   return (

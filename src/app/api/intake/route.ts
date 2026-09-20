@@ -14,7 +14,6 @@ export async function POST(req: Request) {
       irisStatus = "active",
       serviceTier = "assistance_2500",
       contactPreference = "whatsapp",
-      credentialsNotes = "",
       clientNotes = "",
       documentsSummary = "",
       source = "web_intake",
@@ -39,7 +38,7 @@ export async function POST(req: Request) {
 
     // Compose diagnostic notes
     const consolidatedNotes = [
-      clientNotes || credentialsNotes,
+      clientNotes,
       simOwner === "relative"
         ? `SIM on Relative: ${relativeName || ""} (${relativeRelation || ""}, CNIC: ${relativeCnic || ""})`
         : null,
@@ -74,6 +73,7 @@ export async function POST(req: Request) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(backendPayload),
         cache: "no-store",
+        signal: AbortSignal.timeout(20000),
       });
 
       if (backendRes.ok) {

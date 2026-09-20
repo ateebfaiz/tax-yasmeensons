@@ -37,6 +37,7 @@ export function Header() {
       style={{
         WebkitBackdropFilter: "blur(24px) saturate(180%)",
         backdropFilter: "blur(24px) saturate(180%)",
+        overflowX: "clip",
       }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
@@ -63,7 +64,7 @@ export function Header() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors py-1 text-ash hover:text-palette-coral flex items-center gap-1"
+                  className="transition-colors py-1 text-ash hover:text-apple-blue flex items-center gap-1 whitespace-nowrap"
                 >
                   <span>{isUrdu ? link.ur : link.en}</span>
                 </a>
@@ -74,7 +75,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`transition-colors py-1 ${
+                className={`transition-colors py-1 whitespace-nowrap ${
                   isActive
                     ? "text-apple-blue font-bold border-b-2 border-apple-blue"
                     : "text-ash hover:text-ink dark:hover:text-white"
@@ -87,7 +88,7 @@ export function Header() {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <ThemeToggle />
           <LanguageToggle />
 
@@ -95,7 +96,7 @@ export function Header() {
             href={formatWhatsAppUrl("Hi, I want to file my Tax Year 2026 return.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-ink dark:text-white px-3.5 py-1.5 rounded-full border border-rule/80 hover:bg-paper dark:hover:bg-white/[0.06] hover:border-apple-blue/50 transition-all"
+            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-ink dark:text-white px-3.5 py-1.5 rounded-full border border-rule/80 hover:bg-paper dark:hover:bg-white/[0.06] hover:border-apple-blue/50 transition-all whitespace-nowrap"
           >
             <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
             <span>{SITE_CONFIG.contact.whatsappDisplay}</span>
@@ -103,7 +104,7 @@ export function Header() {
 
           <Link
             href="/start"
-            className="inline-flex items-center gap-1.5 bg-apple-blue hover:bg-apple-blue/90 text-white px-4 sm:px-5 py-2 rounded-full text-xs font-bold shadow-sm hover:shadow-md transition-all active:scale-95"
+            className="inline-flex items-center gap-1.5 bg-apple-blue hover:bg-apple-blue/90 text-white px-4 sm:px-5 py-2 rounded-full text-xs font-bold shadow-sm hover:shadow-md transition-all active:scale-95 whitespace-nowrap"
           >
             <span>{isUrdu ? "فائلنگ کا آغاز" : "Start Filing"}</span>
             <ArrowRight className="w-3.5 h-3.5" />

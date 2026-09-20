@@ -38,7 +38,7 @@ export function GlassButton({
     <button
       disabled={disabled}
       className={cn(
-        "inline-flex items-center justify-center gap-2.5 font-mono select-none transition-all duration-200 outline-none disabled:opacity-40 disabled:pointer-events-none",
+        "inline-flex items-center justify-center gap-2.5 font-mono select-none whitespace-nowrap transition-all duration-200 outline-none disabled:opacity-40 disabled:pointer-events-none",
         sizeStyles[size],
         variantStyles[variant],
         className

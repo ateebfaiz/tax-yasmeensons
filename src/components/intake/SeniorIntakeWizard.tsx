@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { formatWhatsAppUrl } from "@/lib/utils";
+import { postIntake } from "@/lib/intake";
 import { SITE_CONFIG } from "@/lib/config";
 import { useLanguage } from "@/context/language-context";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
@@ -171,7 +172,7 @@ export function SeniorIntakeWizard({
   const [familyConsolidation, setFamilyConsolidation] = useState<boolean>(false);
   const [whtAudit, setWhtAudit] = useState<boolean>(true);
   const [sendViaWhatsApp, setSendViaWhatsApp] = useState<boolean>(true);
-  const [credentialsNotes, setCredentialsNotes] = useState<string>("");
+  const [clientNotes, setClientNotes] = useState<string>("");
   const [consented, setConsented] = useState<boolean>(false);
 
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -285,30 +286,25 @@ export function SeniorIntakeWizard({
         incomeDetails ? `Income details: ${incomeDetails}` : "",
         familyConsolidation ? "Family group filing / inter-family transfers reconciliation requested" : "",
         whtAudit ? "Full withholding tax deduction claim audit enabled (banks, bills, SIM, fuel)" : "",
-        credentialsNotes ? `Notes: ${credentialsNotes}` : "",
+        clientNotes ? `Notes: ${clientNotes}` : "",
       ].filter(Boolean).join(" | ");
 
-      const res = await fetch("/api/intake", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          phone: phone.trim(),
-          cnic: cnic.trim(),
-          email: needEmailHelp ? "needs_email_help@fbr.local" : email.trim(),
-          persona: categoryCode.toLowerCase(),
-          irisStatus,
-          serviceTier: currentPkg.id,
-          contactPreference: "whatsapp",
-          credentialsNotes: notesSummary,
-          documentsSummary: sendViaWhatsApp ? "Will send documents on WhatsApp" : "Direct filing",
-          source: "senior_wizard",
-        }),
+      const result = await postIntake({
+        fullName: fullName.trim(),
+        phone: phone.trim(),
+        cnic: cnic.trim(),
+        email: needEmailHelp ? "needs_email_help@fbr.local" : email.trim(),
+        persona: categoryCode.toLowerCase(),
+        irisStatus,
+        serviceTier: currentPkg.id,
+        contactPreference: "whatsapp",
+        clientNotes: notesSummary,
+        documentsSummary: sendViaWhatsApp ? "Will send documents on WhatsApp" : "Direct filing",
+        source: "senior_wizard",
       });
 
-      const data = await res.json();
-      if (res.ok && data.success) {
-        const ref = data.reference;
+      if (result.ok) {
+        const ref = result.reference;
         setCaseFolio({
           reference: ref,
           categoryCode,
@@ -330,12 +326,12 @@ export function SeniorIntakeWizard({
           (whtAudit ? `*WHT Audit:* Claim all ATM, fuel, utility, SIM source taxes\n` : "") +
           `*Service:* ${currentPkg.nameEn} (${currentPkg.fee})\n` +
           `*IRIS Status:* ${irisStatus}\n` +
-          (credentialsNotes ? `*Notes:* ${credentialsNotes}\n` : "") +
+          (clientNotes ? `*Notes:* ${clientNotes}\n` : "") +
           `\nI have registered this filing case on tax.yasmeensons.com and am ready to proceed.`;
 
         window.open(formatWhatsAppUrl(waMsg), "_blank");
       } else {
-        setError(data.error || "Failed to create case record. Please retry.");
+        setError(result.error || "Failed to create case record. Please retry.");
       }
     } catch {
       setError(`Network connection issue. You can contact WhatsApp directly at ${SITE_CONFIG.contact.whatsappDisplay}.`);
@@ -388,7 +384,7 @@ export function SeniorIntakeWizard({
             href={formatWhatsAppUrl(`Hi, following up on ${waPrefill}`)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 bg-[#128C7E] hover:bg-[#0e7064] text-white font-bold py-3.5 px-6 rounded shadow transition-all"
+            className="inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-bold py-3.5 px-6 rounded shadow transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>Open WhatsApp Chat ({SITE_CONFIG.contact.whatsappDisplay})</span>
@@ -418,7 +414,7 @@ export function SeniorIntakeWizard({
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* SmoothUI Animated Stepper Header */}
-      <div className="space-y-4 bg-paper-light/80 dark:bg-[#07121D]/80 p-5 sm:p-6 rounded-3xl border border-rule shadow-sm">
+      <div className="space-y-4 bg-paper-light/80 dark:bg-paper-light/80 p-5 sm:p-6 rounded-3xl border border-rule shadow-sm">
         <AnimatedStepper
           steps={wizardSteps}
           currentStep={currentPart - 1}
@@ -464,7 +460,7 @@ export function SeniorIntakeWizard({
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
               Part 01 — Select Your Income Profile
             </h2>
-            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-sm text-apple-blue" dir="rtl">
               براہِ کرم اپنی آمدنی یا ٹیکس دہندہ کی صنف کا انتخاب کریں
             </div>
             <p className="text-xs sm:text-sm text-ash leading-relaxed">
@@ -495,7 +491,7 @@ export function SeniorIntakeWizard({
                       </span>
                     </div>
 
-                    <div className="font-urdu text-sm font-semibold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                    <div className="font-urdu text-sm font-semibold text-apple-blue" dir="rtl">
                       {cat.ur}
                     </div>
 
@@ -535,7 +531,7 @@ export function SeniorIntakeWizard({
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
               Part 02 — FBR IRIS Account Access
             </h2>
-            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-sm text-apple-blue" dir="rtl">
               کیا آپ کے پاس سرکاری ایف بی آر پورٹل کا فعال لاگ ان موجود ہے؟
             </div>
             <p className="text-xs sm:text-sm text-ash leading-relaxed">
@@ -592,7 +588,7 @@ export function SeniorIntakeWizard({
                     <div className="font-bold text-base sm:text-lg text-ink">
                       {opt.titleEn}
                     </div>
-                    <div className="font-urdu text-sm font-semibold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                    <div className="font-urdu text-sm font-semibold text-apple-blue" dir="rtl">
                       {opt.titleUr}
                     </div>
                     <p className="text-xs sm:text-sm text-ash leading-relaxed">
@@ -629,7 +625,7 @@ export function SeniorIntakeWizard({
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
               Part 03 — Choose Service Package
             </h2>
-            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-sm text-apple-blue" dir="rtl">
               شفاف اور پیشگی فیس • کوئی پوشیدہ اخراجات نہیں
             </div>
             <p className="text-xs sm:text-sm text-ash leading-relaxed">
@@ -669,7 +665,7 @@ export function SeniorIntakeWizard({
                       {pkg.nameEn}
                     </div>
 
-                    <div className="font-urdu text-sm font-semibold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                    <div className="font-urdu text-sm font-semibold text-apple-blue" dir="rtl">
                       {pkg.nameUr}
                     </div>
 
@@ -717,7 +713,7 @@ export function SeniorIntakeWizard({
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
               Part 04 — Taxpayer Particulars &amp; Folio
             </h2>
-            <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            <div className="font-urdu text-sm text-apple-blue" dir="rtl">
               بنیادی شناختی کوائف اور تصدیق برائے انفرادی کیس
             </div>
             <p className="text-xs sm:text-sm text-ash leading-relaxed">
@@ -731,7 +727,7 @@ export function SeniorIntakeWizard({
               <label className="block text-xs font-bold uppercase tracking-wider text-ink">
                 Full Name (as per CNIC) <span className="text-stamp-red">*</span>
               </label>
-              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-xs text-apple-blue" dir="rtl">
                 شناختی کارڈ کے مطابق پورا نام
               </div>
               <input
@@ -740,7 +736,7 @@ export function SeniorIntakeWizard({
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="e.g. Muhammad Tariq"
-                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-apple-blue focus:ring-1 focus:ring-apple-blue outline-none transition-all"
               />
             </div>
 
@@ -749,7 +745,7 @@ export function SeniorIntakeWizard({
               <label className="block text-xs font-bold uppercase tracking-wider text-ink">
                 Active Mobile SIM / WhatsApp Contact <span className="text-stamp-red">*</span>
               </label>
-              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-xs text-apple-blue" dir="rtl">
                 فعال موبائل سم / واٹس ایپ نمبر (او ٹی پی و تصدیق کے لیے)
               </div>
               <input
@@ -758,7 +754,7 @@ export function SeniorIntakeWizard({
                 value={phone}
                 onChange={(e) => handlePhoneChange(e.target.value)}
                 placeholder="0312 0000000"
-                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink font-mono focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink font-mono focus:border-apple-blue focus:ring-1 focus:ring-apple-blue outline-none transition-all"
               />
 
               <div className="pt-2 flex flex-col sm:flex-row gap-3 text-xs font-medium">
@@ -768,7 +764,7 @@ export function SeniorIntakeWizard({
                     name="seniorSimOwner"
                     checked={simOwner === "own"}
                     onChange={() => setSimOwner("own")}
-                    className="accent-[#128C7E] h-4 w-4"
+                    className="accent-apple-blue h-4 w-4"
                   />
                   <span>SIM in own name (اپنے نام پر سم)</span>
                 </label>
@@ -779,7 +775,7 @@ export function SeniorIntakeWizard({
                     name="seniorSimOwner"
                     checked={simOwner === "relative"}
                     onChange={() => setSimOwner("relative")}
-                    className="accent-[#128C7E] h-4 w-4"
+                    className="accent-apple-blue h-4 w-4"
                   />
                   <span>Blood Relative / Family SIM (خونی رشتہ دار)</span>
                 </label>
@@ -822,7 +818,7 @@ export function SeniorIntakeWizard({
               <label className="block text-xs font-bold uppercase tracking-wider text-ink">
                 CNIC (13 digits)
               </label>
-              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-xs text-apple-blue" dir="rtl">
                 قومی شناختی کارڈ نمبر (۱۳ ہندسے)
               </div>
               <input
@@ -830,7 +826,7 @@ export function SeniorIntakeWizard({
                 value={cnic}
                 onChange={(e) => handleCnicChange(e.target.value)}
                 placeholder="35202-0000000-0"
-                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink font-mono focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink font-mono focus:border-apple-blue focus:ring-1 focus:ring-apple-blue outline-none transition-all"
               />
             </div>
 
@@ -839,7 +835,7 @@ export function SeniorIntakeWizard({
               <label className="block text-xs font-bold uppercase tracking-wider text-ink">
                 Personal Email Address <span className="text-ash font-normal">(Optional)</span>
               </label>
-              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-xs text-apple-blue" dir="rtl">
                 ذاتی ای میل ایڈریس (نوٹسز اور تصدیق کے لیے)
               </div>
               <input
@@ -848,7 +844,7 @@ export function SeniorIntakeWizard({
                 value={needEmailHelp ? "" : email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={needEmailHelp ? "We will help create and configure your email" : "client@domain.com"}
-                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all disabled:opacity-60"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-apple-blue focus:ring-1 focus:ring-apple-blue outline-none transition-all disabled:opacity-60"
               />
 
               <label className="flex items-start gap-3 p-3 rounded-xl border border-rule bg-paper-light cursor-pointer text-xs text-ink">
@@ -856,11 +852,11 @@ export function SeniorIntakeWizard({
                   type="checkbox"
                   checked={needEmailHelp}
                   onChange={(e) => setNeedEmailHelp(e.target.checked)}
-                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-apple-blue h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <span className="leading-relaxed">
                   <strong>I don&apos;t have an email</strong> — we can help along with full guidance and create email if you don&apos;t already have one.
-                  <span className="block font-urdu text-xs text-[#128C7E] dark:text-[#C4A046] mt-1" dir="rtl">
+                  <span className="block font-urdu text-xs text-apple-blue mt-1" dir="rtl">
                     میرا ای میل نہیں ہے، ہمارے لیے نیا ای میل بنائیں اور مکمل رہنمائی دیں۔
                   </span>
                 </span>
@@ -872,7 +868,7 @@ export function SeniorIntakeWizard({
               <label className="block text-xs font-bold uppercase tracking-wider text-ink">
                 Current Residential Address <span className="text-ash font-normal">(FBR Form 181 requirement)</span>
               </label>
-              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-xs text-apple-blue" dir="rtl">
                 موجودہ رہائشی پتہ مع شہر و ضلع
               </div>
               <input
@@ -880,7 +876,7 @@ export function SeniorIntakeWizard({
                 value={residentialAddress}
                 onChange={(e) => setResidentialAddress(e.target.value)}
                 placeholder="House / Street / Area / City"
-                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-apple-blue focus:ring-1 focus:ring-apple-blue outline-none transition-all"
               />
             </div>
 
@@ -889,7 +885,7 @@ export function SeniorIntakeWizard({
               <label className="block text-xs font-bold uppercase tracking-wider text-ink">
                 Income Source Details <span className="text-ash font-normal">(Optional)</span>
               </label>
-              <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-xs text-apple-blue" dir="rtl">
                 آمدن یا روزگار کے ذرائع کی مختصر تفصیل
               </div>
               <input
@@ -905,7 +901,7 @@ export function SeniorIntakeWizard({
                     ? "Husband / Family financial maintenance"
                     : "Rental property address or business activity"
                 }
-                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-sm font-semibold text-ink focus:border-apple-blue focus:ring-1 focus:ring-apple-blue outline-none transition-all"
               />
             </div>
 
@@ -916,11 +912,11 @@ export function SeniorIntakeWizard({
                   type="checkbox"
                   checked={familyConsolidation}
                   onChange={(e) => setFamilyConsolidation(e.target.checked)}
-                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-apple-blue h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <div className="space-y-1">
                   <div className="font-bold text-ink text-sm">Family Group Filing &amp; Inter-Family Transfers Reconciliation</div>
-                  <div className="font-urdu text-xs text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                  <div className="font-urdu text-xs text-apple-blue" dir="rtl">
                     خاندانی بینک ٹرانسفرز کی تصدیق تاکہ دہرے ٹیکس سے بچاؤ ممکن ہو سکے
                   </div>
                   <div className="text-xs text-ash leading-relaxed">
@@ -934,10 +930,10 @@ export function SeniorIntakeWizard({
                   type="checkbox"
                   checked={whtAudit}
                   onChange={(e) => setWhtAudit(e.target.checked)}
-                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-apple-blue h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <div className="space-y-1">
-                  <div className="font-bold text-[#128C7E] dark:text-[#C4A046] text-sm">Full Source Withholding Tax Audit (Recommended)</div>
+                  <div className="font-bold text-apple-blue text-sm">Full Source Withholding Tax Audit (Recommended)</div>
                   <div className="font-urdu text-xs text-ash" dir="rtl">
                     تمام ودہولڈنگ ٹیکس کٹوتیوں کا کلیم (بجلی، گیس، موبائل، بینک و اے ٹی ایم)
                   </div>
@@ -968,7 +964,7 @@ export function SeniorIntakeWizard({
                   type="checkbox"
                   checked={sendViaWhatsApp}
                   onChange={(e) => setSendViaWhatsApp(e.target.checked)}
-                  className="accent-[#128C7E] h-4 w-4 rounded"
+                  className="accent-apple-blue h-4 w-4 rounded"
                 />
                 <span>I will send document photos / PDFs directly on WhatsApp.</span>
               </label>
@@ -981,10 +977,10 @@ export function SeniorIntakeWizard({
               </label>
               <textarea
                 rows={2}
-                value={credentialsNotes}
-                onChange={(e) => setCredentialsNotes(e.target.value)}
+                value={clientNotes}
+                onChange={(e) => setClientNotes(e.target.value)}
                 placeholder="Any special remarks or prior filing details..."
-                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-xs text-ink focus:border-[#128C7E] focus:ring-1 focus:ring-[#128C7E] outline-none transition-all"
+                className="w-full bg-folio border border-rule rounded-xl px-4 py-3 text-xs text-ink focus:border-apple-blue focus:ring-1 focus:ring-apple-blue outline-none transition-all"
               />
             </div>
 
@@ -996,7 +992,7 @@ export function SeniorIntakeWizard({
                   required
                   checked={consented}
                   onChange={(e) => setConsented(e.target.checked)}
-                  className="accent-[#128C7E] h-4 w-4 mt-0.5 shrink-0 rounded"
+                  className="accent-apple-blue h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <span className="text-xs text-ink leading-relaxed">
                   <strong>Authority to prepare:</strong> I authorize Yasmeen &amp; Sons tax specialists to review provided records and prepare figures for Tax Year 2026. <em>No filing will be submitted without my review and direct IRIS sign-in.</em>
@@ -1008,7 +1004,7 @@ export function SeniorIntakeWizard({
       )}
 
       {/* Sticky Wizard Footer */}
-      <div className="sticky bottom-6 z-30 bg-paper-light/95 dark:bg-[#07121D]/95 backdrop-blur-xl border border-rule p-4 sm:p-5 rounded-3xl flex items-center justify-between gap-4 shadow-xl mt-8">
+      <div className="sticky bottom-6 z-30 bg-paper-light/95 dark:bg-paper-light/95 backdrop-blur-xl border border-rule p-4 sm:p-5 rounded-3xl flex items-center justify-between gap-4 shadow-xl mt-8">
         {currentPart > 1 ? (
           <button
             type="button"
@@ -1025,7 +1021,7 @@ export function SeniorIntakeWizard({
             rel="noopener noreferrer"
             className="text-xs font-mono text-ash hover:text-ink flex items-center gap-2 px-4 py-2.5 rounded-full hover:bg-paper transition-all"
           >
-            <WhatsAppIcon className="w-4 h-4 text-[#128C7E]" />
+            <WhatsAppIcon className="w-4 h-4 text-apple-blue" />
             <span>WhatsApp Instead</span>
           </a>
         )}
@@ -1044,7 +1040,7 @@ export function SeniorIntakeWizard({
               type="button"
               onClick={handleSubmit}
               disabled={submitting}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#128C7E] to-[#0A6054] text-white font-mono font-bold text-xs sm:text-sm px-7 py-3 rounded-full shadow-md transition-all disabled:opacity-60 active:scale-95"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-apple-blue to-apple-blue/80 text-white font-mono font-bold text-xs sm:text-sm px-7 py-3 rounded-full shadow-md transition-all disabled:opacity-60 active:scale-95"
             >
               <span>{submitting ? "Recording Folio..." : "Generate Case File (YS-26-XXXXX)"}</span>
               <ArrowRight className="w-4 h-4" />

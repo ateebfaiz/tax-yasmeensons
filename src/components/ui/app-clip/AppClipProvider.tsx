@@ -35,6 +35,13 @@ export function AppClipProvider({ children }: { children: ReactNode }) {
     setActiveClipState(null);
   }, []);
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as any).__openAppClip = open;
+      (window as any).__closeAppClip = close;
+    }
+  }, [open, close]);
+
   const ActiveComponent = activeClipState?.id ? AppClipRegistry[activeClipState.id] : null;
 
   return (

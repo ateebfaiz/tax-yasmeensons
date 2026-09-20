@@ -42,10 +42,10 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             <span className="font-mono text-[10px] font-bold text-ash dark:text-white/60 tracking-widest uppercase">
               PACKAGE: GF-1000
             </span>
-            <div className="font-serif text-2xl font-black text-white">
+            <div className="font-serif text-2xl font-black text-ink dark:text-white">
               PKR 1,000
             </div>
-            <h3 className="font-serif text-base font-bold text-white">
+            <h3 className="font-serif text-base font-bold text-ink dark:text-white">
               Guided Self-Filing
             </h3>
             <div className="font-urdu text-xs text-apple-blue" dir="rtl">
@@ -92,10 +92,10 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             <span className="font-mono text-[10px] font-bold text-apple-blue tracking-widest uppercase">
               PACKAGE: FA-2500
             </span>
-            <div className="font-serif text-2xl font-black text-white">
+            <div className="font-serif text-2xl font-black text-ink dark:text-white">
               PKR 2,500
             </div>
-            <h3 className="font-serif text-base font-bold text-white">
+            <h3 className="font-serif text-base font-bold text-ink dark:text-white">
               Complete Filing Assistance
             </h3>
             <div className="font-urdu text-xs text-apple-blue" dir="rtl">
@@ -143,10 +143,10 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             <span className="font-mono text-[10px] font-bold text-ash dark:text-white/60 tracking-widest uppercase">
               PACKAGE: CX-4500
             </span>
-            <div className="font-serif text-2xl font-black text-white">
+            <div className="font-serif text-2xl font-black text-ink dark:text-white">
               PKR 4,500+
             </div>
-            <h3 className="font-serif text-base font-bold text-white">
+            <h3 className="font-serif text-base font-bold text-ink dark:text-white">
               Complex Individual Review
             </h3>
             <div className="font-urdu text-xs text-apple-blue" dir="rtl">
@@ -189,7 +189,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             href={formatWhatsAppUrl("Hi, I have questions regarding tax filing fees.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
+            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-[#25D366]/10 border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all whitespace-nowrap px-4"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>Consult Fees on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>

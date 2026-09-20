@@ -41,7 +41,7 @@ export default function PricingPage() {
                 Transparent Fee Schedule
               </h1>
 
-              <div className="font-urdu text-base font-bold text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+              <div className="font-urdu text-base font-bold text-apple-blue" dir="rtl">
                 شفاف فیس و پیکیجز • کوئی پوشیدہ چارجز نہیں
               </div>
 
@@ -52,7 +52,7 @@ export default function PricingPage() {
 
             {/* Zero-Credential Invariant Card */}
             <div className="p-5 rounded-2xl bg-paper-light border border-rule space-y-2.5 shadow-xs">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#128C7E] dark:text-[#C4A046]">
+              <div className="flex items-center gap-2 text-xs font-bold text-apple-blue">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Zero-Credential Invariant</span>
               </div>
@@ -110,7 +110,7 @@ export default function PricingPage() {
                     <h2 className="font-serif text-2xl font-bold text-ink">
                       Guided Self-Filing
                     </h2>
-                    <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                    <div className="font-urdu text-sm text-apple-blue" dir="rtl">
                       رہنمائی مع سیلف فائلنگ
                     </div>
                   </div>
@@ -163,7 +163,7 @@ export default function PricingPage() {
                     <h2 className="font-serif text-2xl font-bold text-ink">
                       Complete Filing Assistance
                     </h2>
-                    <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                    <div className="font-urdu text-sm text-apple-blue" dir="rtl">
                       مکمل فائلنگ اسسٹنس
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export default function PricingPage() {
                 <div className="pt-2">
                   <Link
                     href="/start?tier=assistance_2500"
-                    className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#128C7E] to-[#0A6054] text-white font-mono font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
+                    className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-apple-blue to-apple-blue/80 text-white font-mono font-bold text-xs sm:text-sm shadow-md transition-all active:scale-95"
                   >
                     <span>Proceed with FA-2500 (PKR 2,500)</span>
                     <Sparkles className="w-4 h-4" />
@@ -216,7 +216,7 @@ export default function PricingPage() {
                     <h2 className="font-serif text-2xl font-bold text-ink">
                       Complex Individual Review
                     </h2>
-                    <div className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+                    <div className="font-urdu text-sm text-apple-blue" dir="rtl">
                       پیچیدہ کیس جائزہ
                     </div>
                   </div>
