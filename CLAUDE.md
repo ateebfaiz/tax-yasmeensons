@@ -1,38 +1,53 @@
-# CLAUDE.md — Quick Reference for Claude & AI Coding Assistants
-**Workspace**: `/home/ateeb/projects/tax-yasmeensons`  
-**Platform**: `tax.yasmeensons.com` (Pakistani Inland Revenue Individual Tax Facilitation)  
-**Backend Authority**: FastAPI Cloud (`https://ys-fastapi-backend.fastapicloud.dev`)
+# CLAUDE.md — tax-yasmeensons quick ref
 
----
+Workspace: `/home/ateeb/projects/tax-yasmeensons`  
+Site: `tax.yasmeensons.com`  
+Desk API: `https://ys-fastapi-backend.fastapicloud.dev/api/tax`  
+Full rules: [AGENTS.md](./AGENTS.md)
 
-## ⚡ Essential Commands
 ```bash
-# Run All Local On-Device Quality Gates
-npm run check-gates
-
-# Build & Typecheck (Must compile cleanly)
+npm run check-gates    # G1–G7 (lint + real next build)
 npm run build
-
-# Start Dev Server
+npm run lint
+npm run typecheck
 npm run dev
-
-# Run Automated Puppeteer UI Audit (Mobile & Desktop Viewports)
-node scripts/audit_ui.mjs
-
-# Strict No-Hardcoding Gate
-grep -rn "03120947187" src/ | grep -v "config.ts"
+grep -rn "03120947187" src/ | grep -v "config.ts"   # must be empty
 ```
 
----
+## Do not
 
-## 🛡️ Strict Quality Gates & Invariants
+- Ask for FBR IRIS password/PIN. Column is `client_notes`, never `credentials_notes`.
+- Return `{ success: true }` if the case was not written.
+- Invent folio IDs (`TAX-2026-CLIP`, `YS-26-FBR`). Use `postIntake()` — requires `YS-26-#####`.
+- Hardcode WhatsApp numbers. Use `SITE_CONFIG` + `formatWhatsAppUrl`.
+- Skip `npm run build`. CSS/`*/ */` breaks are invisible to `tsc`.
+- Put all dark-mode text in white. Headings `text-ink`, body `text-ash`.
+- Add color glows (`shadow-[0_0_…]`).
+- Commit `.env.local` or Neon object-storage secrets.
 
-1. **Zero-Credential Security**: NEVER ask for, store, or accept FBR Iris passwords or PINs. Column name is `client_notes`, never `credentials_notes`.
-2. **Strict No-Hardcoding**: Never hardcode WhatsApp phone numbers or API URLs. Always import from `SITE_CONFIG` ([`src/lib/config.ts`](file:///home/ateeb/projects/tax-yasmeensons/src/lib/config.ts)) and use `formatWhatsAppUrl`.
-3. **Fail-Fast API Contract**: `/api/intake` must NEVER silently swallow DB errors and pretend success. If backend fails, return 502/503 with WhatsApp fallback.
-4. **FastAPI Cloud Database Authority**: All DB persistence and Todoist P1 dispatching must route to FastAPI Cloud backend (`https://ys-fastapi-backend.fastapicloud.dev/api/tax`).
-5. **Apple HIG Foundations Standard**: Full Apple HIG compliance across colors, contrast (WCAG AAA 7:1+), dual light/dark appearance, 44x44pt touch targets, Apple optical frosted materials (`backdrop-filter: blur(24px-32px) saturate(180%-190%)` with `WebkitBackdropFilter`), official Apple system colors (System Blue `#007AFF`/`#0A84FF`, System Green `#34C759`/`#30D158`, System Orange `#FF9500`/`#FF9F0A`, System Red `#FF3B30`/`#FF453A`), and Apple system typography (SF Pro, New York, SF Mono, SF Pro Rounded).
-6. **Zero Empty Space Gate**: All AppClips and `AppClipSheet` must size naturally (`height: auto; max-height: 90dvh`) without artificial blank voids below the content or CTAs. Use `100dvh` and clamped `env(safe-area-inset-bottom)`.
-7. **FBR 8-Window Simplified Non-Business Spec (SRO 1561(I)/2025)**: Modular clips 0–7 with bilingual labels, Urdu hints, FBR code persistence (`5003`, `2031`, `s.149`, `s.116`), and real-time wealth recon to 0.00. Business income exits flow.
-8. **Additive Evolution Rule**: Never remove existing sections or features. Enhancements to hero, menu, reviews, workflow, and tracking must be strictly additive.
-9. **UI Craft by SmoothDev & SmoothUI File-Upload Standard**: Drag-and-drop file upload via `SmoothFileUpload` for bank statements, CNIC copies, and tax records, with prominent manual entry routing to `fbr-simplified-intake`.
+## Storage
+
+| What | Where |
+|---|---|
+| Case row | Neon Postgres `tax_filings` via FastAPI |
+| File bytes | Neon object storage bucket **`assets`**, key `tax/{uuid}/{file}` |
+| File pointer | `tax_filings.raw_payload.documents[]` (`key` + `/api/documents/view?key=`) |
+
+Env: `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION=us-east-1`, `S3_BUCKET=assets`. Must also be set on Vercel.
+
+Update stage:
+
+```sql
+UPDATE tax_filings SET status = 'reviewing', updated_at = NOW()
+WHERE reference = 'YS-26-XXXXX';
+```
+
+`pending` → 1, `reviewing` → 2, `reconciled` → 3, `submitted`/`active` → 4.
+
+## Design
+
+- Accent: Apple Blue `#0071E3` (dark `#0A84FF`). Canvas `#F5F5F7` / `#000`.
+- Type: SF Pro on Apple (`-apple-system`); Inter fallback; NY/SF Display titles; SF Mono refs; Noto Nastaliq Urdu only for Urdu.
+- Default theme **light**. Logo white in dark mode.
+- AppClip: `height: auto; max-height: 90dvh`.
+- Human copy: “tax desk”, not “FastAPI Cloud Microservice Authority”.

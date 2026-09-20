@@ -1,104 +1,158 @@
-# AGENTS.md — Developer & Agent Instructions for tax-yasmeensons
+# AGENTS.md — tax.yasmeensons.com
 
-Welcome to **`tax.yasmeensons.com`** ([github.com/ateebfaiz/tax-yasmeensons](https://github.com/ateebfaiz/tax-yasmeensons)).  
-All agents operating in this repository must strictly adhere to the policies, invariants, and architectural quality gates documented here.
+Repo: [ateebfaiz/tax-yasmeensons](https://github.com/ateebfaiz/tax-yasmeensons)  
+Live: `https://tax.yasmeensons.com`  
+Desk API: `https://ys-fastapi-backend.fastapicloud.dev/api/tax`  
+Branch: `feat/tax-platform-preview` (PR #1)
 
----
-
-## 1. Non-Negotiable Invariants & Quality Gates
-
-### 1.1 Invariant 1: Zero-Credential Security (FBR Iris Password Protection)
-- **NEVER** ask for, collect, store, transmit, or log a taxpayer's FBR Iris password or 4-digit PIN.
-- Any password input or automated Iris login attempt is an immediate, critical vulnerability.
-- Schema columns and variables must use `client_notes` / `intake_notes`, never `credentials_notes`.
-
-### 1.2 Gate 2: Strict No-Hardcoding Gate
-- **NEVER** hardcode WhatsApp phone numbers (`03120947187`) or URLs directly in components or strings.
-- **ALWAYS** import from `SITE_CONFIG` ([`src/lib/config.ts`](file:///home/ateeb/projects/tax-yasmeensons/src/lib/config.ts)) and format links via `formatWhatsAppUrl(message)`.
-- Backend endpoints must be resolved through `FASTAPI_BACKEND_URL` (`https://ys-fastapi-backend.fastapicloud.dev`).
-
-### 1.3 Gate 3: Fail-Fast & Zero-Vanishing-Order API Contract
-- API routes ([`src/app/api/intake/route.ts`](file:///home/ateeb/projects/tax-yasmeensons/src/app/api/intake/route.ts)) must **NEVER** silently swallow database or Todoist errors with empty `catch` blocks that pretend success (`{ success: true }`).
-- If backend persistence fails, the API must fail fast with HTTP 502/503 and return an actionable message with an automated WhatsApp fallback so customer cases never vanish into thin air.
-
-### 1.4 Gate 4: FastAPI Cloud Database & Todoist Authority
-- Database persistence and Todoist P1 notifications are handled centrally by the persistent **FastAPI Cloud Backend Service** ([`https://ys-fastapi-backend.fastapicloud.dev`](https://ys-fastapi-backend.fastapicloud.dev)).
-- Next.js serverless functions act as authenticated HTTP proxies to FastAPI Cloud, preventing connection pooling exhaustion and environment drift.
-
-### 1.5 Gate 5: Apple Human Interface Guidelines (HIG) Foundations Standard
-- All components, sheets, navigation, and pages MUST strictly conform to **Apple Human Interface Guidelines (HIG) Foundations**:
-  - **Official Apple System Palette**: Strictly use Apple default system colors: System Blue (`#007AFF` / `#0A84FF`), System Orange (`#FF9500` / `#FF9F0A`), System Green (`#34C759` / `#30D158`), System Red (`#FF3B30` / `#FF453A`), System Gray 1–6, and dynamic labels/materials.
-  - **Official Apple System Typography**: Adopt Apple's default font stacks (SF Pro Text/Display for sans, New York for serif, SF Mono for code, SF Pro Rounded for metrics). Urdu script uses Noto Nastaliq Urdu exclusively.
-  - **Contrast & Legibility First**: All text must maintain minimum 4.5:1 (AA) and ideally 7:1+ (AAA) contrast in BOTH Light and Dark modes.
-  - **First-Class Dual Appearance**: Seamless toggle and automatic system preference support for Light and Dark modes.
-  - **Optical Frosted Glass Blur & Vibrancy**: Hardware-accelerated materials (`backdrop-filter: blur(24px-32px) saturate(180%-190%)` with `WebkitBackdropFilter`), subtle scrims (`bg-black/25 dark:bg-black/50`), and fine specular borders (`border-black/[0.08] dark:border-white/[0.12]`).
-  - **44x44pt Touch Targets**: All buttons, links, inputs, and close triggers MUST have at least 44x44px touch targets.
-  - **Safe Areas & Natural Viewports**: Clamped `env(safe-area-inset-bottom)` and naturally sizing content (`max-height: 90dvh`).
-  - **Tactile Feedback**: Spring animations and `active:scale-[0.97]` touch responsiveness.
-
-### 1.6 Gate 6: Zero Empty Space & Dynamic Viewport Standard
-- **NEVER** use static `height: 92dvh` or arbitrary fixed heights that leave large blank areas at the bottom of AppClips.
-- Base sheet ([`AppClipSheet.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/components/ui/app-clip/AppClipSheet.tsx)) and all clips must size **naturally** (`height: auto; max-height: 90dvh`).
-- All mobile viewport heights must use `100dvh` instead of `100vh`.
-- Safe-area bottom padding must be clamped: `padding-bottom: calc(env(safe-area-inset-bottom, 16px) + 16px)`.
-- All modals must keep close buttons in a stable top-right position with a minimum 44px tap target.
-
-### 1.7 Gate 7: FBR 8-Window Simplified Non-Business Spec (SRO 1561(I)/2025)
-- Modelled strictly on FBR's simplified electronic return for non-business individuals:
-  - **Clip 0:** Identity & Source Picker (Full name, CNIC, Tax Year 2026, 183+ days resident, Source flags). *Business income s.18 politely exits flow to custom concierge.*
-  - **Clip 1:** Salary & Pension (`s.12` / `s.149` employer WHT).
-  - **Clip 2:** Property / Rent (`s.15` / code `2031` 1/5 repair allowance, `7E` flag).
-  - **Clip 3:** Other Sources (`s.39` / code `5003` bank profit, dividends, prizes).
-  - **Clip 4:** Capital Gains (`s.37` securities & property).
-  - **Clip 5:** Deductible Allowances & Credits (`s.60–63` Zakat, donations, pension fund).
-  - **Clip 6:** Tax Already Paid (Schedule of WHT source deductions).
-  - **Clip 7:** Wealth Statement (`s.116`) with **Real-Time Wealth Reconciliation to 0.00**.
-- **Urdu is first-class:** Every field includes an English label, Nastaleeq Urdu label, and one-line Urdu hint.
-- **Persistent FBR Codes:** Raw codes (`5003`, `2031`, `s.149`, `s.116`) are always stored in the payload even when hidden from client view.
-
-### 1.8 Gate 8: Additive Evolution Rule
-- **NEVER** remove or wipe out existing sections, pages, pricing cards, or guides when making improvements.
-- All enhancements (Hero updates, 4-step workflow, customer reviews, urgency deadline banner, `/track` portal, new menu links) must be **additive** and preserve all current functionality.
-
-### 1.9 Gate 9: UI Craft by SmoothDev & SmoothUI File-Upload Standard
-- Direct file upload for taxpayers via `SmoothFileUpload` to attach bank statements, CNIC copies (front, back, combined), salary slips, and withholding tax certificates.
-- Explicit and prominent manual entry routing to FBR 8-Window Simplified e-Return AppClip (`fbr-simplified-intake`) for taxpayers who prefer entering numbers manually.
+Read this file before editing. Do not invent architecture that contradicts it.
 
 ---
 
-## 2. Key Component & File Mapping
+## Always before a commit or PR
 
-| Purpose | Component File | Viewport |
+```bash
+npm run check-gates   # G1–G7 including ESLint + real `next build`
+```
+
+Gates (in `scripts/run-quality-gates.sh`):
+
+| # | Check |
+|---|---|
+| G1 | No IRIS password/PIN / `credentials_notes` / `credentialsNotes` in `src/` |
+| G2 | No hardcoded `0312…` phones outside `src/lib/config.ts` |
+| G3 | No `h-[92dvh]` AppClip sheets |
+| G4 | Pinch-to-zoom stays on (`userScalable` not false) |
+| G5 | Apple Blue `#0071E3`, off-white `#F5F5F7`, no stray `*/ */` in CSS, no fake folio refs, uploads POST `/api/documents`, dark-mode white logo |
+| G6 | `next lint` — zero errors |
+| G7 | `npm run build` — must compile (do not hide webpack output) |
+
+Also: `npm run typecheck`. Never skip G7. The Vercel CSS `*/ */` break was missed because a prior agent ran `tsc` only.
+
+---
+
+## Data plane (do not reverse this)
+
+```
+Browser
+  POST /api/documents     → Neon Object Storage bucket `assets`  (bytes)
+  POST /api/intake        → FastAPI /api/tax/intake              (case row)
+  GET  /api/track         → FastAPI /api/tax/track               (status)
+  GET  /api/documents/view?key=tax/…  → signed GET from `assets`
+```
+
+- **Cases** live in Neon Postgres table `tax_filings`. Next.js does **not** write this table itself.
+- **Files** live in Neon S3-compatible storage. There is **no S3 column**. Pointers are JSON in `tax_filings.raw_payload.documents`.
+- Client success requires a real folio matching `YS-26-#####`. Never mint `TAX-2026-CLIP`, `TAX-2026-DIRECT`, or `YS-26-FBR`. Use `postIntake()` in `src/lib/intake.ts`.
+- If intake fails: HTTP 503 + WhatsApp fallback. Never `{ success: true }` on a missed write.
+
+### Object storage
+
+Env (local `.env.local`, also required on Vercel):
+
+```
+AWS_ENDPOINT_URL_S3=https://….storage.c-9.us-east-1.aws.neon.tech
+AWS_ACCESS_KEY_ID=nak_live_…
+AWS_SECRET_ACCESS_KEY=nsk_live_…
+AWS_REGION=us-east-1
+S3_BUCKET=assets
+```
+
+- Client: `src/lib/s3.ts` (`forcePathStyle: true`)
+- PUT key: `tax/{uuid}/{safe-filename}`
+- View URL stored on the case: `/api/documents/view?key=tax/…` (re-signs; do not persist expiring signed URLs)
+
+### Update a case (desk)
+
+```sql
+UPDATE tax_filings
+SET status = 'reviewing',   -- pending | reviewing | reconciled | submitted
+    updated_at = NOW()
+WHERE reference = 'YS-26-XXXXX';
+```
+
+| `status` | `/track` stage |
+|---|---|
+| `pending` | 1 Received |
+| `reviewing` / `in_progress` | 2 Document & WHT audit |
+| `reconciled` / `ready_for_approval` | 3 Wealth recon |
+| `submitted` / `completed` / `active` | 4 IRIS & ATL |
+
+Optional: `PATCH /api/tax/cases/{ref}` with header `X-Tax-Desk-Key` = `TAX_DESK_TOKEN` or `FASTAPI_API_KEY`.
+
+---
+
+## Invariants
+
+1. **Zero IRIS credentials.** Never ask for / store FBR password or PIN. Column is `client_notes`, never `credentials_notes`.
+2. **No hardcoded phones or desk URLs.** `SITE_CONFIG` + `formatWhatsAppUrl`. FastAPI via `FASTAPI_BACKEND_URL`.
+3. **Fail-fast intake.** Proxy errors to 502/503. Clips must not show a folio unless `postIntake()` returns `ok`.
+4. **Human copy.** Do not say “FastAPI Cloud Microservice Authority”. Say “filing desk” / “tax desk”.
+5. **Apple HIG color & type** (see below). No color/text glows (`shadow-[0_0_…]`, `--accent-glow`).
+6. **AppClips size to content** (`height: auto; max-height: 90dvh`), `100dvh`, 44px tap targets.
+7. **FBR 8-window** (SRO 1561(I)/2025) clips 0–7. Business s.18 exits to concierge. Persist FBR codes in payload.
+8. **Additive UI.** Do not delete existing pages/sections to “clean up” unless asked.
+9. **Uploads.** `SmoothFileUpload` → `/api/documents` → bucket `assets`. Manual path: `fbr-simplified-intake`.
+10. **Default theme is light.** Logo: black in light, **white** in dark (`StoreLogo variant`).
+
+---
+
+## Color (HIG labels, one accent)
+
+Tokens: `src/themes/tokens.css`. Do not hardcode competing palettes.
+
+| Role | Light | Dark |
 |---|---|---|
-| Desktop 4-Part Filing Wizard | [`src/components/intake/SeniorIntakeWizard.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/components/intake/SeniorIntakeWizard.tsx) | Desktop (`hidden md:block`) |
-| FBR 8-Window Simplified AppClip Wizard | [`src/components/clips/FbrSimplifiedClipWizard.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/components/clips/FbrSimplifiedClipWizard.tsx) | Mobile (`block md:hidden`) |
-| Mobile 3-Step Filing Clip | [`src/components/clips/TaxIntakeClip.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/components/clips/TaxIntakeClip.tsx) | Mobile (`block md:hidden`) |
-| Mobile Persona Briefings | [`src/components/clips/PersonaClip.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/components/clips/PersonaClip.tsx) | Mobile (`block md:hidden`) |
-| Dark Glass Bottom Sheet | [`src/components/ui/app-clip/AppClipSheet.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/components/ui/app-clip/AppClipSheet.tsx) | Mobile (`max-w-lg fixed bottom-0`) |
-| Dark Glass Primitives | `src/components/ui/glass/` (`GlassSheet`, `GlassCard`, `GlassButton`) | Universal |
-| Mobile Tab Navigation | [`src/components/navigation/liquid-glass-tab-bar.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/components/navigation/liquid-glass-tab-bar.tsx) | Mobile (`block md:hidden`) |
-| Case Progress Tracking | [`src/app/track/page.tsx`](file:///home/ateeb/projects/tax-yasmeensons/src/app/track/page.tsx) / `/api/track` | Dual-Viewport |
-| FastAPI Cloud Backend | `https://ys-fastapi-backend.fastapicloud.dev/api/tax` | Microservice |
+| Canvas | Off-white `#F5F5F7` | `#000000` |
+| Card | `#FFFFFF` | `#1C1C1E` / `#2C2C2E` |
+| Label (headings) | `#000000` → `text-ink` | `#FFFFFF` |
+| Secondary (body) | Space Gray / `rgba(60,60,67,0.60)` → `text-ash` | System Gray `#8E8E93` |
+| Tertiary (captions) | `rgba(60,60,67,0.30)` | `rgba(235,235,245,0.30)` |
+| Accent / CTA / links | Apple Blue `#0071E3` | System Blue `#0A84FF` |
+| Success | `#34C759` | `#30D158` |
+| Danger | `#FF3B30` | `#FF453A` |
+| Silver | `#A2AAAD` | — |
+
+Never paint all dark-mode copy `text-white`. Headings = label; body = `text-ash`. CSS comments must be valid (one `*/` per comment).
 
 ---
 
-## 3. Verification Checklist Before Any Commit or PR
+## Type
 
-1. **Local Quality Gates Runner (All 7 gates on-device)**:
-   ```bash
-   npm run check-gates
-   # or: ./scripts/run-quality-gates.sh
-   ```
-   Must pass all 7 gates (Zero-credentials, No-hardcoding, AppClip natural height, Mobile accessibility, Apple palette + uploads + CSS comments, ESLint, Next.js production build).
+- **SF Pro** via `-apple-system, BlinkMacSystemFont, "SF Pro Text"` on Apple devices. Do **not** commit Apple font files.
+- **Inter** (`next/font`, `--font-inter`) is the web fallback.
+- **SF Pro Display** / New York (`font-display` / `font-serif`) for large titles.
+- **SF Mono** (`font-mono`) for `YS-26-#####` and codes.
+- **SF Rounded** (`font-rounded`) for pills/badges.
+- **Noto Nastaliq Urdu** (`font-urdu`, `--font-urdu`) for Urdu only.
+- Body ~17px Regular (HIG). Avoid Thin/Ultralight. Min ~11px.
 
-2. **Puppeteer Headless UI Audit**:
-   ```bash
-   node scripts/audit_ui.mjs
-   ```
-   Must verify that all routes at 390px and 1440px have `hasOverflow: false` (0 horizontal bleeding) and mobile AppClip interaction opens smoothly with zero blank vertical gaps.
+---
 
-3. **No-Hardcoding Check**:
-   ```bash
-   grep -rn "03120947187" src/ | grep -v "config.ts"
-   ```
-   Must return zero lines.
+## Map
+
+| What | Where |
+|---|---|
+| Intake proxy | `src/app/api/intake/route.ts` |
+| Track proxy | `src/app/api/track/route.ts` |
+| Upload PUT | `src/app/api/documents/route.ts` + `src/lib/s3.ts` |
+| Signed GET | `src/app/api/documents/view/route.ts` |
+| Folio helper | `src/lib/intake.ts` → `postIntake()` |
+| Config | `src/lib/config.ts` |
+| Desktop wizard | `src/components/intake/SeniorIntakeWizard.tsx` |
+| Mobile 8-window | `src/components/clips/FbrSimplifiedClipWizard.tsx` |
+| Mobile 3-step | `src/components/clips/TaxIntakeClip.tsx` |
+| Sheet | `src/components/ui/app-clip/AppClipSheet.tsx` |
+| Upload UI | `src/components/ui/file-upload.tsx` |
+| Track UI | `src/app/track/page.tsx` |
+| Tax API (backend repo) | `yasmeen-sons/backend/tax.py` |
+
+Tiers: GF-1000 / FA-2500 / CX-4500.
+
+---
+
+## Copy & UI nits
+
+- Season banner: mobile `Tax Season 2026 · ATL Open` (no wrap); desktop full sentence; island `TAX SEASON 2026 · ATL OPEN`.
+- Do not wrap other CTAs that already use `whitespace-nowrap`.
+- No glow-hover grids. No `credentialsNotes` in submit payloads.

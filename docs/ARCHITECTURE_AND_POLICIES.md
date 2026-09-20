@@ -1,7 +1,8 @@
 # System Architecture, Strict Policies & Engineering Guide
 **Yasmeen & Sons Tax Practice Platform (`tax.yasmeensons.com`)**  
 **Repository**: `ateebfaiz/tax-yasmeensons`  
-**Backend Authority**: FastAPI Cloud (`https://ys-fastapi-backend.fastapicloud.dev`)
+**Desk API**: FastAPI Cloud (`https://ys-fastapi-backend.fastapicloud.dev/api/tax`)  
+**Object storage**: Neon S3-compatible bucket `assets` (not an S3 column in Postgres)
 
 ---
 
@@ -25,7 +26,7 @@
 
 ### Gate 4: FastAPI Cloud Database Authority
 - Database persistence and Todoist P1 notifications are handled centrally by the persistent **FastAPI Cloud Backend Service** (`https://ys-fastapi-backend.fastapicloud.dev`).
-- Next.js serverless functions act as authenticated HTTP proxies to FastAPI Cloud, preventing connection pooling exhaustion and environment drift.
+- Next.js serverless functions proxy intake/track to FastAPI. File bytes go to Neon object storage (`assets`), not through FastAPI S3.
 
 ### Gate 5: Apple Human Interface Guidelines (HIG) Foundations Standard
 All UI components, sheets, navigation, and pages MUST strictly conform to **Apple's Human Interface Guidelines (HIG) Foundations**:
@@ -35,14 +36,14 @@ All UI components, sheets, navigation, and pages MUST strictly conform to **Appl
    - All interactive controls (buttons, tabs, inputs, close icons, checkboxes) MUST have a minimum tap target of **44x44 pt (44px)**.
 2. **Official Apple Default System Palette**:
    All colors strictly adhere to Apple HIG default system colors:
-   - **System Blue (`systemBlue`)**: Primary brand and action color. Light: `#007AFF`, Dark: `#0A84FF`.
+   - **Apple Blue (CTA / links)**: Light `#0071E3`, Dark System Blue `#0A84FF`. One accent.
    - **System Orange (`systemOrange`)**: Accents, highlights, badges. Light: `#FF9500`, Dark: `#FF9F0A`.
    - **System Green (`systemGreen`)**: Success, verified, WhatsApp. Light: `#34C759`, Dark: `#30D158`.
    - **System Red (`systemRed`)**: Destructive, warnings, required badges. Light: `#FF3B30`, Dark: `#FF453A`.
    - **System Gray 1–6**: Dynamic elevation backgrounds, borders, and fills.
    - **Dynamic Labels**: Primary `#000000` / `#FFFFFF`, Secondary `rgba(60,60,67,0.60)` / `rgba(235,235,245,0.60)`.
 3. **Official Apple System Typography**:
-   - Default Sans: `-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", system-ui, sans-serif`
+   - Default Sans: `-apple-system, BlinkMacSystemFont, "SF Pro Text", Inter` (SF on Apple devices; Inter is the licensed web fallback — do not commit Apple font files)
    - Default Serif: `"New York", -apple-system-ui-serif, ui-serif, Georgia, serif`
    - Default Mono: `ui-monospace, "SF Mono", "SFProMono-Regular", Menlo, Monaco, monospace`
    - Default Rounded: `ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif`
@@ -108,8 +109,9 @@ All UI components, sheets, navigation, and pages MUST strictly conform to **Appl
   - G2: Hardcoded phone numbers outside config
   - G3: AppClip zero-void natural height container invariants
   - G4: Mobile viewport accessibility (pinch-to-zoom preservation)
-  - G5: UI Craft by SmoothDev & Apple HIG design tokens (SmoothFileUpload, true frosted blur, manual filing fallback)
-  - G6: Next.js build and route generation
+  - G5: Apple palette `#0071E3` / `#F5F5F7`, valid CSS comments, no fake folio refs, `/api/documents` uploads, dark-mode white logo
+  - G6: ESLint (`next lint`)
+  - G7: Next.js production `npm run build` (never hide webpack output; `tsc` is not enough)
 - **Backend Quality Gates Runner:**
   ```bash
   # Inside /home/ateeb/projects/yasmeen-sons/backend
@@ -126,33 +128,23 @@ All UI components, sheets, navigation, and pages MUST strictly conform to **Appl
 
 ## 2. Design System & Visual Tokens
 
-### Safari History Dark Glass Tokens
-```css
-:root {
-  --page-bg: #07131b;
-  --glass-bg: rgba(27, 37, 43, 0.72);
-  --glass-bg-strong: rgba(22, 30, 36, 0.88);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-border-subtle: rgba(255, 255, 255, 0.07);
-  --glass-highlight: rgba(255, 255, 255, 0.06);
-  --glass-glow: rgba(32, 182, 165, 0.15);
+Source of truth: `src/themes/tokens.css`. No teal/gunmetal glow palette. No `--accent-glow`.
 
-  --text-primary: #f5f7f8;
-  --text-secondary: #aeb9bf;
-  --text-muted: #72828b;
+| Role | Light | Dark |
+|---|---|---|
+| Canvas | `#F5F5F7` | `#000000` |
+| Label | `#000000` (`text-ink`) | `#FFFFFF` |
+| Secondary body | Space Gray / 60% label (`text-ash`) | `#8E8E93` |
+| CTA | `#0071E3` | `#0A84FF` |
 
-  --accent: #20b6a5;
-  --accent-strong: #0d978b;
-  --accent-surface: rgba(32, 182, 165, 0.14);
-  --accent-glow: 0 0 24px rgba(32, 182, 165, 0.28);
+Default theme is **light**. Logo is white in dark mode. Headings use label color; body copy uses secondary — never all-white text in dark mode.
 
-  --radius-panel: 28px;
-  --radius-card: 20px;
-  --radius-pill: 9999px;
+## 2b. Documents & case storage
 
-  --glass-blur: blur(20px) saturate(140%);
-}
-```
+- **Bytes:** Neon object storage, bucket `assets`, key `tax/{uuid}/{filename}`. Client: `src/lib/s3.ts`. Upload: `POST /api/documents`. View: `GET /api/documents/view?key=`.
+- **Pointers:** Neon Postgres `tax_filings.raw_payload.documents[]` (`key`, `url`, `name`, `category`). No S3 column.
+- **Cases:** FastAPI `POST /api/tax/intake`, `GET /api/tax/track`. Folio `YS-26-#####` only via `postIntake()`.
+- **Stage update:** `UPDATE tax_filings SET status = 'reviewing' WHERE reference = 'YS-26-XXXXX';` (`pending`/`reviewing`/`reconciled`/`submitted`).
 
 ---
 
@@ -182,8 +174,9 @@ src/
 │   ├── services/page.tsx       # Standalone fee schedule & SLA details
 │   ├── iris-guide/page.tsx     # Annex A: Comprehensive official FBR Iris portal guide
 │   └── api/
-│       ├── intake/route.ts     # Ingestion proxy to FastAPI Cloud backend
-│       └── track/route.ts      # Status tracking proxy to FastAPI Cloud backend
+│       ├── intake/route.ts     # Proxy to FastAPI /api/tax/intake
+│       ├── track/route.ts      # Proxy to FastAPI /api/tax/track
+│       └── documents/          # PUT to Neon bucket `assets`; view signs GET
 ├── components/
 │   ├── clips/                  # Mobile-first AppClips
 │   │   ├── FbrSimplifiedClipWizard.tsx # SRO 1561(I)/2025 8-Window Simplified Wizard
@@ -193,7 +186,8 @@ src/
 │   │   ├── PricingClip.tsx     # Mobile pricing bottom sheet
 │   │   └── IrisGuideClip.tsx   # Mobile Iris Annex A bottom sheet
 │   ├── ui/
-│   │   ├── glass/              # Dark Glass UI Primitives
+│   │   ├── file-upload.tsx     # SmoothFileUpload → /api/documents
+│   │   ├── glass/              # Glass primitives (no glow)
 │   │   │   ├── GlassSheet.tsx
 │   │   │   ├── GlassCard.tsx
 │   │   │   ├── GlassSegmentedControl.tsx
