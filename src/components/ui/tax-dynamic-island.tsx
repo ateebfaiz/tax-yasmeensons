@@ -146,7 +146,7 @@ export function TaxDynamicIsland({ className = "", activeCaseRef }: TaxDynamicIs
           </div>
         );
     }
-  }, [view, isHovered, activeCaseRef, appClip]);
+  }, [view, isHovered, activeCaseRef, appClip, router]);
 
   return (
     <div className={`relative flex flex-col items-center justify-center ${className}`}>

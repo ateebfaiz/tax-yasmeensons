@@ -358,6 +358,8 @@ export function SmoothFileUpload({
                   >
                     <div className="flex items-center gap-2.5 min-w-0 flex-1 mr-2">
                       {isImage && file.previewUrl ? (
+                        // Blob/object URLs are not valid next/image sources
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={file.previewUrl}
                           alt={file.name}

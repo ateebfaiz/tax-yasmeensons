@@ -9,7 +9,7 @@
   color-scheme: light;
 
   /* Apple Official System Colors — Light Mode */
-  --apple-blue-rgb: 0 113 227;          /* #0071E3 — Apple marketing / CTA blue */ */
+  --apple-blue-rgb: 0 113 227;          /* #0071E3 — Apple marketing / CTA blue */
   --apple-indigo-rgb: 88 86 214;        /* #5856D6 */
   --apple-purple-rgb: 175 82 222;       /* #AF52DE */
   --apple-pink-rgb: 255 45 85;          /* #FF2D55 */
@@ -31,7 +31,7 @@
 
   /* Apple System Backgrounds — Light Mode */
   --system-bg-rgb: 255 255 255;         /* #FFFFFF — Primary Canvas */
-  --system-grouped-bg-rgb: 245 245 247; /* #F5F5F7 — Apple off-white */ */
+  --system-grouped-bg-rgb: 245 245 247; /* #F5F5F7 — Apple off-white */
   --system-card-rgb: 255 255 255;       /* #FFFFFF — Card Surface */
 
   /* Apple Dynamic Typography & Separators — Light Mode */

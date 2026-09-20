@@ -84,12 +84,12 @@ All agents operating in this repository must strictly adhere to the policies, in
 
 ## 3. Verification Checklist Before Any Commit or PR
 
-1. **Local Quality Gates Runner (All 6 gates on-device)**:
+1. **Local Quality Gates Runner (All 7 gates on-device)**:
    ```bash
    npm run check-gates
    # or: ./scripts/run-quality-gates.sh
    ```
-   Must pass all 6 gates (Zero-credentials, No-hardcoding, AppClip natural height, Mobile accessibility, UI Craft by SmoothDev / Apple HIG tokens, Next.js build).
+   Must pass all 7 gates (Zero-credentials, No-hardcoding, AppClip natural height, Mobile accessibility, Apple palette + uploads + CSS comments, ESLint, Next.js production build).
 
 2. **Puppeteer Headless UI Audit**:
    ```bash
