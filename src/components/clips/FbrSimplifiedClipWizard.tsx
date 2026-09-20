@@ -393,7 +393,7 @@ export default function FbrSimplifiedClipWizard({
       title="FBR Simplified e-Return"
       subtitle={`SRO 1561(I)/2025 • Window ${currentStep.num} / ${activeGraph.length - 1}`}
     >
-      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
+      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
         {/* Graph Progress Indicator */}
         <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-1">
           {activeGraph.map((step, idx) => {
@@ -406,10 +406,10 @@ export default function FbrSimplifiedClipWizard({
                 onClick={() => idx <= activeStepIndex && setActiveStepIndex(idx)}
                 className={`flex-shrink-0 px-2.5 py-1 rounded-full text-[11px] font-mono font-medium transition-all flex items-center gap-1.5 ${
                   isCurrent
-                    ? "bg-[#20b6a5] text-black font-bold shadow-[0_0_12px_rgba(32,182,165,0.4)]"
+                    ? "bg-palette-coral text-white font-bold shadow-[0_0_12px_rgba(238,108,77,0.35)]"
                     : isCompleted
-                    ? "bg-white/[0.08] text-[#20b6a5] hover:bg-white/[0.12]"
-                    : "bg-white/[0.03] text-[#aeb9bf]/50 pointer-events-none"
+                    ? "bg-white/[0.08] text-palette-coral hover:bg-white/[0.12]"
+                    : "bg-white/[0.03] text-ash dark:text-palette-sky/50 pointer-events-none"
                 }`}
               >
                 <span>{step.num}</span>
@@ -433,19 +433,19 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 0 • Identity
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   آپ کا ٹیکس سال — ایک منٹ میں
                 </span>
               </div>
-              <p className="text-xs text-[#aeb9bf]">
+              <p className="text-xs text-ash dark:text-palette-sky">
                 Only select sources from which you earned income this year. Business s.18 exits to commercial filing.
               </p>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-1">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-1">
                   Full Name (as per CNIC) / پورا نام
                 </label>
                 <input
@@ -453,13 +453,13 @@ export default function FbrSimplifiedClipWizard({
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Muhammad Usman"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3.5 py-2.5 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-1">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-1">
                     Mobile SIM Number / فعال موبائل نمبر
                   </label>
                   <input
@@ -467,11 +467,11 @@ export default function FbrSimplifiedClipWizard({
                     value={phone}
                     onChange={(e) => setPhone(formatPhoneInput(e.target.value))}
                     placeholder="0312 0000000"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-1">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-1">
                     CNIC (13 Digits) / شناختی کارڈ
                   </label>
                   <input
@@ -479,7 +479,7 @@ export default function FbrSimplifiedClipWizard({
                     value={cnic}
                     onChange={(e) => setCnic(formatCnicInput(e.target.value))}
                     placeholder="35202-0000000-0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
@@ -487,7 +487,7 @@ export default function FbrSimplifiedClipWizard({
 
             {/* Income Source Toggles */}
             <div className="space-y-2">
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#aeb9bf]">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ash dark:text-palette-sky">
                 Income Sources (Tax Year 2026) / آمدنی کے ذرائع
               </label>
 
@@ -534,23 +534,23 @@ export default function FbrSimplifiedClipWizard({
                       }
                       className={`p-3 rounded-2xl border text-left transition-all flex items-center justify-between gap-2 ${
                         isChecked
-                          ? "border-[#20b6a5]/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_12px_rgba(32,182,165,0.2)] text-white"
-                          : "border-white/[0.08] bg-[rgba(27,37,43,0.6)] text-[#aeb9bf]"
+                          ? "border-palette-coral bg-palette-coral/15 shadow-[0_0_12px_rgba(238,108,77,0.25)] text-ink dark:text-palette-frost font-bold"
+                          : "border-rule/60 dark:border-palette-sky/15 bg-paper-light/50 dark:bg-palette-gunmetal/60 text-ash dark:text-palette-sky hover:border-palette-sky/40"
                       }`}
                     >
                       <div className="min-w-0">
                         <div className="text-xs font-bold flex items-center gap-1.5">
                           <span>{item.en}</span>
                         </div>
-                        <div className="text-[11px] font-urdu text-[#20b6a5]" dir="rtl">
+                        <div className="text-[11px] font-urdu text-palette-coral" dir="rtl">
                           {item.ur}
                         </div>
                       </div>
                       <div
                         className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 border ${
                           isChecked
-                            ? "bg-[#20b6a5] border-[#20b6a5] text-black"
-                            : "border-white/20 bg-transparent"
+                            ? "bg-palette-coral text-white border-palette-coral"
+                            : "border-rule dark:border-palette-sky/30 bg-transparent"
                         }`}
                       >
                         {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
@@ -575,10 +575,10 @@ export default function FbrSimplifiedClipWizard({
                     className="accent-amber-500 h-4 w-4 mt-0.5 rounded shrink-0"
                   />
                   <div>
-                    <div className="text-xs font-bold text-white">
+                    <div className="text-xs font-bold text-ink dark:text-palette-frost">
                       Any Business / Commercial Trade (s.18)?
                     </div>
-                    <div className="text-[11px] text-[#aeb9bf]">
+                    <div className="text-[11px] text-ash dark:text-palette-sky">
                       کیا کوئی دکان، فیکٹری یا تجارتی کاروبار موجود ہے؟
                     </div>
                   </div>
@@ -612,20 +612,20 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 1 • Salary &amp; Pension
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   آپ کی تنخواہ (سیکشن 12)
                 </span>
               </div>
-              <p className="text-xs text-[#aeb9bf]">
+              <p className="text-xs text-ash dark:text-palette-sky">
                 Keep your Employer Tax Certificate (Section 149 / Form 16) handy.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-1">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-1">
                     Employer Name / ادارے کا نام
                   </label>
                   <input
@@ -633,11 +633,11 @@ export default function FbrSimplifiedClipWizard({
                     value={salary.employerName}
                     onChange={(e) => setSalary((p) => ({ ...p, employerName: e.target.value }))}
                     placeholder="e.g. Ministry / Corporate Ltd"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-1">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-1">
                     Employer NTN (Optional)
                   </label>
                   <input
@@ -645,16 +645,16 @@ export default function FbrSimplifiedClipWizard({
                     value={salary.employerNtn}
                     onChange={(e) => setSalary((p) => ({ ...p, employerNtn: e.target.value }))}
                     placeholder="7-digit NTN"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Gross Annual Salary (PKR) • Code 1000
                 </label>
-                <span className="text-[11px] text-[#aeb9bf] block mb-1">
+                <span className="text-[11px] text-ash dark:text-palette-sky block mb-1">
                   مجموعی سالانہ تنخواہ (بیسک، بونس اور تمام الاؤنسز)
                 </span>
                 <input
@@ -662,16 +662,16 @@ export default function FbrSimplifiedClipWizard({
                   value={salary.grossSalary}
                   onChange={(e) => setSalary((p) => ({ ...p, grossSalary: e.target.value }))}
                   placeholder="e.g. 1800000"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3.5 py-2.5 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Exempt Allowances (PKR)
                   </label>
-                  <span className="text-[11px] text-[#aeb9bf] block mb-1">
+                  <span className="text-[11px] text-ash dark:text-palette-sky block mb-1">
                     مستثنیٰ الاؤنسز (مثلاً میڈیکل)
                   </span>
                   <input
@@ -679,14 +679,14 @@ export default function FbrSimplifiedClipWizard({
                     value={salary.exemptAllowances}
                     onChange={(e) => setSalary((p) => ({ ...p, exemptAllowances: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Tax Deducted by Employer (s.149)
                   </label>
-                  <span className="text-[11px] text-[#aeb9bf] block mb-1">
+                  <span className="text-[11px] text-ash dark:text-palette-sky block mb-1">
                     آجر کا کاٹا ہوا انکم ٹیکس
                   </span>
                   <input
@@ -694,13 +694,13 @@ export default function FbrSimplifiedClipWizard({
                     value={salary.taxDeductedEmployer}
                     onChange={(e) => setSalary((p) => ({ ...p, taxDeductedEmployer: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Annual Pension Received (if any) / پنشن
                 </label>
                 <input
@@ -708,13 +708,13 @@ export default function FbrSimplifiedClipWizard({
                   value={salary.pension}
                   onChange={(e) => setSalary((p) => ({ ...p, pension: e.target.value }))}
                   placeholder="0"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between text-xs">
-                <span className="text-[#aeb9bf]">Calculated Net Salary Income:</span>
-                <span className="font-mono font-bold text-[#20b6a5]">
+                <span className="text-ash dark:text-palette-sky">Calculated Net Salary Income:</span>
+                <span className="font-mono font-bold text-palette-coral">
                   PKR {totalSalaryIncome.toLocaleString()}
                 </span>
               </div>
@@ -729,19 +729,19 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 2 • Property Rent
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   جائیداد سے کرایہ (سیکشن 15)
                 </span>
               </div>
-              <p className="text-xs text-[#aeb9bf]">
+              <p className="text-xs text-ash dark:text-palette-sky">
                 Annual rent received. Statutory 20% repair allowance is automatically calculated per SRO.
               </p>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-1">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-1">
                   Property Address / جائیداد کا پتہ
                 </label>
                 <input
@@ -749,15 +749,15 @@ export default function FbrSimplifiedClipWizard({
                   value={property.address}
                   onChange={(e) => setProperty((p) => ({ ...p, address: e.target.value }))}
                   placeholder="Plot/Flat number, Sector, City"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Gross Rent Received (Annual) • Code 2001
                 </label>
-                <span className="text-[11px] text-[#aeb9bf] block mb-1">
+                <span className="text-[11px] text-ash dark:text-palette-sky block mb-1">
                   سال بھر کا مجموعی کرایہ
                 </span>
                 <input
@@ -765,13 +765,13 @@ export default function FbrSimplifiedClipWizard({
                   value={property.grossRent}
                   onChange={(e) => setProperty((p) => ({ ...p, grossRent: e.target.value }))}
                   placeholder="e.g. 600000"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3.5 py-2.5 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Property Tax Paid • Code 2033
                   </label>
                   <input
@@ -779,11 +779,11 @@ export default function FbrSimplifiedClipWizard({
                     value={property.propertyTax}
                     onChange={(e) => setProperty((p) => ({ ...p, propertyTax: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Insurance Premium • Code 2032
                   </label>
                   <input
@@ -791,21 +791,21 @@ export default function FbrSimplifiedClipWizard({
                     value={property.insurance}
                     onChange={(e) => setProperty((p) => ({ ...p, insurance: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between text-xs">
-                <span className="text-[#aeb9bf]">Statutory 1/5 Repair Allowance (20%):</span>
-                <span className="font-mono font-bold text-white">
+                <span className="text-ash dark:text-palette-sky">Statutory 1/5 Repair Allowance (20%):</span>
+                <span className="font-mono font-bold text-ink dark:text-palette-frost">
                   PKR {(parseNum(property.grossRent) * 0.2).toLocaleString()}
                 </span>
               </div>
 
               <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between text-xs">
-                <span className="text-[#aeb9bf]">Net Taxable Rent Income:</span>
-                <span className="font-mono font-bold text-[#20b6a5]">
+                <span className="text-ash dark:text-palette-sky">Net Taxable Rent Income:</span>
+                <span className="font-mono font-bold text-palette-coral">
                   PKR {totalPropertyIncome.toLocaleString()}
                 </span>
               </div>
@@ -820,22 +820,22 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 3 • Other Sources
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   بینک منافع و ڈیویڈنڈ (سیکشن 39)
                 </span>
               </div>
-              <p className="text-xs text-[#aeb9bf]">
+              <p className="text-xs text-ash dark:text-palette-sky">
                 Check profit on debt from your annual bank profit certificate.
               </p>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Profit on Debt / Bank Profit (PKR) • Code 5003
                 </label>
-                <span className="text-[11px] text-[#aeb9bf] block mb-1">
+                <span className="text-[11px] text-ash dark:text-palette-sky block mb-1">
                   بینک اکاؤنٹس یا قومی بچت سے حاصل شدہ سالانہ منافع
                 </span>
                 <input
@@ -843,12 +843,12 @@ export default function FbrSimplifiedClipWizard({
                   value={otherSources.profitOnDebt}
                   onChange={(e) => setOtherSources((p) => ({ ...p, profitOnDebt: e.target.value }))}
                   placeholder="e.g. 150000"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3.5 py-2.5 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Dividends from Listed Shares (PKR) • Code 5002
                 </label>
                 <input
@@ -856,13 +856,13 @@ export default function FbrSimplifiedClipWizard({
                   value={otherSources.dividend}
                   onChange={(e) => setOtherSources((p) => ({ ...p, dividend: e.target.value }))}
                   placeholder="0"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Prize Bond Winnings • Code 5028
                   </label>
                   <input
@@ -870,11 +870,11 @@ export default function FbrSimplifiedClipWizard({
                     value={otherSources.prizeBonds}
                     onChange={(e) => setOtherSources((p) => ({ ...p, prizeBonds: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Misc Other Receipts
                   </label>
                   <input
@@ -882,7 +882,7 @@ export default function FbrSimplifiedClipWizard({
                     value={otherSources.miscReceipts}
                     onChange={(e) => setOtherSources((p) => ({ ...p, miscReceipts: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
@@ -897,33 +897,33 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 4 • Capital Gains
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   کیپٹل گین (سیکشن 37)
                 </span>
               </div>
-              <p className="text-xs text-[#aeb9bf]">
+              <p className="text-xs text-ash dark:text-palette-sky">
                 Gain or loss on disposal of securities, shares, or immovable properties.
               </p>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-1">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-1">
                   Asset Class / اثاثے کی قسم
                 </label>
                 <select
                   value={capitalGains.assetType}
                   onChange={(e) => setCapitalGains((p) => ({ ...p, assetType: e.target.value }))}
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2.5 text-xs text-white focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2.5 text-xs text-ink dark:text-palette-frost focus:border-palette-coral outline-none"
                 >
-                  <option value="securities" className="bg-[#161e24] text-white">
+                  <option value="securities" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">
                     Securities / Listed Shares (s.37A)
                   </option>
-                  <option value="immovable_property" className="bg-[#161e24] text-white">
+                  <option value="immovable_property" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">
                     Immovable Property / Plot / Flat (s.37)
                   </option>
-                  <option value="other" className="bg-[#161e24] text-white">
+                  <option value="other" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">
                     Other Capital Assets
                   </option>
                 </select>
@@ -931,10 +931,10 @@ export default function FbrSimplifiedClipWizard({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Sale Consideration (PKR)
                   </label>
-                  <span className="text-[11px] text-[#aeb9bf] block mb-1">
+                  <span className="text-[11px] text-ash dark:text-palette-sky block mb-1">
                     فروخت کی رقم
                   </span>
                   <input
@@ -942,14 +942,14 @@ export default function FbrSimplifiedClipWizard({
                     value={capitalGains.saleProceeds}
                     onChange={(e) => setCapitalGains((p) => ({ ...p, saleProceeds: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Acquisition Cost (ACB)
                   </label>
-                  <span className="text-[11px] text-[#aeb9bf] block mb-1">
+                  <span className="text-[11px] text-ash dark:text-palette-sky block mb-1">
                     خریداری کی لاگت
                   </span>
                   <input
@@ -957,14 +957,14 @@ export default function FbrSimplifiedClipWizard({
                     value={capitalGains.costAcquisition}
                     onChange={(e) => setCapitalGains((p) => ({ ...p, costAcquisition: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between text-xs">
-                <span className="text-[#aeb9bf]">Computed Capital Gain:</span>
-                <span className="font-mono font-bold text-[#20b6a5]">
+                <span className="text-ash dark:text-palette-sky">Computed Capital Gain:</span>
+                <span className="font-mono font-bold text-palette-coral">
                   PKR {totalCapitalGains.toLocaleString()}
                 </span>
               </div>
@@ -979,16 +979,16 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 5 • Allowances &amp; Credits
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   چھوٹ اور ٹیکس کریڈٹ (سیکشن 60 تا 63)
                 </span>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Zakat Paid under Zakat &amp; Ushr Ordinance • Code 6001
                 </label>
                 <input
@@ -996,12 +996,12 @@ export default function FbrSimplifiedClipWizard({
                   value={deductions.zakat}
                   onChange={(e) => setDeductions((p) => ({ ...p, zakat: e.target.value }))}
                   placeholder="0"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Donations to Approved Charities (s.61)
                 </label>
                 <input
@@ -1009,12 +1009,12 @@ export default function FbrSimplifiedClipWizard({
                   value={deductions.donations}
                   onChange={(e) => setDeductions((p) => ({ ...p, donations: e.target.value }))}
                   placeholder="0"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-white mb-0.5">
+                <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                   Contribution to Approved Voluntary Pension Scheme (s.63)
                 </label>
                 <input
@@ -1022,7 +1022,7 @@ export default function FbrSimplifiedClipWizard({
                   value={deductions.pensionFund}
                   onChange={(e) => setDeductions((p) => ({ ...p, pensionFund: e.target.value }))}
                   placeholder="0"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                  className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                 />
               </div>
             </GlassCard>
@@ -1036,23 +1036,23 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 6 • Tax Already Paid
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   پہلے سے کٹا ہوا ٹیکس (مالومات تصدیق)
                 </span>
               </div>
-              <p className="text-xs text-[#aeb9bf]">
+              <p className="text-xs text-ash dark:text-palette-sky">
                 Claim all advance taxes deducted at source to reduce your final tax bill or claim refund.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Mobile SIM Withholding (s.236)
                   </label>
-                  <span className="text-[10px] text-[#aeb9bf] block mb-1">
+                  <span className="text-[10px] text-ash dark:text-palette-sky block mb-1">
                     جاز، زونگ، یوفون، ٹیلی نار کٹوتی
                   </span>
                   <input
@@ -1060,14 +1060,14 @@ export default function FbrSimplifiedClipWizard({
                     value={taxPaid.simWht}
                     onChange={(e) => setTaxPaid((p) => ({ ...p, simWht: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Electricity &amp; Gas Bills (s.235)
                   </label>
-                  <span className="text-[10px] text-[#aeb9bf] block mb-1">
+                  <span className="text-[10px] text-ash dark:text-palette-sky block mb-1">
                     بجلی کے بلوں پر ودہولڈنگ ٹیکس
                   </span>
                   <input
@@ -1075,14 +1075,14 @@ export default function FbrSimplifiedClipWizard({
                     value={taxPaid.electricityWht}
                     onChange={(e) => setTaxPaid((p) => ({ ...p, electricityWht: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Bank Cash Withdrawals (s.231A)
                   </label>
                   <input
@@ -1090,11 +1090,11 @@ export default function FbrSimplifiedClipWizard({
                     value={taxPaid.bankCashWht}
                     onChange={(e) => setTaxPaid((p) => ({ ...p, bankCashWht: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     WHT on Bank Profit (s.151)
                   </label>
                   <input
@@ -1102,14 +1102,14 @@ export default function FbrSimplifiedClipWizard({
                     value={taxPaid.bankProfitWht}
                     onChange={(e) => setTaxPaid((p) => ({ ...p, bankProfitWht: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Vehicle Token / Purchase (s.231B/234)
                   </label>
                   <input
@@ -1117,11 +1117,11 @@ export default function FbrSimplifiedClipWizard({
                     value={taxPaid.vehicleWht}
                     onChange={(e) => setTaxPaid((p) => ({ ...p, vehicleWht: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-white mb-0.5">
+                  <label className="block text-xs font-bold text-ink dark:text-palette-frost mb-0.5">
                     Property Purchase/Sale (s.236K/C)
                   </label>
                   <input
@@ -1129,14 +1129,14 @@ export default function FbrSimplifiedClipWizard({
                     value={taxPaid.propertyWht}
                     onChange={(e) => setTaxPaid((p) => ({ ...p, propertyWht: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-between text-xs">
-                <span className="text-[#aeb9bf]">Total Advance Tax Claimed:</span>
-                <span className="font-mono font-bold text-[#20b6a5] text-sm">
+                <span className="text-ash dark:text-palette-sky">Total Advance Tax Claimed:</span>
+                <span className="font-mono font-bold text-palette-coral text-sm">
                   PKR {totalTaxPaid.toLocaleString()}
                 </span>
               </div>
@@ -1151,26 +1151,26 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             <GlassCard variant="default" className="p-4 space-y-3">
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs text-[#20b6a5] font-bold uppercase">
+                <span className="font-mono text-xs text-palette-coral font-bold uppercase">
                   Window 7 • Wealth &amp; Reconciliation
                 </span>
-                <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                <span className="font-urdu text-xs text-palette-coral" dir="rtl">
                   دولت کا گوشوارہ (سیکشن 116)
                 </span>
               </div>
-              <p className="text-xs text-[#aeb9bf]">
+              <p className="text-xs text-ash dark:text-palette-sky">
                 Declare assets and liabilities as of 30th June 2026. Real-time reconciliation balances the difference to 0.00.
               </p>
 
               {/* ASSETS SECTION */}
               <div className="space-y-2 pt-1 border-t border-white/[0.08]">
-                <span className="font-bold text-xs text-white block">
+                <span className="font-bold text-xs text-ink dark:text-palette-frost block">
                   1. Assets as of 30 June 2026 (اثاثہ جات)
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Immovable Property / مکان و پلاٹ
                     </label>
                     <input
@@ -1178,11 +1178,11 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.immovableProperty}
                       onChange={(e) => setWealth((p) => ({ ...p, immovableProperty: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Motor Vehicles / گاڑیاں
                     </label>
                     <input
@@ -1190,14 +1190,14 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.vehicles}
                       onChange={(e) => setWealth((p) => ({ ...p, vehicles: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Bank Balances (30 June) / بینک بیلنس
                     </label>
                     <input
@@ -1205,11 +1205,11 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.bankBalance}
                       onChange={(e) => setWealth((p) => ({ ...p, bankBalance: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Cash in Hand / کیش ان ہینڈ
                     </label>
                     <input
@@ -1217,13 +1217,13 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.cashInHand}
                       onChange={(e) => setWealth((p) => ({ ...p, cashInHand: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                  <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                     Gold &amp; Capital Investments / سونا و سرمایہ کاری
                   </label>
                   <input
@@ -1231,12 +1231,12 @@ export default function FbrSimplifiedClipWizard({
                     value={wealth.investmentsGold}
                     onChange={(e) => setWealth((p) => ({ ...p, investmentsGold: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                  <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                     Liabilities &amp; Outstanding Loans / واجب الادا قرضے
                   </label>
                   <input
@@ -1244,23 +1244,23 @@ export default function FbrSimplifiedClipWizard({
                     value={wealth.liabilities}
                     onChange={(e) => setWealth((p) => ({ ...p, liabilities: e.target.value }))}
                     placeholder="0"
-                    className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                    className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                   />
                 </div>
               </div>
 
               {/* RECONCILIATION SECTION */}
               <div className="space-y-2 pt-2 border-t border-white/[0.08]">
-                <span className="font-bold text-xs text-white block">
+                <span className="font-bold text-xs text-ink dark:text-palette-frost block">
                   2. Wealth Reconciliation (اثاثوں کا میل)
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Opening Net Assets (Last Year)
                     </label>
-                    <span className="text-[10px] text-[#aeb9bf] block mb-1">
+                    <span className="text-[10px] text-ash dark:text-palette-sky block mb-1">
                       گزشتہ سال کے خالص اثاثے
                     </span>
                     <input
@@ -1268,14 +1268,14 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.openingNetAssets}
                       onChange={(e) => setWealth((p) => ({ ...p, openingNetAssets: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Personal / Household Expenses
                     </label>
-                    <span className="text-[10px] text-[#aeb9bf] block mb-1">
+                    <span className="text-[10px] text-ash dark:text-palette-sky block mb-1">
                       سالانہ ذاتی و گھریلو اخراجات
                     </span>
                     <input
@@ -1283,14 +1283,14 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.personalExpenses}
                       onChange={(e) => setWealth((p) => ({ ...p, personalExpenses: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Gifts / Inheritance Inflows
                     </label>
                     <input
@@ -1298,11 +1298,11 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.giftsReceived}
                       onChange={(e) => setWealth((p) => ({ ...p, giftsReceived: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-[#aeb9bf] mb-0.5">
+                    <label className="block text-xs text-ash dark:text-palette-sky mb-0.5">
                       Foreign Remittance Inflows (PRC)
                     </label>
                     <input
@@ -1310,7 +1310,7 @@ export default function FbrSimplifiedClipWizard({
                       value={wealth.foreignRemittances}
                       onChange={(e) => setWealth((p) => ({ ...p, foreignRemittances: e.target.value }))}
                       placeholder="0"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                      className="w-full bg-paper-light/80 dark:bg-palette-gunmetal/80 border border-rule/80 dark:border-palette-sky/20 text-ink dark:text-palette-frost focus:ring-2 focus:ring-palette-coral rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
                     />
                   </div>
                 </div>
@@ -1320,14 +1320,14 @@ export default function FbrSimplifiedClipWizard({
               <div
                 className={`p-3.5 rounded-2xl border transition-all ${
                   unreconciledGap === 0
-                    ? "bg-[#20b6a5]/15 border-[#20b6a5]/50 text-white"
+                    ? "bg-palette-coral text-palette-coral border-palette-coral/50 font-bold"
                     : "bg-amber-500/15 border-amber-500/40 text-amber-200"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     {unreconciledGap === 0 ? (
-                      <CheckCircle2 className="w-5 h-5 text-[#20b6a5]" />
+                      <CheckCircle2 className="w-5 h-5 text-palette-coral" />
                     ) : (
                       <AlertCircle className="w-5 h-5 text-amber-400" />
                     )}
@@ -1367,27 +1367,27 @@ export default function FbrSimplifiedClipWizard({
           <div className="space-y-3.5">
             {submissionSuccess ? (
               <div className="text-center py-5 space-y-3.5">
-                <div className="w-16 h-16 rounded-full bg-[#20b6a5]/20 text-[#20b6a5] flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
+                <div className="w-16 h-16 rounded-full bg-palette-coral/20 text-palette-coral flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
                 <div>
-                  <span className="font-mono text-xs text-[#aeb9bf] uppercase tracking-wider">
+                  <span className="font-mono text-xs text-ash dark:text-palette-sky uppercase tracking-wider">
                     SIMPLIFIED RETURN QUEUED
                   </span>
-                  <div className="font-mono text-3xl font-black text-white mt-1">
+                  <div className="font-mono text-3xl font-black text-ink dark:text-palette-frost mt-1">
                     {caseReference}
                   </div>
-                  <p className="text-xs text-[#aeb9bf] mt-1 font-urdu" dir="rtl">
+                  <p className="text-xs text-ash dark:text-palette-sky mt-1 font-urdu" dir="rtl">
                     آپ کا ٹیکس گوشوارہ کامیابی سے محفوظ ہو چکا ہے۔
                   </p>
                 </div>
 
                 <GlassCard variant="glow" className="p-4 text-xs text-left space-y-2">
-                  <div className="flex items-center gap-2 text-white font-bold">
-                    <ShieldCheck className="w-4 h-4 text-[#20b6a5]" />
+                  <div className="flex items-center gap-2 text-ink dark:text-palette-frost font-bold">
+                    <ShieldCheck className="w-4 h-4 text-palette-coral" />
                     <span>Zero-Password Principle Upheld</span>
                   </div>
-                  <p className="text-[#aeb9bf] leading-relaxed text-[11px]">
+                  <p className="text-ash dark:text-palette-sky leading-relaxed text-[11px]">
                     Your verified data and field-by-field checklist are generated. Connect on WhatsApp to complete official filing with our senior team.
                   </p>
                 </GlassCard>
@@ -1417,39 +1417,39 @@ export default function FbrSimplifiedClipWizard({
               </div>
             ) : (
               <div className="space-y-3.5">
-                <GlassCard variant="glow" className="p-4 space-y-3 border-[#20b6a5]/50">
+                <GlassCard variant="glow" className="p-4 space-y-3 border-palette-coral/50">
                   <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
-                    <span className="font-serif text-sm font-bold text-white">
+                    <span className="font-serif text-sm font-bold text-ink dark:text-palette-frost">
                       Tax Year 2026 Summary
                     </span>
-                    <span className="font-mono text-xs text-[#20b6a5] font-bold">
+                    <span className="font-mono text-xs text-palette-coral font-bold">
                       SRO 1561(I)/2025
                     </span>
                   </div>
 
                   <div className="space-y-1.5 text-xs">
                     <div className="flex justify-between">
-                      <span className="text-[#aeb9bf]">Taxpayer:</span>
-                      <span className="font-bold text-white">{fullName}</span>
+                      <span className="text-ash dark:text-palette-sky">Taxpayer:</span>
+                      <span className="font-bold text-ink dark:text-palette-frost">{fullName}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-[#aeb9bf]">CNIC:</span>
-                      <span className="font-mono text-white">{cnic || "Pending"}</span>
+                      <span className="text-ash dark:text-palette-sky">CNIC:</span>
+                      <span className="font-mono text-ink dark:text-palette-frost">{cnic || "Pending"}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-[#aeb9bf]">Total Declared Income:</span>
-                      <span className="font-mono font-bold text-[#20b6a5]">
+                      <span className="text-ash dark:text-palette-sky">Total Declared Income:</span>
+                      <span className="font-mono font-bold text-palette-coral">
                         PKR {totalTaxableIncome.toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-[#aeb9bf]">Total Source Tax (WHT):</span>
-                      <span className="font-mono font-bold text-[#20b6a5]">
+                      <span className="text-ash dark:text-palette-sky">Total Source Tax (WHT):</span>
+                      <span className="font-mono font-bold text-palette-coral">
                         PKR {totalTaxPaid.toLocaleString()}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-[#aeb9bf]">Wealth Balance Difference:</span>
+                      <span className="text-ash dark:text-palette-sky">Wealth Balance Difference:</span>
                       <span
                         className={`font-mono font-bold ${
                           unreconciledGap === 0 ? "text-emerald-400" : "text-amber-400"

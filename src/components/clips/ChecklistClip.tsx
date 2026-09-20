@@ -92,7 +92,7 @@ export default function ChecklistClip({
       title="Filing Document Checklist"
       subtitle="دستاویزات کی مکمل چیک لسٹ • Tax Year 2026"
     >
-      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
+      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
         {/* Category Tabs */}
         <GlassSegmentedControl
           tabs={tabs}
@@ -101,10 +101,10 @@ export default function ChecklistClip({
         />
 
         <div className="space-y-0.5 pt-1">
-          <h3 className="text-xs font-bold text-[#f5f7f8] uppercase tracking-wider">
+          <h3 className="text-xs font-bold text-ink dark:text-palette-frost uppercase tracking-wider">
             {current.titleEn}
           </h3>
-          <p className="text-xs font-bold text-[#20b6a5] font-urdu" dir="rtl">
+          <p className="text-xs font-bold text-palette-coral font-urdu" dir="rtl">
             {current.titleUr}
           </p>
         </div>
@@ -122,19 +122,19 @@ export default function ChecklistClip({
                 className="p-3.5 flex items-start gap-3"
               >
                 {isChecked ? (
-                  <CheckSquare className="w-4 h-4 text-[#20b6a5] shrink-0 mt-0.5" />
+                  <CheckSquare className="w-4 h-4 text-palette-coral shrink-0 mt-0.5" />
                 ) : (
-                  <Square className="w-4 h-4 text-[#aeb9bf] shrink-0 mt-0.5" />
+                  <Square className="w-4 h-4 text-ash dark:text-palette-sky shrink-0 mt-0.5" />
                 )}
                 <div className="space-y-0.5 min-w-0 flex-1">
                   <div
                     className={`text-xs font-medium transition-all ${
-                      isChecked ? "line-through opacity-60 text-[#aeb9bf]" : "text-[#f5f7f8]"
+                      isChecked ? "line-through opacity-60 text-ash dark:text-palette-sky" : "text-ink dark:text-palette-frost"
                     }`}
                   >
                     {item.en}
                   </div>
-                  <div className="text-[11px] font-urdu opacity-75 text-[#20b6a5]" dir="rtl">
+                  <div className="text-[11px] font-urdu opacity-75 text-palette-coral" dir="rtl">
                     {item.ur}
                   </div>
                 </div>
@@ -145,8 +145,8 @@ export default function ChecklistClip({
 
         {/* Info Note */}
         <GlassCard variant="subtle" className="p-3 text-xs space-y-1">
-          <div className="font-bold text-[#f5f7f8]">Don&apos;t have all documents right now?</div>
-          <p className="text-[#aeb9bf] leading-relaxed font-urdu text-[11px]" dir="rtl">
+          <div className="font-bold text-ink dark:text-palette-frost">Don&apos;t have all documents right now?</div>
+          <p className="text-ash dark:text-palette-sky leading-relaxed font-urdu text-[11px]" dir="rtl">
             اگر تمام کاغذات دستیاب نہیں ہیں تو فکر نہ کریں، ہمارے نمائندے آپ کے دستیاب ریکارڈ کے مطابق فائلنگ میں مدد کریں گے۔
           </p>
         </GlassCard>
@@ -154,13 +154,13 @@ export default function ChecklistClip({
         {/* Certificate Request Templates & App Guide */}
         <GlassCard variant="glow" className="p-3 flex items-center justify-between gap-3 text-xs">
           <div>
-            <strong className="text-[#f5f7f8] block font-bold">Need WHT, PRC or SIM Certificates?</strong>
-            <span className="text-[#aeb9bf] text-[11px]">Copy-paste messages &amp; instant app guide</span>
+            <strong className="text-ink dark:text-palette-frost block font-bold">Need WHT, PRC or SIM Certificates?</strong>
+            <span className="text-ash dark:text-palette-sky text-[11px]">Copy-paste messages &amp; instant app guide</span>
           </div>
           <Link
             href="/requirements"
             onClick={onClose}
-            className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/20 text-[#f5f7f8] font-bold text-[11px] whitespace-nowrap shadow-sm active:scale-95 transition-all"
+            className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/20 text-ink dark:text-palette-frost font-bold text-[11px] whitespace-nowrap shadow-sm active:scale-95 transition-all"
           >
             View Templates →
           </Link>
@@ -185,7 +185,7 @@ export default function ChecklistClip({
             href={formatWhatsAppUrl("Hi, I have questions about required tax documents.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-[rgba(27,37,43,0.72)] hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
+            className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/80 dark:bg-palette-gunmetal/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>

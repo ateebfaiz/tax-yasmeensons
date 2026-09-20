@@ -20,26 +20,38 @@ const config: Config = {
     },
     extend: {
       colors: {
-        ink: "var(--tax-ink)",
-        "iris-teal": "var(--tax-iris-teal)",
+        ink: "rgb(var(--tax-ink-rgb) / <alpha-value>)",
+        "iris-teal": "rgb(var(--palette-slate-rgb) / <alpha-value>)",
         brass: {
-          DEFAULT: "var(--tax-brass)",
-          light: "var(--tax-brass-light)",
-          subtle: "var(--tax-brass-subtle)",
+          DEFAULT: "rgb(var(--palette-coral-rgb) / <alpha-value>)",
+          light: "rgb(var(--palette-coral-rgb) / <alpha-value>)",
+          subtle: "rgb(var(--palette-coral-rgb) / 0.12)",
         },
         paper: {
-          DEFAULT: "var(--tax-paper)",
-          light: "var(--tax-paper-light)",
+          DEFAULT: "rgb(var(--tax-paper-rgb) / <alpha-value>)",
+          light: "rgb(var(--tax-paper-light-rgb) / <alpha-value>)",
         },
-        folio: "var(--tax-folio)",
+        folio: "rgb(var(--tax-folio-rgb) / <alpha-value>)",
         rule: {
-          DEFAULT: "var(--tax-rule)",
-          light: "var(--tax-rule-light)",
+          DEFAULT: "rgb(var(--tax-rule-rgb) / <alpha-value>)",
+          light: "rgb(var(--tax-rule-rgb) / 0.12)",
         },
-        "stamp-red": "var(--tax-stamp-red)",
+        "stamp-red": "rgb(var(--palette-coral-rgb) / <alpha-value>)",
         ash: {
-          DEFAULT: "var(--tax-ash)",
-          light: "var(--tax-ash-light)",
+          DEFAULT: "rgb(var(--tax-ash-rgb) / <alpha-value>)",
+          light: "rgb(var(--tax-ash-light-rgb) / <alpha-value>)",
+        },
+        accent: {
+          DEFAULT: "rgb(var(--palette-coral-rgb) / <alpha-value>)",
+          strong: "rgb(var(--palette-coral-hover-rgb) / <alpha-value>)",
+          surface: "rgb(var(--palette-coral-rgb) / 0.14)",
+        },
+        palette: {
+          slate: "rgb(var(--palette-slate-rgb) / <alpha-value>)",
+          sky: "rgb(var(--palette-sky-rgb) / <alpha-value>)",
+          frost: "rgb(var(--palette-frost-rgb) / <alpha-value>)",
+          coral: "rgb(var(--palette-coral-rgb) / <alpha-value>)",
+          gunmetal: "rgb(var(--palette-gunmetal-rgb) / <alpha-value>)",
         },
         theme: {
           primary: "var(--theme-primary)",

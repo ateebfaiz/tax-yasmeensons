@@ -56,9 +56,9 @@ export function LiquidGlassTabBar() {
       <nav
         className={cn(
           "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] px-2.5",
-          "bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-3xl backdrop-saturate-150",
-          "border border-white/70 dark:border-white/20",
-          "shadow-[0_16px_40px_rgba(0,0,0,0.16),inset_0_1px_1px_rgba(255,255,255,0.85)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.12)]"
+          "bg-white/85 dark:bg-palette-gunmetal/85 backdrop-blur-3xl backdrop-saturate-150",
+          "border border-rule/80 dark:border-palette-sky/20",
+          "shadow-[0_16px_40px_rgba(41,50,65,0.12)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
         )}
       >
         {/* Tab 1: Home */}
@@ -72,12 +72,12 @@ export function LiquidGlassTabBar() {
             "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
             "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
             isHomeActive
-              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
-              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
+              ? "text-palette-coral font-bold"
+              : "text-ash hover:text-ink dark:hover:text-palette-frost"
           )}
         >
           {isHomeActive && (
-            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-palette-coral shadow-sm" />
           )}
           <Home className="w-5 h-5" />
           <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Home</span>
@@ -91,12 +91,12 @@ export function LiquidGlassTabBar() {
             "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
             "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
             isServicesActive
-              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
-              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
+              ? "text-palette-coral font-bold"
+              : "text-ash hover:text-ink dark:hover:text-palette-frost"
           )}
         >
           {isServicesActive && (
-            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-palette-coral shadow-sm" />
           )}
           <Layers className="w-5 h-5" />
           <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Services</span>
@@ -110,12 +110,12 @@ export function LiquidGlassTabBar() {
             "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
             "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
             isChecklistActive
-              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
-              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
+              ? "text-palette-coral font-bold"
+              : "text-ash hover:text-ink dark:hover:text-palette-frost"
           )}
         >
           {isChecklistActive && (
-            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-palette-coral shadow-sm" />
           )}
           <CheckSquare className="w-5 h-5" />
           <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Docs</span>
@@ -129,12 +129,12 @@ export function LiquidGlassTabBar() {
             "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
             "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
             isGuideActive
-              ? "text-[#128C7E] dark:text-[#C4A046] font-bold"
-              : "text-[#5A6872] hover:text-[#0B1C2C] dark:text-[#8C959F] dark:hover:text-[#F4EFE6]"
+              ? "text-palette-coral font-bold"
+              : "text-ash hover:text-ink dark:hover:text-palette-frost"
           )}
         >
           {isGuideActive && (
-            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-[#128C7E] dark:bg-[#C4A046] shadow-sm" />
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-palette-coral shadow-sm" />
           )}
           <HelpCircle className="w-5 h-5" />
           <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider">Guide</span>
@@ -144,7 +144,7 @@ export function LiquidGlassTabBar() {
         <button
           type="button"
           onClick={() => appClip.open("tax-intake")}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-[#128C7E] to-[#0A6054] hover:from-[#149989] hover:to-[#0D6D60] text-white shadow-md shadow-[#128C7E]/25 active:scale-90 transition-all ml-1 shrink-0"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-palette-coral to-palette-coral-hover text-white shadow-md shadow-palette-coral/30 active:scale-90 transition-all ml-1 shrink-0"
           aria-label="Start Fast Intake AppClip"
         >
           <Sparkles className="w-4 h-4 text-white" />

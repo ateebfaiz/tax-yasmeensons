@@ -190,37 +190,37 @@ export default function PersonaClip({ persona, onClose }: PersonaClipProps) {
       title={current.titleEn}
       subtitle={current.subtitleEn}
     >
-      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
+      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
         {/* Profile Card */}
         <GlassCard variant="default" className="p-4 space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-[#20b6a5]/15 flex items-center justify-center text-[#20b6a5]">
+              <div className="w-8 h-8 rounded-full bg-palette-coral/15 flex items-center justify-center text-palette-coral">
                 <Icon className="w-4 h-4" />
               </div>
-              <span className="font-mono text-xs font-bold text-[#20b6a5]">
+              <span className="font-mono text-xs font-bold text-palette-coral">
                 CODE: {current.code}
               </span>
             </div>
-            <span className="font-mono text-[10px] text-[#aeb9bf] bg-white/[0.06] px-2.5 py-0.5 rounded-full border border-white/[0.08]">
+            <span className="font-mono text-[10px] text-ash dark:text-palette-sky bg-white/[0.06] px-2.5 py-0.5 rounded-full border border-rule/50 dark:border-palette-sky/10">
               TY2026 AUDIENCE
             </span>
           </div>
 
-          <div className="font-urdu text-sm font-bold text-[#20b6a5]" dir="rtl">
+          <div className="font-urdu text-sm font-bold text-palette-coral" dir="rtl">
             {current.titleUr}
           </div>
-          <p className="text-xs text-[#aeb9bf] leading-relaxed">
+          <p className="text-xs text-ash dark:text-palette-sky leading-relaxed">
             {current.leadEn}
           </p>
-          <div className="font-urdu text-xs text-[#aeb9bf] leading-relaxed" dir="rtl">
+          <div className="font-urdu text-xs text-ash dark:text-palette-sky leading-relaxed" dir="rtl">
             {current.leadUr}
           </div>
         </GlassCard>
 
         {/* 3 Core Pillars */}
         <div className="space-y-2">
-          <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#aeb9bf]">
+          <div className="font-mono text-xs font-bold uppercase tracking-wider text-ash dark:text-palette-sky">
             Key Provisions &amp; Tax Rights
           </div>
           <div className="space-y-2">
@@ -231,12 +231,12 @@ export default function PersonaClip({ persona, onClose }: PersonaClipProps) {
                 className="p-3.5 space-y-1"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-[#f5f7f8]">{p.title}</span>
-                  <span className="font-mono text-[9px] font-bold text-[#20b6a5] px-2 py-0.5 rounded-full bg-[#20b6a5]/10 border border-[#20b6a5]/30">
+                  <span className="font-bold text-xs text-ink dark:text-palette-frost">{p.title}</span>
+                  <span className="font-mono text-[9px] font-bold text-palette-coral px-2 py-0.5 rounded-full bg-palette-coral/10 border border-palette-coral/30">
                     {p.badge}
                   </span>
                 </div>
-                <p className="text-[11px] text-[#aeb9bf] leading-relaxed">
+                <p className="text-[11px] text-ash dark:text-palette-sky leading-relaxed">
                   {p.desc}
                 </p>
               </GlassCard>
@@ -246,19 +246,19 @@ export default function PersonaClip({ persona, onClose }: PersonaClipProps) {
 
         {/* Required Documents Checklist */}
         <GlassCard variant="default" className="p-4 space-y-2.5">
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
-            <span className="font-serif text-sm font-bold text-[#f5f7f8]">
+          <div className="flex items-center justify-between border-b border-rule/50 dark:border-palette-sky/10 pb-2">
+            <span className="font-serif text-sm font-bold text-ink dark:text-palette-frost">
               Required Documents Checklist
             </span>
-            <span className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+            <span className="font-urdu text-xs text-palette-coral" dir="rtl">
               لازمی دستاویزات
             </span>
           </div>
 
-          <ul className="space-y-2 text-xs text-[#aeb9bf] font-mono">
+          <ul className="space-y-2 text-xs text-ash dark:text-palette-sky font-mono">
             {current.docs.map((doc, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0 mt-0.5" />
                 <span className="leading-snug">{doc}</span>
               </li>
             ))}
@@ -267,8 +267,8 @@ export default function PersonaClip({ persona, onClose }: PersonaClipProps) {
 
         {/* Security Stamp */}
         <GlassCard variant="subtle" className="p-3 flex items-center gap-2 text-xs">
-          <ShieldCheck className="w-4 h-4 text-[#20b6a5] shrink-0" />
-          <span className="text-[11px] text-[#aeb9bf]">
+          <ShieldCheck className="w-4 h-4 text-palette-coral shrink-0" />
+          <span className="text-[11px] text-ash dark:text-palette-sky">
             Zero password sharing: We prepare numbers and guide you on official IRIS.
           </span>
         </GlassCard>
@@ -291,7 +291,7 @@ export default function PersonaClip({ persona, onClose }: PersonaClipProps) {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-[rgba(27,37,43,0.72)] hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
+            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-white/80 dark:bg-palette-gunmetal/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>Consult on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>

@@ -67,14 +67,14 @@ export default function ServicesClip({ onClose }: { onClose: () => void }) {
       title="Tax Facilitation Services"
       subtitle="ہماری سروسز • Individual Filers Only • TY2026"
     >
-      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
+      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
         {/* Zero-Credential Invariant Banner */}
         <GlassCard variant="subtle" className="p-3.5 space-y-1">
-          <div className="flex items-center gap-2 text-xs font-bold text-[#20b6a5]">
+          <div className="flex items-center gap-2 text-xs font-bold text-palette-coral">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>Zero-Credential Architecture</span>
           </div>
-          <p className="text-xs text-[#aeb9bf] leading-relaxed">
+          <p className="text-xs text-ash dark:text-palette-sky leading-relaxed">
             We never ask for or store your IRIS password. All filings are submitted under your own private authentication.
           </p>
         </GlassCard>
@@ -90,35 +90,35 @@ export default function ServicesClip({ onClose }: { onClose: () => void }) {
               <div className="flex items-start justify-between gap-2">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-[#aeb9bf]">
+                    <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/[0.08] text-ash dark:text-palette-sky">
                       {svc.code}
                     </span>
                     {svc.isRecommended && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#20b6a5]">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-palette-coral">
                         Recommended
                       </span>
                     )}
                   </div>
-                  <h3 className="font-serif text-base font-bold text-white">
+                  <h3 className="font-serif text-base font-bold text-ink dark:text-palette-frost">
                     {svc.titleEn}
                   </h3>
-                  <div className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+                  <div className="font-urdu text-xs text-palette-coral" dir="rtl">
                     {svc.titleUr}
                   </div>
                 </div>
-                <div className="font-serif text-xl font-black text-white shrink-0">
+                <div className="font-serif text-xl font-black text-ink dark:text-palette-frost shrink-0">
                   {svc.fee}
                 </div>
               </div>
 
-              <p className="text-xs text-[#aeb9bf] leading-relaxed">
+              <p className="text-xs text-ash dark:text-palette-sky leading-relaxed">
                 {svc.descEn}
               </p>
 
-              <ul className="space-y-1.5 text-xs text-[#aeb9bf] font-mono border-t border-white/[0.08] pt-2">
+              <ul className="space-y-1.5 text-xs text-ash dark:text-palette-sky font-mono border-t border-rule/50 dark:border-palette-sky/10 pt-2">
                 {svc.points.map((pt, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#20b6a5] shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
                     <span>{pt}</span>
                   </li>
                 ))}
@@ -143,7 +143,7 @@ export default function ServicesClip({ onClose }: { onClose: () => void }) {
             href={formatWhatsAppUrl("Hi, I have questions about your tax services.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-[rgba(27,37,43,0.72)] hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
+            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-white/80 dark:bg-palette-gunmetal/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>Consult on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>

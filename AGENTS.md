@@ -25,13 +25,15 @@ All agents operating in this repository must strictly adhere to the policies, in
 - Database persistence and Todoist P1 notifications are handled centrally by the persistent **FastAPI Cloud Backend Service** ([`https://ys-fastapi-backend.fastapicloud.dev`](https://ys-fastapi-backend.fastapicloud.dev)).
 - Next.js serverless functions act as authenticated HTTP proxies to FastAPI Cloud, preventing connection pooling exhaustion and environment drift.
 
-### 1.5 Gate 5: Safari History Dark Glass UI Standard
-- All AppClips must strictly follow the **Safari History dark glass UI** design specification:
-  - Deep page/backdrop canvas: `#07131b` with a soft radial teal glow (`rgba(32, 182, 165, 0.15)`).
-  - Translucent charcoal glass panels: `rgba(27, 37, 43, 0.72)` / `rgba(22, 30, 36, 0.88)` with `backdrop-filter: blur(20px) saturate(140%)`.
-  - Borders: 1px fine translucent outline (`rgba(255, 255, 255, 0.12)`).
-  - Accents: Emerald/Teal (`#20b6a5` / `#0d978b`) for active states, checkmarks, and primary actions.
-  - **NO bright white cards** on mobile bottom sheets or AppClips.
+### 1.5 Gate 5: Apple Human Interface Guidelines (HIG) Foundations Standard
+- All components, sheets, navigation, and pages MUST strictly conform to **Apple Human Interface Guidelines (HIG) Foundations**:
+  - **Contrast & Legibility First**: All text must maintain minimum 4.5:1 (AA) and ideally 7:1+ (AAA) contrast in BOTH Light and Dark modes. Never place white text on light cards or dark text on dark surfaces.
+  - **Authoritative 5-Color Palette**: Use colors strictly mapped from `generic-mobile-portrait-palette.svg`: `#3d5a80` (Steel Slate Blue), `#98c1d9` (Sky Ice Blue), `#e0fbfc` (Frost Paper), `#ee6c4d` (Burnt Coral Accent), and `#293241` (Deep Gunmetal Slate).
+  - **First-Class Dual Appearance**: Full support for both Light and Dark mode appearances with user toggle and system preference auto-detection.
+  - **Materials & Vibrancy**: Apple-grade frosted glass materials with `backdrop-filter: blur(18px-24px)` and fine 1px hairline specular rim borders.
+  - **44x44pt Touch Targets**: All buttons, links, inputs, and close triggers MUST have at least 44x44px touch targets.
+  - **Safe Areas & Natural Viewports**: Clamped `env(safe-area-inset-bottom)` and naturally sizing content (`max-height: 90dvh`).
+  - **Tactile Feedback**: Spring animations and `active:scale-[0.97]` touch responsiveness.
 
 ### 1.6 Gate 6: Zero Empty Space & Dynamic Viewport Standard
 - **NEVER** use static `height: 92dvh` or arbitrary fixed heights that leave large blank areas at the bottom of AppClips.

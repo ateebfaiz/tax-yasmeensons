@@ -27,13 +27,33 @@
 - Database persistence and Todoist P1 notifications are handled centrally by the persistent **FastAPI Cloud Backend Service** (`https://ys-fastapi-backend.fastapicloud.dev`).
 - Next.js serverless functions act as authenticated HTTP proxies to FastAPI Cloud, preventing connection pooling exhaustion and environment drift.
 
-### Gate 5: Safari History Dark Glass UI Standard
-- All AppClips and secondary sheets must strictly follow the **Safari History dark glass UI** design specification:
-  - Deep page/backdrop canvas: `#07131b` with a soft radial teal glow (`rgba(32, 182, 165, 0.15)`).
-  - Translucent charcoal glass panels: `rgba(27, 37, 43, 0.72)` / `rgba(22, 30, 36, 0.88)` with `backdrop-filter: blur(20px) saturate(140%)`.
-  - Borders: 1px fine translucent outline (`rgba(255, 255, 255, 0.12)`).
-  - Accents: Emerald/Teal (`#20b6a5` / `#0d978b`) for active states, checkmarks, and primary actions.
-  - **NO bright white cards** on mobile bottom sheets or AppClips.
+### Gate 5: Apple Human Interface Guidelines (HIG) Foundations Standard
+All UI components, sheets, navigation, and pages MUST strictly conform to **Apple's Human Interface Guidelines (HIG) Foundations**:
+1. **Accessibility & Contrast First**:
+   - Every text element must achieve at least **4.5:1** (WCAG AA) and ideally **7:1+** (WCAG AAA) contrast in **BOTH** Light and Dark modes.
+   - Never place white text on light backgrounds or dark text on dark backgrounds.
+   - All interactive controls (buttons, tabs, inputs, close icons, checkboxes) MUST have a minimum tap target of **44x44 pt (44px)**.
+2. **Authoritative 5-Color Palette**:
+   All colors MUST map directly to the official 5-color palette (`generic-mobile-portrait-palette.svg`):
+   - **`#3d5a80` (Steel Slate Blue)**: Brand identity, headers, borders, secondary text.
+   - **`#98c1d9` (Sky Ice Blue)**: Secondary accents, rim lighting, dark mode helper text.
+   - **`#e0fbfc` (Frost Ice Paper)**: Light mode card backgrounds, dark mode high-contrast primary text (13:1+ AAA).
+   - **`#ee6c4d` (Burnt Coral)**: Primary CTAs, active states, urgency badges, primary action focus.
+   - **`#293241` (Deep Gunmetal Slate)**: Dark mode canvas, light mode high-contrast primary text (12:1+ AAA).
+3. **First-Class Dual Appearance (Light & Dark Modes)**:
+   - Light and Dark modes are equal first-class citizens.
+   - The user can seamlessly toggle between Light, Dark, and System preference via the Header theme toggle.
+   - No hardcoded dark-only (`#07131b`) or light-only colors outside dynamic CSS variables (`tokens.css`).
+4. **Materials & Vibrancy**:
+   - Surfaces use Apple-grade materials: `backdrop-filter: blur(18px-24px) saturate(140%-160%)`.
+   - 1px hairline specular rim borders (`rgba(61, 90, 128, 0.16)` in light, `rgba(152, 193, 217, 0.20)` in dark).
+5. **Safe Areas & Natural Viewport Sizing**:
+   - Respect `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.
+   - Bottom sheets and AppClips MUST size naturally to their content (`height: auto; max-height: 90dvh`).
+   - Zero empty vertical voids and zero horizontal overflow (`hasOverflow: false`).
+6. **Tactile Feedback & Inputs**:
+   - All buttons and interactive cards provide tactile spring press feedback (`active:scale-[0.97]`).
+   - Inputs provide clear focus states: `focus:ring-2 focus:ring-palette-coral`.
 
 ### Gate 6: Zero Empty Space & Dynamic Viewport Standard
 - **NEVER** use static `height: 92dvh` or arbitrary fixed heights that leave large blank areas at the bottom of AppClips.

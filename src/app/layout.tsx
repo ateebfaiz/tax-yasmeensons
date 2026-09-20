@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { AppClipProvider } from "@/components/ui/app-clip/AppClipProvider";
 import { LanguageProvider } from "@/context/language-context";
+import { ThemeProvider } from "@/context/theme-context";
 import { LetterheadBand } from "@/components/navigation/letterhead-band";
 import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/navigation/footer";
@@ -27,7 +28,7 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   viewportFit: "cover",
-  themeColor: "#07131b",
+  themeColor: "#293241",
 };
 
 export default function RootLayout({
@@ -36,8 +37,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const t = localStorage.getItem('tax_theme');
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -45,16 +60,18 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-paper text-ink font-sans selection:bg-brass/20 selection:text-ink">
-        <LanguageProvider>
-          <AppClipProvider>
-            <LetterheadBand />
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <LiquidGlassTabBar />
-          </AppClipProvider>
-        </LanguageProvider>
+      <body className="min-h-screen flex flex-col bg-paper text-ink font-sans selection:bg-palette-coral/20 selection:text-ink transition-colors duration-200">
+        <ThemeProvider>
+          <LanguageProvider>
+            <AppClipProvider>
+              <LetterheadBand />
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <LiquidGlassTabBar />
+            </AppClipProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

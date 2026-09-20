@@ -162,15 +162,15 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
       title="Fast Tax Filing Intake"
       subtitle="فوری ٹیکس فائلنگ • 60 Seconds • No Password Required"
     >
-      <div className="space-y-3.5 pb-3 text-[#f5f7f8]">
+      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
         {/* Step Indicator */}
-        <div className="flex items-center justify-between text-xs font-mono border-b border-white/[0.08] pb-2">
-          <span className="font-bold text-[#20b6a5]">
+        <div className="flex items-center justify-between text-xs font-mono border-b border-rule/50 dark:border-palette-sky/10 pb-2">
+          <span className="font-bold text-palette-coral">
             {step === 1 && "STEP 1: IDENTITY & VERIFIED SIM"}
             {step === 2 && "STEP 2: INCOME & WHT AUDIT"}
             {step === 3 && "STEP 3: CASE REGISTERED"}
           </span>
-          <span className="text-[#aeb9bf]">PART {step} / 3</span>
+          <span className="text-ash dark:text-palette-sky">PART {step} / 3</span>
         </div>
 
         {error && (
@@ -185,10 +185,10 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
           <div className="space-y-3.5">
             {/* Persona Chips */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#aeb9bf]">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ash dark:text-palette-sky">
                 Taxpayer Category
               </label>
-              <div className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+              <div className="font-urdu text-xs text-palette-coral" dir="rtl">
                 ٹیکس گزار کی صنف کا انتخاب کریں
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -202,15 +202,15 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setPersona(p.id)}
                       className={`p-3 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-1.5 ${
                         isSelected
-                          ? "border-[#20b6a5]/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-white"
-                          : "border-white/[0.08] bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-[#aeb9bf]"
+                          ? "border-palette-coral/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-ink dark:text-palette-frost"
+                          : "border-rule/50 dark:border-palette-sky/10 bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-ash dark:text-palette-sky"
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <Icon className={`w-4 h-4 shrink-0 ${isSelected ? "text-[#20b6a5]" : "text-[#aeb9bf]"}`} />
+                        <Icon className={`w-4 h-4 shrink-0 ${isSelected ? "text-palette-coral" : "text-ash dark:text-palette-sky"}`} />
                         <span className="text-xs font-bold leading-tight">{p.labelEn}</span>
                       </div>
-                      <div className="text-xs font-urdu opacity-85 leading-tight text-[#20b6a5]" dir="rtl">
+                      <div className="text-xs font-urdu opacity-85 leading-tight text-palette-coral" dir="rtl">
                         {p.labelUr}
                       </div>
                     </button>
@@ -221,10 +221,10 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
 
             {/* FBR IRIS Status */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#aeb9bf]">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ash dark:text-palette-sky">
                 FBR IRIS Registration Status
               </label>
-              <div className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+              <div className="font-urdu text-xs text-palette-coral" dir="rtl">
                 آئرس اکاؤنٹ یا این ٹی این رجسٹریشن کی صورتحال
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -241,12 +241,12 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setIrisStatus(s.id as any)}
                       className={`p-2.5 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-0.5 ${
                         isSelected
-                          ? "border-[#20b6a5]/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-white"
-                          : "border-white/[0.08] bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-[#aeb9bf]"
+                          ? "border-palette-coral/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-ink dark:text-palette-frost"
+                          : "border-rule/50 dark:border-palette-sky/10 bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-ash dark:text-palette-sky"
                       }`}
                     >
                       <span className="text-xs font-bold leading-tight">{s.labelEn}</span>
-                      <span className="text-[11px] font-urdu opacity-80 leading-tight text-[#20b6a5]" dir="rtl">
+                      <span className="text-[11px] font-urdu opacity-80 leading-tight text-palette-coral" dir="rtl">
                         {s.labelUr}
                       </span>
                     </button>
@@ -265,7 +265,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Muhammad Tariq"
-                  className="w-full mt-1.5 bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-white/30 focus:border-[#20b6a5] outline-none transition-all"
+                  className="w-full mt-1.5 bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3.5 py-2.5 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none transition-all"
                 />
               </div>
 
@@ -278,7 +278,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   value={cnic}
                   onChange={(e) => setCnic(formatCnicInput(e.target.value))}
                   placeholder="35202-0000000-0"
-                  className="w-full mt-1 bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none transition-all"
+                  className="w-full mt-1 bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none transition-all"
                 />
               </div>
 
@@ -291,10 +291,10 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   value={phone}
                   onChange={(e) => setPhone(formatPhoneInput(e.target.value))}
                   placeholder="0312 0000000"
-                  className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs font-mono text-white placeholder-white/30 focus:border-[#20b6a5] outline-none transition-all"
+                  className="w-full bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3 py-2 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none transition-all"
                 />
 
-                <div className="pt-1 flex flex-col sm:flex-row gap-2.5 sm:gap-4 text-xs font-medium text-[#aeb9bf]">
+                <div className="pt-1 flex flex-col sm:flex-row gap-2.5 sm:gap-4 text-xs font-medium text-ash dark:text-palette-sky">
                   <label className="flex items-center gap-1.5 cursor-pointer">
                     <input
                       type="radio"
@@ -320,7 +320,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
 
                 {simOwner === "relative" && (
                   <GlassCard variant="subtle" className="mt-2 p-3 space-y-2.5">
-                    <div className="text-[11px] font-medium text-[#aeb9bf]">
+                    <div className="text-[11px] font-medium text-ash dark:text-palette-sky">
                       If the SIM is registered under an immediate family member:
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -329,14 +329,14 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                         value={relativeName}
                         onChange={(e) => setRelativeName(e.target.value)}
                         placeholder="Relative Name (رشتہ دار کا نام)"
-                        className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-white/30 outline-none"
+                        className="w-full bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 outline-none"
                       />
                       <input
                         type="text"
                         value={relativeRelation}
                         onChange={(e) => setRelativeRelation(e.target.value)}
                         placeholder="Relation (Father / Husband / Mother)"
-                        className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-white/30 outline-none"
+                        className="w-full bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 outline-none"
                       />
                     </div>
                     <input
@@ -344,7 +344,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       value={relativeCnic}
                       onChange={(e) => setRelativeCnic(formatCnicInput(e.target.value))}
                       placeholder="Relative's CNIC (رشتہ دار کا شناختی کارڈ)"
-                      className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-xs font-mono text-white placeholder-white/30 outline-none"
+                      className="w-full bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 outline-none"
                     />
                   </GlassCard>
                 )}
@@ -371,10 +371,10 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
           <div className="space-y-3.5">
             {/* Package Selection */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#aeb9bf]">
+              <label className="block text-xs font-bold uppercase tracking-wider text-ash dark:text-palette-sky">
                 Select Filing Package
               </label>
-              <div className="font-urdu text-xs text-[#20b6a5]" dir="rtl">
+              <div className="font-urdu text-xs text-palette-coral" dir="rtl">
                 فائلنگ پیکیج کا انتخاب کریں
               </div>
               <div className="grid grid-cols-3 gap-2">
@@ -391,19 +391,19 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                       onClick={() => setTier(t.id)}
                       className={`p-2.5 rounded-2xl border text-left transition-all duration-200 active:scale-95 flex flex-col justify-between gap-1 relative ${
                         isSelected
-                          ? "border-[#20b6a5]/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-white"
-                          : "border-white/[0.08] bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-[#aeb9bf]"
+                          ? "border-palette-coral/60 bg-[rgba(32,182,165,0.18)] shadow-[0_0_16px_rgba(32,182,165,0.2)] font-bold text-ink dark:text-palette-frost"
+                          : "border-rule/50 dark:border-palette-sky/10 bg-[rgba(27,37,43,0.6)] hover:bg-[rgba(36,52,60,0.8)] text-ash dark:text-palette-sky"
                       }`}
                     >
                       {t.rec && (
-                        <span className="text-[9px] font-mono font-bold uppercase text-[#20b6a5]">
+                        <span className="text-[9px] font-mono font-bold uppercase text-palette-coral">
                           ★ Popular
                         </span>
                       )}
                       <div>
-                        <div className="text-[10px] font-mono text-[#aeb9bf]">{t.code}</div>
-                        <div className="text-xs font-bold text-white">{t.fee}</div>
-                        <div className="text-[10px] text-[#aeb9bf] truncate">{t.label}</div>
+                        <div className="text-[10px] font-mono text-ash dark:text-palette-sky">{t.code}</div>
+                        <div className="text-xs font-bold text-ink dark:text-palette-frost">{t.fee}</div>
+                        <div className="text-[10px] text-ash dark:text-palette-sky truncate">{t.label}</div>
                       </div>
                     </button>
                   );
@@ -421,10 +421,10 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                 value={needEmailHelp ? "" : email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={needEmailHelp ? "We will create an email for you" : "client@example.com"}
-                className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#20b6a5] outline-none disabled:opacity-50"
+                className="w-full bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3 py-2 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none disabled:opacity-50"
               />
 
-              <label className="flex items-start gap-2 pt-1 cursor-pointer text-xs text-[#aeb9bf]">
+              <label className="flex items-start gap-2 pt-1 cursor-pointer text-xs text-ash dark:text-palette-sky">
                 <input
                   type="checkbox"
                   checked={needEmailHelp}
@@ -432,8 +432,8 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   className="accent-[#20b6a5] h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <span className="text-xs leading-relaxed">
-                  <strong className="text-white">I don&apos;t have an email</strong> — we can help along with full guidance and create email if you don&apos;t already have one.
-                  <span className="block font-urdu text-[11px] text-[#20b6a5] mt-0.5" dir="rtl">
+                  <strong className="text-ink dark:text-palette-frost">I don&apos;t have an email</strong> — we can help along with full guidance and create email if you don&apos;t already have one.
+                  <span className="block font-urdu text-[11px] text-palette-coral mt-0.5" dir="rtl">
                     میرا ای میل نہیں ہے، ہمارے لیے نیا ای میل بنائیں اور ترتیب دیں۔
                   </span>
                 </span>
@@ -449,7 +449,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                 value={residentialAddress}
                 onChange={(e) => setResidentialAddress(e.target.value)}
                 placeholder="House / Street / City"
-                className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                className="w-full bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3 py-2 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
               />
             </GlassCard>
 
@@ -468,7 +468,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                     ? "Business Name & Principal Activity"
                     : "e.g. Household allowance, rent, or pension"
                 }
-                className="w-full bg-[rgba(15,22,27,0.7)] border border-white/[0.14] rounded-xl px-3 py-2 text-xs text-white placeholder-white/30 focus:border-[#20b6a5] outline-none"
+                className="w-full bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3 py-2 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
               />
             </GlassCard>
 
@@ -482,14 +482,14 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   className="accent-[#20b6a5] h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <div>
-                  <div className="font-bold text-white">Family Group Filing &amp; Inter-Family Transfers</div>
-                  <div className="text-[11px] text-[#aeb9bf] leading-snug">
+                  <div className="font-bold text-ink dark:text-palette-frost">Family Group Filing &amp; Inter-Family Transfers</div>
+                  <div className="text-[11px] text-ash dark:text-palette-sky leading-snug">
                     Reconcile internal family bank transfers (Spouse, Parents, Siblings) so funds are never double-taxed.
                   </div>
                 </div>
               </label>
 
-              <label className="flex items-start gap-2.5 cursor-pointer text-xs border-t border-white/[0.08] pt-2.5">
+              <label className="flex items-start gap-2.5 cursor-pointer text-xs border-t border-rule/50 dark:border-palette-sky/10 pt-2.5">
                 <input
                   type="checkbox"
                   checked={whtAudit}
@@ -497,10 +497,10 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                   className="accent-[#20b6a5] h-4 w-4 mt-0.5 shrink-0 rounded"
                 />
                 <div>
-                  <div className="font-bold text-[#20b6a5]">
+                  <div className="font-bold text-palette-coral">
                     Full Source Withholding Tax Audit (Recommended)
                   </div>
-                  <div className="text-[11px] text-[#aeb9bf] leading-snug">
+                  <div className="text-[11px] text-ash dark:text-palette-sky leading-snug">
                     Claim and audit all deductions taken at source: ATM cash withdrawals, fuel, utility bills, mobile SIM load and package fees, card fees.
                   </div>
                 </div>
@@ -538,7 +538,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                 type="button"
                 onClick={() => handleSubmit(false)}
                 disabled={submitting}
-                className="text-[11px] text-[#aeb9bf] hover:text-white underline transition-all font-mono"
+                className="text-[11px] text-ash dark:text-palette-sky hover:text-white underline transition-all font-mono"
               >
                 Or save case without opening WhatsApp
               </button>
@@ -549,28 +549,28 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
         {/* STEP 3: SUCCESS & FOLIO */}
         {step === 3 && (
           <div className="text-center py-4 space-y-3.5">
-            <div className="w-14 h-14 rounded-full bg-[#20b6a5]/15 text-[#20b6a5] flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
+            <div className="w-14 h-14 rounded-full bg-palette-coral/15 text-palette-coral flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
             <div className="space-y-1">
-              <div className="font-mono text-[11px] text-[#aeb9bf] uppercase tracking-wider">
+              <div className="font-mono text-[11px] text-ash dark:text-palette-sky uppercase tracking-wider">
                 CASE FOLIO ISSUED
               </div>
-              <div className="font-mono text-2xl sm:text-3xl font-black text-white tracking-tight">
+              <div className="font-mono text-2xl sm:text-3xl font-black text-ink dark:text-palette-frost tracking-tight">
                 {refId || "TAX-2026-RECORD"}
               </div>
-              <div className="text-xs text-[#aeb9bf]">
+              <div className="text-xs text-ash dark:text-palette-sky">
                 TY2026 • {persona.toUpperCase()} • NON-BUSINESS INDIVIDUAL
               </div>
             </div>
 
             <GlassCard variant="glow" className="p-3.5 text-xs text-left space-y-2">
-              <div className="flex items-center gap-2 text-white font-semibold">
-                <ShieldCheck className="w-4 h-4 text-[#20b6a5]" />
+              <div className="flex items-center gap-2 text-ink dark:text-palette-frost font-semibold">
+                <ShieldCheck className="w-4 h-4 text-palette-coral" />
                 <span>Zero-Credential Invariant Preserved</span>
               </div>
-              <p className="text-[11px] text-[#aeb9bf] leading-relaxed">
+              <p className="text-[11px] text-ash dark:text-palette-sky leading-relaxed">
                 Your filing case has been queued with our senior desk. You will be assisted directly on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay}) with your official IRIS filing checklist.
               </p>
             </GlassCard>
