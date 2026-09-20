@@ -27,10 +27,11 @@ All agents operating in this repository must strictly adhere to the policies, in
 
 ### 1.5 Gate 5: Apple Human Interface Guidelines (HIG) Foundations Standard
 - All components, sheets, navigation, and pages MUST strictly conform to **Apple Human Interface Guidelines (HIG) Foundations**:
-  - **Contrast & Legibility First**: All text must maintain minimum 4.5:1 (AA) and ideally 7:1+ (AAA) contrast in BOTH Light and Dark modes. Never place white text on light cards or dark text on dark surfaces.
-  - **Authoritative 5-Color Palette**: Use colors strictly mapped from `generic-mobile-portrait-palette.svg`: `#3d5a80` (Steel Slate Blue), `#98c1d9` (Sky Ice Blue), `#e0fbfc` (Frost Paper), `#ee6c4d` (Burnt Coral Accent), and `#293241` (Deep Gunmetal Slate).
-  - **First-Class Dual Appearance**: Full support for both Light and Dark mode appearances with user toggle and system preference auto-detection.
-  - **Materials & Vibrancy**: Apple-grade frosted glass materials with `backdrop-filter: blur(18px-24px)` and fine 1px hairline specular rim borders.
+  - **Official Apple System Palette**: Strictly use Apple default system colors: System Blue (`#007AFF` / `#0A84FF`), System Orange (`#FF9500` / `#FF9F0A`), System Green (`#34C759` / `#30D158`), System Red (`#FF3B30` / `#FF453A`), System Gray 1–6, and dynamic labels/materials.
+  - **Official Apple System Typography**: Adopt Apple's default font stacks (SF Pro Text/Display for sans, New York for serif, SF Mono for code, SF Pro Rounded for metrics). Urdu script uses Noto Nastaliq Urdu exclusively.
+  - **Contrast & Legibility First**: All text must maintain minimum 4.5:1 (AA) and ideally 7:1+ (AAA) contrast in BOTH Light and Dark modes.
+  - **First-Class Dual Appearance**: Seamless toggle and automatic system preference support for Light and Dark modes.
+  - **Optical Frosted Glass Blur & Vibrancy**: Hardware-accelerated materials (`backdrop-filter: blur(24px-32px) saturate(180%-190%)` with `WebkitBackdropFilter`), subtle scrims (`bg-black/25 dark:bg-black/50`), and fine specular borders (`border-black/[0.08] dark:border-white/[0.12]`).
   - **44x44pt Touch Targets**: All buttons, links, inputs, and close triggers MUST have at least 44x44px touch targets.
   - **Safe Areas & Natural Viewports**: Clamped `env(safe-area-inset-bottom)` and naturally sizing content (`max-height: 90dvh`).
   - **Tactile Feedback**: Spring animations and `active:scale-[0.97]` touch responsiveness.
@@ -59,6 +60,10 @@ All agents operating in this repository must strictly adhere to the policies, in
 - **NEVER** remove or wipe out existing sections, pages, pricing cards, or guides when making improvements.
 - All enhancements (Hero updates, 4-step workflow, customer reviews, urgency deadline banner, `/track` portal, new menu links) must be **additive** and preserve all current functionality.
 
+### 1.9 Gate 9: UI Craft by SmoothDev & SmoothUI File-Upload Standard
+- Direct file upload for taxpayers via `SmoothFileUpload` to attach bank statements, CNIC copies (front, back, combined), salary slips, and withholding tax certificates.
+- Explicit and prominent manual entry routing to FBR 8-Window Simplified e-Return AppClip (`fbr-simplified-intake`) for taxpayers who prefer entering numbers manually.
+
 ---
 
 ## 2. Key Component & File Mapping
@@ -79,12 +84,12 @@ All agents operating in this repository must strictly adhere to the policies, in
 
 ## 3. Verification Checklist Before Any Commit or PR
 
-1. **Local Quality Gates Runner (All 5 gates on-device)**:
+1. **Local Quality Gates Runner (All 6 gates on-device)**:
    ```bash
    npm run check-gates
    # or: ./scripts/run-quality-gates.sh
    ```
-   Must pass all 5 gates (Zero-credentials, No-hardcoding, AppClip natural height, Mobile accessibility, Next.js build).
+   Must pass all 6 gates (Zero-credentials, No-hardcoding, AppClip natural height, Mobile accessibility, UI Craft by SmoothDev / Apple HIG tokens, Next.js build).
 
 2. **Puppeteer Headless UI Audit**:
    ```bash

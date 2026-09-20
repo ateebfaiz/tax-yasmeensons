@@ -90,17 +90,17 @@ export default function HomePage() {
         <Link
           key={p.code}
           href={p.href}
-          className="glass-card p-6 rounded-[24px] hover:border-palette-coral/50 transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md h-full"
+          className="glass-card p-6 rounded-[24px] hover:border-apple-blue/50 transition-all group flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md h-full"
         >
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold text-palette-coral px-2 py-0.5 rounded-full bg-palette-coral/10 border border-palette-coral/30">
+              <span className="font-mono text-xs font-bold text-apple-blue px-2 py-0.5 rounded-full bg-apple-blue/10 border border-apple-blue/30">
                 {p.code}
               </span>
               <Icon className="w-4 h-4 text-ash group-hover:text-ink dark:group-hover:text-white transition-colors" />
             </div>
             <div>
-              <h3 className="font-bold text-sm text-ink dark:text-palette-frost group-hover:text-palette-coral transition-colors">
+              <h3 className="font-bold text-sm text-ink dark:text-white group-hover:text-apple-blue transition-colors">
                 {p.titleEn}
               </h3>
               <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{p.titleUr}</div>
@@ -108,7 +108,7 @@ export default function HomePage() {
             <p className="text-xs text-ash leading-relaxed">{p.descEn}</p>
           </div>
 
-          <div className="font-mono text-[11px] font-bold text-ink dark:text-palette-frost flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-palette-coral">
+          <div className="font-mono text-[11px] font-bold text-ink dark:text-white flex items-center gap-1 pt-3 border-t border-rule-light group-hover:text-apple-blue">
             <span>Start as {p.code}</span>
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </div>
@@ -238,8 +238,8 @@ export default function HomePage() {
       {/* 1. Hero Section — Lead with the Job */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
         {/* Tax Season 2026 Announcement Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-palette-slate/10 dark:bg-palette-coral/15 border border-palette-slate/25 dark:border-palette-coral/40 text-palette-slate dark:text-palette-frost text-xs font-mono font-bold shadow-[0_0_16px_rgba(61,90,128,0.1)] dark:shadow-[0_0_16px_rgba(238,108,77,0.25)] animate-pulse">
-          <Sparkles className="w-3.5 h-3.5 text-palette-coral" />
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-apple-blue/10 dark:bg-apple-blue/15 border border-apple-blue/30 text-apple-blue text-xs font-mono font-bold shadow-[0_0_16px_rgba(0,122,255,0.15)] animate-pulse">
+          <Sparkles className="w-3.5 h-3.5 text-apple-blue" />
           <span>Tax Season 2026 is Here! 🎉 Active ATL Filing Open</span>
         </div>
 
@@ -250,18 +250,18 @@ export default function HomePage() {
 
         {/* Hero Title */}
         <div className="space-y-3.5">
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink dark:text-palette-frost tracking-tight leading-[1.15]">
+          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink dark:text-white tracking-tight leading-[1.15]">
             File your Tax Year 2026 return <br className="hidden sm:inline" />
-            <span className="italic text-palette-coral font-bold">— from PKR 1,000</span>
+            <span className="italic text-apple-blue font-bold">— from PKR 1,000</span>
           </h1>
 
           {isUrdu ? (
-            <p className="font-urdu text-xl sm:text-2xl font-bold text-ink dark:text-palette-frost leading-relaxed" dir="rtl">
+            <p className="font-urdu text-xl sm:text-2xl font-bold text-ink dark:text-white leading-relaxed" dir="rtl">
               ہم تیار کریں گے۔ آپ آفیشل آئرس پر خود لاگ ان کر کے فائل کریں گے۔
             </p>
           ) : (
             <p className="text-base sm:text-lg text-ash max-w-2xl mx-auto leading-relaxed">
-              We prepare the figures and reconcile your wealth statement to exact 0.00. You log into official FBR IRIS yourself. <strong className="text-ink dark:text-palette-frost">We never take your password.</strong>
+              We prepare the figures and reconcile your wealth statement to exact 0.00. You log into official FBR IRIS yourself. <strong className="text-ink dark:text-white">We never take your password.</strong>
             </p>
           )}
         </div>
@@ -273,11 +273,11 @@ export default function HomePage() {
             return (
               <div
                 key={i}
-                className="p-3 rounded-2xl bg-white/40 dark:bg-palette-gunmetal/80 border border-white/10 dark:border-white/[0.08] backdrop-blur-md space-y-1 shadow-sm"
+                className="p-3 rounded-2xl bg-white/40 dark:bg-[#1c1c1e]/80 border border-white/10 dark:border-white/[0.08] backdrop-blur-md space-y-1 shadow-sm"
               >
                 <div className="flex items-center gap-2">
-                  <Icon className="w-4 h-4 text-palette-coral" />
-                  <span className="font-bold text-xs text-ink dark:text-palette-frost">{b.title}</span>
+                  <Icon className="w-4 h-4 text-apple-blue" />
+                  <span className="font-bold text-xs text-ink dark:text-white">{b.title}</span>
                 </div>
                 <p className="text-[11px] text-ash truncate">{b.desc}</p>
               </div>
@@ -296,7 +296,7 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("fbr-simplified-intake")}
-            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-palette-coral to-palette-coral-hover hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(238,108,77,0.30)] transition-all active:scale-95"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-palette-coral to-apple-blue hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(238,108,77,0.30)] transition-all active:scale-95"
           >
             <Sparkles className="w-4 h-4" />
             <span>Start FBR 8-Window Return</span>
@@ -304,7 +304,7 @@ export default function HomePage() {
 
           <Link
             href="/start"
-            className="hidden md:inline-flex items-center justify-center gap-2 bg-gradient-to-r from-palette-coral to-palette-coral-hover hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(238,108,77,0.30)] transition-all active:scale-95"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-gradient-to-r from-palette-coral to-apple-blue hover:opacity-95 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(238,108,77,0.30)] transition-all active:scale-95"
           >
             <span>Start Filing (Part 01 / 04)</span>
             <ArrowRight className="w-4 h-4" />
@@ -313,7 +313,7 @@ export default function HomePage() {
           {/* Track Filing Progress Link */}
           <Link
             href="/track"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-white/15 text-ink dark:text-palette-frost font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:border-palette-coral transition-all active:scale-95"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-white/15 text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm hover:border-apple-blue transition-all active:scale-95"
           >
             <span>Track Case Status (/track)</span>
           </Link>
@@ -322,17 +322,17 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light dark:bg-white/[0.04] border border-rule text-ink dark:text-palette-frost font-bold py-3.5 px-6 rounded-full text-sm transition-all active:scale-95 shadow-sm"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-paper-light dark:bg-white/[0.04] border border-rule text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm transition-all active:scale-95 shadow-sm"
           >
-            <FileText className="w-4 h-4 text-palette-coral" />
+            <FileText className="w-4 h-4 text-apple-blue" />
             <span>Docs Checklist</span>
           </button>
 
           <Link
             href="/requirements"
-            className="hidden md:inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl border border-rule hover:border-palette-coral text-ink dark:text-palette-frost font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-all active:scale-95"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-white/70 dark:bg-white/[0.04] backdrop-blur-xl border border-rule hover:border-apple-blue text-ink dark:text-white font-bold py-3.5 px-6 rounded-full text-sm shadow-sm transition-all active:scale-95"
           >
-            <FileText className="w-4 h-4 text-palette-coral" />
+            <FileText className="w-4 h-4 text-apple-blue" />
             <span>Required Documents</span>
           </Link>
         </div>
@@ -345,28 +345,28 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("fbr-simplified-intake")}
-            className="px-3.5 py-1.5 rounded-full bg-palette-coral/15 border border-palette-coral/40 text-palette-coral font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-apple-blue/15 border border-apple-blue/40 text-apple-blue font-bold transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
           >
             <span>⚡ FBR Simplified Return</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("tax-checklist")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-palette-frost font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
           >
             <span>📋 Documents Needed</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("whatsapp-intake")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-palette-frost font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
           >
             <span className="text-[#25D366]">💬 WhatsApp File</span>
           </button>
           <button
             type="button"
             onClick={() => appClip.open("iris-guide")}
-            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-palette-frost font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/55 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule text-ink dark:text-white font-medium transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
           >
             <span>🛡️ IRIS Password Guide</span>
           </button>
@@ -379,7 +379,7 @@ export default function HomePage() {
           </span>
           <Link
             href="/requirements"
-            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-palette-frost font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <span>📋 Document Checklist</span>
           </Link>
@@ -387,14 +387,14 @@ export default function HomePage() {
             href={formatWhatsAppUrl("Hi, I want to file my Tax Year 2026 return.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-[#25D366] text-ink dark:text-palette-frost font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-[#25D366] text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
             <span className="text-[#128C7E] dark:text-[#25D366]">{SITE_CONFIG.contact.whatsappDisplay} (WhatsApp Desk)</span>
           </a>
           <Link
             href="/iris-guide"
-            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-palette-frost font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
+            className="px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-[#07121D]/60 backdrop-blur-md border border-rule hover:border-brass text-ink dark:text-white font-medium transition-all shadow-sm hover:shadow-md flex items-center gap-1.5 active:scale-95"
           >
             <span>🛡️ IRIS Security Walkthrough</span>
           </Link>
@@ -426,7 +426,7 @@ export default function HomePage() {
               <AlertTriangle className="w-5 h-5" />
             </div>
             <div>
-              <div className="font-bold text-xs sm:text-sm text-ink dark:text-palette-frost">
+              <div className="font-bold text-xs sm:text-sm text-ink dark:text-white">
                 Don&apos;t Miss the Deadline! Protect Your Active Taxpayer (ATL) Status
               </div>
               <p className="text-[11px] text-ash leading-snug">
@@ -448,7 +448,7 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex items-baseline justify-between">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION A</span>
-            <h2 className="font-serif text-2xl font-bold text-ink dark:text-palette-frost">Individual Tax Categories</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Individual Tax Categories</h2>
           </div>
           <span className="font-mono text-xs text-ash">NON-BUSINESS ONLY</span>
         </div>
@@ -467,7 +467,7 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION B</span>
-            <h2 className="font-serif text-2xl font-bold text-ink dark:text-palette-frost">Fee Schedule &amp; Packages</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Fee Schedule &amp; Packages</h2>
           </div>
           <span className="font-mono text-xs text-ash">NO HIDDEN CHARGES · 100% TRANSPARENT</span>
         </div>
@@ -494,10 +494,10 @@ export default function HomePage() {
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: GF-1000</span>
-                <h3 className="font-serif text-xl font-bold text-ink dark:text-palette-frost">Guided Filing</h3>
+                <h3 className="font-serif text-xl font-bold text-ink dark:text-white">Guided Filing</h3>
                 <div className="font-urdu text-xs text-ash" dir="rtl">رہنمائی مع سیلف فائلنگ</div>
               </div>
-              <div className="font-serif text-3xl font-black text-ink dark:text-palette-frost">
+              <div className="font-serif text-3xl font-black text-ink dark:text-white">
                 PKR 1,000
               </div>
               <p className="text-xs text-ash leading-relaxed">
@@ -505,15 +505,15 @@ export default function HomePage() {
               </p>
               <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>Document check &amp; tax calculation</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>Field-by-field IRIS checklist</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>Zero password shared</span>
                 </li>
               </ul>
@@ -523,14 +523,14 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "guided_1000" })}
-                className="md:hidden w-full py-3.5 text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule font-bold text-xs text-ink dark:text-palette-frost transition-all font-mono active:scale-95 shadow-sm"
+                className="md:hidden w-full py-3.5 text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
               >
                 Select GF-1000 (PKR 1,000)
               </button>
 
               <Link
                 href="/start?tier=guided_1000"
-                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule font-bold text-xs text-ink dark:text-palette-frost transition-all font-mono active:scale-95 shadow-sm"
+                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-paper hover:bg-paper-light dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-rule font-bold text-xs text-ink dark:text-white transition-all font-mono active:scale-95 shadow-sm"
               >
                 Select GF-1000 (PKR 1,000)
               </Link>
@@ -539,18 +539,18 @@ export default function HomePage() {
 
           {/* Complete Assistance — Recommended */}
           <div className={`glass-card-featured p-6 sm:p-7 rounded-[30px] flex flex-col justify-between space-y-6 relative shadow-lg transition-all ${
-            pricingCategory === "complex" ? "opacity-40 scale-[0.98]" : "opacity-100 ring-2 ring-palette-coral/50"
+            pricingCategory === "complex" ? "opacity-40 scale-[0.98]" : "opacity-100 ring-2 ring-apple-blue/50"
           }`}>
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-palette-coral text-white font-mono text-[10px] font-bold uppercase tracking-wider shadow-sm">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-apple-blue text-white font-mono text-[10px] font-bold uppercase tracking-wider shadow-sm">
               Most Selected · تجویز کردہ
             </div>
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
-                <span className="font-mono text-[10px] font-bold text-palette-coral tracking-widest">CODE: FA-2500</span>
-                <h3 className="font-serif text-xl font-bold text-ink dark:text-palette-frost">Complete Assistance</h3>
+                <span className="font-mono text-[10px] font-bold text-apple-blue tracking-widest">CODE: FA-2500</span>
+                <h3 className="font-serif text-xl font-bold text-ink dark:text-white">Complete Assistance</h3>
                 <div className="font-urdu text-xs text-ash" dir="rtl">مکمل فائلنگ اسسٹنس</div>
               </div>
-              <div className="font-serif text-3xl font-black text-ink dark:text-palette-frost">
+              <div className="font-serif text-3xl font-black text-ink dark:text-white">
                 PKR 2,500
               </div>
               <p className="text-xs text-ash leading-relaxed">
@@ -558,15 +558,15 @@ export default function HomePage() {
               </p>
               <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>Full return + s.116 wealth balance</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>WHT credit adjustment audit</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>Mandatory client pre-approval summary</span>
                 </li>
               </ul>
@@ -576,7 +576,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => appClip.open("tax-intake", { defaultTier: "assistance_2500" })}
-                className="md:hidden w-full py-3.5 text-center rounded-full bg-gradient-to-r from-palette-coral to-palette-coral-hover font-bold text-xs text-white shadow-md transition-all font-mono active:scale-95 flex items-center justify-center gap-2"
+                className="md:hidden w-full py-3.5 text-center rounded-full bg-gradient-to-r from-palette-coral to-apple-blue font-bold text-xs text-white shadow-md transition-all font-mono active:scale-95 flex items-center justify-center gap-2"
               >
                 <span>Select FA-2500 (PKR 2,500)</span>
                 <Sparkles className="w-3.5 h-3.5" />
@@ -584,7 +584,7 @@ export default function HomePage() {
 
               <Link
                 href="/start?tier=assistance_2500"
-                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-gradient-to-r from-palette-coral to-palette-coral-hover font-bold text-xs text-white shadow-md transition-all font-mono active:scale-95 gap-2"
+                className="hidden md:flex w-full py-3.5 items-center justify-center text-center rounded-full bg-gradient-to-r from-palette-coral to-apple-blue font-bold text-xs text-white shadow-md transition-all font-mono active:scale-95 gap-2"
               >
                 <span>Select FA-2500 (PKR 2,500)</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -599,10 +599,10 @@ export default function HomePage() {
             <div className="space-y-4">
               <div className="border-b border-rule pb-3">
                 <span className="font-mono text-[10px] font-bold text-ash tracking-widest">CODE: CX-4500</span>
-                <h3 className="font-serif text-xl font-bold text-ink dark:text-palette-frost">Complex Review</h3>
+                <h3 className="font-serif text-xl font-bold text-ink dark:text-white">Complex Review</h3>
                 <div className="font-urdu text-xs text-ash" dir="rtl">پیچیدہ ریٹرن جائزہ</div>
               </div>
-              <div className="font-serif text-3xl font-black text-ink dark:text-palette-frost">
+              <div className="font-serif text-3xl font-black text-ink dark:text-white">
                 PKR 4,500+
               </div>
               <p className="text-xs text-ash leading-relaxed">
@@ -610,15 +610,15 @@ export default function HomePage() {
               </p>
               <ul className="space-y-2 text-xs text-ash font-mono pt-2 border-t border-rule-light">
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>Prior unfiled years reconciliation</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>s.111 asset transactions</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
                   <span>Final fee confirmed after review</span>
                 </li>
               </ul>
@@ -660,7 +660,7 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex items-baseline justify-between">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION C</span>
-            <h2 className="font-serif text-2xl font-bold text-ink dark:text-palette-frost">Filing Workflow</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Filing Workflow</h2>
           </div>
           <span className="font-mono text-xs text-ash">4 STEPS TO COMPLETED TASK</span>
         </div>
@@ -669,11 +669,11 @@ export default function HomePage() {
           {fourSteps.map((s) => (
             <div key={s.num} className="glass-card p-6 rounded-[24px] space-y-2.5 relative border-rule/70 shadow-sm">
               <div className="flex items-center justify-between font-mono text-xs">
-                <span className="font-bold text-palette-coral">{s.num}</span>
+                <span className="font-bold text-apple-blue">{s.num}</span>
                 <span className="text-[10px] text-ash px-2 py-0.5 bg-paper-light dark:bg-white/10 border border-rule rounded-full">{s.code}</span>
               </div>
               <div>
-                <h3 className="font-bold text-sm text-ink dark:text-palette-frost">{s.titleEn}</h3>
+                <h3 className="font-bold text-sm text-ink dark:text-white">{s.titleEn}</h3>
                 <div className="font-urdu text-xs text-ash mt-0.5" dir="rtl">{s.titleUr}</div>
               </div>
               <p className="text-xs text-ash leading-relaxed">{s.descEn}</p>
@@ -687,20 +687,20 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex items-baseline justify-between">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION D</span>
-            <h2 className="font-serif text-2xl font-bold text-ink dark:text-palette-frost">What Our Filers Say</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">What Our Filers Say</h2>
           </div>
-          <span className="font-mono text-xs text-palette-coral">VERIFIED REVIEWS</span>
+          <span className="font-mono text-xs text-apple-blue">VERIFIED REVIEWS</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {customerReviews.map((rev, i) => (
             <div
               key={i}
-              className="p-5 rounded-3xl bg-white/45 dark:bg-palette-gunmetal/70 border border-white/10 backdrop-blur-xl space-y-3 shadow-sm"
+              className="p-5 rounded-3xl bg-white/45 dark:bg-[#1c1c1e]/70 border border-white/10 backdrop-blur-xl space-y-3 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="font-bold text-xs sm:text-sm text-ink dark:text-palette-frost">
+                  <div className="font-bold text-xs sm:text-sm text-ink dark:text-white">
                     {rev.name}
                   </div>
                   <div className="text-[11px] text-ash">
@@ -718,7 +718,7 @@ export default function HomePage() {
                 &ldquo;{rev.comment}&rdquo;
               </p>
 
-              <div className="font-mono text-[10px] text-palette-coral pt-1 border-t border-white/[0.08] flex items-center justify-between">
+              <div className="font-mono text-[10px] text-apple-blue pt-1 border-t border-white/[0.08] flex items-center justify-between">
                 <span>Verified Case: {rev.ref}</span>
                 <span className="text-emerald-400">Active ATL ✓</span>
               </div>
@@ -732,7 +732,7 @@ export default function HomePage() {
         <div className="border-b border-rule pb-2 flex items-baseline justify-between">
           <div>
             <span className="font-mono text-[10px] text-ash tracking-widest uppercase">SECTION E</span>
-            <h2 className="font-serif text-2xl font-bold text-ink dark:text-palette-frost">Practice FAQs</h2>
+            <h2 className="font-serif text-2xl font-bold text-ink dark:text-white">Practice FAQs</h2>
           </div>
           <span className="font-mono text-xs text-ash font-urdu" dir="rtl">اکثر پوچھے گئے سوالات</span>
         </div>
@@ -741,7 +741,7 @@ export default function HomePage() {
           {faqs.map((faq, idx) => (
             <div key={idx} className="glass-card p-6 rounded-[22px] space-y-2.5 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-                <h3 className="font-bold text-sm text-ink dark:text-palette-frost">{faq.qEn}</h3>
+                <h3 className="font-bold text-sm text-ink dark:text-white">{faq.qEn}</h3>
                 <span className="font-urdu text-xs text-ash" dir="rtl">{faq.qUr}</span>
               </div>
               <p className="text-xs text-ash leading-relaxed pt-2 border-t border-rule-light">
@@ -757,9 +757,9 @@ export default function HomePage() {
 
       {/* 6. Bottom Banner CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="bg-ink text-paper-light border-2 border-palette-coral/50 p-8 sm:p-10 rounded-[32px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div className="bg-ink text-paper-light border-2 border-apple-blue/50 p-8 sm:p-10 rounded-[32px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
           <div className="space-y-1.5 text-center sm:text-left">
-            <span className="font-mono text-xs text-palette-coral tracking-wider uppercase font-bold">TY2026 INTAKE OPEN</span>
+            <span className="font-mono text-xs text-apple-blue tracking-wider uppercase font-bold">TY2026 INTAKE OPEN</span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-paper-light">
               Ready to file your return?
             </h2>
@@ -773,7 +773,7 @@ export default function HomePage() {
             <button
               type="button"
               onClick={() => appClip.open("fbr-simplified-intake")}
-              className="md:hidden inline-flex items-center justify-center gap-2 bg-palette-coral hover:bg-palette-coral-hover text-white font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
+              className="md:hidden inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue-hover text-white font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
             >
               <span>FBR 8-Window Form</span>
               <Sparkles className="w-3.5 h-3.5" />
@@ -782,7 +782,7 @@ export default function HomePage() {
             {/* Desktop link to /start */}
             <Link
               href="/start"
-              className="hidden md:inline-flex items-center justify-center gap-2 bg-palette-coral hover:bg-palette-coral-hover text-white font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
+              className="hidden md:inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue-hover text-white font-bold py-3.5 px-7 rounded-full text-xs shadow-md transition-all font-mono active:scale-95"
             >
               <span>Start Filing Return</span>
               <ArrowRight className="w-3.5 h-3.5" />

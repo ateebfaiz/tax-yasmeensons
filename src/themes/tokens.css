@@ -1,83 +1,111 @@
 /* ================================================================
-   Yasmeen & Sons Tax Practice — Authoritative Dynamic Design Tokens
+   Yasmeen & Sons Tax Practice — Official Apple HIG System Design Tokens
    Apple Human Interface Guidelines (HIG) Foundations Standard
-   Palette Source: generic-mobile-portrait-palette.svg
-   1. Slate Blue:   #3d5a80 -> 61 90 128
-   2. Sky Ice:      #98c1d9 -> 152 193 217
-   3. Frost Paper:  #e0fbfc -> 224 251 252
-   4. Burnt Coral:  #ee6c4d -> 238 108 77
-   5. Gunmetal:     #293241 -> 41 50 65
+   Colors: Apple iOS / macOS System Palette (Light & Dark)
+   Materials: Apple System Materials with Vibrancy & Frosted Glass Refraction
    ================================================================ */
 
 :root {
   color-scheme: light;
 
-  /* Raw Palette RGB Channels for Tailwind <alpha-value> support */
-  --palette-slate-rgb: 61 90 128;
-  --palette-sky-rgb: 152 193 217;
-  --palette-frost-rgb: 224 251 252;
-  --palette-coral-rgb: 238 108 77;
-  --palette-coral-hover-rgb: 224 88 55;
-  --palette-gunmetal-rgb: 41 50 65;
+  /* Apple Official System Colors — Light Mode */
+  --apple-blue-rgb: 0 122 255;          /* #007AFF — Apple System Blue (Primary Tint) */
+  --apple-indigo-rgb: 88 86 214;        /* #5856D6 */
+  --apple-purple-rgb: 175 82 222;       /* #AF52DE */
+  --apple-pink-rgb: 255 45 85;          /* #FF2D55 */
+  --apple-red-rgb: 255 59 48;           /* #FF3B30 — Apple System Red */
+  --apple-orange-rgb: 255 149 0;        /* #FF9500 — Apple System Orange */
+  --apple-yellow-rgb: 255 204 0;        /* #FFCC00 */
+  --apple-green-rgb: 52 199 89;         /* #34C759 — Apple System Green */
+  --apple-mint-rgb: 0 199 190;          /* #00C7BE */
+  --apple-teal-rgb: 48 176 199;         /* #30B0C7 */
+  --apple-cyan-rgb: 50 173 230;         /* #32ADE6 */
+
+  /* Apple System Grays — Light Mode */
+  --apple-gray-rgb: 142 142 147;        /* #8E8E93 — System Gray */
+  --apple-gray2-rgb: 174 174 178;       /* #AEAEB2 — System Gray 2 */
+  --apple-gray3-rgb: 199 199 204;       /* #C7C7CC — System Gray 3 */
+  --apple-gray4-rgb: 209 209 214;       /* #D1D1D6 — System Gray 4 */
+  --apple-gray5-rgb: 229 229 234;       /* #E5E5EA — System Gray 5 */
+  --apple-gray6-rgb: 242 242 247;       /* #F2F2F7 — System Gray 6 */
+
+  /* Apple System Backgrounds — Light Mode */
+  --system-bg-rgb: 255 255 255;         /* #FFFFFF — Primary Canvas */
+  --system-grouped-bg-rgb: 242 242 247; /* #F2F2F7 — Grouped Canvas */
+  --system-card-rgb: 255 255 255;       /* #FFFFFF — Card Surface */
+
+  /* Apple Dynamic Typography & Separators — Light Mode */
+  --system-label-rgb: 0 0 0;            /* #000000 — Primary Label */
+  --system-secondary-label-rgb: 60 60 67; /* rgba(60, 60, 67, 0.60) — Secondary Label */
+  --system-tertiary-label-rgb: 60 60 67;  /* rgba(60, 60, 67, 0.30) */
+  --system-separator-rgb: 60 60 67;       /* rgba(60, 60, 67, 0.20) — Hairline Separator */
+  --system-tint-rgb: 0 122 255;          /* Apple System Blue */
+
+  /* Semantic Application Channels — Light Mode */
+  --tax-ink-rgb: 0 0 0;                 /* Apple Primary Label */
+  --tax-ash-rgb: 60 60 67;              /* Apple Secondary Label */
+  --tax-ash-light-rgb: 142 142 147;     /* Apple System Gray */
+  --tax-paper-rgb: 242 242 247;         /* Apple System Grouped Background */
+  --tax-paper-light-rgb: 255 255 255;   /* Apple Secondary Grouped Background */
+  --tax-folio-rgb: 255 255 255;         /* Apple Tertiary Grouped Background */
+  --tax-rule-rgb: 60 60 67;             /* Apple System Separator */
+  --accent-rgb: 0 122 255;              /* Apple System Blue CTA */
+
+  /* Legacy & Palette Compatibility mapped to Apple HIG */
+  --palette-slate-rgb: 142 142 147;     /* Apple System Gray */
+  --palette-sky-rgb: 50 173 230;        /* Apple System Cyan */
+  --palette-frost-rgb: 0 0 0;           /* Apple Label (Dark on light) */
+  --palette-coral-rgb: 0 122 255;       /* Apple System Blue */
+  --palette-coral-hover-rgb: 0 100 215;
+  --palette-gunmetal-rgb: 242 242 247;  /* Apple System Gray 6 */
 
   /* Raw Hex References */
-  --palette-slate: #3d5a80;
-  --palette-sky: #98c1d9;
-  --palette-frost: #e0fbfc;
-  --palette-coral: #ee6c4d;
-  --palette-coral-hover: #e05837;
-  --palette-gunmetal: #293241;
+  --palette-slate: #8e8e93;
+  --palette-sky: #32ade6;
+  --palette-frost: #000000;
+  --palette-coral: #007aff;
+  --palette-coral-hover: #0064d7;
+  --palette-gunmetal: #f2f2f7;
 
-  /* Semantic RGB Channels — Light Mode */
-  --tax-ink-rgb: 41 50 65;          /* Deep Gunmetal Slate — 12.4:1 contrast on white */
-  --tax-ash-rgb: 61 90 128;         /* Steel Slate Blue — 6.5:1 contrast */
-  --tax-ash-light-rgb: 94 118 148;
-  --tax-paper-rgb: 242 248 250;     /* Fresh Frost Paper Canvas */
-  --tax-paper-light-rgb: 224 251 252;
-  --tax-folio-rgb: 255 255 255;     /* Pure Crisp Card Surface */
-  --tax-rule-rgb: 61 90 128;        /* Slate border line */
-  --accent-rgb: 238 108 77;         /* Burnt Coral Primary CTA */
-
-  /* Surface & Glass Tokens — Light Mode */
-  --page-bg: #f2f8fa;
-  --page-bg-alt: #e0fbfc;
-  --glass-bg: rgba(255, 255, 255, 0.86);
-  --glass-bg-strong: rgba(255, 255, 255, 0.95);
-  --glass-card-bg: rgba(255, 255, 255, 0.90);
-  --glass-card-hover: #ffffff;
-  --glass-border: rgba(61, 90, 128, 0.16);
-  --glass-border-subtle: rgba(61, 90, 128, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.70);
-  --glass-glow: rgba(152, 193, 217, 0.25);
+  /* Apple Frosted Glass Materials — Light Mode */
+  --page-bg: #f2f2f7;
+  --page-bg-alt: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-strong: rgba(255, 255, 255, 0.82);
+  --glass-card-bg: rgba(255, 255, 255, 0.65);
+  --glass-card-hover: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(60, 60, 67, 0.14);
+  --glass-border-subtle: rgba(60, 60, 67, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.80);
+  --glass-glow: rgba(0, 122, 255, 0.20);
 
   /* Typography Colors */
-  --text-primary: #293241;
-  --text-secondary: #3d5a80;
-  --text-muted: #5e7694;
+  --text-primary: #000000;
+  --text-secondary: rgba(60, 60, 67, 0.75);
+  --text-muted: rgba(60, 60, 67, 0.50);
 
   /* Accents */
-  --accent: #ee6c4d;
-  --accent-strong: #d95838;
-  --accent-surface: rgba(238, 108, 77, 0.12);
-  --accent-glow: 0 0 20px rgba(238, 108, 77, 0.25);
+  --accent: #007aff;
+  --accent-strong: #0064d7;
+  --accent-surface: rgba(0, 122, 255, 0.12);
+  --accent-glow: 0 0 24px rgba(0, 122, 255, 0.25);
 
-  /* Legacy & Theme Compatibility */
-  --tax-ink: #293241;
-  --tax-iris-teal: #3d5a80;
-  --tax-brass: #ee6c4d;
-  --tax-brass-light: #f3866b;
-  --tax-brass-subtle: rgba(238, 108, 77, 0.10);
-  --tax-paper: #f2f8fa;
-  --tax-paper-light: #e0fbfc;
+  /* Legacy Theme Mappings */
+  --tax-ink: #000000;
+  --tax-iris-teal: #007aff;
+  --tax-brass: #007aff;
+  --tax-brass-light: #32ade6;
+  --tax-brass-subtle: rgba(0, 122, 255, 0.10);
+  --tax-paper: #f2f2f7;
+  --tax-paper-light: #ffffff;
   --tax-folio: #ffffff;
-  --tax-rule: rgba(61, 90, 128, 0.16);
-  --tax-rule-light: rgba(61, 90, 128, 0.09);
-  --tax-stamp-red: #ee6c4d;
-  --tax-stamp-bg: rgba(238, 108, 77, 0.12);
-  --tax-ash: #3d5a80;
-  --tax-ash-light: #5e7694;
+  --tax-rule: rgba(60, 60, 67, 0.15);
+  --tax-rule-light: rgba(60, 60, 67, 0.08);
+  --tax-stamp-red: #ff3b30;
+  --tax-stamp-bg: rgba(255, 59, 48, 0.12);
+  --tax-ash: #8e8e93;
+  --tax-ash-light: #aeaeb2;
 
-  /* Theme mappings */
   --theme-background: var(--page-bg);
   --theme-surface: var(--tax-folio);
   --theme-surface-raised: var(--tax-paper-light);
@@ -88,69 +116,117 @@
   --theme-primary: var(--accent);
   --theme-primary-hover: var(--accent-strong);
   --theme-accent: var(--accent);
-  --theme-success: #2e7d32;
-  --theme-danger: #d32f2f;
+  --theme-success: #34c759;
+  --theme-danger: #ff3b30;
 
-  /* Liquid Frosted Glass */
+  /* Apple Liquid Frosted Glass Spec */
   --theme-glass-bg: var(--glass-bg);
   --theme-glass-border: var(--glass-border);
-  --theme-glass-blur: 18px;
+  --theme-glass-blur: 25px;
 }
 
 :root.dark,
 html.dark {
   color-scheme: dark;
 
-  /* Semantic RGB Channels — Dark Mode */
-  --tax-ink-rgb: 224 251 252;       /* Crisp Frost White — 11.2:1 contrast on gunmetal */
-  --tax-ash-rgb: 152 193 217;       /* Sky Ice Blue — 6.8:1 contrast */
-  --tax-ash-light-rgb: 110 143 168;
-  --tax-paper-rgb: 28 36 48;        /* Deep Slate Gunmetal Canvas */
-  --tax-paper-light-rgb: 41 50 65;  /* Secondary Gunmetal Section */
-  --tax-folio-rgb: 37 46 60;        /* Elevated Translucent Glass */
-  --tax-rule-rgb: 152 193 217;      /* Sky hairline border */
-  --accent-rgb: 238 108 77;         /* Burnt Coral Primary CTA */
+  /* Apple Official System Colors — Dark Mode */
+  --apple-blue-rgb: 10 132 255;         /* #0A84FF — Apple Dark System Blue (Primary Tint) */
+  --apple-indigo-rgb: 94 92 230;        /* #5E5CE6 */
+  --apple-purple-rgb: 191 90 242;       /* #BF5AF2 */
+  --apple-pink-rgb: 255 55 95;          /* #FF375F */
+  --apple-red-rgb: 255 69 58;           /* #FF453A — Apple Dark System Red */
+  --apple-orange-rgb: 255 159 10;       /* #FF9F0A — Apple Dark System Orange */
+  --apple-yellow-rgb: 255 214 10;       /* #FFD60A */
+  --apple-green-rgb: 48 209 88;         /* #30D158 — Apple Dark System Green */
+  --apple-mint-rgb: 99 230 226;         /* #63E6E2 */
+  --apple-teal-rgb: 64 200 224;         /* #40C8E0 */
+  --apple-cyan-rgb: 100 210 255;        /* #64D2FF */
 
-  /* Surface & Glass Tokens — Dark Mode */
-  --page-bg: #1c2430;
-  --page-bg-alt: #293241;
-  --glass-bg: rgba(41, 50, 65, 0.82);
-  --glass-bg-strong: rgba(33, 41, 54, 0.94);
-  --glass-card-bg: rgba(41, 50, 65, 0.76);
-  --glass-card-hover: rgba(52, 64, 82, 0.90);
-  --glass-border: rgba(152, 193, 217, 0.20);
-  --glass-border-subtle: rgba(152, 193, 217, 0.10);
-  --glass-highlight: rgba(224, 251, 252, 0.08);
-  --glass-glow: rgba(152, 193, 217, 0.18);
+  /* Apple System Grays — Dark Mode */
+  --apple-gray-rgb: 142 142 147;        /* #8E8E93 — System Gray */
+  --apple-gray2-rgb: 99 99 102;         /* #636366 — Dark System Gray 2 */
+  --apple-gray3-rgb: 72 72 74;          /* #48484A — Dark System Gray 3 */
+  --apple-gray4-rgb: 58 58 60;          /* #3A3A3C — Dark System Gray 4 */
+  --apple-gray5-rgb: 44 44 46;          /* #2C2C2E — Dark System Gray 5 */
+  --apple-gray6-rgb: 28 28 30;          /* #1C1C1E — Dark System Gray 6 */
+
+  /* Apple System Backgrounds — Dark Mode */
+  --system-bg-rgb: 0 0 0;               /* #000000 — Pure Black System Canvas */
+  --system-grouped-bg-rgb: 0 0 0;       /* #000000 — Pure Black Grouped Canvas */
+  --system-card-rgb: 28 28 30;          /* #1C1C1E — Dark System Gray 6 Card */
+
+  /* Apple Dynamic Typography & Separators — Dark Mode */
+  --system-label-rgb: 255 255 255;      /* #FFFFFF — Dark Mode Primary Label */
+  --system-secondary-label-rgb: 235 235 245; /* rgba(235, 235, 245, 0.60) — Secondary Label */
+  --system-tertiary-label-rgb: 235 235 245;  /* rgba(235, 235, 245, 0.30) */
+  --system-separator-rgb: 84 84 88;     /* rgba(84, 84, 88, 0.35) — Dark Hairline Separator */
+  --system-tint-rgb: 10 132 255;        /* Apple Dark System Blue */
+
+  /* Semantic Application Channels — Dark Mode */
+  --tax-ink-rgb: 255 255 255;           /* Apple Dark Primary Label */
+  --tax-ash-rgb: 235 235 245;           /* Apple Dark Secondary Label */
+  --tax-ash-light-rgb: 142 142 147;     /* Apple System Gray */
+  --tax-paper-rgb: 0 0 0;               /* Apple Pure Black Canvas */
+  --tax-paper-light-rgb: 28 28 30;      /* Apple Dark System Gray 6 */
+  --tax-folio-rgb: 44 44 46;            /* Apple Dark System Gray 5 */
+  --tax-rule-rgb: 84 84 88;             /* Apple Dark System Separator */
+  --accent-rgb: 10 132 255;             /* Apple Dark System Blue CTA */
+
+  /* Legacy & Palette Compatibility mapped to Apple HIG */
+  --palette-slate-rgb: 142 142 147;     /* Apple System Gray */
+  --palette-sky-rgb: 100 210 255;       /* Apple Dark System Cyan */
+  --palette-frost-rgb: 255 255 255;     /* Apple White Label */
+  --palette-coral-rgb: 10 132 255;      /* Apple Dark System Blue */
+  --palette-coral-hover-rgb: 64 156 255;
+  --palette-gunmetal-rgb: 28 28 30;     /* Apple Dark System Gray 6 */
+
+  /* Raw Hex References */
+  --palette-slate: #8e8e93;
+  --palette-sky: #64d2ff;
+  --palette-frost: #ffffff;
+  --palette-coral: #0a84ff;
+  --palette-coral-hover: #409cff;
+  --palette-gunmetal: #1c1c1e;
+
+  /* Apple Frosted Glass Materials — Dark Mode */
+  --page-bg: #000000;
+  --page-bg-alt: #1c1c1e;
+  --glass-bg: rgba(28, 28, 30, 0.75);
+  --glass-bg-strong: rgba(44, 44, 46, 0.82);
+  --glass-card-bg: rgba(44, 44, 46, 0.60);
+  --glass-card-hover: rgba(58, 58, 60, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-subtle: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+  --glass-glow: rgba(10, 132, 255, 0.25);
 
   /* Typography Colors */
-  --text-primary: #e0fbfc;
-  --text-secondary: #98c1d9;
-  --text-muted: #6e8fa8;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(235, 235, 245, 0.75);
+  --text-muted: rgba(235, 235, 245, 0.50);
 
   /* Accents */
-  --accent: #ee6c4d;
-  --accent-strong: #f18064;
-  --accent-surface: rgba(238, 108, 77, 0.16);
-  --accent-glow: 0 0 24px rgba(238, 108, 77, 0.35);
+  --accent: #0a84ff;
+  --accent-strong: #409cff;
+  --accent-surface: rgba(10, 132, 255, 0.18);
+  --accent-glow: 0 0 28px rgba(10, 132, 255, 0.35);
 
-  /* Legacy & Theme Compatibility */
-  --tax-ink: #e0fbfc;
-  --tax-iris-teal: #98c1d9;
-  --tax-brass: #ee6c4d;
-  --tax-brass-light: #f3866b;
-  --tax-brass-subtle: rgba(238, 108, 77, 0.15);
-  --tax-paper: #1c2430;
-  --tax-paper-light: #293241;
-  --tax-folio: #252e3c;
-  --tax-rule: rgba(152, 193, 217, 0.20);
-  --tax-rule-light: rgba(152, 193, 217, 0.10);
-  --tax-stamp-red: #ee6c4d;
-  --tax-stamp-bg: rgba(238, 108, 77, 0.15);
-  --tax-ash: #98c1d9;
-  --tax-ash-light: #6e8fa8;
+  /* Legacy Theme Mappings */
+  --tax-ink: #ffffff;
+  --tax-iris-teal: #0a84ff;
+  --tax-brass: #0a84ff;
+  --tax-brass-light: #64d2ff;
+  --tax-brass-subtle: rgba(10, 132, 255, 0.15);
+  --tax-paper: #000000;
+  --tax-paper-light: #1c1c1e;
+  --tax-folio: #2c2c2e;
+  --tax-rule: rgba(84, 84, 88, 0.35);
+  --tax-rule-light: rgba(84, 84, 88, 0.18);
+  --tax-stamp-red: #ff453a;
+  --tax-stamp-bg: rgba(255, 69, 58, 0.16);
+  --tax-ash: #8e8e93;
+  --tax-ash-light: #636366;
 
-  /* Theme mappings */
   --theme-background: var(--page-bg);
   --theme-surface: var(--tax-folio);
   --theme-surface-raised: var(--tax-paper-light);
@@ -161,11 +237,11 @@ html.dark {
   --theme-primary: var(--accent);
   --theme-primary-hover: var(--accent-strong);
   --theme-accent: var(--accent);
-  --theme-success: #4caf50;
-  --theme-danger: #ef5350;
+  --theme-success: #30d158;
+  --theme-danger: #ff453a;
 
-  /* Liquid Frosted Glass */
+  /* Apple Liquid Frosted Glass Spec */
   --theme-glass-bg: var(--glass-bg);
   --theme-glass-border: var(--glass-border);
-  --theme-glass-blur: 20px;
+  --theme-glass-blur: 28px;
 }

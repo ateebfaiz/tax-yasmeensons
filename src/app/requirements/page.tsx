@@ -24,6 +24,7 @@ import {
   Lock,
 } from "lucide-react";
 import { TaxCertificateTemplates } from "@/components/tax/TaxCertificateTemplates";
+import { SmoothFileUpload, UploadedTaxDocument } from "@/components/ui/file-upload";
 
 interface DocItem {
   code: string;
@@ -83,6 +84,7 @@ const CATEGORY_DOCS: Record<string, { title: string; ur: string; items: DocItem[
 export default function RequirementsPage() {
   const router = useRouter();
   const [activeCat, setActiveCat] = useState<string>("SAL");
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedTaxDocument[]>([]);
   const appClip = useAppClip();
   const current = CATEGORY_DOCS[activeCat] || CATEGORY_DOCS.SAL;
 
@@ -260,7 +262,48 @@ export default function RequirementsPage() {
         </div>
       </div>
 
-      {/* Module 4: Category Checklist Cards */}
+      {/* Module 4: Document Upload & Manual Filing Options (SmoothUI) */}
+      <div className="glass-card p-6 sm:p-8 rounded-3xl space-y-5 border-rule shadow-sm">
+        <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2.5">
+            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
+              SECTION 4
+            </span>
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
+              Upload Documents &amp; Manual Filing Options
+            </h2>
+          </div>
+          <span className="font-urdu text-sm text-[#128C7E] dark:text-[#C4A046]" dir="rtl">
+            دستاویزات اپلوڈ کریں یا مینوئل فارم پُر کریں
+          </span>
+        </div>
+
+        <p className="text-xs text-ash leading-relaxed">
+          Upload bank statements, CNIC scans (front, back, or combined), salary certificates, and withholding slips directly.
+          If you prefer to enter all figures manually without uploading files, open the 8-window simplified wizard.
+        </p>
+
+        <SmoothFileUpload
+          initialFiles={uploadedFiles}
+          onFilesChange={setUploadedFiles}
+          onManualEntryClick={() => appClip.open("fbr-simplified-intake")}
+        />
+
+        {uploadedFiles.length > 0 && (
+          <div className="pt-2 flex flex-col sm:flex-row gap-3">
+            <button
+              type="button"
+              onClick={() => appClip.open("tax-intake")}
+              className="flex-1 inline-flex items-center justify-center gap-2 bg-[#007AFF] hover:bg-[#007AFF]/90 text-white font-mono font-bold text-xs py-3.5 px-6 rounded-full shadow transition-all active:scale-95"
+            >
+              <span>Proceed with {uploadedFiles.length} Uploaded File{uploadedFiles.length > 1 ? "s" : ""}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Module 5: Category Checklist Cards */}
       <div className="space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2 font-mono text-xs">

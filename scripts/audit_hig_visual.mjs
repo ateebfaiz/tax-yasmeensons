@@ -119,6 +119,7 @@ async function runVisualAudit() {
   await browser.close();
   serverProc.kill("SIGINT");
   console.log("All visual audit screenshots generated successfully!");
+  process.exit(0);
 }
 
 runVisualAudit().catch((err) => {

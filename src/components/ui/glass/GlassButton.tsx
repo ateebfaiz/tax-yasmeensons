@@ -25,13 +25,13 @@ export function GlassButton({
 
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-palette-coral to-palette-coral-hover text-white font-bold shadow-[0_4px_20px_rgba(238,108,77,0.30)] border border-palette-coral/30 hover:opacity-95 active:scale-95",
+      "bg-apple-blue hover:bg-apple-blue/90 text-white font-bold shadow-[0_4px_20px_rgba(0,122,255,0.25)] border border-apple-blue/30 active:scale-95",
     secondary:
-      "bg-paper-light dark:bg-palette-gunmetal/80 hover:bg-paper dark:hover:bg-palette-gunmetal border border-rule/80 hover:border-palette-coral/50 text-ink dark:text-palette-frost font-semibold backdrop-blur-xl shadow-sm active:scale-95",
+      "bg-white/80 dark:bg-[#1c1c1e]/80 hover:bg-white dark:hover:bg-[#2c2c2e] border border-black/[0.08] dark:border-white/[0.12] hover:border-apple-blue/50 text-ink dark:text-white font-semibold backdrop-blur-xl shadow-sm active:scale-95",
     whatsapp:
-      "bg-paper-light dark:bg-palette-gunmetal/80 hover:bg-paper dark:hover:bg-palette-gunmetal border border-[#25D366]/40 hover:border-[#25D366] text-[#25D366] font-bold backdrop-blur-xl shadow-sm active:scale-95",
+      "bg-white/80 dark:bg-[#1c1c1e]/80 hover:bg-white dark:hover:bg-[#2c2c2e] border border-[#25D366]/40 hover:border-[#25D366] text-[#25D366] font-bold backdrop-blur-xl shadow-sm active:scale-95",
     ghost:
-      "bg-transparent hover:bg-black/5 dark:hover:bg-white/[0.08] text-ash hover:text-ink dark:hover:text-palette-frost active:scale-95",
+      "bg-transparent hover:bg-black/5 dark:hover:bg-white/[0.08] text-ash hover:text-ink dark:hover:text-white active:scale-95",
   };
 
   return (

@@ -33,27 +33,34 @@ All UI components, sheets, navigation, and pages MUST strictly conform to **Appl
    - Every text element must achieve at least **4.5:1** (WCAG AA) and ideally **7:1+** (WCAG AAA) contrast in **BOTH** Light and Dark modes.
    - Never place white text on light backgrounds or dark text on dark backgrounds.
    - All interactive controls (buttons, tabs, inputs, close icons, checkboxes) MUST have a minimum tap target of **44x44 pt (44px)**.
-2. **Authoritative 5-Color Palette**:
-   All colors MUST map directly to the official 5-color palette (`generic-mobile-portrait-palette.svg`):
-   - **`#3d5a80` (Steel Slate Blue)**: Brand identity, headers, borders, secondary text.
-   - **`#98c1d9` (Sky Ice Blue)**: Secondary accents, rim lighting, dark mode helper text.
-   - **`#e0fbfc` (Frost Ice Paper)**: Light mode card backgrounds, dark mode high-contrast primary text (13:1+ AAA).
-   - **`#ee6c4d` (Burnt Coral)**: Primary CTAs, active states, urgency badges, primary action focus.
-   - **`#293241` (Deep Gunmetal Slate)**: Dark mode canvas, light mode high-contrast primary text (12:1+ AAA).
-3. **First-Class Dual Appearance (Light & Dark Modes)**:
+2. **Official Apple Default System Palette**:
+   All colors strictly adhere to Apple HIG default system colors:
+   - **System Blue (`systemBlue`)**: Primary brand and action color. Light: `#007AFF`, Dark: `#0A84FF`.
+   - **System Orange (`systemOrange`)**: Accents, highlights, badges. Light: `#FF9500`, Dark: `#FF9F0A`.
+   - **System Green (`systemGreen`)**: Success, verified, WhatsApp. Light: `#34C759`, Dark: `#30D158`.
+   - **System Red (`systemRed`)**: Destructive, warnings, required badges. Light: `#FF3B30`, Dark: `#FF453A`.
+   - **System Gray 1–6**: Dynamic elevation backgrounds, borders, and fills.
+   - **Dynamic Labels**: Primary `#000000` / `#FFFFFF`, Secondary `rgba(60,60,67,0.60)` / `rgba(235,235,245,0.60)`.
+3. **Official Apple System Typography**:
+   - Default Sans: `-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", system-ui, sans-serif`
+   - Default Serif: `"New York", -apple-system-ui-serif, ui-serif, Georgia, serif`
+   - Default Mono: `ui-monospace, "SF Mono", "SFProMono-Regular", Menlo, Monaco, monospace`
+   - Default Rounded: `ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif`
+   - Urdu Script: `Noto Nastaliq Urdu` preserved exclusively for Nastaleeq typography.
+4. **First-Class Dual Appearance (Light & Dark Modes)**:
    - Light and Dark modes are equal first-class citizens.
    - The user can seamlessly toggle between Light, Dark, and System preference via the Header theme toggle.
-   - No hardcoded dark-only (`#07131b`) or light-only colors outside dynamic CSS variables (`tokens.css`).
-4. **Materials & Vibrancy**:
-   - Surfaces use Apple-grade materials: `backdrop-filter: blur(18px-24px) saturate(140%-160%)`.
-   - 1px hairline specular rim borders (`rgba(61, 90, 128, 0.16)` in light, `rgba(152, 193, 217, 0.20)` in dark).
-5. **Safe Areas & Natural Viewport Sizing**:
+5. **Optical Translucent Glass Blur & Vibrancy**:
+   - Surfaces use Apple-grade hardware-accelerated materials: `backdrop-filter: blur(24px-32px) saturate(180%-190%)` (with `WebkitBackdropFilter`).
+   - Scrims use subtle `bg-black/25 dark:bg-black/50` allowing real optical refraction of background elements.
+   - Fine 0.5px–1px specular hairline rim borders (`border-black/[0.08] dark:border-white/[0.12]`).
+6. **Safe Areas & Natural Viewport Sizing**:
    - Respect `env(safe-area-inset-top)` and `env(safe-area-inset-bottom)`.
    - Bottom sheets and AppClips MUST size naturally to their content (`height: auto; max-height: 90dvh`).
    - Zero empty vertical voids and zero horizontal overflow (`hasOverflow: false`).
-6. **Tactile Feedback & Inputs**:
+7. **Tactile Feedback & Inputs**:
    - All buttons and interactive cards provide tactile spring press feedback (`active:scale-[0.97]`).
-   - Inputs provide clear focus states: `focus:ring-2 focus:ring-palette-coral`.
+   - Inputs provide clear focus states: `focus:border-apple-blue`.
 
 ### Gate 6: Zero Empty Space & Dynamic Viewport Standard
 - **NEVER** use static `height: 92dvh` or arbitrary fixed heights that leave large blank areas at the bottom of AppClips.
@@ -79,6 +86,14 @@ All UI components, sheets, navigation, and pages MUST strictly conform to **Appl
 - **NEVER** remove or wipe out existing sections, pages, pricing cards, or guides when making improvements.
 - All enhancements (Hero updates, 4-step workflow, customer reviews, urgency deadline banner, `/track` portal, new menu links) must be **additive** and preserve all current functionality.
 
+### Gate 9: UI Craft by SmoothDev & SmoothUI File-Upload Standard
+- **SmoothUI File-Upload Integration (`SmoothFileUpload`)**:
+  - Direct file upload for taxpayers to attach CNIC images (front, back, combined), bank statements, salary slips, and withholding tax certificates.
+  - Drag-and-drop frosted glass upload surface with live file manifest, category selection, thumbnail preview, file size limits (15MB), and removal triggers.
+- **Manual Filing Routing Rule**:
+  - For taxpayers who prefer to enter tax details manually without uploading files, an explicit and prominent affordance must route them to the FBR 8-Window Simplified e-Return AppClip (`fbr-simplified-intake`).
+  - Available across `SmoothFileUpload`, `ChecklistClip`, `TaxIntakeClip`, and `/requirements`.
+
 ### Local On-Device Quality Gates Runner
 - Quality gates are executed **locally and on-device** (no reliance on external GitHub actions for gating).
 - **Frontend Quality Gates Runner:**
@@ -93,7 +108,8 @@ All UI components, sheets, navigation, and pages MUST strictly conform to **Appl
   - G2: Hardcoded phone numbers outside config
   - G3: AppClip zero-void natural height container invariants
   - G4: Mobile viewport accessibility (pinch-to-zoom preservation)
-  - G5: Next.js build and route generation
+  - G5: UI Craft by SmoothDev & Apple HIG design tokens (SmoothFileUpload, true frosted blur, manual filing fallback)
+  - G6: Next.js build and route generation
 - **Backend Quality Gates Runner:**
   ```bash
   # Inside /home/ateeb/projects/yasmeen-sons/backend

@@ -17,24 +17,29 @@ export function GlassCard({
 }: GlassCardProps) {
   const variantStyles = {
     default:
-      "bg-white/80 dark:bg-palette-gunmetal/75 border-rule/70 dark:border-palette-sky/20 text-ink dark:text-palette-frost shadow-sm",
+      "bg-white/65 dark:bg-[#1c1c1e]/65 border-black/[0.08] dark:border-white/[0.12] text-ink dark:text-white shadow-[0_4px_24px_rgba(0,0,0,0.04)]",
     active:
-      "bg-palette-coral/10 border-palette-coral/50 text-ink dark:text-palette-frost shadow-[0_0_20px_rgba(238,108,77,0.20)]",
+      "bg-apple-blue/10 border-apple-blue/50 text-ink dark:text-white shadow-[0_0_24px_rgba(0,122,255,0.20)]",
     subtle:
-      "bg-paper-light/60 dark:bg-palette-gunmetal/50 border-rule/50 dark:border-palette-sky/10 text-ash dark:text-palette-sky",
+      "bg-black/[0.03] dark:bg-white/[0.05] border-black/[0.05] dark:border-white/[0.08] text-ash dark:text-system-secondary-label",
     glow:
-      "bg-white/90 dark:bg-palette-gunmetal/85 border-palette-coral/40 shadow-[0_0_28px_rgba(238,108,77,0.20)]",
+      "bg-white/75 dark:bg-[#2c2c2e]/75 border-apple-blue/40 shadow-[0_0_32px_rgba(0,122,255,0.20)]",
   };
 
   return (
     <div
       className={cn(
-        "rounded-[20px] border backdrop-blur-[20px] backdrop-saturate-[140%] p-4 sm:p-5 transition-all duration-200",
+        "rounded-[20px] border p-4 sm:p-5 transition-all duration-200",
         variantStyles[variant],
         interactive &&
-          "cursor-pointer hover:border-palette-coral/50 hover:bg-white dark:hover:bg-palette-gunmetal active:scale-[0.985]",
+          "cursor-pointer hover:border-apple-blue/50 hover:bg-white/85 dark:hover:bg-[#2c2c2e]/85 active:scale-[0.985]",
         className
       )}
+      style={{
+        WebkitBackdropFilter: "blur(24px) saturate(180%)",
+        backdropFilter: "blur(24px) saturate(180%)",
+        ...props.style,
+      }}
       {...props}
     >
       {children}

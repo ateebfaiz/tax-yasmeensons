@@ -7,8 +7,9 @@ import { GlassCard } from "@/components/ui/glass/GlassCard";
 import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { GlassSegmentedControl } from "@/components/ui/glass/GlassSegmentedControl";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
-import { CheckSquare, Square, Sparkles } from "lucide-react";
+import { CheckSquare, Square, Sparkles, UploadCloud, ListChecks } from "lucide-react";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { SmoothFileUpload, UploadedTaxDocument } from "@/components/ui/file-upload";
 import { formatWhatsAppUrl } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/config";
 
@@ -72,6 +73,14 @@ export default function ChecklistClip({
   const [activeTab, setActiveTab] = useState<string>(payload?.persona || "salaried");
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
 
+  const [viewMode, setViewMode] = useState<"upload" | "checklist">("upload");
+  const [uploadedDocs, setUploadedDocs] = useState<UploadedTaxDocument[]>([]);
+
+  const viewModeTabs = [
+    { id: "upload", label: "Upload Documents", labelUrdu: "کاغذات اپلوڈ" },
+    { id: "checklist", label: "View Checklist", labelUrdu: "مکمل فہرست" },
+  ];
+
   const current = CHECKLISTS[activeTab] || CHECKLISTS.salaried;
 
   const toggleCheck = (idx: number) => {
@@ -89,25 +98,45 @@ export default function ChecklistClip({
   return (
     <AppClipSheet
       onClose={onClose}
-      title="Filing Document Checklist"
-      subtitle="دستاویزات کی مکمل چیک لسٹ • Tax Year 2026"
+      title="Filing Documents & Upload"
+      subtitle="دستاویزات اپلوڈ و چیک لسٹ • Tax Year 2026"
     >
-      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
-        {/* Category Tabs */}
+      <div className="space-y-3.5 pb-3 text-ink dark:text-white">
+        {/* Mode Selector: Direct Upload vs Full Checklist */}
         <GlassSegmentedControl
-          tabs={tabs}
-          activeTab={activeTab}
-          onChange={(id) => setActiveTab(id)}
+          tabs={viewModeTabs}
+          activeTab={viewMode}
+          onChange={(id) => setViewMode(id as "upload" | "checklist")}
         />
 
-        <div className="space-y-0.5 pt-1">
-          <h3 className="text-xs font-bold text-ink dark:text-palette-frost uppercase tracking-wider">
-            {current.titleEn}
-          </h3>
-          <p className="text-xs font-bold text-palette-coral font-urdu" dir="rtl">
-            {current.titleUr}
-          </p>
-        </div>
+        {viewMode === "upload" ? (
+          <div className="space-y-3">
+            <SmoothFileUpload
+              initialFiles={uploadedDocs}
+              onFilesChange={setUploadedDocs}
+              onManualEntryClick={() => {
+                onClose();
+                appClip.open("fbr-simplified-intake");
+              }}
+            />
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {/* Category Tabs */}
+            <GlassSegmentedControl
+              tabs={tabs}
+              activeTab={activeTab}
+              onChange={(id) => setActiveTab(id)}
+            />
+
+            <div className="space-y-0.5 pt-1">
+              <h3 className="text-xs font-bold text-ink dark:text-white uppercase tracking-wider">
+                {current.titleEn}
+              </h3>
+              <p className="text-xs font-bold text-apple-blue font-urdu" dir="rtl">
+                {current.titleUr}
+              </p>
+            </div>
 
         {/* Interactive Checklist Items */}
         <div className="space-y-2">
@@ -122,19 +151,19 @@ export default function ChecklistClip({
                 className="p-3.5 flex items-start gap-3"
               >
                 {isChecked ? (
-                  <CheckSquare className="w-4 h-4 text-palette-coral shrink-0 mt-0.5" />
+                  <CheckSquare className="w-4 h-4 text-apple-blue shrink-0 mt-0.5" />
                 ) : (
-                  <Square className="w-4 h-4 text-ash dark:text-palette-sky shrink-0 mt-0.5" />
+                  <Square className="w-4 h-4 text-ash dark:text-white/60 shrink-0 mt-0.5" />
                 )}
                 <div className="space-y-0.5 min-w-0 flex-1">
                   <div
                     className={`text-xs font-medium transition-all ${
-                      isChecked ? "line-through opacity-60 text-ash dark:text-palette-sky" : "text-ink dark:text-palette-frost"
+                      isChecked ? "line-through opacity-60 text-ash dark:text-white/60" : "text-ink dark:text-white"
                     }`}
                   >
                     {item.en}
                   </div>
-                  <div className="text-[11px] font-urdu opacity-75 text-palette-coral" dir="rtl">
+                  <div className="text-[11px] font-urdu opacity-75 text-apple-blue" dir="rtl">
                     {item.ur}
                   </div>
                 </div>
@@ -145,8 +174,8 @@ export default function ChecklistClip({
 
         {/* Info Note */}
         <GlassCard variant="subtle" className="p-3 text-xs space-y-1">
-          <div className="font-bold text-ink dark:text-palette-frost">Don&apos;t have all documents right now?</div>
-          <p className="text-ash dark:text-palette-sky leading-relaxed font-urdu text-[11px]" dir="rtl">
+          <div className="font-bold text-ink dark:text-white">Don&apos;t have all documents right now?</div>
+          <p className="text-ash dark:text-white/60 leading-relaxed font-urdu text-[11px]" dir="rtl">
             اگر تمام کاغذات دستیاب نہیں ہیں تو فکر نہ کریں، ہمارے نمائندے آپ کے دستیاب ریکارڈ کے مطابق فائلنگ میں مدد کریں گے۔
           </p>
         </GlassCard>
@@ -154,13 +183,13 @@ export default function ChecklistClip({
         {/* Certificate Request Templates & App Guide */}
         <GlassCard variant="glow" className="p-3 flex items-center justify-between gap-3 text-xs">
           <div>
-            <strong className="text-ink dark:text-palette-frost block font-bold">Need WHT, PRC or SIM Certificates?</strong>
-            <span className="text-ash dark:text-palette-sky text-[11px]">Copy-paste messages &amp; instant app guide</span>
+            <strong className="text-ink dark:text-white block font-bold">Need WHT, PRC or SIM Certificates?</strong>
+            <span className="text-ash dark:text-white/60 text-[11px]">Copy-paste messages &amp; instant app guide</span>
           </div>
           <Link
             href="/requirements"
             onClick={onClose}
-            className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/20 text-ink dark:text-palette-frost font-bold text-[11px] whitespace-nowrap shadow-sm active:scale-95 transition-all"
+            className="px-3 py-1.5 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/20 text-ink dark:text-white font-bold text-[11px] whitespace-nowrap shadow-sm active:scale-95 transition-all"
           >
             View Templates →
           </Link>
@@ -185,12 +214,14 @@ export default function ChecklistClip({
             href={formatWhatsAppUrl("Hi, I have questions about required tax documents.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/80 dark:bg-palette-gunmetal/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
+            className="flex-1 inline-flex items-center justify-center gap-2 h-12 px-6 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>
           </a>
         </div>
+          </div>
+        )}
       </div>
     </AppClipSheet>
   );

@@ -40,10 +40,34 @@ if grep -q "userScalable: false" src/app/layout.tsx; then
 fi
 echo "    [G4 PASSED] Mobile accessibility pinch-to-zoom preserved."
 
-# G5 - TypeScript Build & Route Generation Gate
-echo "--> [G5] Running Next.js build & typecheck..."
+# G5 - UI Craft by SmoothDev & Apple HIG System Design Gate
+echo "--> [G5] Checking UI Craft by SmoothDev and Apple HIG compliance..."
+if [ ! -f "src/components/ui/file-upload.tsx" ]; then
+  echo "ERROR: [G5 FAILED] SmoothFileUpload component missing from src/components/ui/file-upload.tsx!"
+  exit 1
+fi
+if ! grep -q "export function SmoothFileUpload" src/components/ui/file-upload.tsx; then
+  echo "ERROR: [G5 FAILED] SmoothFileUpload is not properly exported in src/components/ui/file-upload.tsx!"
+  exit 1
+fi
+if ! grep -q "fbr-simplified-intake" src/components/ui/app-clip/AppClipRegistry.tsx; then
+  echo "ERROR: [G5 FAILED] Manual entry fallback 'fbr-simplified-intake' missing from AppClipRegistry.tsx!"
+  exit 1
+fi
+if ! grep -q "WebkitBackdropFilter" src/components/ui/app-clip/AppClipSheet.tsx; then
+  echo "ERROR: [G5 FAILED] WebkitBackdropFilter missing from AppClipSheet.tsx! Apple frosted glass blur required."
+  exit 1
+fi
+if ! grep -q "\-\-apple-blue" src/themes/tokens.css; then
+  echo "ERROR: [G5 FAILED] Apple system blue token missing from tokens.css!"
+  exit 1
+fi
+echo "    [G5 PASSED] UI Craft by SmoothDev & Apple HIG design tokens verified."
+
+# G6 - TypeScript Build & Route Generation Gate
+echo "--> [G6] Running Next.js build & typecheck..."
 npm run build > /dev/null
-echo "    [G5 PASSED] Next.js build succeeded (all routes compiled)."
+echo "    [G6 PASSED] Next.js build succeeded (all routes compiled)."
 
 echo "================================================="
 echo "   ALL FRONTEND QUALITY GATES PASSED (100% OK)   "

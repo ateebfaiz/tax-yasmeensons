@@ -24,14 +24,14 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
       title="Transparent Fee Schedule"
       subtitle="شفاف فیس و پیکیجز • TY2026 • No Hidden Retainers"
     >
-      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
+      <div className="space-y-3.5 pb-3 text-ink dark:text-white">
         {/* Security / Policy Note */}
         <GlassCard variant="subtle" className="p-3.5 space-y-1">
-          <div className="flex items-center gap-2 text-xs font-bold text-palette-coral">
+          <div className="flex items-center gap-2 text-xs font-bold text-apple-blue">
             <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>Senior Tax Practice · Non-Business Individuals Only</span>
           </div>
-          <p className="text-xs text-ash dark:text-palette-sky leading-relaxed">
+          <p className="text-xs text-ash dark:text-white/60 leading-relaxed">
             All fees are fixed and confirmed upfront. No surprises, no hourly billing, and zero password sharing.
           </p>
         </GlassCard>
@@ -39,7 +39,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
         {/* Tier 1: Guided Filing */}
         <GlassCard variant="default" className="p-4 space-y-2.5">
           <div className="space-y-1">
-            <span className="font-mono text-[10px] font-bold text-ash dark:text-palette-sky tracking-widest uppercase">
+            <span className="font-mono text-[10px] font-bold text-ash dark:text-white/60 tracking-widest uppercase">
               PACKAGE: GF-1000
             </span>
             <div className="font-serif text-2xl font-black text-white">
@@ -48,26 +48,26 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             <h3 className="font-serif text-base font-bold text-white">
               Guided Self-Filing
             </h3>
-            <div className="font-urdu text-xs text-palette-coral" dir="rtl">
+            <div className="font-urdu text-xs text-apple-blue" dir="rtl">
               رہنمائی مع سیلف فائلنگ
             </div>
           </div>
 
-          <p className="text-xs text-ash dark:text-palette-sky leading-relaxed">
+          <p className="text-xs text-ash dark:text-white/60 leading-relaxed">
             We audit your figures and give you a field-by-field checklist. You log into IRIS and submit independently.
           </p>
 
-          <ul className="space-y-1.5 text-xs text-ash dark:text-palette-sky font-mono border-t border-rule/50 dark:border-palette-sky/10 pt-2">
+          <ul className="space-y-1.5 text-xs text-ash dark:text-white/60 font-mono border-t border-rule/50 dark:border-white/[0.08] pt-2">
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Zero password sharing required</span>
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Full salary &amp; WHT audit</span>
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Field-by-field IRIS entry guide</span>
             </li>
           </ul>
@@ -83,13 +83,13 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
         </GlassCard>
 
         {/* Tier 2: Complete Assistance (Recommended) */}
-        <GlassCard variant="glow" className="p-4 space-y-2.5 relative border-palette-coral/50">
-          <div className="inline-block px-3 py-0.5 rounded-full bg-palette-coral text-black font-mono text-[10px] font-bold uppercase tracking-wider">
+        <GlassCard variant="glow" className="p-4 space-y-2.5 relative border-apple-blue/50">
+          <div className="inline-block px-3 py-0.5 rounded-full bg-apple-blue text-black font-mono text-[10px] font-bold uppercase tracking-wider">
             Most Selected · تجویز کردہ
           </div>
 
           <div className="space-y-1">
-            <span className="font-mono text-[10px] font-bold text-palette-coral tracking-widest uppercase">
+            <span className="font-mono text-[10px] font-bold text-apple-blue tracking-widest uppercase">
               PACKAGE: FA-2500
             </span>
             <div className="font-serif text-2xl font-black text-white">
@@ -98,30 +98,30 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             <h3 className="font-serif text-base font-bold text-white">
               Complete Filing Assistance
             </h3>
-            <div className="font-urdu text-xs text-palette-coral" dir="rtl">
+            <div className="font-urdu text-xs text-apple-blue" dir="rtl">
               مکمل فائلنگ اسسٹنس
             </div>
           </div>
 
-          <p className="text-xs text-ash dark:text-palette-sky leading-relaxed">
+          <p className="text-xs text-ash dark:text-white/60 leading-relaxed">
             Full return &amp; wealth statement (s.116) preparation with screen assistance on official IRIS.
           </p>
 
-          <ul className="space-y-1.5 text-xs text-ash dark:text-palette-sky font-mono border-t border-rule/50 dark:border-palette-sky/10 pt-2">
+          <ul className="space-y-1.5 text-xs text-ash dark:text-white/60 font-mono border-t border-rule/50 dark:border-white/[0.08] pt-2">
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Full return + Section 116 wealth balance</span>
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>WHT audit (SIM, bills, ATM, car, fuel)</span>
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Customer-authenticated IRIS session</span>
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Active Taxpayer List (ATL) guarantee</span>
             </li>
           </ul>
@@ -140,7 +140,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
         {/* Tier 3: Complex Case Review */}
         <GlassCard variant="default" className="p-4 space-y-2.5">
           <div className="space-y-1">
-            <span className="font-mono text-[10px] font-bold text-ash dark:text-palette-sky tracking-widest uppercase">
+            <span className="font-mono text-[10px] font-bold text-ash dark:text-white/60 tracking-widest uppercase">
               PACKAGE: CX-4500
             </span>
             <div className="font-serif text-2xl font-black text-white">
@@ -149,26 +149,26 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             <h3 className="font-serif text-base font-bold text-white">
               Complex Individual Review
             </h3>
-            <div className="font-urdu text-xs text-palette-coral" dir="rtl">
+            <div className="font-urdu text-xs text-apple-blue" dir="rtl">
               پیچیدہ کیس جائزہ
             </div>
           </div>
 
-          <p className="text-xs text-ash dark:text-palette-sky leading-relaxed">
+          <p className="text-xs text-ash dark:text-white/60 leading-relaxed">
             Multi-bank accounts, unfiled prior years, foreign remittances, or property section 111 asset reconciliations.
           </p>
 
-          <ul className="space-y-1.5 text-xs text-ash dark:text-palette-sky font-mono border-t border-rule/50 dark:border-palette-sky/10 pt-2">
+          <ul className="space-y-1.5 text-xs text-ash dark:text-white/60 font-mono border-t border-rule/50 dark:border-white/[0.08] pt-2">
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Capital gains &amp; property reconciliation</span>
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Foreign remittance &amp; PRC audit</span>
             </li>
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-palette-coral shrink-0" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-apple-blue shrink-0" />
               <span>Multi-year wealth gap resolution</span>
             </li>
           </ul>
@@ -189,7 +189,7 @@ export default function PricingClip({ onClose }: { onClose: () => void }) {
             href={formatWhatsAppUrl("Hi, I have questions regarding tax filing fees.")}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-white/80 dark:bg-palette-gunmetal/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
+            className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-white/80 dark:bg-[#1c1c1e]/75 hover:bg-[rgba(36,52,60,0.85)] border border-[#25D366]/40 text-[#25D366] font-bold text-xs backdrop-blur-xl shadow-sm active:scale-95 transition-all"
           >
             <WhatsAppIcon className="w-4 h-4" />
             <span>Consult Fees on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>

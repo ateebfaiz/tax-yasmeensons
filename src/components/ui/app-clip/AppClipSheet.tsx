@@ -25,16 +25,16 @@ export function AppClipSheet({
 
   return (
     <>
-      {/* Backdrop with soft dimming */}
+      {/* Apple Sheet Scrim — gentle dimming without destroying underlying page blur */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/65 backdrop-blur-[8px] z-40 transition-opacity"
+        className="fixed inset-0 bg-black/25 dark:bg-black/50 z-40 transition-opacity"
         onClick={onClose}
       />
 
-      {/* Safari History Dark Glass Sheet Container */}
+      {/* Apple HIG Frosted Translucent Glass Sheet Container */}
       <motion.div
         key="app-clip-sheet"
         initial={{ y: "100%" }}
@@ -52,19 +52,20 @@ export function AppClipSheet({
         className={cn(
           "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-50",
           "flex flex-col",
-          "bg-white/95 dark:bg-palette-gunmetal/95 text-ink dark:text-palette-frost",
-          "backdrop-blur-[24px] backdrop-saturate-[150%]",
-          "border-t border-x border-rule/80 dark:border-palette-sky/20",
+          "bg-white/75 dark:bg-[#1c1c1e]/78 text-ink dark:text-white",
+          "border-t border-x border-black/[0.10] dark:border-white/[0.14]",
           "rounded-t-[28px] sm:rounded-t-[32px] overflow-hidden",
-          "shadow-[0_-15px_50px_rgba(41,50,65,0.15)] dark:shadow-[0_-20px_60px_rgba(0,0,0,0.6)]"
+          "shadow-[0_-20px_60px_rgba(0,0,0,0.15)] dark:shadow-[0_-25px_70px_rgba(0,0,0,0.7)]"
         )}
         style={{
           maxHeight: "90dvh",
           paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 16px)",
+          WebkitBackdropFilter: "blur(32px) saturate(190%)",
+          backdropFilter: "blur(32px) saturate(190%)",
         }}
       >
-        {/* Subtle center illumination behind sheet header */}
-        <div className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-32 bg-palette-coral/10 dark:bg-palette-coral/15 blur-3xl rounded-full" />
+        {/* Subtle Apple blue illumination behind sheet header */}
+        <div className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-32 bg-apple-blue/10 dark:bg-apple-blue/15 blur-3xl rounded-full" />
 
         {/* Refined Glass Grab Bar & Header */}
         <div

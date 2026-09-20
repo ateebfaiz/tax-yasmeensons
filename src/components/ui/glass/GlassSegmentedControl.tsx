@@ -23,7 +23,13 @@ export function GlassSegmentedControl({
 }: GlassSegmentedControlProps) {
   return (
     <div className={cn("relative w-full overflow-hidden", className)}>
-      <div className="flex items-center gap-1.5 p-1.5 rounded-[22px] bg-paper-light/70 dark:bg-palette-gunmetal/60 border border-rule/60 backdrop-blur-xl overflow-x-auto no-scrollbar scroll-smooth">
+      <div
+        className="flex items-center gap-1.5 p-1.5 rounded-[22px] bg-black/[0.04] dark:bg-white/[0.08] border border-black/[0.06] dark:border-white/[0.08] overflow-x-auto no-scrollbar scroll-smooth"
+        style={{
+          WebkitBackdropFilter: "blur(20px) saturate(180%)",
+          backdropFilter: "blur(20px) saturate(180%)",
+        }}
+      >
         {tabs.map((tab) => {
           const isActive = tab.id === activeTab;
           return (
@@ -34,8 +40,8 @@ export function GlassSegmentedControl({
               className={cn(
                 "flex-shrink-0 px-3.5 py-2 rounded-[16px] text-xs font-mono font-medium transition-all duration-200 select-none flex items-center gap-2",
                 isActive
-                  ? "bg-palette-coral text-white font-bold shadow-[0_0_16px_rgba(238,108,77,0.30)] border border-palette-coral"
-                  : "bg-transparent hover:bg-black/5 dark:hover:bg-white/[0.06] text-ash dark:text-palette-sky hover:text-ink dark:hover:text-palette-frost border border-transparent"
+                  ? "bg-white dark:bg-[#2c2c2e] text-apple-blue font-bold shadow-sm border border-black/[0.04] dark:border-white/[0.08]"
+                  : "bg-transparent hover:bg-black/5 dark:hover:bg-white/[0.06] text-ash dark:text-system-secondary-label hover:text-ink dark:hover:text-white border border-transparent"
               )}
             >
               <span>{tab.label}</span>
@@ -54,7 +60,7 @@ export function GlassSegmentedControl({
         })}
       </div>
       {/* Right scroll fade affordance */}
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-paper dark:from-palette-gunmetal to-transparent" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-paper dark:from-system-bg to-transparent" />
     </div>
   );
 }

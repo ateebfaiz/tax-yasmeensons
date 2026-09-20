@@ -73,14 +73,14 @@ export default function WhatsAppIntakeClip({
       title="Quick WhatsApp Filing"
       subtitle={`واٹس ایپ پر فوری رابطہ • ${SITE_CONFIG.contact.whatsappDisplay}`}
     >
-      <div className="space-y-3.5 pb-3 text-ink dark:text-palette-frost">
+      <div className="space-y-3.5 pb-3 text-ink dark:text-white">
         {refId ? (
           <div className="text-center py-5 space-y-3.5">
-            <div className="w-14 h-14 bg-palette-coral/15 text-palette-coral rounded-full flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
+            <div className="w-14 h-14 bg-apple-blue/15 text-apple-blue rounded-full flex items-center justify-center mx-auto shadow-[0_0_24px_rgba(32,182,165,0.3)]">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold text-ink dark:text-palette-frost">WhatsApp Chat Opened</h3>
-            <p className="text-xs text-ash dark:text-palette-sky font-urdu" dir="rtl">
+            <h3 className="text-xl font-bold text-ink dark:text-white">WhatsApp Chat Opened</h3>
+            <p className="text-xs text-ash dark:text-white/60 font-urdu" dir="rtl">
               آپ کا کیس نمبر {refId} ہے۔ واٹس ایپ پر گفتگو شروع ہو چکی ہے۔
             </p>
             <GlassButton
@@ -95,9 +95,9 @@ export default function WhatsAppIntakeClip({
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3.5">
             <GlassCard variant="subtle" className="p-3 flex items-start gap-2.5">
-              <ShieldCheck className="w-4 h-4 text-palette-coral shrink-0 mt-0.5" />
-              <div className="text-xs text-ash dark:text-palette-sky">
-                <span className="font-bold text-ink dark:text-palette-frost">Your FBR Password stays with you.</span> We never request credentials on WhatsApp.
+              <ShieldCheck className="w-4 h-4 text-apple-blue shrink-0 mt-0.5" />
+              <div className="text-xs text-ash dark:text-white/60">
+                <span className="font-bold text-ink dark:text-white">Your FBR Password stays with you.</span> We never request credentials on WhatsApp.
               </div>
             </GlassCard>
 
@@ -111,7 +111,7 @@ export default function WhatsAppIntakeClip({
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="e.g. Tariq Mehmood"
-                  className="w-full mt-1.5 bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3.5 py-2.5 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
+                  className="w-full mt-1.5 bg-black/[0.04] dark:bg-white/[0.08] text-ink dark:text-white border border-black/[0.10] dark:border-white/[0.15] rounded-xl px-3.5 py-2.5 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-apple-blue outline-none"
                 />
               </div>
 
@@ -124,7 +124,7 @@ export default function WhatsAppIntakeClip({
                   value={phone}
                   onChange={(e) => setPhone(formatPhoneInput(e.target.value))}
                   placeholder="0312 0000000"
-                  className="w-full mt-1 bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3.5 py-2.5 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
+                  className="w-full mt-1 bg-black/[0.04] dark:bg-white/[0.08] text-ink dark:text-white border border-black/[0.10] dark:border-white/[0.15] rounded-xl px-3.5 py-2.5 text-xs font-mono placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-apple-blue outline-none"
                 />
               </div>
 
@@ -134,14 +134,14 @@ export default function WhatsAppIntakeClip({
                   id="wa-cat"
                   value={persona}
                   onChange={(e) => setPersona(e.target.value)}
-                  className="w-full mt-1 bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3.5 py-2.5 text-xs text-ink dark:text-palette-frost focus:border-palette-coral outline-none"
+                  className="w-full mt-1 bg-black/[0.04] dark:bg-white/[0.08] text-ink dark:text-white border border-black/[0.10] dark:border-white/[0.15] rounded-xl px-3.5 py-2.5 text-xs text-ink dark:text-white focus:border-apple-blue outline-none"
                 >
-                  <option value="salaried" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Salaried Individual / تنخواہ دار ملازم</option>
-                  <option value="pensioner" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Senior / Pensioner / پنشنر و بزرگ شہری</option>
-                  <option value="no_income" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Housewife / No Income / گھریلو خواتین و بغیر آمدنی</option>
-                  <option value="student" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Student Filer / طالب علم</option>
-                  <option value="govt" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Government Employee / سرکاری ملازم</option>
-                  <option value="other" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Other Individual / دیگر</option>
+                  <option value="salaried" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Salaried Individual / تنخواہ دار ملازم</option>
+                  <option value="pensioner" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Senior / Pensioner / پنشنر و بزرگ شہری</option>
+                  <option value="no_income" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Housewife / No Income / گھریلو خواتین و بغیر آمدنی</option>
+                  <option value="student" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Student Filer / طالب علم</option>
+                  <option value="govt" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Government Employee / سرکاری ملازم</option>
+                  <option value="other" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Other Individual / دیگر</option>
                 </select>
               </div>
 
@@ -151,11 +151,11 @@ export default function WhatsAppIntakeClip({
                   id="wa-tier"
                   value={tier}
                   onChange={(e) => setTier(e.target.value)}
-                  className="w-full mt-1 bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3.5 py-2.5 text-xs text-ink dark:text-palette-frost focus:border-palette-coral outline-none"
+                  className="w-full mt-1 bg-black/[0.04] dark:bg-white/[0.08] text-ink dark:text-white border border-black/[0.10] dark:border-white/[0.15] rounded-xl px-3.5 py-2.5 text-xs text-ink dark:text-white focus:border-apple-blue outline-none"
                 >
-                  <option value="guided_1000" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Guided Filing (PKR 1,000) / رہنمائی مع سیلف فائلنگ</option>
-                  <option value="assistance_2500" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Filing Assistance (PKR 2,500) / مکمل فائلنگ اسسٹنس</option>
-                  <option value="complex_5000" className="bg-paper dark:bg-palette-gunmetal text-ink dark:text-palette-frost">Complex Review (PKR 4,500+) / پیچیدہ کیس جائزہ</option>
+                  <option value="guided_1000" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Guided Filing (PKR 1,000) / رہنمائی مع سیلف فائلنگ</option>
+                  <option value="assistance_2500" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Filing Assistance (PKR 2,500) / مکمل فائلنگ اسسٹنس</option>
+                  <option value="complex_5000" className="bg-paper dark:bg-[#1c1c1e] text-ink dark:text-white">Complex Review (PKR 4,500+) / پیچیدہ کیس جائزہ</option>
                 </select>
               </div>
 
@@ -167,7 +167,7 @@ export default function WhatsAppIntakeClip({
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Any special remarks..."
-                  className="w-full mt-1 bg-white/90 dark:bg-palette-gunmetal/80 text-ink dark:text-palette-frost border border-rule/80 dark:border-palette-sky/20 rounded-xl px-3.5 py-2 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-palette-coral outline-none"
+                  className="w-full mt-1 bg-black/[0.04] dark:bg-white/[0.08] text-ink dark:text-white border border-black/[0.10] dark:border-white/[0.15] rounded-xl px-3.5 py-2 text-xs placeholder:text-ash/50 dark:placeholder:text-palette-sky/40 focus:border-apple-blue outline-none"
                 />
               </div>
             </GlassCard>

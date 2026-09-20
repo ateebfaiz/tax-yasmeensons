@@ -92,48 +92,48 @@
 @layer utilities {
   .glass {
     background: var(--theme-glass-bg);
-    backdrop-filter: blur(var(--theme-glass-blur, 20px));
-    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 20px));
-    border: 1px solid var(--tax-rule);
+    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 28px)) saturate(190%);
+    backdrop-filter: blur(var(--theme-glass-blur, 28px)) saturate(190%);
+    border: 1px solid var(--glass-border);
   }
 
   .glass-card {
     background: var(--glass-card-bg);
-    backdrop-filter: blur(var(--theme-glass-blur, 18px)) saturate(140%);
-    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 18px)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--theme-glass-blur, 25px)) saturate(190%);
+    backdrop-filter: blur(var(--theme-glass-blur, 25px)) saturate(190%);
     border: 1px solid var(--glass-border);
     border-radius: 1.5rem;
-    box-shadow: 0 4px 20px rgba(41, 50, 65, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-card:hover {
     background: var(--glass-card-hover);
-    border-color: var(--palette-sky);
-    box-shadow: 0 10px 30px rgba(41, 50, 65, 0.12);
+    border-color: var(--theme-primary);
+    box-shadow: 0 10px 32px rgba(0, 122, 255, 0.10);
   }
 
   .glass-card-featured {
     background: var(--glass-bg-strong);
-    backdrop-filter: blur(22px) saturate(160%);
-    -webkit-backdrop-filter: blur(22px) saturate(160%);
-    border: 1.5px solid var(--palette-coral);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    backdrop-filter: blur(30px) saturate(200%);
+    border: 1.5px solid var(--theme-primary);
     border-radius: 1.75rem;
-    box-shadow: 0 8px 32px rgba(238, 108, 77, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 122, 255, 0.20);
   }
 
   .glass-pill {
     background: var(--glass-bg);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
     border-radius: 9999px;
   }
 
   .letterhead-band {
     background: var(--palette-gunmetal);
-    color: var(--palette-frost);
-    border-bottom: 2px solid var(--palette-coral);
+    color: var(--theme-text);
+    border-bottom: 2px solid var(--theme-primary);
   }
 
   .stamp-box {
