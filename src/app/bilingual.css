@@ -23,7 +23,7 @@
 }
 
 .label-ur {
-  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  font-family: var(--font-urdu), 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.3;

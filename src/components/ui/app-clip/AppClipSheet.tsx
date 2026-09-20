@@ -80,7 +80,7 @@ export function AppClipSheet({
 
           <div className="px-5 flex justify-between items-center gap-3">
             <div className="min-w-0 flex-1">
-              <div className="font-serif text-lg font-bold tracking-tight leading-tight" style={{ color: "var(--text-primary)" }}>
+              <div className="font-display text-[17px] font-semibold tracking-tight leading-tight" style={{ color: "var(--text-primary)" }}>
                 {title}
               </div>
               {subtitle && (

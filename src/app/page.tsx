@@ -195,7 +195,7 @@ export default function HomePage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-7">
         {/* Tax Season 2026 — mobile uses a short no-wrap line; desktop the full line */}
         <div className="w-full max-w-full flex justify-center px-2">
-          <div className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-black/10 dark:border-white/15 bg-white dark:bg-black px-3 py-1.5 text-[11px] sm:text-xs font-medium text-black dark:text-white">
+          <div className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-black/10 dark:border-white/15 bg-white dark:bg-black px-3 py-1.5 text-[11px] sm:text-xs font-rounded font-medium text-black dark:text-white">
             <Sparkles className="w-3.5 h-3.5 text-apple-blue shrink-0" />
             <span className="sm:hidden whitespace-nowrap truncate">Tax Season 2026 · ATL Open</span>
             <span className="hidden sm:inline whitespace-nowrap">Tax Season 2026 is Here! Active ATL Filing Open</span>
@@ -209,7 +209,7 @@ export default function HomePage() {
 
         {/* Hero Title */}
         <div className="space-y-4 max-w-4xl mx-auto">
-          <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-ink dark:text-white tracking-tight leading-[1.2]">
+          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight leading-[1.2]">
             <span>File your Tax Year 2026 return </span>
             <span className="italic text-apple-blue font-bold whitespace-nowrap">— from PKR 1,000</span>
           </h1>
@@ -255,7 +255,7 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => appClip.open("fbr-simplified-intake")}
-            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(0,122,255,0.30)] transition-all active:scale-95 whitespace-nowrap"
+            className="md:hidden w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-semibold py-3.5 px-8 rounded-full text-[17px] shadow-sm transition-all active:scale-95 whitespace-nowrap"
           >
             <Sparkles className="w-4 h-4 shrink-0" />
             <span>Start FBR 8-Window Return</span>
@@ -263,7 +263,7 @@ export default function HomePage() {
 
           <Link
             href="/start"
-            className="hidden md:inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-bold py-3.5 px-8 rounded-full text-sm shadow-[0_4px_20px_rgba(0,122,255,0.30)] transition-all active:scale-95 whitespace-nowrap"
+            className="hidden md:inline-flex items-center justify-center gap-2 bg-apple-blue hover:bg-apple-blue/90 text-white font-semibold py-3.5 px-8 rounded-full text-[17px] shadow-sm transition-all active:scale-95 whitespace-nowrap"
           >
             <span>Start Filing (Part 01 / 04)</span>
             <ArrowRight className="w-4 h-4 shrink-0" />

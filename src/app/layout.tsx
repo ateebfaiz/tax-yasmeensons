@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Noto_Nastaliq_Urdu } from "next/font/google";
 import { AppClipProvider } from "@/components/ui/app-clip/AppClipProvider";
 import { LanguageProvider } from "@/context/language-context";
 import { ThemeProvider } from "@/context/theme-context";
@@ -6,6 +7,20 @@ import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/navigation/footer";
 import { LiquidGlassTabBar } from "@/components/navigation/liquid-glass-tab-bar";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const notoNastaliq = Noto_Nastaliq_Urdu({
+  subsets: ["arabic"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  variable: "--font-urdu",
+});
 
 export const metadata: Metadata = {
   title: "Yasmeen & Sons · Tax Practice TY2026",
@@ -39,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${notoNastaliq.variable} scroll-smooth`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -55,15 +70,8 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className="min-h-screen flex flex-col bg-paper text-ink font-sans selection:bg-apple-blue/20 selection:text-apple-blue transition-colors duration-200 overflow-x-clip">
+      <body className="min-h-screen flex flex-col bg-paper text-ink font-sans font-normal selection:bg-apple-blue/20 selection:text-apple-blue transition-colors duration-200 overflow-x-clip">
         <ThemeProvider>
           <LanguageProvider>
             <AppClipProvider>

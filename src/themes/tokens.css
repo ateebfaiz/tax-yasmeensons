@@ -81,8 +81,8 @@
 
   /* Typography Colors */
   --text-primary: #000000;
-  --text-secondary: rgba(60, 60, 67, 0.75);
-  --text-muted: rgba(60, 60, 67, 0.50);
+  --text-secondary: rgba(60, 60, 67, 0.60);
+  --text-muted: rgba(60, 60, 67, 0.30);
 
   /* Accents */
   --accent: #0071e3;
@@ -164,7 +164,7 @@ html.dark {
 
   /* Semantic Application Channels — Dark Mode */
   --tax-ink-rgb: 255 255 255;           /* Apple Dark Primary Label */
-  --tax-ash-rgb: 235 235 245;           /* Apple Dark Secondary Label */
+  --tax-ash-rgb: 142 142 147;           /* System Gray — secondary, not white */
   --tax-ash-light-rgb: 142 142 147;     /* Apple System Gray */
   --tax-paper-rgb: 0 0 0;               /* Apple Pure Black Canvas */
   --tax-paper-light-rgb: 28 28 30;      /* Apple Dark System Gray 6 */
@@ -202,8 +202,8 @@ html.dark {
 
   /* Typography Colors */
   --text-primary: #ffffff;
-  --text-secondary: rgba(235, 235, 245, 0.75);
-  --text-muted: rgba(235, 235, 245, 0.50);
+  --text-secondary: rgba(235, 235, 245, 0.60);
+  --text-muted: rgba(235, 235, 245, 0.30);
 
   /* Accents */
   --accent: #0a84ff;
