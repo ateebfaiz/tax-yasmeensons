@@ -1,6 +1,10 @@
 import postgres from "postgres";
 
-const connStr = process.env.DATABASE_URL || "postgresql://neondb_owner:npg_1cheOPVZs5gF@ep-broad-dawn-at1btdsy.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require";
+const connStr = process.env.DATABASE_URL;
+if (!connStr) {
+  console.error("FATAL: DATABASE_URL environment variable is required.");
+  process.exit(1);
+}
 
 async function main() {
   console.log("Connecting to Neon branch...");
@@ -19,7 +23,8 @@ async function main() {
       iris_status VARCHAR(50) NOT NULL,
       service_tier VARCHAR(50) NOT NULL,
       contact_preference VARCHAR(50) NOT NULL,
-      credentials_notes TEXT,
+      client_notes TEXT,
+      raw_payload JSONB,
       documents_summary TEXT,
       todoist_task_id VARCHAR(255),
       source VARCHAR(50) DEFAULT 'web_intake',

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode, useCallback } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 import { AppClipRegistry } from "./AppClipRegistry";
 
 interface AppClipState {
@@ -34,6 +34,13 @@ export function AppClipProvider({ children }: { children: ReactNode }) {
   const close = useCallback(() => {
     setActiveClipState(null);
   }, []);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as any).__openAppClip = open;
+      (window as any).__closeAppClip = close;
+    }
+  }, [open, close]);
 
   const ActiveComponent = activeClipState?.id ? AppClipRegistry[activeClipState.id] : null;
 

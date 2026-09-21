@@ -4,12 +4,12 @@
 
 .field-label-wrap {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
-  margin-bottom: 0.35rem;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  margin-bottom: 0.5rem;
+  gap: 0.2rem;
 }
 
 .label-en {
@@ -17,25 +17,24 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  line-height: 1.2;
+  line-height: 1.3;
   color: var(--theme-text-secondary);
-  flex-shrink: 0;
+  display: block;
 }
 
 .label-ur {
-  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  font-family: var(--font-urdu), 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.2;
-  color: var(--theme-text-muted);
-  position: relative;
-  top: 2px;
+  line-height: 1.3;
+  color: var(--text-secondary);
   direction: rtl;
   text-align: right;
+  display: block;
 }
 
-.label-en-dark { color: rgba(255,255,255,0.6); }
-.label-ur-dark  { color: rgba(255,255,255,0.6); }
+.label-en-dark { color: var(--text-secondary); }
+.label-ur-dark  { color: var(--text-secondary); }
 
 /* Shimmer & glow interactions */
 @media (hover: hover) {

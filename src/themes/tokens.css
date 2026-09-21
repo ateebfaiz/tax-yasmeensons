@@ -1,54 +1,247 @@
 /* ================================================================
-   Yasmeen Tax — Theming Tokens
-   Liquid Frosted Glass + Modern iOS Emerald Palette
+   Yasmeen & Sons Tax Practice — Official Apple HIG System Design Tokens
+   Apple Human Interface Guidelines (HIG) Foundations Standard
+   Colors: Apple iOS / macOS System Palette (Light & Dark)
+   Materials: Apple System Materials with Vibrancy & Frosted Glass Refraction
    ================================================================ */
 
 :root {
   color-scheme: light;
+
+  /* Apple Official System Colors — Light Mode */
+  --apple-blue-rgb: 0 113 227;          /* #0071E3 — Apple marketing / CTA blue */
+  --apple-indigo-rgb: 88 86 214;        /* #5856D6 */
+  --apple-purple-rgb: 175 82 222;       /* #AF52DE */
+  --apple-pink-rgb: 255 45 85;          /* #FF2D55 */
+  --apple-red-rgb: 255 59 48;           /* #FF3B30 — Apple System Red */
+  --apple-orange-rgb: 255 149 0;        /* #FF9500 — Apple System Orange */
+  --apple-yellow-rgb: 255 204 0;        /* #FFCC00 */
+  --apple-green-rgb: 52 199 89;         /* #34C759 — Apple System Green */
+  --apple-mint-rgb: 0 199 190;          /* #00C7BE */
+  --apple-teal-rgb: 48 176 199;         /* #30B0C7 */
+  --apple-cyan-rgb: 50 173 230;         /* #32ADE6 */
+
+  /* Apple System Grays — Light Mode */
+  --apple-gray-rgb: 142 142 147;        /* #8E8E93 — System Gray */
+  --apple-gray2-rgb: 174 174 178;       /* #AEAEB2 — System Gray 2 */
+  --apple-gray3-rgb: 199 199 204;       /* #C7C7CC — System Gray 3 */
+  --apple-gray4-rgb: 209 209 214;       /* #D1D1D6 — System Gray 4 */
+  --apple-gray5-rgb: 229 229 234;       /* #E5E5EA — System Gray 5 */
+  --apple-gray6-rgb: 242 242 247;       /* #F2F2F7 — System Gray 6 */
+
+  /* Apple System Backgrounds — Light Mode */
+  --system-bg-rgb: 255 255 255;         /* #FFFFFF — Primary Canvas */
+  --system-grouped-bg-rgb: 245 245 247; /* #F5F5F7 — Apple off-white */
+  --system-card-rgb: 255 255 255;       /* #FFFFFF — Card Surface */
+
+  /* Apple Dynamic Typography & Separators — Light Mode */
+  --system-label-rgb: 0 0 0;            /* #000000 — Primary Label */
+  --system-secondary-label-rgb: 60 60 67; /* rgba(60, 60, 67, 0.60) — Secondary Label */
+  --system-tertiary-label-rgb: 60 60 67;  /* rgba(60, 60, 67, 0.30) */
+  --system-separator-rgb: 60 60 67;       /* rgba(60, 60, 67, 0.20) — Hairline Separator */
+  --system-tint-rgb: 0 113 227;          /* Apple Blue #0071E3 */
+
+  /* Semantic Application Channels — Light Mode */
+  --tax-ink-rgb: 0 0 0;                 /* Apple Primary Label */
+  --tax-ash-rgb: 85 85 85;              /* Space Gray #555555 */
+  --tax-ash-light-rgb: 162 170 173;     /* Apple Silver #A2AAAD */
+  --tax-paper-rgb: 245 245 247;         /* Apple Off-White #F5F5F7 */
+  --tax-paper-light-rgb: 255 255 255;   /* Apple Secondary Grouped Background */
+  --tax-folio-rgb: 255 255 255;         /* Apple Tertiary Grouped Background */
+  --tax-rule-rgb: 60 60 67;             /* Apple System Separator */
+  --accent-rgb: 0 113 227;              /* Apple Blue CTA */
+
+  /* Legacy & Palette Compatibility mapped to Apple HIG */
+  --palette-slate-rgb: 142 142 147;     /* Apple System Gray */
+  --palette-sky-rgb: 50 173 230;        /* Apple System Cyan */
+  --palette-frost-rgb: 0 0 0;           /* Apple Label (Dark on light) */
+  --palette-coral-rgb: 0 113 227;       /* Apple Blue */
+  --palette-coral-hover-rgb: 0 91 187;
+  --palette-gunmetal-rgb: 245 245 247;  /* Apple Off-White */
+
+  /* Raw Hex References */
+  --palette-slate: #8e8e93;
+  --palette-sky: #32ade6;
+  --palette-frost: #000000;
+  --palette-coral: #0071e3;
+  --palette-coral-hover: #005bbb;
+  --palette-gunmetal: #f5f5f7;
+
+  /* Apple Frosted Glass Materials — Light Mode */
+  --page-bg: #f5f5f7;
+  --page-bg-alt: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.52);
+  --glass-bg-strong: rgba(255, 255, 255, 0.62);
+  --glass-card-bg: rgba(255, 255, 255, 0.48);
+  --glass-card-hover: rgba(255, 255, 255, 0.58);
+  --glass-border: rgba(60, 60, 67, 0.06);
+  --glass-border-subtle: rgba(60, 60, 67, 0.04);
+  --glass-highlight: rgba(255, 255, 255, 0.55);
+  --glass-glow: transparent;
+
+  /* Typography Colors */
+  --text-primary: #000000;
+  --text-secondary: rgba(60, 60, 67, 0.60);
+  --text-muted: rgba(60, 60, 67, 0.48);
+
+  /* Accents */
+  --accent: #0071e3;
+  --accent-strong: #005bbb;
+  --accent-surface: rgba(0, 113, 227, 0.12);
+  --accent-glow: none;
+
+  /* Legacy Theme Mappings */
+  --tax-ink: #000000;
+  --tax-iris-teal: #0071e3;
+  --tax-brass: #0071e3;
+  --tax-brass-light: #a2aaad;
+  --tax-brass-subtle: rgba(0, 113, 227, 0.10);
+  --tax-paper: #f5f5f7;
+  --tax-paper-light: #ffffff;
+  --tax-folio: #ffffff;
+  --tax-rule: rgba(60, 60, 67, 0.08);
+  --tax-rule-light: rgba(60, 60, 67, 0.04);
+  --tax-stamp-red: #ff3b30;
+  --tax-stamp-bg: rgba(255, 59, 48, 0.12);
+  --tax-ash: #555555;
+  --tax-ash-light: #a2aaad;
+
+  --theme-background: var(--page-bg);
+  --theme-surface: var(--tax-folio);
+  --theme-surface-raised: var(--tax-paper-light);
+  --theme-text: var(--text-primary);
+  --theme-text-secondary: var(--text-secondary);
+  --theme-text-muted: var(--text-muted);
+  --theme-border: var(--glass-border);
+  --theme-primary: var(--accent);
+  --theme-primary-hover: var(--accent-strong);
+  --theme-accent: var(--accent);
+  --theme-success: #34c759;
+  --theme-danger: #ff3b30;
+
+  /* Apple Liquid Frosted Glass Spec */
+  --theme-glass-bg: var(--glass-bg);
+  --theme-glass-border: var(--glass-border);
+  --theme-glass-blur: 32px;
 }
-:root.dark {
+
+:root.dark,
+html.dark {
   color-scheme: dark;
-}
 
-:root {
-  /* Surface hierarchy */
-  --theme-surface:         light-dark(#ffffff, #0d0d0f);
-  --theme-surface-raised:  light-dark(#f9f9f9, #16161a);
-  --theme-background:      light-dark(#f6f5f2, #0a0a0c);
-  --theme-muted:           light-dark(#ededeb, #1a1a1e);
-  --theme-overlay:         light-dark(rgba(0,0,0,0.04), rgba(255,255,255,0.04));
+  /* Apple Official System Colors — Dark Mode */
+  --apple-blue-rgb: 10 132 255;         /* #0A84FF — Apple Dark System Blue (Primary Tint) */
+  --apple-indigo-rgb: 94 92 230;        /* #5E5CE6 */
+  --apple-purple-rgb: 191 90 242;       /* #BF5AF2 */
+  --apple-pink-rgb: 255 55 95;          /* #FF375F */
+  --apple-red-rgb: 255 69 58;           /* #FF453A — Apple Dark System Red */
+  --apple-orange-rgb: 255 159 10;       /* #FF9F0A — Apple Dark System Orange */
+  --apple-yellow-rgb: 255 214 10;       /* #FFD60A */
+  --apple-green-rgb: 48 209 88;         /* #30D158 — Apple Dark System Green */
+  --apple-mint-rgb: 99 230 226;         /* #63E6E2 */
+  --apple-teal-rgb: 64 200 224;         /* #40C8E0 */
+  --apple-cyan-rgb: 100 210 255;        /* #64D2FF */
 
-  /* Text */
-  --theme-text:            light-dark(#111110, #f0f0ed);
-  --theme-text-secondary:  light-dark(#5e5d59, #9d9c95);
-  --theme-text-muted:      light-dark(#8b8a84, #6b6a65);
-  --theme-text-inverse:    light-dark(#ffffff, #0a0a0c);
+  /* Apple System Grays — Dark Mode */
+  --apple-gray-rgb: 142 142 147;        /* #8E8E93 — System Gray */
+  --apple-gray2-rgb: 99 99 102;         /* #636366 — Dark System Gray 2 */
+  --apple-gray3-rgb: 72 72 74;          /* #48484A — Dark System Gray 3 */
+  --apple-gray4-rgb: 58 58 60;          /* #3A3A3C — Dark System Gray 4 */
+  --apple-gray5-rgb: 44 44 46;          /* #2C2C2E — Dark System Gray 5 */
+  --apple-gray6-rgb: 28 28 30;          /* #1C1C1E — Dark System Gray 6 */
 
-  /* Borders */
-  --theme-border:          light-dark(#e0ded7, #27262d);
-  --theme-border-light:    light-dark(#edece8, #1f1e23);
-  --theme-border-focus:    light-dark(#059669, #34d399);
+  /* Apple System Backgrounds — Dark Mode */
+  --system-bg-rgb: 0 0 0;               /* #000000 — Pure Black System Canvas */
+  --system-grouped-bg-rgb: 0 0 0;       /* #000000 — Pure Black Grouped Canvas */
+  --system-card-rgb: 28 28 30;          /* #1C1C1E — Dark System Gray 6 Card */
 
-  /* Brand / Emerald */
-  --theme-primary:         light-dark(#059669, #34d399);
-  --theme-primary-hover:   light-dark(#047857, #6ee7b7);
-  --theme-primary-subtle:  light-dark(#ecfdf5, #064e3b);
-  --theme-accent:          light-dark(#b8860b, #fbbf24);
+  /* Apple Dynamic Typography & Separators — Dark Mode */
+  --system-label-rgb: 255 255 255;      /* #FFFFFF — Dark Mode Primary Label */
+  --system-secondary-label-rgb: 235 235 245; /* rgba(235, 235, 245, 0.60) — Secondary Label */
+  --system-tertiary-label-rgb: 235 235 245;  /* rgba(235, 235, 245, 0.30) */
+  --system-separator-rgb: 84 84 88;     /* rgba(84, 84, 88, 0.35) — Dark Hairline Separator */
+  --system-tint-rgb: 10 132 255;        /* Apple Dark System Blue */
 
-  /* Status */
-  --theme-success:         light-dark(#059669, #34d399);
-  --theme-success-subtle:  light-dark(#ecfdf5, #064e3b);
-  --theme-danger:          light-dark(#dc2626, #f87171);
-  --theme-danger-subtle:   light-dark(#fef2f2, #7f1d1d18);
-  --theme-warning:         light-dark(#d97706, #fbbf24);
-  --theme-warning-subtle:  light-dark(#fffbeb, #78350f18);
-  --theme-info:            light-dark(#2563eb, #60a5fa);
-  --theme-info-subtle:     light-dark(#eff6ff, #1e3a5f18);
+  /* Semantic Application Channels — Dark Mode */
+  --tax-ink-rgb: 255 255 255;           /* Apple Dark Primary Label */
+  --tax-ash-rgb: 142 142 147;           /* System Gray — secondary, not white */
+  --tax-ash-light-rgb: 142 142 147;     /* Apple System Gray */
+  --tax-paper-rgb: 0 0 0;               /* Apple Pure Black Canvas */
+  --tax-paper-light-rgb: 28 28 30;      /* Apple Dark System Gray 6 */
+  --tax-folio-rgb: 44 44 46;            /* Apple Dark System Gray 5 */
+  --tax-rule-rgb: 84 84 88;             /* Apple Dark System Separator */
+  --accent-rgb: 10 132 255;             /* Apple Dark System Blue CTA */
 
-  /* Liquid Frosted Glass */
-  --theme-glass-bg:        light-dark(rgba(255,255,255,0.78), rgba(13,13,15,0.82));
-  --theme-glass-border:    light-dark(rgba(0,0,0,0.08), rgba(255,255,255,0.12));
-  --theme-glass-shadow:    light-dark(rgba(0,0,0,0.05), rgba(0,0,0,0.30));
-  --theme-glass-blur:      20px;
-  --theme-glass-blur-heavy: 40px;
+  /* Legacy & Palette Compatibility mapped to Apple HIG */
+  --palette-slate-rgb: 142 142 147;     /* Apple System Gray */
+  --palette-sky-rgb: 100 210 255;       /* Apple Dark System Cyan */
+  --palette-frost-rgb: 255 255 255;     /* Apple White Label */
+  --palette-coral-rgb: 10 132 255;      /* Apple Dark System Blue */
+  --palette-coral-hover-rgb: 64 156 255;
+  --palette-gunmetal-rgb: 28 28 30;     /* Apple Dark System Gray 6 */
+
+  /* Raw Hex References */
+  --palette-slate: #8e8e93;
+  --palette-sky: #64d2ff;
+  --palette-frost: #ffffff;
+  --palette-coral: #0a84ff;
+  --palette-coral-hover: #409cff;
+  --palette-gunmetal: #1c1c1e;
+
+  /* Apple Frosted Glass Materials — Dark Mode */
+  --page-bg: #000000;
+  --page-bg-alt: #1c1c1e;
+  --glass-bg: rgba(28, 28, 30, 0.48);
+  --glass-bg-strong: rgba(28, 28, 30, 0.58);
+  --glass-card-bg: rgba(44, 44, 46, 0.42);
+  --glass-card-hover: rgba(58, 58, 60, 0.52);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-subtle: rgba(255, 255, 255, 0.05);
+  --glass-highlight: rgba(255, 255, 255, 0.10);
+  --glass-glow: transparent;
+
+  /* Typography Colors */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(235, 235, 245, 0.60);
+  --text-muted: rgba(235, 235, 245, 0.50);
+
+  /* Accents */
+  --accent: #0a84ff;
+  --accent-strong: #409cff;
+  --accent-surface: rgba(10, 132, 255, 0.18);
+  --accent-glow: none;
+
+  /* Legacy Theme Mappings */
+  --tax-ink: #ffffff;
+  --tax-iris-teal: #0a84ff;
+  --tax-brass: #0a84ff;
+  --tax-brass-light: #64d2ff;
+  --tax-brass-subtle: rgba(10, 132, 255, 0.15);
+  --tax-paper: #000000;
+  --tax-paper-light: #1c1c1e;
+  --tax-folio: #2c2c2e;
+  --tax-rule: rgba(84, 84, 88, 0.22);
+  --tax-rule-light: rgba(84, 84, 88, 0.12);
+  --tax-stamp-red: #ff453a;
+  --tax-stamp-bg: rgba(255, 69, 58, 0.16);
+  --tax-ash: #8e8e93;
+  --tax-ash-light: #636366;
+
+  --theme-background: var(--page-bg);
+  --theme-surface: var(--tax-folio);
+  --theme-surface-raised: var(--tax-paper-light);
+  --theme-text: var(--text-primary);
+  --theme-text-secondary: var(--text-secondary);
+  --theme-text-muted: var(--text-muted);
+  --theme-border: var(--glass-border);
+  --theme-primary: var(--accent);
+  --theme-primary-hover: var(--accent-strong);
+  --theme-accent: var(--accent);
+  --theme-success: #30d158;
+  --theme-danger: #ff453a;
+
+  /* Apple Liquid Frosted Glass Spec */
+  --theme-glass-bg: var(--glass-bg);
+  --theme-glass-border: var(--glass-border);
+  --theme-glass-blur: 32px;
 }

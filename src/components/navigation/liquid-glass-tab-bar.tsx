@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Layers, CheckSquare, Sparkles, MessageCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Home, Search, CheckSquare, Sparkles, HelpCircle } from "lucide-react";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
+import { cn } from "@/lib/utils";
 
 export function LiquidGlassTabBar() {
   const pathname = usePathname();
@@ -35,10 +35,15 @@ export function LiquidGlassTabBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Don't show tab bar on fullscreen intake page if open
+  // Don't cover form actions on fullscreen intake wizard
   if (pathname === "/start") {
     return null;
   }
+
+  const isChecklistActive = appClip.activeClip === "tax-checklist" || pathname === "/requirements";
+  const isGuideActive = appClip.activeClip === "iris-guide" || pathname === "/iris-guide";
+  const isTrackActive = appClip.activeClip === "tax-track" || pathname === "/track";
+  const isHomeActive = pathname === "/" && !appClip.isOpen;
 
   return (
     <div
@@ -49,69 +54,101 @@ export function LiquidGlassTabBar() {
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 20px) + 8px)" }}
     >
       <nav
-        className={cn(
-          "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] overflow-hidden px-3",
-          "bg-theme-surface/85 backdrop-blur-2xl backdrop-saturate-200 border border-theme-glass-border",
-          "shadow-[0_-4px_24px_rgba(0,0,0,0.10)]"
-        )}
+        className="flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] px-2.5"
+        style={{
+          backgroundColor: "var(--glass-bg)",
+          border: "0.5px solid var(--glass-border)",
+          boxShadow: "inset 0 1px 0 var(--glass-highlight), 0 16px 40px rgba(0,0,0,0.10)",
+          WebkitBackdropFilter: "blur(32px) saturate(190%)",
+          backdropFilter: "blur(32px) saturate(190%)",
+        }}
       >
         {/* Tab 1: Home */}
         <button
           type="button"
-          onClick={() => router.push("/")}
+          onClick={() => {
+            if (appClip.isOpen) appClip.close();
+            router.push("/");
+          }}
           className={cn(
-            "flex flex-col items-center justify-center flex-1 py-1 transition-all",
-            pathname === "/" ? "text-theme-primary font-bold" : "text-theme-text-muted hover:text-theme-text"
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isHomeActive
+              ? "text-apple-blue font-bold"
+              : "text-ash hover:text-ink dark:hover:text-white"
           )}
         >
+          {isHomeActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
+          )}
           <Home className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">Home</span>
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Home</span>
         </button>
 
-        {/* Tab 2: Services */}
         <button
           type="button"
-          onClick={() => router.push("/services")}
+          onClick={() => appClip.open("tax-track")}
           className={cn(
-            "flex flex-col items-center justify-center flex-1 py-1 transition-all",
-            pathname === "/services" ? "text-theme-primary font-bold" : "text-theme-text-muted hover:text-theme-text"
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isTrackActive
+              ? "text-apple-blue font-semibold"
+              : "text-ash hover:text-ink"
           )}
         >
-          <Layers className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">Services</span>
+          {isTrackActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
+          )}
+          <Search className="w-5 h-5" />
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Track</span>
         </button>
 
-        {/* Tab 3: Checklist Clip */}
+        {/* Tab 3: Checklist (Docs) */}
         <button
           type="button"
           onClick={() => appClip.open("tax-checklist")}
           className={cn(
-            "flex flex-col items-center justify-center flex-1 py-1 transition-all",
-            appClip.activeClip === "tax-checklist" ? "text-theme-primary font-bold" : "text-theme-text-muted hover:text-theme-text"
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isChecklistActive
+              ? "text-apple-blue font-bold"
+              : "text-ash hover:text-ink dark:hover:text-white"
           )}
         >
+          {isChecklistActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
+          )}
           <CheckSquare className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5">Checklist</span>
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Docs</span>
         </button>
 
-        {/* Tab 4: WhatsApp Clip */}
+        {/* Tab 4: IRIS Guide */}
         <button
           type="button"
-          onClick={() => appClip.open("whatsapp-intake")}
-          className="flex flex-col items-center justify-center flex-1 py-1 text-[#25D366] hover:opacity-80 transition-all"
+          onClick={() => appClip.open("iris-guide")}
+          className={cn(
+            "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
+            "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
+            isGuideActive
+              ? "text-apple-blue font-bold"
+              : "text-ash hover:text-ink dark:hover:text-white"
+          )}
         >
-          <MessageCircle className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-bold">WhatsApp</span>
+          {isGuideActive && (
+            <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
+          )}
+          <HelpCircle className="w-5 h-5" />
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Guide</span>
         </button>
 
-        {/* Tab 5: Start Primary Action */}
+        {/* Tab 5: Start Fast AppClip Intake FAB */}
         <button
           type="button"
           onClick={() => appClip.open("tax-intake")}
-          className="flex items-center justify-center w-11 h-11 rounded-full bg-theme-primary text-white shadow-md active:scale-95 transition-all ml-1 shrink-0"
-          aria-label="Start Filing"
+          className="flex items-center justify-center w-11 h-11 rounded-full bg-apple-blue hover:bg-apple-blue/90 text-white shadow-md shadow-apple-blue/30 active:scale-90 transition-all ml-1 shrink-0"
+          aria-label="Start Fast Intake AppClip"
         >
-          <Sparkles className="w-5 h-5" />
+          <Sparkles className="w-4 h-4 text-white" />
         </button>
       </nav>
     </div>

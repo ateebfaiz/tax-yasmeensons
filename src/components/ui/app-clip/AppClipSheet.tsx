@@ -1,10 +1,9 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { motion, useDragControls } from "framer-motion";
+import { motion, useDragControls } from "motion/react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { clipType } from "./clip-ui";
 
 export interface AppClipSheetProps {
   onClose: () => void;
@@ -19,7 +18,6 @@ export function AppClipSheet({
   onClose,
   title,
   subtitle,
-  fullHeight = false,
   children,
   headerRight,
 }: AppClipSheetProps) {
@@ -27,45 +25,65 @@ export function AppClipSheet({
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9998]" onClick={onClose} />
+      {/* Light scrim so the page behind stays visible and the sheet can frost it */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/10 dark:bg-black/25 z-40 transition-opacity"
+        onClick={onClose}
+      />
 
       <motion.div
         key="app-clip-sheet"
         initial={{ y: "100%" }}
         animate={{ y: "0%" }}
         exit={{ y: "100%" }}
-        transition={{ type: "spring", damping: 28, stiffness: 300 }}
+        transition={{ type: "spring", damping: 30, stiffness: 340 }}
         drag="y"
         dragControls={dragControls}
         dragListener={false}
         dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0.05, bottom: 0.8 }}
+        dragElastic={{ top: 0.05, bottom: 0.6 }}
         onDragEnd={(_e, info) => {
-          if (info.offset.y > 60 || info.velocity.y > 250) onClose();
+          if (info.offset.y > 60 || info.velocity.y > 280) onClose();
         }}
         className={cn(
-          "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-[9999]",
-          "flex flex-col pb-safe",
-          "bg-theme-glass backdrop-blur-2xl border-t border-theme-glass-border text-theme-text",
-          "rounded-t-[2rem] overflow-hidden shadow-[0_-8px_40px_rgba(0,0,0,0.16)]"
+          "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-50",
+          "flex flex-col text-ink",
+          "rounded-t-[28px] sm:rounded-t-[32px] overflow-hidden",
+          "shadow-[0_-20px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_-25px_70px_rgba(0,0,0,0.45)]"
         )}
         style={{
-          height: fullHeight ? "92dvh" : "auto",
-          maxHeight: "92dvh",
+          maxHeight: "90dvh",
+          paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 16px)",
+          backgroundColor: "var(--glass-bg)",
+          border: "0.5px solid var(--glass-border)",
+          borderBottom: "none",
+          boxShadow: "inset 0 1px 0 var(--glass-highlight)",
+          color: "var(--text-primary)",
+          WebkitBackdropFilter: "blur(40px) saturate(190%)",
+          backdropFilter: "blur(40px) saturate(190%)",
         }}
       >
+
+        {/* Refined Glass Grab Bar & Header */}
         <div
           onPointerDown={(e) => dragControls.start(e)}
-          className="w-full cursor-grab active:cursor-grabbing shrink-0 touch-none select-none relative z-20 pt-3 pb-2 border-b border-theme-border/40"
+          className="w-full cursor-grab active:cursor-grabbing shrink-0 touch-none select-none relative z-20 pt-3 pb-3 border-b border-black/[0.04] dark:border-white/[0.06]"
         >
-          <div className="w-full flex justify-center pb-2">
-            <div className="w-12 h-1 rounded-full bg-theme-border" />
+          <div className="w-full flex justify-center pb-2.5">
+            <div className="w-10 h-1 rounded-full bg-black/20 dark:bg-white/25 shadow-[inset_0_1px_1px_rgba(0,0,0,0.2)]" />
           </div>
 
-          <div className="px-5 flex justify-between items-start gap-3">
-            <div className="min-w-0">
-              <h2 className={cn(clipType.display, "pr-2")}>{title}</h2>
-              {subtitle && <p className={cn(clipType.meta, "mt-0.5")}>{subtitle}</p>}
+          <div className="px-5 flex justify-between items-center gap-3">
+            <div className="min-w-0 flex-1">
+              <div className="font-display text-[17px] font-semibold tracking-tight leading-tight" style={{ color: "var(--text-primary)" }}>
+                {title}
+              </div>
+              {subtitle && (
+                <div className="text-xs leading-tight mt-0.5 truncate" style={{ color: "var(--text-secondary)" }}>{subtitle}</div>
+              )}
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {headerRight}
@@ -73,17 +91,22 @@ export function AppClipSheet({
                 type="button"
                 onClick={onClose}
                 onPointerDown={(e) => e.stopPropagation()}
-                aria-label="Close"
-                className="w-8 h-8 rounded-full border border-theme-border bg-theme-surface flex items-center justify-center active:scale-90 transition hover:bg-theme-muted"
+                aria-label="Close sheet"
+                className="w-9 h-9 rounded-full border border-black/[0.08] dark:border-white/15 bg-black/5 hover:bg-black/10 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] focus-visible:ring-2 focus-visible:ring-apple-blue flex items-center justify-center active:scale-95 transition-all text-ink dark:text-white shadow-sm shrink-0"
               >
-                <X className="w-4 h-4 text-theme-text" />
+                <X className="w-4 h-4" />
               </button>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto overscroll-contain relative z-10">{children}</div>
+        {/* Scrollable Content Container with natural sizing */}
+        <div className="flex-1 overflow-y-auto overscroll-contain relative z-10 px-4 sm:px-5 py-3">
+          {children}
+        </div>
       </motion.div>
     </>
   );
 }
+
+export default AppClipSheet;
