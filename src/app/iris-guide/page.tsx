@@ -17,7 +17,7 @@ export default function IrisGuidePage() {
   const steps = [
     {
       step: "01",
-      code: "AUTH-LOGIN",
+      code: "IRIS",
       titleEn: "Sign into Official FBR IRIS",
       titleUr: "آفیشل آئرس لاگ ان",
       descEn: "Navigate directly to the official Federal Board of Revenue portal. The URL must begin with iris.fbr.gov.pk.",
@@ -32,7 +32,7 @@ export default function IrisGuidePage() {
     },
     {
       step: "02",
-      code: "AUTH-RESET",
+      code: "OTP",
       titleEn: "Forgot Password / PIN Recovery",
       titleUr: "پاس ورڈ یا پن ری سیٹ کرنے کا طریقہ",
       descEn: "If you have lost your credentials, click 'Forgot Password' on the IRIS login screen.",
@@ -59,7 +59,7 @@ export default function IrisGuidePage() {
         "Active Mobile SIM: Registered under own CNIC, or blood relative / immediate family member (with relative's name & CNIC)",
         "Personal Email: Used for electronic notice and OTP (we can guide and create one for you)",
         "Current Residential Address: Form 181 property and residence mapping",
-        "Income Source Details: Salaried employer NTN, business activity, or household support declaration",
+        "Income source: salaried employer NTN, household support, or pension",
         "Dual Verification: Submit 6-digit SMS OTP and Email OTP to complete registration",
       ],
       link: "https://iris.fbr.gov.pk/infosys/public/txplogin.xhtml",
@@ -67,7 +67,7 @@ export default function IrisGuidePage() {
     },
     {
       step: "04",
-      code: "DECLARATION",
+      code: "114(1)",
       titleEn: "Where We Assist You: Return & Wealth Statement",
       titleUr: "فائلنگ کا طریقہ کار",
       descEn: "Once logged in, our specialist guides you to each exact screen and code.",

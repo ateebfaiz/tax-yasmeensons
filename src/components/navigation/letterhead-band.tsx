@@ -15,11 +15,11 @@ export function LetterheadBand() {
           <span className="text-ash-light opacity-60">·</span>
           <span className="text-brass-light font-bold">TY 2026</span>
           <span className="hidden md:inline text-ash-light opacity-60">·</span>
-          <span className="hidden md:inline">INDIVIDUAL / NON-BUSINESS</span>
+          <span className="hidden md:inline">Individual filers</span>
         </div>
 
-        <div className="flex items-center gap-3 text-[10px] text-paper/80">
-          <span className="hidden sm:inline">REF: YS-26-_____</span>
+        <div className="flex items-center gap-3 text-[12px] text-paper/80">
+          <span className="hidden sm:inline font-mono">YS/ITR/TY2026</span>
           <span className="hidden sm:inline text-ash-light opacity-60">·</span>
           <span className="text-stamp-red bg-white/90 px-1.5 py-0.2 rounded font-bold">
             NOT FBR GOV

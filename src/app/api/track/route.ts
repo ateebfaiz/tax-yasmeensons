@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { FASTAPI_BACKEND_URL } from "@/lib/config";
+import { normalizeFolio } from "@/lib/utils";
 
 export async function GET(req: Request) {
   try {
@@ -14,7 +15,7 @@ export async function GET(req: Request) {
       );
     }
 
-    const query = new URLSearchParams({ ref });
+    const query = new URLSearchParams({ ref: normalizeFolio(ref) });
     if (cnic) query.append("cnic", cnic);
 
     const backendRes = await fetch(

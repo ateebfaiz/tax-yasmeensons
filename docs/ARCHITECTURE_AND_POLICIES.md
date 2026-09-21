@@ -143,8 +143,8 @@ Default theme is **light**. Logo is white in dark mode. Headings use label color
 
 - **Bytes:** Neon object storage, bucket `assets`, key `tax/{uuid}/{filename}`. Client: `src/lib/s3.ts`. Upload: `POST /api/documents`. View: `GET /api/documents/view?key=`.
 - **Pointers:** Neon Postgres `tax_filings.raw_payload.documents[]` (`key`, `url`, `name`, `category`). No S3 column.
-- **Cases:** FastAPI `POST /api/tax/intake`, `GET /api/tax/track`. Folio `YS-26-#####` only via `postIntake()`.
-- **Stage update:** `UPDATE tax_filings SET status = 'reviewing' WHERE reference = 'YS-26-XXXXX';` (`pending`/`reviewing`/`reconciled`/`submitted`).
+- **Cases:** FastAPI `POST /api/tax/intake`, `GET /api/tax/track`. Folio `YS/ITR/TY2026/#####` via `postIntake()` (legacy `YS-26-#####` still looks up).
+- **Stage update:** `UPDATE tax_filings SET status = 'reviewing' WHERE reference = 'YS/ITR/TY2026/XXXXX';` (`pending`/`reviewing`/`reconciled`/`submitted`).
 
 ---
 

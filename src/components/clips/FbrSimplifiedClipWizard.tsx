@@ -6,6 +6,7 @@ import { GlassCard } from "@/components/ui/glass/GlassCard";
 import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
 import { formatWhatsAppUrl, formatCnicInput, formatPhoneInput } from "@/lib/utils";
+import { CaseFolioCard } from "@/components/tax/CaseFolioCard";
 import { postIntake } from "@/lib/intake";
 import { SITE_CONFIG } from "@/lib/config";
 import {
@@ -128,26 +129,26 @@ export default function FbrSimplifiedClipWizard({
   // Dynamic Clip Graph based on selections
   const activeGraph = useMemo(() => {
     const list: { id: string; labelEn: string; labelUr: string; num: string }[] = [
-      { id: "clip0", labelEn: "Identity & Sources", labelUr: "شناخت و ذرائع", num: "0" },
+      { id: "clip0", labelEn: "ID", labelUr: "شناخت", num: "0" },
     ];
     if (flags.salary) {
-      list.push({ id: "clip1", labelEn: "Salary & Pension", labelUr: "تنخواہ و پنشن", num: "1" });
+      list.push({ id: "clip1", labelEn: "Salary", labelUr: "تنخواہ", num: "1" });
     }
     if (flags.property) {
-      list.push({ id: "clip2", labelEn: "Property Rent", labelUr: "جائیداد کرایہ", num: "2" });
+      list.push({ id: "clip2", labelEn: "Rent", labelUr: "کرایہ", num: "2" });
     }
     if (flags.other) {
-      list.push({ id: "clip3", labelEn: "Other Sources", labelUr: "دیگر ذرائع", num: "3" });
+      list.push({ id: "clip3", labelEn: "Other", labelUr: "دیگر", num: "3" });
     }
     if (flags.cg) {
-      list.push({ id: "clip4", labelEn: "Capital Gains", labelUr: "کیپٹل گین", num: "4" });
+      list.push({ id: "clip4", labelEn: "Gains", labelUr: "گین", num: "4" });
     }
     if (flags.deductions) {
-      list.push({ id: "clip5", labelEn: "Credits & Deductions", labelUr: "چھوٹ و کٹوتی", num: "5" });
+      list.push({ id: "clip5", labelEn: "Credits", labelUr: "کٹوتی", num: "5" });
     }
-    list.push({ id: "clip6", labelEn: "Tax Already Paid", labelUr: "ادا شدہ ٹیکس", num: "6" });
-    list.push({ id: "clip7", labelEn: "Wealth & Recon (s.116)", labelUr: "دولت کا گوشوارہ", num: "7" });
-    list.push({ id: "review", labelEn: "Review & Submit", labelUr: "جائزہ و تصدیق", num: "✓" });
+    list.push({ id: "clip6", labelEn: "WHT", labelUr: "کٹوتی", num: "6" });
+    list.push({ id: "clip7", labelEn: "s.116", labelUr: "دولت", num: "7" });
+    list.push({ id: "review", labelEn: "Review", labelUr: "جائزہ", num: "✓" });
     return list;
   }, [flags]);
 
@@ -398,7 +399,7 @@ export default function FbrSimplifiedClipWizard({
     >
       <div className="space-y-3.5 pb-3 text-ink dark:text-white">
         {/* Graph Progress Indicator */}
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-1">
+        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-1 pr-6">
           {activeGraph.map((step, idx) => {
             const isCurrent = idx === activeStepIndex;
             const isCompleted = idx < activeStepIndex;
@@ -416,7 +417,7 @@ export default function FbrSimplifiedClipWizard({
                 }`}
               >
                 <span>{step.num}</span>
-                <span className="truncate max-w-[80px] sm:max-w-[120px]">{step.labelEn}</span>
+                <span className="whitespace-nowrap">{step.labelEn}</span>
               </button>
             );
           })}
@@ -443,8 +444,8 @@ export default function FbrSimplifiedClipWizard({
                   آپ کا ٹیکس سال — ایک منٹ میں
                 </span>
               </div>
-              <p className="text-xs text-ash dark:text-white/60">
-                Only select sources from which you earned income this year. Business s.18 exits to commercial filing.
+              <p className="text-[13px] text-ash">
+                Tick every source you earned this year. This desk is for individuals.
               </p>
 
               <div>
@@ -506,7 +507,7 @@ export default function FbrSimplifiedClipWizard({
                     key: "property",
                     en: "Rent from Property (s.15)",
                     ur: "جائیداد کا کرایہ",
-                    code: "s.15 / 2000s",
+                    code: "s.15 / 2031",
                   },
                   {
                     key: "other",
@@ -578,28 +579,28 @@ export default function FbrSimplifiedClipWizard({
                     className="accent-amber-500 h-4 w-4 mt-0.5 rounded shrink-0"
                   />
                   <div>
-                    <div className="text-xs font-bold text-ink dark:text-white">
-                      Any Business / Commercial Trade (s.18)?
+                    <div className="text-[13px] font-semibold text-ink">
+                      Shop or company income? This desk is for individuals.
                     </div>
-                    <div className="text-[11px] text-ash dark:text-white/60">
-                      کیا کوئی دکان، فیکٹری یا تجارتی کاروبار موجود ہے؟
+                    <div className="text-[13px] text-ash font-urdu" dir="rtl">
+                      دکان یا کمپنی کی آمدنی؟ واٹس ایپ پر پوچھیں
                     </div>
                   </div>
                 </label>
 
                 {flags.business && (
                   <div className="mt-2 pt-2 border-t border-amber-500/30 text-xs text-amber-200 space-y-1.5">
-                    <p>
-                      <strong>Notice:</strong> Business income under Section 18 exceeds the simplified non-business return. Our senior tax desk will prepare your full commercial accounts directly on WhatsApp.
+                    <p className="text-[13px] text-ink">
+                      Individual Form 114(1) does not cover a shop or company. WhatsApp the desk.
                     </p>
                     <a
-                      href={formatWhatsAppUrl("Hi, I have Business/Commercial income (s.18) for Tax Year 2026.")}
+                      href={formatWhatsAppUrl("Hi, I have income that may need a different return for Tax Year 2026.")}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 underline"
+                      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#128C7E] underline whitespace-nowrap"
                     >
                       <WhatsAppIcon className="w-3.5 h-3.5" />
-                      <span>Consult Senior Desk on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay})</span>
+                      <span>WhatsApp the desk</span>
                     </a>
                   </div>
                 )}
@@ -1369,43 +1370,22 @@ export default function FbrSimplifiedClipWizard({
         {currentStep.id === "review" && (
           <div className="space-y-3.5">
             {submissionSuccess ? (
-              <div className="text-center py-5 space-y-3.5">
-                <div className="w-16 h-16 rounded-full bg-apple-blue/20 text-apple-blue flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-9 h-9" />
-                </div>
-                <div>
-                  <span className="font-mono text-xs text-ash dark:text-white/60 uppercase tracking-wider">
-                    SIMPLIFIED RETURN QUEUED
-                  </span>
-                  <div className="font-mono text-3xl font-black text-ink dark:text-white mt-1">
-                    {caseReference}
-                  </div>
-                  <p className="text-xs text-ash dark:text-white/60 mt-1 font-urdu" dir="rtl">
-                    آپ کا ٹیکس گوشوارہ کامیابی سے محفوظ ہو چکا ہے۔
-                  </p>
-                </div>
-
-                <GlassCard variant="glow" className="p-4 text-xs text-left space-y-2">
-                  <div className="flex items-center gap-2 text-ink dark:text-white font-bold">
-                    <ShieldCheck className="w-4 h-4 text-apple-blue" />
-                    <span>Zero-Password Principle Upheld</span>
-                  </div>
-                  <p className="text-ash dark:text-white/60 leading-relaxed text-[11px]">
-                    Your verified data and field-by-field checklist are generated. Connect on WhatsApp to complete official filing with our senior team.
-                  </p>
-                </GlassCard>
-
-                <div className="pt-2 flex flex-col gap-2">
+              <div className="text-center py-4 space-y-3.5">
+                <CaseFolioCard reference={caseReference} name={fullName} meta="Form 114(1) · SRO 1561(I)/2025" />
+                <p className="text-[13px] text-ash font-urdu" dir="rtl">
+                  ڈاکٹ نمبر محفوظ کریں۔ آئرس پاس ورڈ آپ کے پاس رہتا ہے۔
+                </p>
+                <div className="pt-1 flex flex-col gap-2">
                   <a
                     href={formatWhatsAppUrl(
-                      `Hi, I submitted Simplified Return Case ${caseReference} for ${fullName}. Ready to review and file.`
+                      `Hi, I submitted Form 114(1) docket ${caseReference} for ${fullName}. Ready to review and file on iris.fbr.gov.pk.`
                     )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-xs shadow-md active:scale-95 transition-all"
+                    className="w-full min-h-11 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] text-white font-semibold text-[15px] active:scale-95 whitespace-nowrap"
                   >
                     <WhatsAppIcon className="w-4 h-4" />
-                    <span>Open WhatsApp Chat ({SITE_CONFIG.contact.whatsappDisplay})</span>
+                    WhatsApp the desk
                   </a>
 
                   <GlassButton

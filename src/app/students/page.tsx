@@ -123,7 +123,7 @@ export default function StudentsPage() {
             <div className="space-y-3">
               <div>
                 <span className="inline-block font-mono text-[11px] text-brass font-bold tracking-widest uppercase bg-brass/10 border border-brass/30 px-3 py-1 rounded-full">
-                  TAX CATEGORY: STU · TY2026
+                  Student · TY2026
                 </span>
               </div>
 

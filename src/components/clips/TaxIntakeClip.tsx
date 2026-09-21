@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import { SmoothFileUpload, UploadedTaxDocument } from "@/components/ui/file-upload";
+import { CaseFolioCard } from "@/components/tax/CaseFolioCard";
 
 interface FastIntakeProps {
   onClose: () => void;
@@ -33,7 +34,7 @@ const PERSONAS = [
   { id: "pensioner", labelEn: "Pensioner", labelUr: "پنشنر", icon: HeartHandshake },
   { id: "housewife", labelEn: "Housewife", labelUr: "گھریلو خاتون", icon: Users },
   { id: "student", labelEn: "Student", labelUr: "طالب علم", icon: GraduationCap },
-  { id: "business", labelEn: "Business/Freelance", labelUr: "کاروبار / فری لانسر", icon: Building2 },
+  { id: "business", labelEn: "Freelancer", labelUr: "فری لانسر", icon: Building2 },
 ];
 
 export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
@@ -582,7 +583,7 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
                 }`}
               >
                 <WhatsAppIcon className="w-4 h-4" />
-                <span>{submitting ? "Opening..." : `Submit on WhatsApp (${SITE_CONFIG.contact.whatsappDisplay})`}</span>
+                <span>{submitting ? "Opening…" : "Submit on WhatsApp"}</span>
               </a>
             </div>
 
@@ -599,44 +600,21 @@ export default function TaxIntakeClip({ onClose, payload }: FastIntakeProps) {
           </div>
         )}
 
-        {/* STEP 3: SUCCESS & FOLIO */}
         {step === 3 && (
           <div className="text-center py-4 space-y-3.5">
-            <div className="w-14 h-14 rounded-full bg-apple-blue/15 text-apple-blue flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8" />
-            </div>
-
-            <div className="space-y-1">
-              <div className="font-mono text-[11px] text-ash dark:text-white/60 uppercase tracking-wider">
-                CASE FOLIO ISSUED
-              </div>
-              <div className="font-mono text-2xl sm:text-3xl font-black text-ink dark:text-white tracking-tight">
-                {refId}
-              </div>
-              <div className="text-xs text-ash dark:text-white/60">
-                TY2026 • {persona.toUpperCase()} • NON-BUSINESS INDIVIDUAL
-              </div>
-            </div>
-
-            <GlassCard variant="glow" className="p-3.5 text-xs text-left space-y-2">
-              <div className="flex items-center gap-2 text-ink dark:text-white font-semibold">
-                <ShieldCheck className="w-4 h-4 text-apple-blue" />
-                <span>Zero-Credential Invariant Preserved</span>
-              </div>
-              <p className="text-[11px] text-ash dark:text-white/60 leading-relaxed">
-                Your filing case has been queued with our senior desk. You will be assisted directly on WhatsApp ({SITE_CONFIG.contact.whatsappDisplay}) with your official IRIS filing checklist.
-              </p>
-            </GlassCard>
-
-            <div className="pt-2 flex flex-col gap-2">
+            {refId && <CaseFolioCard reference={refId} meta={`${persona} · Form 114(1)`} />}
+            <p className="text-[13px] text-ash">
+              Save the docket. You keep IRIS. WhatsApp the desk to continue.
+            </p>
+            <div className="pt-1 flex flex-col gap-2">
               <a
-                href={formatWhatsAppUrl(`Hi, following up on Tax Filing Case ${refId}`)}
+                href={formatWhatsAppUrl(`Hi, following up on Form 114(1) docket ${refId}`)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full h-12 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-bold text-xs shadow-md active:scale-95 transition-all"
+                className="w-full min-h-11 inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] text-white font-semibold text-[15px] active:scale-95 whitespace-nowrap"
               >
                 <WhatsAppIcon className="w-4 h-4" />
-                <span>Open WhatsApp Chat ({SITE_CONFIG.contact.whatsappDisplay})</span>
+                WhatsApp the desk
               </a>
 
               <GlassButton

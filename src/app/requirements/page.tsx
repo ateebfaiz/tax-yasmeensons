@@ -96,7 +96,7 @@ export default function RequirementsPage() {
         <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
             <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
-              SECTION 1
+              Papers
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
               Required Information &amp; Documents
@@ -188,7 +188,7 @@ export default function RequirementsPage() {
         <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
             <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
-              SECTION 2
+              SIM & email
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
               Online Registration Process (Form 181)
@@ -230,7 +230,7 @@ export default function RequirementsPage() {
         <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
             <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
-              SECTION 3
+              WHT certificates
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
               Family Group Consolidation &amp; Source Withholding Audit
@@ -267,7 +267,7 @@ export default function RequirementsPage() {
         <div className="border-b border-rule pb-4 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
             <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-brass/20 text-ink">
-              SECTION 4
+              Form 181
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-bold text-ink">
               Upload Documents &amp; Manual Filing Options

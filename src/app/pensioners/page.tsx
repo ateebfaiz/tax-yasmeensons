@@ -123,12 +123,12 @@ export default function PensionersPage() {
             <div className="space-y-3">
               <div>
                 <span className="inline-block font-mono text-[11px] text-brass font-bold tracking-widest uppercase bg-brass/10 border border-brass/30 px-3 py-1 rounded-full">
-                  TAX CATEGORY: PEN · TY2026
+                  Pension · TY2026
                 </span>
               </div>
 
-              <h1 className="font-serif text-3xl lg:text-4xl font-black text-ink leading-tight">
-                Senior Citizen &amp; Pensioner Tax Facilitation
+              <h1 className="text-title">
+                Pensioner return
               </h1>
 
               <div className="font-urdu text-base font-bold text-apple-blue" dir="rtl">
@@ -136,7 +136,7 @@ export default function PensionersPage() {
               </div>
 
               <p className="text-sm text-ash leading-relaxed">
-                Dedicated desk for retired government, armed forces, and corporate personnel. Ensure complete tax exemptions on pension receipts and National Savings profits.
+                Pension receipts and National Savings / Behbood profits. Exemptions claimed on Form 114(1).
               </p>
             </div>
 

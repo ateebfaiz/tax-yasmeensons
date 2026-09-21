@@ -16,9 +16,9 @@ export default function SalariedPage() {
     <div className="space-y-6">
       {/* 3 Value Pillars */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="glass-card p-5 rounded-2xl space-y-2 border-rule shadow-xs">
-          <span className="font-mono text-xs font-bold text-brass px-2.5 py-0.5 rounded-full bg-brass/10 border border-brass/20">
-            s.149 AUDIT
+        <div className="glass-card p-5 rounded-2xl space-y-2">
+          <span className="font-mono text-[13px] font-semibold text-apple-blue">
+            s.149
           </span>
           <h3 className="font-bold text-sm text-ink pt-1">Employer Tax Reconciliation</h3>
           <p className="text-xs text-ash leading-relaxed">
@@ -26,9 +26,9 @@ export default function SalariedPage() {
           </p>
         </div>
 
-        <div className="glass-card p-5 rounded-2xl space-y-2 border-rule shadow-xs">
-          <span className="font-mono text-xs font-bold text-brass px-2.5 py-0.5 rounded-full bg-brass/10 border border-brass/20">
-            s.235/236 WHT
+        <div className="glass-card p-5 rounded-2xl space-y-2">
+          <span className="font-mono text-[13px] font-semibold text-apple-blue">
+            s.235 / s.236
           </span>
           <h3 className="font-bold text-sm text-ink pt-1">Adjustable Tax Credits</h3>
           <p className="text-xs text-ash leading-relaxed">
@@ -36,9 +36,9 @@ export default function SalariedPage() {
           </p>
         </div>
 
-        <div className="glass-card p-5 rounded-2xl space-y-2 border-rule shadow-xs">
-          <span className="font-mono text-xs font-bold text-brass px-2.5 py-0.5 rounded-full bg-brass/10 border border-brass/20">
-            s.116 WEALTH
+        <div className="glass-card p-5 rounded-2xl space-y-2">
+          <span className="font-mono text-[13px] font-semibold text-apple-blue">
+            s.116
           </span>
           <h3 className="font-bold text-sm text-ink pt-1">Wealth Statement Balance</h3>
           <p className="text-xs text-ash leading-relaxed">
@@ -47,10 +47,30 @@ export default function SalariedPage() {
         </div>
       </div>
 
-      {/* Requirements Checklist Card */}
-      <div className="glass-card p-6 sm:p-7 rounded-3xl space-y-4 border-rule shadow-sm">
+      <div className="glass-card overflow-hidden">
+        <div className="p-4 pb-2">
+          <h3 className="font-semibold text-[17px] text-ink">Salary slabs TY2026–27</h3>
+          <p className="text-[13px] text-ash">0% on the first PKR 600,000. Progressive after that.</p>
+        </div>
+        <table className="w-full text-[13px]">
+          <thead>
+            <tr className="text-ash text-left">
+              <th className="px-4 py-2 font-semibold">Annual salary</th>
+              <th className="px-4 py-2 font-semibold">Rate</th>
+            </tr>
+          </thead>
+          <tbody className="text-ink">
+            <tr className="border-t border-black/[0.04] dark:border-white/[0.06]"><td className="px-4 py-2">Up to 600,000</td><td className="px-4 py-2">0%</td></tr>
+            <tr className="border-t border-black/[0.04] dark:border-white/[0.06]"><td className="px-4 py-2">600,001 – 1,200,000</td><td className="px-4 py-2">1% of excess</td></tr>
+            <tr className="border-t border-black/[0.04] dark:border-white/[0.06]"><td className="px-4 py-2">1,200,001 – 2,200,000</td><td className="px-4 py-2">6,000 + 11%</td></tr>
+            <tr className="border-t border-black/[0.04] dark:border-white/[0.06]"><td className="px-4 py-2">Above 7,000,000</td><td className="px-4 py-2">1,424,000 + 35%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="glass-card p-6 sm:p-7 rounded-3xl space-y-4">
         <div className="border-b border-rule-light pb-3 flex items-center justify-between">
-          <h3 className="font-serif text-lg font-bold text-ink">Required Evidence Checklist (SAL)</h3>
+          <h3 className="text-[17px] font-semibold text-ink">Papers we need (s.149)</h3>
           <span className="font-mono text-[10px] text-brass font-bold uppercase tracking-wider">TY2026 EVIDENCE</span>
         </div>
 
@@ -122,26 +142,26 @@ export default function SalariedPage() {
           <div className="col-span-5 lg:col-span-4 sticky top-24 space-y-6">
             <div className="space-y-3">
               <div>
-                <span className="inline-block font-mono text-[11px] text-brass font-bold tracking-widest uppercase bg-brass/10 border border-brass/30 px-3 py-1 rounded-full">
-                  TAX CATEGORY: SAL · TY2026
+                <span className="inline-block font-mono text-[12px] text-apple-blue font-semibold tracking-wide glass-pill px-3 py-1">
+                  s.12 / s.149 · TY2026
                 </span>
               </div>
 
-              <h1 className="font-serif text-3xl lg:text-4xl font-black text-ink leading-tight">
-                Salaried Individual Return Facilitation
+              <h1 className="text-title">
+                Salaried return
               </h1>
 
               <div className="font-urdu text-base font-bold text-apple-blue" dir="rtl">
                 تنخواہ دار ملازمین کے لیے انکم ٹیکس گوشوارہ و ودہولڈنگ ٹیکس ریفنڈ
               </div>
 
-              <p className="text-sm text-ash leading-relaxed">
-                Designed specifically for corporate, private, and institutional employees paying monthly income tax under Section 149 of the Income Tax Ordinance.
+              <p className="text-body">
+                Employer withholds under s.149. You still file Form 114(1) and Form 116. First Rs 600,000 of salary is 0%.
               </p>
             </div>
 
             {/* Zero-Credential Invariant Card */}
-            <div className="p-5 rounded-2xl bg-paper-light border border-rule space-y-2.5 shadow-xs">
+            <div className="glass-card p-5 space-y-2.5">
               <div className="flex items-center gap-2 text-xs font-bold text-apple-blue">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>Zero-Credential Invariant</span>
@@ -152,7 +172,7 @@ export default function SalariedPage() {
             </div>
 
             {/* WhatsApp Desk */}
-            <div className="p-5 rounded-2xl bg-folio border border-rule space-y-3 shadow-xs">
+            <div className="glass-card p-5 space-y-3">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">

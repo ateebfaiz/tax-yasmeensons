@@ -13,7 +13,7 @@ export function Footer() {
   const appClip = useAppClip();
 
   return (
-    <footer className="bg-[#1c1c1e] text-white border-t border-white/[0.12] pt-12 pb-32 md:pb-12 text-xs">
+    <footer className="relative z-[1] bg-[#1c1c1e] text-white border-t border-white/[0.08] pt-12 pb-32 md:pb-12 text-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
         {/* Practice Identity & Direct Support Lines */}
         <div className="space-y-3">
@@ -26,7 +26,7 @@ export function Footer() {
             </div>
           </div>
           <p className="text-white/60 text-xs leading-relaxed">
-            Private individual tax return reconciliation and assistance practice. Dedicated to non-business individuals across Pakistan for Tax Year 2026.
+            Yasmeen &amp; Sons tax desk. Form 114(1) and Form 116 for individuals. You keep IRIS.
           </p>
           <div className="space-y-1.5 pt-2 border-t border-white/10 text-[11px]">
             <div className="text-apple-blue font-bold uppercase tracking-wider font-mono">
@@ -62,10 +62,10 @@ export function Footer() {
                 onClick={() => appClip.open("persona-salaried")}
                 className="md:hidden text-left hover:text-apple-blue transition-colors active:scale-95"
               >
-                SAL · Salaried Employees
+                Salaried
               </button>
               <Link href="/salaried" className="hidden md:inline hover:text-apple-blue transition-colors">
-                SAL · Salaried Employees
+                Salaried
               </Link>
             </li>
             <li>
@@ -74,10 +74,10 @@ export function Footer() {
                 onClick={() => appClip.open("persona-pensioner")}
                 className="md:hidden text-left hover:text-apple-blue transition-colors active:scale-95"
               >
-                PEN · Senior &amp; Pensioners
+                Pensioners
               </button>
               <Link href="/pensioners" className="hidden md:inline hover:text-apple-blue transition-colors">
-                PEN · Senior &amp; Pensioners
+                Pensioners
               </Link>
             </li>
             <li>
@@ -86,10 +86,10 @@ export function Footer() {
                 onClick={() => appClip.open("persona-housewife")}
                 className="md:hidden text-left hover:text-apple-blue transition-colors active:scale-95"
               >
-                HIF · Housewife / Non-Earning
+                Household
               </button>
               <Link href="/no-income" className="hidden md:inline hover:text-apple-blue transition-colors">
-                HIF · Housewife / Non-Earning
+                Household
               </Link>
             </li>
             <li>
@@ -98,10 +98,10 @@ export function Footer() {
                 onClick={() => appClip.open("persona-student")}
                 className="md:hidden text-left hover:text-apple-blue transition-colors active:scale-95"
               >
-                STU · Student Filers
+                Students
               </button>
               <Link href="/students" className="hidden md:inline hover:text-apple-blue transition-colors">
-                STU · Student Filers
+                Students
               </Link>
             </li>
           </ul>
@@ -119,15 +119,22 @@ export function Footer() {
                 onClick={() => appClip.open("fbr-simplified-intake")}
                 className="md:hidden text-left text-apple-blue font-bold hover:underline active:scale-95"
               >
-                FBR 8-Window Simplified Return ★
+                Form 114(1) return
               </button>
               <Link href="/start" className="hidden md:inline text-apple-blue font-bold hover:underline">
-                FBR 8-Window Simplified Return ★
+                Form 114(1) return
               </Link>
             </li>
             <li>
-              <Link href="/track" className="hover:text-white transition-colors">
-                Case Progress Tracking (/track)
+              <button
+                type="button"
+                onClick={() => appClip.open("tax-track")}
+                className="md:hidden text-left hover:text-white transition-colors"
+              >
+                Track docket
+              </button>
+              <Link href="/track" className="hidden md:inline hover:text-white transition-colors">
+                Track docket
               </Link>
             </li>
             <li>
@@ -160,10 +167,10 @@ export function Footer() {
                 onClick={() => appClip.open("iris-guide")}
                 className="md:hidden text-left hover:text-apple-blue transition-colors font-bold active:scale-95"
               >
-                Annex A — Official IRIS Guide
+                IRIS guide
               </button>
               <Link href="/iris-guide" className="hidden md:inline hover:text-apple-blue transition-colors font-bold">
-                Annex A — Official IRIS Guide
+                IRIS guide
               </Link>
             </li>
           </ul>

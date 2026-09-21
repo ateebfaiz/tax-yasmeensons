@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Layers, CheckSquare, Sparkles, HelpCircle } from "lucide-react";
+import { Home, Search, CheckSquare, Sparkles, HelpCircle } from "lucide-react";
 import { useAppClip } from "@/components/ui/app-clip/AppClipProvider";
 import { cn } from "@/lib/utils";
 
@@ -42,7 +42,7 @@ export function LiquidGlassTabBar() {
 
   const isChecklistActive = appClip.activeClip === "tax-checklist" || pathname === "/requirements";
   const isGuideActive = appClip.activeClip === "iris-guide" || pathname === "/iris-guide";
-  const isServicesActive = appClip.activeClip === "services" || pathname === "/services";
+  const isTrackActive = appClip.activeClip === "tax-track" || pathname === "/track";
   const isHomeActive = pathname === "/" && !appClip.isOpen;
 
   return (
@@ -54,15 +54,13 @@ export function LiquidGlassTabBar() {
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 20px) + 8px)" }}
     >
       <nav
-        className={cn(
-          "flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] px-2.5",
-          "border shadow-[0_16px_40px_rgba(0,0,0,0.10)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
-        )}
+        className="flex items-center justify-between max-w-sm mx-auto h-16 rounded-[28px] px-2.5"
         style={{
-          backgroundColor: "var(--glass-bg-strong)",
-          borderColor: "var(--glass-border)",
-          WebkitBackdropFilter: "blur(28px) saturate(190%)",
-          backdropFilter: "blur(28px) saturate(190%)",
+          backgroundColor: "var(--glass-bg)",
+          border: "0.5px solid var(--glass-border)",
+          boxShadow: "inset 0 1px 0 var(--glass-highlight), 0 16px 40px rgba(0,0,0,0.10)",
+          WebkitBackdropFilter: "blur(32px) saturate(190%)",
+          backdropFilter: "blur(32px) saturate(190%)",
         }}
       >
         {/* Tab 1: Home */}
@@ -84,26 +82,25 @@ export function LiquidGlassTabBar() {
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
           <Home className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Home</span>
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Home</span>
         </button>
 
-        {/* Tab 2: Services */}
         <button
           type="button"
-          onClick={() => appClip.open("services")}
+          onClick={() => appClip.open("tax-track")}
           className={cn(
             "relative flex flex-col items-center justify-center flex-1 h-full py-1 rounded-2xl transition-all duration-200 active:scale-95",
             "hover:bg-black/[0.03] dark:hover:bg-white/[0.06]",
-            isServicesActive
-              ? "text-apple-blue font-bold"
-              : "text-ash hover:text-ink dark:hover:text-white"
+            isTrackActive
+              ? "text-apple-blue font-semibold"
+              : "text-ash hover:text-ink"
           )}
         >
-          {isServicesActive && (
+          {isTrackActive && (
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
-          <Layers className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Services</span>
+          <Search className="w-5 h-5" />
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Track</span>
         </button>
 
         {/* Tab 3: Checklist (Docs) */}
@@ -122,7 +119,7 @@ export function LiquidGlassTabBar() {
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
           <CheckSquare className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Docs</span>
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Docs</span>
         </button>
 
         {/* Tab 4: IRIS Guide */}
@@ -141,7 +138,7 @@ export function LiquidGlassTabBar() {
             <span className="absolute top-1.5 w-7 h-1 rounded-full bg-apple-blue shadow-sm" />
           )}
           <HelpCircle className="w-5 h-5" />
-          <span className="text-[10px] mt-0.5 font-mono uppercase tracking-wider whitespace-nowrap">Guide</span>
+          <span className="text-[12px] mt-0.5 font-medium uppercase tracking-wider whitespace-nowrap">Guide</span>
         </button>
 
         {/* Tab 5: Start Fast AppClip Intake FAB */}

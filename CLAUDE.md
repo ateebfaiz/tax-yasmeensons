@@ -18,7 +18,7 @@ grep -rn "03120947187" src/ | grep -v "config.ts"   # must be empty
 
 - Ask for FBR IRIS password/PIN. Column is `client_notes`, never `credentials_notes`.
 - Return `{ success: true }` if the case was not written.
-- Invent folio IDs (`TAX-2026-CLIP`, `YS-26-FBR`). Use `postIntake()` — requires `YS-26-#####`.
+- Invent folio IDs (`TAX-2026-CLIP`, `YS-26-FBR`). Use `postIntake()` — requires `YS/ITR/TY2026/#####` (legacy `YS-26-#####` still looks up).
 - Hardcode WhatsApp numbers. Use `SITE_CONFIG` + `formatWhatsAppUrl`.
 - Skip `npm run build`. CSS/`*/ */` breaks are invisible to `tsc`.
 - Put all dark-mode text in white. Headings `text-ink`, body `text-ash`.
@@ -39,7 +39,7 @@ Update stage:
 
 ```sql
 UPDATE tax_filings SET status = 'reviewing', updated_at = NOW()
-WHERE reference = 'YS-26-XXXXX';
+WHERE reference = 'YS/ITR/TY2026/XXXXX';
 ```
 
 `pending` → 1, `reviewing` → 2, `reconciled` → 3, `submitted`/`active` → 4.

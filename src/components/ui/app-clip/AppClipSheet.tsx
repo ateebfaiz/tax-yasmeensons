@@ -25,16 +25,15 @@ export function AppClipSheet({
 
   return (
     <>
-      {/* Apple Sheet Scrim — gentle dimming without destroying underlying page blur */}
+      {/* Light scrim so the page behind stays visible and the sheet can frost it */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/25 dark:bg-black/50 z-40 transition-opacity"
+        className="fixed inset-0 bg-black/10 dark:bg-black/25 z-40 transition-opacity"
         onClick={onClose}
       />
 
-      {/* Apple HIG Frosted Translucent Glass Sheet Container */}
       <motion.div
         key="app-clip-sheet"
         initial={{ y: "100%" }}
@@ -52,27 +51,26 @@ export function AppClipSheet({
         className={cn(
           "fixed bottom-0 left-0 right-0 mx-auto w-full max-w-lg z-50",
           "flex flex-col text-ink",
-          "border-t border-x",
           "rounded-t-[28px] sm:rounded-t-[32px] overflow-hidden",
-          "shadow-[0_-20px_60px_rgba(0,0,0,0.15)] dark:shadow-[0_-25px_70px_rgba(0,0,0,0.7)]"
+          "shadow-[0_-20px_60px_rgba(0,0,0,0.12)] dark:shadow-[0_-25px_70px_rgba(0,0,0,0.45)]"
         )}
         style={{
           maxHeight: "90dvh",
           paddingBottom: "calc(env(safe-area-inset-bottom, 16px) + 16px)",
-          backgroundColor: "var(--glass-bg-strong)",
-          borderColor: "var(--glass-border)",
+          backgroundColor: "var(--glass-bg)",
+          border: "0.5px solid var(--glass-border)",
+          borderBottom: "none",
+          boxShadow: "inset 0 1px 0 var(--glass-highlight)",
           color: "var(--text-primary)",
-          WebkitBackdropFilter: "blur(32px) saturate(190%)",
-          backdropFilter: "blur(32px) saturate(190%)",
+          WebkitBackdropFilter: "blur(40px) saturate(190%)",
+          backdropFilter: "blur(40px) saturate(190%)",
         }}
       >
-        {/* Subtle Apple blue illumination behind sheet header */}
-        <div className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-32 bg-apple-blue/10 dark:bg-apple-blue/15 blur-3xl rounded-full" />
 
         {/* Refined Glass Grab Bar & Header */}
         <div
           onPointerDown={(e) => dragControls.start(e)}
-          className="w-full cursor-grab active:cursor-grabbing shrink-0 touch-none select-none relative z-20 pt-3 pb-3 border-b border-rule/50 dark:border-white/[0.08] bg-black/[0.01] dark:bg-white/[0.02] backdrop-blur-xl"
+          className="w-full cursor-grab active:cursor-grabbing shrink-0 touch-none select-none relative z-20 pt-3 pb-3 border-b border-black/[0.04] dark:border-white/[0.06]"
         >
           <div className="w-full flex justify-center pb-2.5">
             <div className="w-10 h-1 rounded-full bg-black/20 dark:bg-white/25 shadow-[inset_0_1px_1px_rgba(0,0,0,0.2)]" />

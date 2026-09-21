@@ -43,7 +43,7 @@ Browser
 
 - **Cases** live in Neon Postgres table `tax_filings`. Next.js does **not** write this table itself.
 - **Files** live in Neon S3-compatible storage. There is **no S3 column**. Pointers are JSON in `tax_filings.raw_payload.documents`.
-- Client success requires a real folio matching `YS-26-#####`. Never mint `TAX-2026-CLIP`, `TAX-2026-DIRECT`, or `YS-26-FBR`. Use `postIntake()` in `src/lib/intake.ts`.
+- Client success requires a real folio from `postIntake()`. New dockets match `YS/ITR/TY2026/#####` (Yasmeen & Sons · Form 114(1) · Tax Year 2026). Lookup also accepts legacy `YS-26-#####`. Never mint `TAX-2026-CLIP`, `TAX-2026-DIRECT`, or `YS-26-FBR`.
 - If intake fails: HTTP 503 + WhatsApp fallback. Never `{ success: true }` on a missed write.
 
 ### Object storage
@@ -68,7 +68,7 @@ S3_BUCKET=assets
 UPDATE tax_filings
 SET status = 'reviewing',   -- pending | reviewing | reconciled | submitted
     updated_at = NOW()
-WHERE reference = 'YS-26-XXXXX';
+WHERE reference = 'YS/ITR/TY2026/XXXXX';
 ```
 
 | `status` | `/track` stage |
@@ -122,7 +122,7 @@ Never paint all dark-mode copy `text-white`. Headings = label; body = `text-ash`
 - **SF Pro** via `-apple-system, BlinkMacSystemFont, "SF Pro Text"` on Apple devices. Do **not** commit Apple font files.
 - **Inter** (`next/font`, `--font-inter`) is the web fallback.
 - **SF Pro Display** / New York (`font-display` / `font-serif`) for large titles.
-- **SF Mono** (`font-mono`) for `YS-26-#####` and codes.
+- **SF Mono** (`font-mono`) for `YS/ITR/TY2026/#####` and FBR codes.
 - **SF Rounded** (`font-rounded`) for pills/badges.
 - **Noto Nastaliq Urdu** (`font-urdu`, `--font-urdu`) for Urdu only.
 - Body ~17px Regular (HIG). Avoid Thin/Ultralight. Min ~11px.

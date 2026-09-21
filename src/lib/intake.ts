@@ -1,5 +1,5 @@
 import { SITE_CONFIG } from "@/lib/config";
-import { formatWhatsAppUrl } from "@/lib/utils";
+import { formatWhatsAppUrl, isIssuedFolio } from "@/lib/utils";
 
 export type IntakeInput = {
   fullName: string;
@@ -52,7 +52,7 @@ export async function postIntake(input: IntakeInput): Promise<IntakeResult> {
     });
     const data = await res.json().catch(() => ({} as Record<string, unknown>));
     const reference = typeof data.reference === "string" ? data.reference : "";
-    if (res.ok && data.success && /^YS-26-\d{5}$/.test(reference)) {
+    if (res.ok && data.success && isIssuedFolio(reference)) {
       return {
         ok: true,
         reference,

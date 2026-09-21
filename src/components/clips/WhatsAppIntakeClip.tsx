@@ -6,6 +6,7 @@ import { GlassCard } from "@/components/ui/glass/GlassCard";
 import { GlassButton } from "@/components/ui/glass/GlassButton";
 import { BilingualLabel } from "@/components/ui/bilingual-label";
 import { formatWhatsAppUrl, formatPhoneInput } from "@/lib/utils";
+import { CaseFolioCard } from "@/components/tax/CaseFolioCard";
 import { postIntake } from "@/lib/intake";
 import { SITE_CONFIG } from "@/lib/config";
 import { WhatsAppIcon } from "@/components/ui/icons/whatsapp-icon";
@@ -74,13 +75,10 @@ export default function WhatsAppIntakeClip({
     >
       <div className="space-y-3.5 pb-3 text-ink dark:text-white">
         {refId ? (
-          <div className="text-center py-5 space-y-3.5">
-            <div className="w-14 h-14 bg-apple-blue/15 text-apple-blue rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8" />
-            </div>
-            <h3 className="text-xl font-bold text-ink dark:text-white">WhatsApp Chat Opened</h3>
-            <p className="text-xs text-ash dark:text-white/60 font-urdu" dir="rtl">
-              آپ کا کیس نمبر {refId} ہے۔ واٹس ایپ پر گفتگو شروع ہو چکی ہے۔
+          <div className="text-center py-4 space-y-3.5">
+            <CaseFolioCard reference={refId} name={fullName} meta="Form 114(1) · WhatsApp intake" />
+            <p className="text-[13px] text-ash font-urdu" dir="rtl">
+              ڈاکٹ نمبر محفوظ کریں۔ واٹس ایپ کھل چکا ہے۔
             </p>
             <GlassButton
               type="button"

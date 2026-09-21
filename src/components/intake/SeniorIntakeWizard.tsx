@@ -17,6 +17,7 @@ import {
   Clock,
 } from "lucide-react";
 import AnimatedStepper, { StepItem } from "@/components/smoothui/animated-stepper";
+import { CaseFolioCard } from "@/components/tax/CaseFolioCard";
 
 interface CategoryOption {
   code: string;
@@ -47,7 +48,7 @@ const CATEGORIES: CategoryOption[] = [
     code: "PEN",
     en: "Senior Citizen / Pensioner",
     ur: "پنشنر و بزرگ شہری",
-    descEn: "Retired personnel, government or corporate pensioners.",
+    descEn: "Retired personnel and government pensioners.",
     descUr: "پنشن پر ٹیکس چھوٹ اور قومی بچت اسکیموں پر منافع",
     irisMap: "IRIS → Declaration → Income Tax Return → Other Sources",
     docs: [
@@ -346,29 +347,11 @@ export function SeniorIntakeWizard({
     return (
       <div className="max-w-2xl mx-auto glass-card p-6 sm:p-10 text-center space-y-6 border-brass shadow-lg">
         {/* Rubber Stamp Block */}
-        <div className="border-2 border-dashed border-ink/80 bg-paper-light p-6 rounded-md space-y-3 relative overflow-hidden">
-          <div className="text-[10px] font-mono text-ash tracking-widest uppercase">
-            YASMEEN & SONS TAX PRACTICE · INTAKE RECORD
-          </div>
-
-          <div className="py-2">
-            <div className="font-mono text-3xl sm:text-4xl font-black text-ink tracking-tight">
-              {caseFolio.reference}
-            </div>
-            <div className="font-mono text-xs font-bold text-brass tracking-wider mt-1">
-              TY2026 · {caseFolio.categoryCode} · {caseFolio.packageCode}
-            </div>
-          </div>
-
-          <div className="border-t border-rule pt-3 text-xs font-mono text-ash flex items-center justify-between">
-            <span>CLIENT: {caseFolio.fullName.toUpperCase()}</span>
-            <span>CONTACT: {caseFolio.phone}</span>
-          </div>
-
-          <div className="stamp-box py-1 text-[11px] rounded">
-            CASE RECORDED · ASSIGNED TO OPERATOR DESK
-          </div>
-        </div>
+        <CaseFolioCard
+          reference={caseFolio.reference}
+          name={caseFolio.fullName}
+          meta={`${caseFolio.packageCode} · ${caseFolio.phone}`}
+        />
 
         <div className="space-y-2 text-xs text-ash leading-relaxed max-w-md mx-auto">
           <p>
@@ -458,7 +441,7 @@ export function SeniorIntakeWizard({
               <span className="fbr-chip">{currentCategory.irisMap}</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-ink leading-tight">
-              Part 01 — Select Your Income Profile
+              Select your income profile
             </h2>
             <div className="font-urdu text-sm text-apple-blue" dir="rtl">
               براہِ کرم اپنی آمدنی یا ٹیکس دہندہ کی صنف کا انتخاب کریں
@@ -1042,7 +1025,7 @@ export function SeniorIntakeWizard({
               disabled={submitting}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-apple-blue to-apple-blue/80 text-white font-mono font-bold text-xs sm:text-sm px-7 py-3 rounded-full shadow-md transition-all disabled:opacity-60 active:scale-95"
             >
-              <span>{submitting ? "Recording Folio..." : "Generate Case File (YS-26-XXXXX)"}</span>
+              <span>{submitting ? "Recording docket…" : "Issue Form 114(1) docket"}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           )}

@@ -76,7 +76,7 @@ export default function RootLayout({
           <LanguageProvider>
             <AppClipProvider>
               <Header />
-              <main className="flex-1 w-full overflow-x-clip">{children}</main>
+              <main className="relative z-[1] flex-1 w-full overflow-x-clip">{children}</main>
               <Footer />
               <LiquidGlassTabBar />
             </AppClipProvider>

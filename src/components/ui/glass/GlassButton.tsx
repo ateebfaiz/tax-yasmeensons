@@ -25,9 +25,9 @@ export function GlassButton({
 
   const variantStyles = {
     primary:
-      "bg-apple-blue hover:bg-apple-blue/90 text-white font-bold shadow-[0_4px_20px_rgba(0,122,255,0.25)] border border-apple-blue/30 active:scale-95",
+      "bg-apple-blue hover:bg-apple-blue/90 text-white font-semibold shadow-sm active:scale-95",
     secondary:
-      "bg-white/80 dark:bg-[#1c1c1e]/80 hover:bg-white dark:hover:bg-[#2c2c2e] border border-black/[0.08] dark:border-white/[0.12] hover:border-apple-blue/50 text-ink dark:text-white font-semibold backdrop-blur-xl shadow-sm active:scale-95",
+      "bg-white/45 dark:bg-[#1c1c1e]/45 hover:bg-white/60 dark:hover:bg-[#2c2c2e]/60 border-[0.5px] border-black/[0.06] dark:border-white/[0.08] text-ink dark:text-white font-semibold backdrop-blur-xl active:scale-95",
     whatsapp:
       "bg-white/80 dark:bg-[#1c1c1e]/80 hover:bg-white dark:hover:bg-[#2c2c2e] border border-[#25D366]/40 hover:border-[#25D366] text-[#25D366] font-bold backdrop-blur-xl shadow-sm active:scale-95",
     ghost:
@@ -38,7 +38,7 @@ export function GlassButton({
     <button
       disabled={disabled}
       className={cn(
-        "inline-flex items-center justify-center gap-2.5 font-mono select-none whitespace-nowrap transition-all duration-200 outline-none disabled:opacity-40 disabled:pointer-events-none",
+        "inline-flex items-center justify-center gap-2.5 font-semibold select-none whitespace-nowrap transition-all duration-200 outline-none disabled:opacity-40 disabled:pointer-events-none",
         sizeStyles[size],
         variantStyles[variant],
         className

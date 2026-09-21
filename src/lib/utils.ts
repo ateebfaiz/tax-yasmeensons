@@ -6,9 +6,28 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function generateReference(prefix: string = "YS-26"): string {
-  const randomNum = Math.floor(10000 + Math.random() * 90000);
-  return `${prefix}-${randomNum}`;
+/** Legal docket: Yasmeen & Sons / Income Tax Return / Tax Year 2026 / serial */
+export const FOLIO_EXAMPLE = "YS/ITR/TY2026/48192";
+export const FOLIO_NEW_RE = /^YS\/ITR\/TY2026\/\d{5}$/;
+export const FOLIO_LEGACY_RE = /^YS-26-\d{5}$/;
+
+export function normalizeFolio(raw: string): string {
+  const t = raw.trim().toUpperCase().replace(/\s+/g, "");
+  const asLegacy = t.replace(/\//g, "-");
+  if (FOLIO_LEGACY_RE.test(asLegacy)) return asLegacy;
+  const asSlash = t.replace(/-/g, "/");
+  if (FOLIO_NEW_RE.test(asSlash)) return asSlash;
+  if (FOLIO_NEW_RE.test(t)) return t;
+  return t;
+}
+
+export function isIssuedFolio(raw: string): boolean {
+  const n = normalizeFolio(raw);
+  return FOLIO_NEW_RE.test(n) || FOLIO_LEGACY_RE.test(n);
+}
+
+export function folioLegalCaption(): string {
+  return "Yasmeen & Sons · Form 114(1) · Tax Year 2026";
 }
 
 export function formatWhatsAppUrl(message: string, phone?: string): string {
