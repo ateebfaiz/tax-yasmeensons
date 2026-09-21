@@ -14,6 +14,28 @@ npm run dev
 grep -rn "03120947187" src/ | grep -v "config.ts"   # must be empty
 ```
 
+## Ship
+
+Frontend stays on `feat/tax-platform-preview` → [PR #1](https://github.com/ateebfaiz/tax-yasmeensons/pull/1). Vercel preview auto-deploys. Do not merge or `vercel --prod` until asked.
+
+```bash
+npm run check-gates
+git push origin feat/tax-platform-preview
+```
+
+Preview: `https://tax-yasmeensons-git-feat-tax-19e19d-ateebfaiz64-6628s-projects.vercel.app`
+
+Desk API is a **separate** repo. From `projects/yasmeen-sons/backend`:
+
+```bash
+./scripts/run-quality-gates.sh
+uv run fastapi cloud whoami          # else: uv run fastapi cloud login
+uv run fastapi cloud deploy --app-id b9384975-351e-4b4f-a4ec-f1658ade5182
+curl -sS https://ys-fastapi-backend.fastapicloud.dev/api/tax/health
+```
+
+Deploy ships the local tree to production FastAPI Cloud. Login JWT expires; re-run `login` when `whoami` fails. New `YS/ITR/TY2026/#####` dockets mint only after that deploy.
+
 ## Do not
 
 - Ask for FBR IRIS password/PIN. Column is `client_notes`, never `credentials_notes`.

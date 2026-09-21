@@ -77,6 +77,10 @@ node scripts/audit_ui.mjs
 ---
 
 ## 🚀 Deployment
-- Production / Preview Platform: Vercel
-- Domain: `tax.yasmeensons.com`
-- Pull Request: [ateebfaiz/tax-yasmeensons #1](https://github.com/ateebfaiz/tax-yasmeensons/pull/1)
+
+Step-by-step: [AGENTS.md — Ship](./AGENTS.md#ship-frontend-pr--backend-fastapi-cloud).
+
+- Domain: `tax.yasmeensons.com` (Vercel production — do not promote until asked)
+- Frontend PR: [ateebfaiz/tax-yasmeensons #1](https://github.com/ateebfaiz/tax-yasmeensons/pull/1) (`feat/tax-platform-preview`)
+- Preview: https://tax-yasmeensons-git-feat-tax-19e19d-ateebfaiz64-6628s-projects.vercel.app
+- Desk API: `https://ys-fastapi-backend.fastapicloud.dev` — `uv run fastapi cloud deploy` from `yasmeen-sons/backend`

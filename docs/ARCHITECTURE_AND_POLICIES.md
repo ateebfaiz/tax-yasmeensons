@@ -27,6 +27,7 @@
 ### Gate 4: FastAPI Cloud Database Authority
 - Database persistence and Todoist P1 notifications are handled centrally by the persistent **FastAPI Cloud Backend Service** (`https://ys-fastapi-backend.fastapicloud.dev`).
 - Next.js serverless functions proxy intake/track to FastAPI. File bytes go to Neon object storage (`assets`), not through FastAPI S3.
+- **Ship:** frontend stays on PR #1 / Vercel preview (`feat/tax-platform-preview`). Backend production is `uv run fastapi cloud deploy` from `yasmeen-sons/backend` (local tree, not GitHub `main`). Full steps in [AGENTS.md — Ship](../AGENTS.md#ship-frontend-pr--backend-fastapi-cloud).
 
 ### Gate 5: Apple Human Interface Guidelines (HIG) Foundations Standard
 All UI components, sheets, navigation, and pages MUST strictly conform to **Apple's Human Interface Guidelines (HIG) Foundations**:

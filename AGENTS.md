@@ -31,6 +31,48 @@ Also: `npm run typecheck`. Never skip G7. The Vercel CSS `*/ */` break was misse
 
 ---
 
+## Ship (frontend PR + backend FastAPI Cloud)
+
+Two repos. Frontend is a **preview PR**. Backend `fastapi cloud deploy` ships the **local working tree to production**, not GitHub.
+
+### Tax frontend — `ateebfaiz/tax-yasmeensons`
+
+```bash
+npm run check-gates                 # G1–G7; tsc alone is not enough
+git checkout feat/tax-platform-preview
+git add -A && git commit && git push origin feat/tax-platform-preview
+```
+
+- PR: https://github.com/ateebfaiz/tax-yasmeensons/pull/1
+- Preview: https://tax-yasmeensons-git-feat-tax-19e19d-ateebfaiz64-6628s-projects.vercel.app
+- Vercel auto-deploys the branch. Do **not** merge or `vercel --prod` until the user says so.
+- Preview may require Vercel SSO; the logged-in owner opens the Preview link on the PR.
+
+### Tax desk API — `ateebfaiz/ys-fastapi-backend` (`projects/yasmeen-sons/backend`)
+
+```bash
+./scripts/run-quality-gates.sh      # G3–G8
+uv run fastapi cloud whoami         # if “No credentials”: uv run fastapi cloud login
+uv run fastapi cloud deploy --app-id b9384975-351e-4b4f-a4ec-f1658ade5182
+curl -sS https://ys-fastapi-backend.fastapicloud.dev/api/tax/health
+# expect: "status":"healthy"  "database":"CONNECTED"
+git push origin feat/native-flow-formatting-hardening   # PR #2
+```
+
+- Live: `https://ys-fastapi-backend.fastapicloud.dev`
+- App id lives in `.fastapicloud/cloud.json`.
+- Login JWT in `~/.config/fastapi-cli/auth.json` expires in days. `whoami` “No credentials” means re-login, not a missing CLI.
+- `FASTAPI_CLOUD_TOKEN` / `FASTAPI_CLOUD_APP_ID` GitHub secrets exist for CI; local deploy uses `fastapi cloud login`.
+- New dockets (`YS/ITR/TY2026/#####`) only mint **after** this deploy. Frontend already accepts both shapes.
+
+### Dual viewport
+
+- Desktop `>= 768px`: pages (`/start`, `/track`, persona routes). No AppClip sheets.
+- Mobile `< 768px`: AppClips (`fbr-simplified-intake`, `tax-track`, `tax-checklist`, `iris-guide`, …). `/track` opens `tax-track` over the page so the sheet frosts real content.
+- Sheet material: `var(--glass-bg)` + `backdrop-filter: blur(40px)`. Do not paint AppClips opaque.
+
+---
+
 ## Data plane (do not reverse this)
 
 ```
@@ -144,7 +186,9 @@ Never paint all dark-mode copy `text-white`. Headings = label; body = `text-ash`
 | Mobile 3-step | `src/components/clips/TaxIntakeClip.tsx` |
 | Sheet | `src/components/ui/app-clip/AppClipSheet.tsx` |
 | Upload UI | `src/components/ui/file-upload.tsx` |
-| Track UI | `src/app/track/page.tsx` |
+| Track UI (desktop) | `src/app/track/page.tsx` + `src/components/tax/TrackPanel.tsx` |
+| Track AppClip (mobile) | `src/components/clips/TrackClip.tsx` (`tax-track`) |
+| Folio card | `src/components/tax/CaseFolioCard.tsx` |
 | Tax API (backend repo) | `yasmeen-sons/backend/tax.py` |
 
 Tiers: GF-1000 / FA-2500 / CX-4500.
